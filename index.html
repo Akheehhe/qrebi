@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>qrebi — მეტი Google შეფასება ერთი შეხებით | qrebi.ge</title>
-  <meta name="description" content="qrebi — NFC ბარათი და სტენდი თბილისის ბიზნესებისთვის. მომხმარებელი ეხება ტელეფონით და 5 წამში ტოვებს Google შეფასებას. მეტი შეფასება — მაღალი პოზიცია რუკაზე, მეტი კლიენტი.">
+  <meta name="description" content="qrebi — NFC ბარათი თბილისის ბიზნესებისთვის, რომელიც კმაყოფილ კლიენტებს Google შეფასებად აქცევს. მეტი შეფასება — მაღალი პოზიცია რუკაზე და მეტი შემოსული კლიენტი.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://qrebi.ge/">
-  <meta property="og:title" content="qrebi — მეტი შეფასება. მეტი მომხმარებელი.">
-  <meta property="og:description" content="NFC ბარათი, რომელსაც მომხმარებელი ტელეფონით ეხება — და 5 წამში ტოვებს შეფასებას თქვენს Google გვერდზე.">
+  <meta property="og:title" content="qrebi — კმაყოფილი კლიენტი მიდის ჩუმად. მოიზიდეთ მეტი მომხმარებელი.">
+  <meta property="og:description" content="NFC ბარათი, რომელიც თქვენს კმაყოფილ კლიენტებს Google შეფასების დატოვებაში ეხმარება — მეტი შეფასება ნიშნავს მეტ მომხმარებელს.">
   <meta property="og:image" content="https://qrebi.ge/qrebi-og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -140,7 +140,7 @@
     @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
       .glass, .site-header, .price-card, .why-card, .bundle-row, .mini-review,
       .faq-list, .trust-strip__row, .hero__try, .phone-wrap__scan,
-      .qr-badge__face, .tap-card__face {
+      .qr-badge__face {
         background: rgba(255,255,255,.94) !important;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
@@ -292,6 +292,10 @@
     .tilt-float { animation: qrebi-float 6s ease-in-out infinite; }
     @keyframes qrebi-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
+    /* hero badge only: calmer, slower float than the default */
+    @keyframes qrebi-float-hero { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    .hero-badge.tilt-float { animation: qrebi-float-hero 8s ease-in-out infinite; }
+
     .badge-scene { position: relative; margin-inline: auto; width: fit-content; padding-bottom: 28px; }
     .badge-shadow {
       position: absolute; left: 50%; bottom: 6px; transform: translateX(-50%);
@@ -348,7 +352,7 @@
     }
     @media (prefers-reduced-motion: reduce) {
       .hero-badge-scene__pulse::before, .hero-badge-scene__pulse::after { animation: none; opacity: 0; }
-      .tilt-float { animation: none; }
+      .tilt-float, .hero-badge.tilt-float { animation: none; }
       .tilt { transition: none; }
     }
 
@@ -423,58 +427,6 @@
     .reviews-demo__stage { display: grid; gap: var(--sp-12); align-items: center; margin-top: var(--sp-6); }
     @media (min-width: 900px) { .reviews-demo__stage { grid-template-columns: auto 1fr; gap: var(--sp-16); } }
 
-    /* ---------- Tap-to-open intro (scanner card sits beside phone -> phone moves over and taps it -> Google review opens) ---------- */
-    .phone__screen.pre-tap .phone__browserbar,
-    .phone__screen.pre-tap .phone__content { opacity: 0; }
-    .phone__browserbar, .phone__content { transition: opacity .4s ease .15s; }
-    .phone { position: relative; z-index: 2; }
-    #rd-phone-wrap.rd-tapping .phone,
-    #rd-phone-wrap.rd-tapped .phone {
-      transform: translate(-30%, 20%) rotate(-4deg) scale(.92) !important;
-      transition: transform .55s cubic-bezier(.32,.72,.31,1.15) !important;
-    }
-    #rd-phone-wrap.rd-tap-back .phone { transform: translate(0, 0) rotate(0) scale(1) !important; transition: transform .5s cubic-bezier(.22,.61,.36,1) !important; }
-    .tap-card {
-      position: absolute; left: -20%; bottom: 4%; transform: scale(.5); z-index: 1;
-      width: 46%; max-width: 150px; aspect-ratio: 1; opacity: 0;
-      transition: opacity .55s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.34,1.56,.64,1);
-    }
-    #rd-phone-wrap.rd-card-in .tap-card,
-    #rd-phone-wrap.rd-tapping .tap-card,
-    #rd-phone-wrap.rd-tapped .tap-card { opacity: 1; transform: scale(1); }
-    #rd-phone-wrap.rd-done .tap-card {
-      opacity: 0; transform: scale(.7) translateY(14px); pointer-events: none;
-      transition: opacity .4s ease, transform .4s ease;
-    }
-    .tap-card__ring {
-      position: absolute; inset: 0; border-radius: 50%;
-      background: conic-gradient(from -40deg,
-        var(--google-blue) 0deg 70deg, var(--google-red) 90deg 160deg,
-        var(--google-yellow) 180deg 250deg, var(--google-green) 270deg 340deg, var(--google-blue) 360deg);
-      box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255,255,255,.5) inset;
-    }
-    .tap-card__face {
-      position: absolute; inset: 8%; border-radius: 50%;
-      background: var(--glass-fill);
-      -webkit-backdrop-filter: var(--glass-blur-sm); backdrop-filter: var(--glass-blur-sm);
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
-      transition: box-shadow .25s ease;
-    }
-    #rd-phone-wrap.rd-tapped .tap-card__face { box-shadow: 0 0 0 6px rgba(91,0,191,.18) inset; }
-    .tap-card__eyebrow { font-size: 12px; font-weight: 700; color: var(--ink-700); }
-    .tap-card__google {
-      font-size: 22px; font-weight: 800; letter-spacing: -.02em; font-family: 'Trebuchet MS', Arial, sans-serif;
-      background: linear-gradient(90deg, var(--google-blue), var(--google-red), var(--google-yellow), var(--google-green));
-      -webkit-background-clip: text; background-clip: text; color: transparent;
-    }
-    .tap-card__wave {
-      position: absolute; inset: -8px; border-radius: 50%; border: 3px solid var(--teal-500); opacity: 0; pointer-events: none;
-    }
-    #rd-phone-wrap.rd-tapping .tap-card__wave--1 { animation: rd-tap-wave 1s ease-out .35s; }
-    #rd-phone-wrap.rd-tapping .tap-card__wave--2 { animation: rd-tap-wave 1s ease-out .5s; }
-    #rd-phone-wrap.rd-tapping .tap-card__wave--3 { animation: rd-tap-wave 1s ease-out .65s; }
-    @keyframes rd-tap-wave { 0% { opacity: .6; transform: scale(.85); } 100% { opacity: 0; transform: scale(2.1); } }
-
     .phone-wrap { position: relative; margin-inline: auto; width: fit-content; }
     .phone {
       width: 264px; background: var(--ink-900); border-radius: 40px; padding: 14px;
@@ -491,7 +443,14 @@
     .phone__content { padding: 22px 18px 18px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; flex: 1; transition: opacity .35s ease, transform .35s ease; }
     .phone__content.is-out { opacity: 0; transform: translateY(8px); }
     .phone__biz { display: flex; align-items: center; gap: 10px; width: 100%; }
-    .phone__biz-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--teal-50); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    .phone__biz-avatar {
+      width: 44px; height: 44px; border-radius: 50%; background: var(--teal-50);
+      display: flex; align-items: center; justify-content: center; font-size: 20px;
+      flex-shrink: 0; overflow: hidden; position: relative;
+    }
+    .phone__biz-avatar-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: none; }
+    .phone__biz-avatar-img.show { display: block; }
+    .phone__biz-avatar-emoji.hide { display: none; }
     .phone__biz-info { text-align: left; }
     .phone__biz-name { font-size: 14px; font-weight: 700; color: var(--ink-900); }
     .phone__biz-sub { font-size: 11px; color: var(--ink-500); }
@@ -529,7 +488,12 @@
     .mini-review:hover { transform: translateY(-4px) scale(1.01); }
     .mini-review__stars { color: var(--google-gold); font-size: 14px; letter-spacing: 2px; margin-bottom: 6px; }
     .mini-review p { font-size: 14.5px; color: var(--ink-900); font-weight: 500; line-height: 1.5; }
-    .mini-review__who { display: block; margin-top: 8px; font-size: 12.5px; color: var(--ink-500); }
+    .mini-review__who { display: inline; margin-top: 0; font-size: 12.5px; color: var(--ink-500); }
+    .mini-review__meta { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+    .mini-review__avatar {
+      width: 38px; height: 38px; border-radius: 50%;
+      object-fit: cover; border: 1px solid var(--border); flex-shrink: 0; display: block;
+    }
 
     /* ---------- Product detail ---------- */
     .product__grid { display: grid; gap: var(--sp-12); align-items: center; }
@@ -695,13 +659,13 @@
       <div class="container hero__grid">
         <div>
           <span class="eyebrow">NFC + QR თქვენი ბიზნესისთვის</span>
-          <h1 id="hero-title">მეტი შეფასება. მეტი მომხმარებელი.</h1>
-          <p class="hero__sub">მომხმარებელი ეხება ტელეფონით. 5 წამში Google შეფასება მზადაა.</p>
+          <h1 id="hero-title">კმაყოფილი კლიენტი მიდის ჩუმად — მოიზიდეთ მეტი მომხმარებელი.</h1>
+          <p class="hero__sub">ხალხი რეკლამაზე მეტად სხვა კლიენტების შეფასებებს ენდობა — qrebi კმაყოფილ სტუმრებს სწორედ ამ შეფასებების დატოვებაში ეხმარება.</p>
           <div class="hero__ctas">
             <a href="mailto:qrebige@gmail.com?subject=%E1%83%91%E1%83%90%E1%83%A0%E1%83%90%E1%83%97%E1%83%98%E1%83%A1%20%E1%83%A8%E1%83%94%E1%83%99%E1%83%95%E1%83%94%E1%83%97%E1%83%90%20%E2%80%94%20qrebi" class="btn btn--primary btn-full-mobile">შეუკვეთეთ ბარათი ახლავე</a>
             <a href="#how-it-works" class="btn btn--ghost">როგორ მუშაობს?</a>
           </div>
-          <p class="hero__note">დაყენება 2 წუთში · დამატებითი აპლიკაცია არ სჭირდება</p>
+          <p class="hero__note">შეხება — 5 წამში · დაყენება — 2 წუთში · აპლიკაცია არ სჭირდება</p>
           <div class="hero__try">
             <img class="hero__try-qr" src="qrebi-qr.png" alt="qrebi.ge QR კოდი — სცადეთ სკანირება" width="40" height="40">
             <span>სცადეთ თავად — დაასკანერეთ ტელეფონით</span>
@@ -783,7 +747,7 @@
         <div class="steps">
           <div class="step reveal">
             <div class="step__num" aria-hidden="true">1</div>
-            <h3>ეხება ან სკანერავს</h3>
+            <h3>ეხება ან ასკანერებს</h3>
             <p>ტელეფონს უახლოვებს ბარათს (NFC) ან ასკანერებს QR-ს. აპლიკაცია არ სჭირდება.</p>
           </div>
           <div class="step reveal">
@@ -806,28 +770,28 @@
         <div class="section-head reveal">
           <h2 id="why-title">რატომ მოაქვს ამას ფული</h2>
         </div>
-        <p class="why__intro reveal">Google Maps ძებნაში პოზიციას შეფასების რაოდენობა და სიხშირე წყვეტს.</p>
+        <p class="why__intro reveal">ერთი ვარსკვლავით მაღალი შეფასება — 5-9%-ით მეტი შემოსავალი დამოუკიდებელი ბიზნესისთვის (Harvard Business School-ის კვლევა). აი, რატომ:</p>
         <div class="why__grid">
           <div class="why-card glass reveal">
             <div class="why-card__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19l5-6 4 3 7-9"/><path d="M15 7h5v5"/></svg>
             </div>
             <h3>მეტი შეფასება → მაღალი პოზიცია</h3>
-            <p>მეტი და ახალი შეფასება Google-ს აიძულებს, კონკურენტებზე მაღლა დაგსვათ.</p>
+            <p>შეფასებები Google Maps რანჟირების დაახლოებით მეხუთედს განსაზღვრავს — რაოდენობა, ხარისხი და სიახლე. (BrightLocal, 2026)</p>
           </div>
           <div class="why-card glass reveal">
             <div class="why-card__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.1-7-11a7 7 0 0 1 14 0c0 5.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
             </div>
             <h3>მაღალი პოზიცია → მეტი კლიენტი</h3>
-            <p>ხალხი პირველ სამ შედეგს ირჩევს. ხილვადობა = შემოსული კლიენტი.</p>
+            <p>10 მომხმარებლიდან თითქმის 9 თქვენს შეფასებებს კითხულობს გადაწყვეტილებამდე და 10-დან 7 საერთოდ არ განიხილავს 4 ვარსკვლავზე დაბალ ბიზნესს. (BrightLocal, 2026)</p>
           </div>
           <div class="why-card glass reveal">
             <div class="why-card__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 15.3l-4.8 2.6.9-5.4-3.9-3.8 5.4-.8z"/></svg>
             </div>
-            <h3>ავტომატური, არა უხერხული თხოვნა</h3>
-            <p>პერსონალს აღარ სჭირდება თხოვნა. ბარათი ამას თავად აკეთებს.</p>
+            <h3>სთხოვეთ ავტომატურად, უხერხულობის გარეშე</h3>
+            <p>უბრალოდ სთხოვეთ — და 10 კლიენტიდან თითქმის 8 დაწერს შეფასებას. თუ არ სთხოვთ — მხოლოდ 1 დაწერს თავისით. (BrightLocal, 2026)</p>
           </div>
         </div>
       </div>
@@ -842,20 +806,23 @@
           <p>ასე გამოიყურება 5 წამი — სკანირებიდან გამოქვეყნებამდე.</p>
         </div>
         <div class="reviews-demo__stage reveal">
-          <div class="phone-wrap tilt-wrap" id="rd-phone-wrap">
-            <div class="phone tilt tilt-float">
+          <div class="phone-wrap" id="rd-phone-wrap">
+            <div class="phone">
               <div class="phone__speaker"></div>
-              <div class="phone__screen pre-tap" id="rd-screen">
+              <div class="phone__screen" id="rd-screen">
                 <div class="phone__browserbar">
                   <span class="g-dot" aria-hidden="true"></span>
                   <span>google.com/reviews</span>
                 </div>
                 <div class="phone__content" id="rd-content">
                   <div class="phone__biz">
-                    <span class="phone__biz-avatar" id="rd-avatar" aria-hidden="true">✂️</span>
+                    <span class="phone__biz-avatar" id="rd-avatar">
+                      <img class="phone__biz-avatar-img" id="rd-avatar-img" src="" alt="" width="44" height="44" loading="lazy">
+                      <span class="phone__biz-avatar-emoji" id="rd-avatar-emoji">✂️</span>
+                    </span>
                     <div class="phone__biz-info">
-                      <div class="phone__biz-name" id="rd-bizname">ბარბერშოპი “Fade”, ვაკე</div>
-                      <div class="phone__biz-sub">Google რევიუ</div>
+                      <div class="phone__biz-name" id="rd-bizname">ბარბერშოპი „Fade“, ვაკე</div>
+                      <div class="phone__biz-sub">Google შეფასება</div>
                     </div>
                   </div>
                   <div class="phone__stars" id="rd-stars" aria-hidden="true">
@@ -874,16 +841,6 @@
                 </div>
               </div>
             </div>
-            <div class="tap-card" id="rd-tap-card" aria-hidden="true">
-              <span class="tap-card__ring"></span>
-              <span class="tap-card__face">
-                <span class="tap-card__eyebrow">Review us on</span>
-                <span class="tap-card__google">Google</span>
-              </span>
-              <span class="tap-card__wave tap-card__wave--1"></span>
-              <span class="tap-card__wave tap-card__wave--2"></span>
-              <span class="tap-card__wave tap-card__wave--3"></span>
-            </div>
             <div class="phone-wrap__scan" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="currentColor">
                 <rect x="2" y="2" width="7" height="7" rx="1"/><rect x="4" y="4" width="3" height="3" fill="#fff"/>
@@ -898,17 +855,26 @@
             <div class="mini-review glass reveal" style="--d:0s">
               <div class="mini-review__stars">★★★★★</div>
               <p>„უსწრაფესი და საუკეთესო შეჭრა ვაკეში, რეკომენდაციას ვუწევ ყველას.“</p>
-              <span class="mini-review__who">— სალონი Fade, ბარბერშოპი</span>
+              <div class="mini-review__meta">
+                <img class="mini-review__avatar" src="avatar-1.png" alt="გიორგი — Fade-ის მუდმივი კლიენტი" width="38" height="38" loading="lazy" onerror="this.style.display='none'">
+                <span class="mini-review__who">— გიორგი მ. · ბარბერშოპი „Fade“</span>
+              </div>
             </div>
             <div class="mini-review glass reveal" style="--d:.1s">
               <div class="mini-review__stars">★★★★★</div>
               <p>„გემრიელი კერძები, საუკეთესო მომსახურება. აუცილებლად დავბრუნდები.“</p>
-              <span class="mini-review__who">— რესტორანი „ტიფლისი“</span>
+              <div class="mini-review__meta">
+                <img class="mini-review__avatar" src="avatar-2.png" alt="ნინო — რესტორანი „ტიფლისის“ სტუმარი" width="38" height="38" loading="lazy" onerror="this.style.display='none'">
+                <span class="mini-review__who">— ნინო კ. · რესტორანი „ტიფლისი“</span>
+              </div>
             </div>
             <div class="mini-review glass reveal" style="--d:.2s">
               <div class="mini-review__stars">★★★★★</div>
               <p>„საუკეთესო კაპუჩინო ძველ თბილისში, ატმოსფერო საოცარია.“</p>
-              <span class="mini-review__who">— კაფე „ლანჩი“</span>
+              <div class="mini-review__meta">
+                <img class="mini-review__avatar" src="avatar-3.png" alt="ლუკა — კაფე „ლანჩის“ სტუმარი" width="38" height="38" loading="lazy" onerror="this.style.display='none'">
+                <span class="mini-review__who">— ლუკა ბ. · კაფე „ლანჩი“</span>
+              </div>
             </div>
           </div>
         </div>
@@ -982,8 +948,8 @@
     <section id="pricing" class="pricing" aria-labelledby="pricing-title">
       <div class="container">
         <div class="section-head reveal">
-          <h2 id="pricing-title">ფასი — გამჭვირვალედ</h2>
-          <p>ერთი ფასი — ბარათი, დამონტაჟება და მომსახურება ერთად. აღარაფერი დამატებით საყიდელი.</p>
+          <h2 id="pricing-title">გამჭვირვალე ფასი</h2>
+          <p>ერთი ფასი — ბარათი, დამონტაჟება და მომსახურება ერთად. დამატებით აღარაფერია საყიდელი.</p>
         </div>
 
         <div class="price-grid">
@@ -1038,7 +1004,7 @@
               </button>
             </h3>
             <div class="faq-panel" id="faq-panel-2" role="region" aria-labelledby="faq-trigger-2">
-              <div class="faq-panel__inner"><p class="faq-answer">მუშაობს ორივეზე. iPhone-ს NFC 2018 წლიდან აქვს ჩაშენებული; თუ არა — QR კოდი ყოველთვის მუშაობს, როგორც სათადარიგო გზა.</p></div>
+              <div class="faq-panel__inner"><p class="faq-answer">მუშაობს ორივეზე. 2018 წლის შემდეგ გამოშვებული iPhone-ები ბარათს აპლიკაციის გარეშე კითხულობენ; ძველ მოდელებზე QR კოდი ყოველთვის მუშაობს.</p></div>
             </div>
           </div>
           <div class="faq-item">
@@ -1071,7 +1037,7 @@
               </button>
             </h3>
             <div class="faq-panel" id="faq-panel-5" role="region" aria-labelledby="faq-trigger-5">
-              <div class="faq-panel__inner"><p class="faq-answer">ბარათი გამორთვება და მომხმარებელს აღარ გადაამისამართებს. 50 ₾/თვე გამოწერა სწორედ ამას ფარავს — ბარათს, დამონტაჟებას და მომსახურებას ერთად.</p></div>
+              <div class="faq-panel__inner"><p class="faq-answer">ბარათი გამოირთვება და მომხმარებელს აღარ გადაამისამართებს. 50 ₾/თვე გამოწერა სწორედ ამას ფარავს — ბარათს, დამონტაჟებას და მომსახურებას ერთად.</p></div>
             </div>
           </div>
           <div class="faq-item">
@@ -1092,7 +1058,7 @@
     <!-- ================= Final CTA ================= -->
     <section id="final-cta" class="final-cta" aria-labelledby="cta-title">
       <div class="container">
-        <h2 id="cta-title" class="reveal">მზად ხართ მეტი შეფასების მისაღებად?</h2>
+        <h2 id="cta-title" class="reveal">მზად ხართ მეტი მომხმარებლის მისაღებად?</h2>
         <p class="final-cta__body reveal">ყოველი დღე ბარათის გარეშე შეფასებაა, რომელსაც კონკურენტი იღებს. დღესვე ვაკონფიგურირებთ და გიგზავნით.</p>
         <a href="mailto:qrebige@gmail.com?subject=%E1%83%91%E1%83%90%E1%83%A0%E1%83%90%E1%83%97%E1%83%98%E1%83%A1%20%E1%83%A8%E1%83%94%E1%83%99%E1%83%95%E1%83%94%E1%83%97%E1%83%90%20%E2%80%94%20qrebi" class="btn btn--amber reveal">შეუკვეთეთ ბარათი ახლავე</a>
         <div class="contact-lines reveal">
@@ -1108,7 +1074,7 @@
     <div class="container site-footer__grid">
       <div>
         <a href="#top" class="wordmark">qrebi</a>
-        <p class="site-footer__tagline">qrebi — NFC ბარათები და სტენდები, რომლებიც Google შეფასებებს წამებში გიგროვებენ.</p>
+        <p class="site-footer__tagline">qrebi — NFC ბარათები, რომლებიც კმაყოფილ კლიენტებს Google შეფასებებად — და ახალ მომხმარებლებად — აქცევს.</p>
       </div>
       <nav aria-label="ქვედა ნავიგაცია">
         <h4>ნავიგაცია</h4>
@@ -1206,19 +1172,17 @@
 
       // Live reviews demo — cycles Google-review scenarios in the phone mockup
       var reviewsData = [
-        { avatar: '✂️', biz: 'ბარბერშოპი “Fade”, ვაკე', who: '— გიორგი მ.',
+        { avatarImg: 'avatar-1.png', avatar: '✂️', biz: 'ბარბერშოპი „Fade“, ვაკე', who: '— გიორგი მ.',
           text: 'უსწრაფესი და საუკეთესო შეჭრა ვაკეში. რეკომენდაციას ვუწევ ყველას!' },
-        { avatar: '🍽️', biz: 'რესტორანი „ტიფლისი“', who: '— ნინო კ.',
+        { avatarImg: 'avatar-2.png', avatar: '🍽️', biz: 'რესტორანი „ტიფლისი“', who: '— ნინო კ.',
           text: 'გემრიელი კერძები და საუკეთესო მომსახურება. აუცილებლად დავბრუნდები.' },
-        { avatar: '☕', biz: 'კაფე „ლანჩი“', who: '— ლუკა ბ.',
+        { avatarImg: 'avatar-3.png', avatar: '☕', biz: 'კაფე „ლანჩი“', who: '— ლუკა ბ.',
           text: 'საუკეთესო კაპუჩინო ძველ თბილისში. ატმოსფერო — საოცარია.' }
       ];
 
-      var rdPhoneWrap = document.getElementById('rd-phone-wrap');
-      var rdScreen = document.getElementById('rd-screen');
-      var rdTapCard = document.getElementById('rd-tap-card');
       var rdContent = document.getElementById('rd-content');
-      var rdAvatar = document.getElementById('rd-avatar');
+      var rdAvatarImg = document.getElementById('rd-avatar-img');
+      var rdAvatarEmoji = document.getElementById('rd-avatar-emoji');
       var rdBizname = document.getElementById('rd-bizname');
       var rdStars = rdContent ? rdContent.querySelectorAll('#rd-stars svg') : [];
       var rdText = document.getElementById('rd-text');
@@ -1249,26 +1213,24 @@
         })();
       }
 
-      // Tap intro: big scanner card grows in -> phone lowers and taps it -> Google review screen opens -> normal cycle follows
-      function playTapIntro(done) {
-        if (!rdPhoneWrap || !rdTapCard || !rdScreen || reduceMotion) { done(); return; }
-        setTimeout(function () {
-          rdPhoneWrap.classList.add('rd-card-in');            // scanner card pops into view, large
-          setTimeout(function () {
-            rdPhoneWrap.classList.add('rd-tapping');           // phone lowers onto it, NFC waves ripple
-            setTimeout(function () {
-              rdPhoneWrap.classList.remove('rd-tapping');
-              rdPhoneWrap.classList.add('rd-tapped');          // contact made — screen wakes up
-              rdScreen.classList.remove('pre-tap');
-              setTimeout(function () {
-                rdPhoneWrap.classList.remove('rd-tapped');
-                rdPhoneWrap.classList.add('rd-tap-back');      // phone lifts back up
-                rdPhoneWrap.classList.add('rd-done');          // scanner card fades away
-                setTimeout(done, 450);
-              }, 700);
-            }, 550);
-          }, 650);
-        }, 500);
+      function setAvatar(scenario) {
+        if (!scenario.avatarImg) {
+          rdAvatarImg.classList.remove('show');
+          rdAvatarEmoji.classList.remove('hide');
+          rdAvatarEmoji.textContent = scenario.avatar;
+          return;
+        }
+        rdAvatarImg.onload = function () {
+          rdAvatarImg.classList.add('show');
+          rdAvatarEmoji.classList.add('hide');
+        };
+        rdAvatarImg.onerror = function () {           // fallback to emoji if file missing
+          rdAvatarImg.classList.remove('show');
+          rdAvatarEmoji.classList.remove('hide');
+          rdAvatarEmoji.textContent = scenario.avatar;
+        };
+        rdAvatarImg.alt = scenario.who.replace(/^—\s*/, '') + ', ' + scenario.biz;
+        rdAvatarImg.src = scenario.avatarImg;
       }
 
       var rdIndex = 0;
@@ -1278,7 +1240,7 @@
         var scenario = reviewsData[rdIndex % reviewsData.length];
         rdIndex++;
 
-        rdAvatar.textContent = scenario.avatar;
+        setAvatar(scenario);
         rdBizname.textContent = scenario.biz;
         rdWho.textContent = scenario.who;
         clearStars();
@@ -1308,9 +1270,7 @@
       if (rdContent) {
         if (reduceMotion) {
           var s0 = reviewsData[0];
-          if (rdScreen) rdScreen.classList.remove('pre-tap');
-          if (rdTapCard) rdTapCard.style.display = 'none';
-          rdAvatar.textContent = s0.avatar;
+          setAvatar(s0);
           rdBizname.textContent = s0.biz;
           rdWho.textContent = s0.who;
           rdText.textContent = s0.text;
@@ -1322,14 +1282,14 @@
             entries.forEach(function (entry) {
               if (entry.isIntersecting && !rdRunning) {
                 rdRunning = true;
-                playTapIntro(runCycle);
+                runCycle();
                 rdObserver.disconnect();
               }
             });
           }, { threshold: 0.35 });
           rdObserver.observe(rdContent);
         } else {
-          playTapIntro(runCycle);
+          runCycle();
         }
       }
     })();
