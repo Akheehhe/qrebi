@@ -67,6 +67,27 @@
       --shadow-lg: 0 20px 48px rgba(18,11,24,.12);
       --shadow-glow: 0 16px 40px rgba(91,0,191,.18);
 
+      /* Liquid glass tokens */
+      --page-bg: #FAF8FF;
+
+      --glass-fill:        rgba(255,255,255,.68);   /* standard card fill */
+      --glass-fill-strong: rgba(255,255,255,.78);   /* header — stays legible while content scrolls under it */
+      --glass-fill-light:  rgba(255,255,255,.55);   /* small chips/pills */
+      --glass-tint:        rgba(240,230,251,.55);   /* highlighted price card — teal-50 at alpha */
+
+      --glass-border:      rgba(91,0,191,.10);      /* hairline, purple-tinted */
+      --glass-border-top:  rgba(255,255,255,.85);   /* lighter top edge = light catching the rim */
+
+      --glass-blur:    blur(20px) saturate(140%);
+      --glass-blur-sm: blur(14px) saturate(140%);
+
+      --glass-shadow: inset 0 1px 0 var(--glass-border-top), 0 2px 8px rgba(18,11,24,.05), 0 16px 40px rgba(91,0,191,.10);
+      --glass-shadow-hover: inset 0 1px 0 var(--glass-border-top), 0 4px 16px rgba(18,11,24,.06), 0 22px 52px rgba(91,0,191,.16);
+      --glass-shadow-lg: inset 0 1px 0 var(--glass-border-top), 0 4px 16px rgba(18,11,24,.07), 0 28px 64px rgba(91,0,191,.20);
+
+      --r-glass: 22px;      /* card radius */
+      --r-glass-lg: 26px;   /* pricing/faq showcase radius */
+
       --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px;
       --sp-5: 20px; --sp-6: 24px; --sp-8: 32px; --sp-10: 40px;
       --sp-12: 48px; --sp-16: 64px; --sp-20: 80px; --sp-24: 96px;
@@ -82,9 +103,48 @@
     body {
       font-family: 'Noto Sans Georgian', 'Noto Sans', system-ui, sans-serif;
       color: var(--color-text);
-      background: var(--color-bg);
+      background: var(--page-bg);
       font-size: 16px;
       line-height: 1.6;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 55% 45% at 12% 8%,  rgba(91,0,191,.13), transparent 70%),
+        radial-gradient(ellipse 50% 42% at 88% 22%, rgba(91,0,191,.09), transparent 70%),
+        radial-gradient(ellipse 48% 50% at 45% 96%, rgba(91,0,191,.08), transparent 70%);
+      filter: blur(60px);
+    }
+    @media (prefers-reduced-motion: reduce), (max-width: 480px) {
+      body::before { filter: blur(40px); }
+    }
+
+    /* Reusable liquid-glass panel */
+    .glass {
+      background: var(--glass-fill);
+      -webkit-backdrop-filter: var(--glass-blur);
+      backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-top-color: var(--glass-border-top);
+      border-radius: var(--r-glass);
+      box-shadow: var(--glass-shadow);
+      transition: transform .3s cubic-bezier(.22,.61,.36,1), box-shadow .3s ease, border-color .3s ease;
+    }
+    .glass:hover { transform: translateY(-5px); box-shadow: var(--glass-shadow-hover); }
+
+    /* No backdrop-filter support: fall back to near-opaque solid so text stays readable */
+    @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+      .glass, .site-header, .price-card, .why-card, .bundle-row, .mini-review,
+      .faq-list, .trust-strip__row, .hero__try, .phone-wrap__scan,
+      .qr-badge__face, .tap-card__face {
+        background: rgba(255,255,255,.94) !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+      }
     }
     img { max-width: 100%; display: block; }
     a { color: var(--color-primary); text-decoration: none; }
@@ -114,10 +174,35 @@
       transition: transform .25s cubic-bezier(.22,.61,.36,1), background-color .2s ease, box-shadow .2s ease, color .2s ease;
     }
     .btn:active { transform: scale(.98); }
-    .btn--primary { background: var(--color-primary); color: var(--color-on-primary); }
-    .btn--primary:hover { background: var(--color-primary-hover); box-shadow: var(--shadow-md); color: var(--color-on-primary); transform: translateY(-2px); }
-    .btn--outline { background: transparent; color: var(--color-primary); border: 1.5px solid var(--color-primary); }
-    .btn--outline:hover { background: var(--teal-50); transform: translateY(-2px); }
+    .btn--primary {
+      background: linear-gradient(180deg, var(--teal-600) 0%, var(--teal-700) 100%);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.26),
+        0 8px 20px rgba(91,0,191,.22);
+    }
+    .btn--primary:hover {
+      background: linear-gradient(180deg, var(--teal-500) 0%, var(--teal-600) 100%);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.3),
+        0 12px 28px rgba(91,0,191,.28);
+    }
+    .btn--outline {
+      background: var(--glass-fill-light);
+      -webkit-backdrop-filter: var(--glass-blur-sm);
+      backdrop-filter: var(--glass-blur-sm);
+      color: var(--teal-700);
+      border: 1px solid var(--glass-border-top);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 4px 14px rgba(18,11,24,.05);
+    }
+    .btn--outline:hover {
+      background: var(--glass-fill);
+      transform: translateY(-2px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 8px 22px rgba(91,0,191,.14);
+    }
     .btn--ghost { background: transparent; color: var(--ink-700); padding: 12px 8px; }
     .btn--ghost:hover { color: var(--color-primary); }
     .btn--amber { background: var(--color-accent); color: var(--amber-ink); }
@@ -129,12 +214,17 @@
     /* ---------- Header ---------- */
     .site-header {
       position: sticky; top: 0; z-index: 50;
-      background: rgba(255,255,255,.88);
-      -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+      background: var(--glass-fill-strong);
+      -webkit-backdrop-filter: var(--glass-blur);
+      backdrop-filter: var(--glass-blur);
       border-bottom: 1px solid transparent;
-      transition: border-color .25s ease;
+      transition: border-color .25s ease, background-color .25s ease;
     }
-    .site-header.scrolled { border-bottom-color: var(--border); }
+    .site-header.scrolled { border-bottom-color: var(--glass-border); }
+    @media (min-width: 768px) {
+      .site-header { top: 12px; margin-inline: 12px; border-radius: 20px; border: 1px solid var(--glass-border); }
+      .site-header__inner { padding-inline: 8px; }
+    }
     .site-header__inner { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: var(--sp-4); }
     @media (min-width: 768px) { .site-header__inner { height: 76px; } }
     .wordmark {
@@ -187,7 +277,11 @@
     .hero__try {
       display: inline-flex; align-items: center; gap: var(--sp-3); margin-top: var(--sp-5);
       padding: var(--sp-2) var(--sp-4) var(--sp-2) var(--sp-2);
-      background: var(--surface-alt); border: 1px solid var(--border); border-radius: var(--r-full);
+      background: var(--glass-fill-light);
+      -webkit-backdrop-filter: var(--glass-blur-sm); backdrop-filter: var(--glass-blur-sm);
+      border: 1px solid var(--glass-border); border-top-color: var(--glass-border-top);
+      border-radius: var(--r-full);
+      box-shadow: var(--glass-shadow);
     }
     .hero__try-qr { width: 40px; height: 40px; border-radius: var(--r-sm); border: 1px solid var(--border); background: #fff; padding: 3px; flex-shrink: 0; }
     .hero__try span { font-size: 13px; font-weight: 600; color: var(--ink-700); }
@@ -218,14 +312,16 @@
         var(--google-yellow) 180deg 250deg,
         var(--google-green) 270deg 340deg,
         var(--google-blue) 360deg);
-      box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255,255,255,.5) inset;
+      box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255,255,255,.5) inset, 0 14px 36px rgba(91,0,191,.20);
     }
     .qr-badge__face {
       position: absolute; inset: 7%;
-      border-radius: 50%; background: #fff;
+      border-radius: 50%;
+      background: var(--glass-fill);
+      -webkit-backdrop-filter: var(--glass-blur-sm); backdrop-filter: var(--glass-blur-sm);
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       gap: 4px; padding: 6% 13%; text-align: center;
-      box-shadow: 0 1px 3px rgba(0,0,0,.05) inset;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.9), inset 0 0 0 1px rgba(255,255,255,.35);
     }
     .qr-badge__eyebrow { font-size: calc(var(--badge-size, 260px) * 0.058); font-weight: 700; color: var(--ink-700); letter-spacing: -.01em; }
     .qr-badge__google { font-size: calc(var(--badge-size, 260px) * 0.15); font-weight: 800; letter-spacing: -.02em; line-height: 1; font-family: 'Trebuchet MS', Arial, sans-serif; margin: 1px 0; }
@@ -257,8 +353,18 @@
     }
 
     /* ---------- Trust strip ---------- */
-    .trust-strip { background: var(--color-bg-alt); padding-block: var(--sp-6); }
-    .trust-strip__row { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--sp-4) var(--sp-10); }
+    .trust-strip { background: none; padding-block: var(--sp-8); }
+    .trust-strip__row {
+      background: var(--glass-fill-light);
+      -webkit-backdrop-filter: var(--glass-blur-sm); backdrop-filter: var(--glass-blur-sm);
+      border: 1px solid var(--glass-border); border-top-color: var(--glass-border-top);
+      border-radius: var(--r-glass);
+      box-shadow: var(--glass-shadow);
+      padding: var(--sp-4) var(--sp-8);
+      max-width: fit-content;
+      margin-inline: auto;
+      display: flex; flex-wrap: wrap; justify-content: center; gap: var(--sp-4) var(--sp-10);
+    }
     .trust-item { display: flex; align-items: center; gap: var(--sp-2); font-size: 14px; font-weight: 600; color: var(--ink-700); }
     .trust-item svg { width: 18px; height: 18px; color: var(--teal-600); flex-shrink: 0; }
 
@@ -293,16 +399,13 @@
     .step p { font-size: 15px; color: var(--ink-700); }
 
     /* ---------- Why it matters ---------- */
-    .why { background: var(--color-bg-alt); }
+    .why { background: none; }
     .why__intro { text-align: center; max-width: 680px; margin: 0 auto var(--sp-12); font-size: 17px; color: var(--ink-700); }
     .why__grid { display: grid; gap: var(--sp-6); }
     @media (min-width: 768px) { .why__grid { grid-template-columns: repeat(3, 1fr); } }
     .why-card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--r-lg); padding: var(--sp-6); box-shadow: var(--shadow-sm);
-      transition: transform .3s cubic-bezier(.22,.61,.36,1), box-shadow .3s ease, border-color .3s ease;
+      border-radius: var(--r-glass); padding: var(--sp-6);
     }
-    .why-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); border-color: var(--teal-100); }
     .why-card__icon {
       width: 44px; height: 44px; border-radius: var(--r-md);
       background: var(--teal-50); color: var(--color-primary);
@@ -351,7 +454,9 @@
       box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255,255,255,.5) inset;
     }
     .tap-card__face {
-      position: absolute; inset: 8%; border-radius: 50%; background: #fff;
+      position: absolute; inset: 8%; border-radius: 50%;
+      background: var(--glass-fill);
+      -webkit-backdrop-filter: var(--glass-blur-sm); backdrop-filter: var(--glass-blur-sm);
       display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
       transition: box-shadow .25s ease;
     }
@@ -373,7 +478,7 @@
     .phone-wrap { position: relative; margin-inline: auto; width: fit-content; }
     .phone {
       width: 264px; background: var(--ink-900); border-radius: 40px; padding: 14px;
-      box-shadow: var(--shadow-lg); position: relative;
+      box-shadow: var(--glass-shadow-lg); position: relative;
     }
     .phone__speaker { width: 50px; height: 5px; background: rgba(255,255,255,.22); border-radius: 3px; margin: 0 auto 12px; }
     .phone__screen { background: #fff; border-radius: 26px; overflow: hidden; display: flex; flex-direction: column; min-height: 430px; }
@@ -406,19 +511,22 @@
     .phone__posted.show { opacity: 1; }
     .phone-wrap__scan {
       position: absolute; left: -14px; bottom: 40px; width: 40px; height: 40px;
-      background: #fff; border: 1px solid var(--border); border-radius: var(--r-md);
-      box-shadow: var(--shadow-md); display: flex; align-items: center; justify-content: center; color: var(--teal-600);
+      background: var(--glass-fill);
+      -webkit-backdrop-filter: var(--glass-blur-sm); backdrop-filter: var(--glass-blur-sm);
+      border: 1px solid var(--glass-border); border-top-color: var(--glass-border-top);
+      border-radius: var(--r-md);
+      box-shadow: var(--glass-shadow); display: flex; align-items: center; justify-content: center; color: var(--teal-600);
     }
     .phone-wrap__scan svg { width: 20px; height: 20px; }
 
     .reviews-demo__cards { display: grid; gap: var(--sp-4); align-content: center; }
     .mini-review {
-      background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg);
-      padding: var(--sp-5); box-shadow: var(--shadow-sm);
+      border-radius: var(--r-glass);
+      padding: var(--sp-5);
       transition: transform .35s cubic-bezier(.22,.61,.36,1), box-shadow .35s ease;
       transition-delay: var(--d, 0s);
     }
-    .mini-review:hover { transform: translateY(-4px) scale(1.01); box-shadow: var(--shadow-md); }
+    .mini-review:hover { transform: translateY(-4px) scale(1.01); }
     .mini-review__stars { color: var(--google-gold); font-size: 14px; letter-spacing: 2px; margin-bottom: 6px; }
     .mini-review p { font-size: 14.5px; color: var(--ink-900); font-weight: 500; line-height: 1.5; }
     .mini-review__who { display: block; margin-top: 8px; font-size: 12.5px; color: var(--ink-500); }
@@ -438,24 +546,20 @@
     .product__text p.lede { color: var(--ink-700); margin-top: var(--sp-3); }
 
     /* ---------- Pricing ---------- */
-    .pricing { background: var(--color-bg-alt); }
-    .price-grid { display: grid; gap: var(--sp-6); align-items: stretch; }
-    @media (min-width: 1024px) { .price-grid { grid-template-columns: 1fr 1fr; } }
+    .pricing { background: none; }
+    .price-grid { display: grid; justify-content: center; }
+    .price-grid .price-card { max-width: 520px; width: 100%; margin-inline: auto; }
     .price-card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--r-xl); padding: var(--sp-8) var(--sp-6);
-      box-shadow: var(--shadow-sm);
+      border-radius: var(--r-glass-lg); padding: var(--sp-8) var(--sp-6);
       display: flex; flex-direction: column; gap: var(--sp-4);
-      transition: transform .3s cubic-bezier(.22,.61,.36,1), box-shadow .3s ease;
     }
-    .price-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
     .price-card--highlight {
-      border: 2px solid var(--color-primary);
-      background: var(--teal-50);
-      box-shadow: var(--shadow-glow);
+      background: var(--glass-tint);
+      border-color: rgba(91,0,191,.18);
+      box-shadow: var(--glass-shadow-lg);
       position: relative;
     }
-    .price-card--highlight:hover { box-shadow: var(--shadow-glow), var(--shadow-md); }
+    .price-card__note { font-size: 13px; color: var(--ink-500); }
     .price-card__badge {
       position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
       background: var(--color-accent); color: var(--amber-ink);
@@ -473,28 +577,38 @@
     .price-card .btn { width: 100%; margin-top: var(--sp-2); }
     .bundle-row {
       margin-top: var(--sp-6);
-      background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg);
-      padding: var(--sp-6); box-shadow: var(--shadow-sm);
+      border-radius: var(--r-glass-lg);
+      padding: var(--sp-6);
       display: flex; flex-direction: column; gap: var(--sp-4);
-      transition: transform .3s ease, box-shadow .3s ease;
     }
-    .bundle-row:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
     @media (min-width: 768px) { .bundle-row { flex-direction: row; align-items: center; justify-content: space-between; gap: var(--sp-8); } }
     .bundle-row__title { font-size: 17px; font-weight: 700; }
     .bundle-row__desc { font-size: 14px; color: var(--ink-700); margin-top: var(--sp-1); }
     .bundle-row .btn { flex-shrink: 0; }
 
     /* ---------- FAQ ---------- */
-    .faq-list { max-width: 720px; margin-inline: auto; }
-    .faq-item { border-bottom: 1px solid var(--border); }
-    .faq-item:first-child { border-top: 1px solid var(--border); }
+    .faq-list {
+      max-width: 720px; margin-inline: auto;
+      background: var(--glass-fill);
+      -webkit-backdrop-filter: var(--glass-blur);
+      backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-top-color: var(--glass-border-top);
+      border-radius: var(--r-glass-lg);
+      box-shadow: var(--glass-shadow);
+      padding-inline: var(--sp-6);
+      overflow: hidden;
+    }
+    .faq-item { border-bottom: 1px solid rgba(91,0,191,.08); }
+    .faq-item:first-child { border-top: none; }
+    .faq-item:last-child { border-bottom: none; }
     .faq-trigger {
       width: 100%; display: flex; justify-content: space-between; align-items: center; gap: var(--sp-4);
       padding: var(--sp-5) var(--sp-2); background: none; border: none; text-align: left;
       font-family: inherit; font-size: 16px; font-weight: 600; color: var(--ink-900); cursor: pointer;
       transition: background-color .2s ease, transform .2s ease;
     }
-    .faq-trigger:hover { background: var(--color-bg-alt); transform: translateX(4px); }
+    .faq-trigger:hover { background: rgba(91,0,191,.05); border-radius: var(--r-md); }
     .faq-trigger:focus-visible { outline: 2px solid var(--teal-600); outline-offset: -2px; }
     .faq-icon { width: 20px; height: 20px; flex-shrink: 0; transition: transform .25s ease; color: var(--teal-600); }
     .faq-item.open .faq-icon { transform: rotate(45deg); }
@@ -535,7 +649,7 @@
     .site-footer__bottom {
       border-top: 1px solid rgba(255,255,255,.08);
       padding-block: var(--sp-5);
-      font-size: 13px; color: var(--teal-300); text-align: center;
+      font-size: 13px; color: var(--teal-100); text-align: center;
     }
 
     /* ---------- Scroll reveal ---------- */
@@ -644,7 +758,7 @@
 
     <!-- ================= Trust strip ================= -->
     <div class="trust-strip" role="presentation">
-      <div class="container trust-strip__row">
+      <div class="container trust-strip__row glass">
         <div class="trust-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
           დაყენება — 2 წუთში
@@ -694,21 +808,21 @@
         </div>
         <p class="why__intro reveal">Google Maps ძებნაში პოზიციას შეფასების რაოდენობა და სიხშირე წყვეტს.</p>
         <div class="why__grid">
-          <div class="why-card reveal">
+          <div class="why-card glass reveal">
             <div class="why-card__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19l5-6 4 3 7-9"/><path d="M15 7h5v5"/></svg>
             </div>
             <h3>მეტი შეფასება → მაღალი პოზიცია</h3>
             <p>მეტი და ახალი შეფასება Google-ს აიძულებს, კონკურენტებზე მაღლა დაგსვათ.</p>
           </div>
-          <div class="why-card reveal">
+          <div class="why-card glass reveal">
             <div class="why-card__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.1-7-11a7 7 0 0 1 14 0c0 5.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
             </div>
             <h3>მაღალი პოზიცია → მეტი კლიენტი</h3>
             <p>ხალხი პირველ სამ შედეგს ირჩევს. ხილვადობა = შემოსული კლიენტი.</p>
           </div>
-          <div class="why-card reveal">
+          <div class="why-card glass reveal">
             <div class="why-card__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 15.3l-4.8 2.6.9-5.4-3.9-3.8 5.4-.8z"/></svg>
             </div>
@@ -781,17 +895,17 @@
             </div>
           </div>
           <div class="reviews-demo__cards">
-            <div class="mini-review reveal" style="--d:0s">
+            <div class="mini-review glass reveal" style="--d:0s">
               <div class="mini-review__stars">★★★★★</div>
               <p>„უსწრაფესი და საუკეთესო შეჭრა ვაკეში, რეკომენდაციას ვუწევ ყველას.“</p>
               <span class="mini-review__who">— სალონი Fade, ბარბერშოპი</span>
             </div>
-            <div class="mini-review reveal" style="--d:.1s">
+            <div class="mini-review glass reveal" style="--d:.1s">
               <div class="mini-review__stars">★★★★★</div>
               <p>„გემრიელი კერძები, საუკეთესო მომსახურება. აუცილებლად დავბრუნდები.“</p>
               <span class="mini-review__who">— რესტორანი „ტიფლისი“</span>
             </div>
-            <div class="mini-review reveal" style="--d:.2s">
+            <div class="mini-review glass reveal" style="--d:.2s">
               <div class="mini-review__stars">★★★★★</div>
               <p>„საუკეთესო კაპუჩინო ძველ თბილისში, ატმოსფერო საოცარია.“</p>
               <span class="mini-review__who">— კაფე „ლანჩი“</span>
@@ -869,34 +983,31 @@
       <div class="container">
         <div class="section-head reveal">
           <h2 id="pricing-title">ფასი — გამჭვირვალედ</h2>
-          <p>პირველ თბილისელ კლიენტებს დამფუძნებლის ფასი, 5 ₾/თვე, სამუდამოდ რჩებათ.</p>
+          <p>ერთი ფასი — ბარათი, დამონტაჟება და მომსახურება ერთად. აღარაფერი დამატებით საყიდელი.</p>
         </div>
+
         <div class="price-grid">
-          <div class="price-card reveal">
-            <span class="price-card__label">დამონტაჟება-დაპროგრამირება</span>
-            <div class="price-card__price">30 ₾ <small>ერთჯერადი</small></div>
-            <p class="price-card__desc">აკრილის NFC ბარათი, დაპროგრამებული და მიბმული ზუსტად თქვენი Google გვერდზე — მზად არის დღესვე.</p>
-            <a href="mailto:qrebige@gmail.com?subject=%E1%83%91%E1%83%90%E1%83%A0%E1%83%90%E1%83%97%E1%83%98%E1%83%A1%20%E1%83%A8%E1%83%94%E1%83%99%E1%83%95%E1%83%94%E1%83%97%E1%83%90%20%E2%80%94%20qrebi" class="btn btn--outline">შეუკვეთეთ</a>
-          </div>
-          <div class="price-card price-card--highlight reveal">
-            <span class="price-card__badge">პოპულარული</span>
-            <span class="price-card__label">მომსახურება</span>
-            <div class="price-card__price">5 ₾ <small>/ თვე</small></div>
-            <p class="price-card__intro">არა „საფასური“ ბარათისთვის — ბმულის მართვის სერვისია:</p>
+          <div class="price-card price-card--highlight glass reveal">
+            <span class="price-card__label">სრული პაკეტი</span>
+            <div class="price-card__price">50 ₾ <small>/ თვე</small></div>
+            <p class="price-card__intro">ერთი გამჭვირვალე ფასი — ეს ყველაფერი შედის:</p>
             <ul class="price-card__list">
-              <li>ბმულის მიმართულება იცვლება ნებისმიერ დროს, მაგ. ახალ ფილიალზე</li>
-              <li>მალე: tap ანალიტიკა კვირაში</li>
-              <li>დღეში 17 თეთრზე იაფი. ერთი დაკარგული კლიენტი ამაზე ძვირი ჯდება</li>
+              <li>ბარათი — NFC + QR, დაპროგრამებული ზუსტად თქვენს Google გვერდზე</li>
+              <li>დამონტაჟება — ჩვენ ვაკონფიგურირებთ, თქვენ მხოლოდ დახლზე დებთ</li>
+              <li>მომსახურება — მუდმივი მხარდაჭერა და მუშაობის გარანტია</li>
+              <li>ბმულის მართვა — მიმართულების შეცვლა ნებისმიერ დროს, მაგ. ახალ ფილიალზე</li>
             </ul>
-            <a href="mailto:qrebige@gmail.com?subject=%E1%83%92%E1%83%90%E1%83%9B%E1%83%9D%E1%83%AC%E1%83%94%E1%83%A0%E1%83%98%E1%83%A1%20%E1%83%93%E1%83%90%E1%83%AC%E1%83%A7%E1%83%94%E1%83%91%E1%83%90%20%E2%80%94%20qrebi" class="btn btn--primary">დაიწყეთ გამოწერა</a>
+            <p class="price-card__note">დღეში 2 ₾-ზე ნაკლები — ერთი დაკარგული კლიენტი ამაზე ბევრად ძვირი ჯდება.</p>
+            <a href="mailto:qrebige@gmail.com?subject=%E1%83%91%E1%83%90%E1%83%A0%E1%83%90%E1%83%97%E1%83%98%E1%83%A1%20%E1%83%A8%E1%83%94%E1%83%99%E1%83%95%E1%83%94%E1%83%97%E1%83%90%20%E2%80%94%20qrebi" class="btn btn--primary">შეუკვეთეთ ბარათი</a>
           </div>
         </div>
-        <div class="bundle-row reveal">
+
+        <div class="bundle-row glass reveal">
           <div>
-            <div class="bundle-row__title">სტენდი + 2 ბარათი — <span style="white-space:nowrap">150 ₾-დან</span></div>
-            <p class="bundle-row__desc">დახლზე დასადგმელად. ფასი დამოკიდებულია ტირაჟზე, მოგვწერეთ ზუსტი შეთავაზებისთვის.</p>
+            <div class="bundle-row__title">რამდენიმე ბარათი ან ლოკაცია?</div>
+            <p class="bundle-row__desc">რაც მეტ ბარათს ან ფილიალს შეუკვეთავთ, მით უფრო ხელსაყრელია ფასი — მოგვწერეთ რაოდენობა.</p>
           </div>
-          <a href="mailto:qrebige@gmail.com?subject=%E1%83%A1%E1%83%A2%E1%83%94%E1%83%9C%E1%83%93%E1%83%98%E1%83%A1%20%E1%83%A8%E1%83%94%E1%83%97%E1%83%90%E1%83%95%E1%83%90%E1%83%96%E1%83%94%E1%83%91%E1%83%90%20%E2%80%94%20qrebi" class="btn btn--outline">მოითხოვეთ ფასი</a>
+          <a href="mailto:qrebige@gmail.com?subject=%E1%83%A1%E1%83%A2%E1%83%94%E1%83%9C%E1%83%93%E1%83%98%E1%83%A1%20%E1%83%A8%E1%83%94%E1%83%97%E1%83%90%E1%83%95%E1%83%90%E1%83%96%E1%83%94%E1%83%91%E1%83%90%20%E2%80%94%20qrebi" class="btn btn--outline">დაგვიკავშირდით ზუსტი ფასისთვის</a>
         </div>
       </div>
     </section>
@@ -960,7 +1071,7 @@
               </button>
             </h3>
             <div class="faq-panel" id="faq-panel-5" role="region" aria-labelledby="faq-trigger-5">
-              <div class="faq-panel__inner"><p class="faq-answer">ბარათი გამორთვება და მომხმარებელს აღარ გადაამისამართებს. გამოწერა ზუსტად ამ მუშაობას ფარავს (ბმულის მართვა, მალე tap ანალიტიკა).</p></div>
+              <div class="faq-panel__inner"><p class="faq-answer">ბარათი გამორთვება და მომხმარებელს აღარ გადაამისამართებს. 50 ₾/თვე გამოწერა სწორედ ამას ფარავს — ბარათს, დამონტაჟებას და მომსახურებას ერთად.</p></div>
             </div>
           </div>
           <div class="faq-item">
