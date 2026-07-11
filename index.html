@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>qrebi — მეტი Google შეფასება ერთი შეხებით | qrebi.ge</title>
+  <meta name="description" content="qrebi — NFC ბარათი და სტენდი თბილისის ბიზნესებისთვის. მომხმარებელი ეხება ტელეფონით და 5 წამში ტოვებს Google შეფასებას. მეტი შეფასება — მაღალი პოზიცია რუკაზე, მეტი კლიენტი.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://qrebi.ge/">
+  <meta property="og:title" content="qrebi — მეტი შეფასება. მეტი მომხმარებელი.">
+  <meta property="og:description" content="NFC ბარათი, რომელსაც მომხმარებელი ტელეფონით ეხება — და 5 წამში ტოვებს შეფასებას თქვენს Google გვერდზე.">
+  <meta property="og:image" content="https://qrebi.ge/qrebi-og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="ka_GE">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%235B00BF'/%3E%3Cpath fill='%23fff' d='M12 12h16v16H12zM36 12h16v16H36zM12 36h16v16H12z'/%3E%3Cpath fill='%235B00BF' d='M16 16h8v8h-8zM40 16h8v8h-8zM16 40h8v8h-8z'/%3E%3Cpath fill='%23fff' d='M18 18h4v4h-4zM42 18h4v4h-4zM18 42h4v4h-4zM36 36h7v7h-7zM45 45h7v7h-7zM36 46h4v4h-4z'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --teal-50:  #F0E6FB;
+      --teal-100: #DCC8F5;
+      --teal-200: #C5A6EE;
+      --teal-300: #AD84E6;
+      --teal-400: #9563DE;
+      --teal-500: #7A38D0;
+      --teal-600: #5B00BF;
+      --teal-700: #5000A8;
+      --teal-800: #460092;
+      --teal-900: #3D0080;
+
+      --amber-100: #FDEDCB;
+      --amber-400: #FAC775;
+      --amber-600: #E5AE4F;
+      --amber-ink: #4A3200;
+
+      --google-blue:   #4285F4;
+      --google-red:    #EA4335;
+      --google-yellow: #FBBC05;
+      --google-green:  #34A853;
+      --google-gold:   #F9AB00;
+
+      --ink-900: #120B18;
+      --ink-700: #463C50;
+      --ink-500: #726B77;
+      --ink-300: #AFA9B3;
+      --border:  #E9E4F0;
+      --surface: #FFFFFF;
+      --surface-alt: #F9F7FB;
+
+      --color-primary: var(--teal-600);
+      --color-primary-hover: var(--teal-700);
+      --color-primary-active: var(--teal-800);
+      --color-on-primary: #FFFFFF;
+      --color-accent: var(--amber-400);
+      --color-text: var(--ink-900);
+      --color-text-muted: var(--ink-500);
+      --color-bg: var(--surface);
+      --color-bg-alt: var(--surface-alt);
+      --color-border: var(--border);
+
+      --r-sm: 8px; --r-md: 12px; --r-lg: 20px; --r-xl: 28px; --r-full: 999px;
+
+      --shadow-sm: 0 1px 2px rgba(18,11,24,.04), 0 1px 1px rgba(18,11,24,.03);
+      --shadow-md: 0 8px 24px rgba(18,11,24,.08);
+      --shadow-lg: 0 20px 48px rgba(18,11,24,.12);
+      --shadow-glow: 0 16px 40px rgba(91,0,191,.18);
+
+      --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px;
+      --sp-5: 20px; --sp-6: 24px; --sp-8: 32px; --sp-10: 40px;
+      --sp-12: 48px; --sp-16: 64px; --sp-20: 80px; --sp-24: 96px;
+
+      --container-max: 1160px;
+      --container-pad: 20px;
+    }
+    @media (min-width: 768px)  { :root { --container-pad: 32px; } }
+    @media (min-width: 1024px) { :root { --container-pad: 48px; } }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: 'Noto Sans Georgian', 'Noto Sans', system-ui, sans-serif;
+      color: var(--color-text);
+      background: var(--color-bg);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: var(--color-primary); text-decoration: none; }
+
+    .container { max-width: var(--container-max); margin-inline: auto; padding-inline: var(--container-pad); }
+
+    section { padding-block: 56px; scroll-margin-top: 88px; }
+    @media (min-width: 1024px) { section { padding-block: 112px; } }
+
+    .eyebrow {
+      font-size: 12px; font-weight: 600; letter-spacing: .04em;
+      color: var(--teal-600); margin-bottom: var(--sp-3); display: block;
+    }
+    h1 { font-size: clamp(32px, 7vw, 56px); font-weight: 800; line-height: 1.08; letter-spacing: -.01em; }
+    h2 { font-size: clamp(26px, 4.5vw, 38px); font-weight: 700; line-height: 1.15; letter-spacing: -.005em; }
+    h3 { font-size: 20px; font-weight: 700; line-height: 1.25; }
+    @media (min-width: 768px) { h3 { font-size: 22px; } }
+    .section-head { text-align: center; max-width: 720px; margin: 0 auto var(--sp-12); }
+    .section-head p { color: var(--ink-700); margin-top: var(--sp-3); }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      font-family: inherit; font-weight: 700; font-size: 16px; line-height: 1.3;
+      border-radius: var(--r-full); padding: 16px 28px;
+      display: inline-flex; align-items: center; justify-content: center; gap: var(--sp-2);
+      border: none; cursor: pointer; text-decoration: none;
+      transition: transform .25s cubic-bezier(.22,.61,.36,1), background-color .2s ease, box-shadow .2s ease, color .2s ease;
+    }
+    .btn:active { transform: scale(.98); }
+    .btn--primary { background: var(--color-primary); color: var(--color-on-primary); }
+    .btn--primary:hover { background: var(--color-primary-hover); box-shadow: var(--shadow-md); color: var(--color-on-primary); transform: translateY(-2px); }
+    .btn--outline { background: transparent; color: var(--color-primary); border: 1.5px solid var(--color-primary); }
+    .btn--outline:hover { background: var(--teal-50); transform: translateY(-2px); }
+    .btn--ghost { background: transparent; color: var(--ink-700); padding: 12px 8px; }
+    .btn--ghost:hover { color: var(--color-primary); }
+    .btn--amber { background: var(--color-accent); color: var(--amber-ink); }
+    .btn--amber:hover { background: var(--amber-600); color: var(--amber-ink); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .btn--sm { font-size: 14px; padding: 10px 20px; }
+    .btn:focus-visible { outline: 2px solid var(--teal-600); outline-offset: 2px; }
+    @media (max-width: 479px) { .btn-full-mobile { width: 100%; } }
+
+    /* ---------- Header ---------- */
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255,255,255,.88);
+      -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+      border-bottom: 1px solid transparent;
+      transition: border-color .25s ease;
+    }
+    .site-header.scrolled { border-bottom-color: var(--border); }
+    .site-header__inner { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: var(--sp-4); }
+    @media (min-width: 768px) { .site-header__inner { height: 76px; } }
+    .wordmark {
+      font-size: 22px; font-weight: 800; letter-spacing: -.01em; color: var(--ink-900);
+      display: inline-flex; align-items: baseline; gap: 2px; text-decoration: none;
+    }
+    .wordmark::after { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--teal-600); }
+    .site-nav { display: none; align-items: center; gap: var(--sp-8); }
+    @media (min-width: 768px) { .site-nav { display: flex; } }
+    .site-nav a { font-size: 15px; font-weight: 500; color: var(--ink-700); position: relative; }
+    .site-nav a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: -4px; height: 2px; background: var(--teal-600); transition: right .25s cubic-bezier(.22,.61,.36,1); }
+    .site-nav a:hover { color: var(--teal-600); }
+    .site-nav a:hover::after { right: 0; }
+    .site-header__actions { display: flex; align-items: center; gap: var(--sp-3); }
+    .menu-toggle {
+      display: inline-flex; flex-direction: column; justify-content: center; gap: 5px;
+      width: 42px; height: 42px; padding: 10px; background: none;
+      border: 1px solid var(--border); border-radius: var(--r-md); cursor: pointer;
+    }
+    .menu-toggle span { display: block; height: 2px; width: 100%; background: var(--ink-900); border-radius: 2px; transition: transform .2s ease, opacity .2s ease; }
+    .menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    @media (min-width: 768px) { .menu-toggle { display: none; } }
+    .mobile-nav { display: none; border-top: 1px solid var(--border); background: var(--color-bg); }
+    .mobile-nav.open { display: block; }
+    .mobile-nav a { display: block; padding: var(--sp-4) var(--container-pad); font-size: 16px; font-weight: 600; color: var(--ink-900); border-bottom: 1px solid var(--border); }
+    .mobile-nav a:last-child { border-bottom: none; }
+    @media (min-width: 768px) { .mobile-nav { display: none !important; } }
+
+    /* ---------- Hero ---------- */
+    .hero { padding-block: 56px 64px; position: relative; overflow: clip; }
+    @media (min-width: 1024px) { .hero { padding-block: 88px 104px; } }
+    .hero::before {
+      content: ""; position: absolute; top: -20%; right: -10%; width: 60vw; height: 60vw; max-width: 640px; max-height: 640px;
+      background: radial-gradient(circle, rgba(91,0,191,.09), transparent 70%);
+      pointer-events: none; z-index: -1;
+    }
+    .hero__grid { display: grid; gap: var(--sp-12); align-items: center; text-align: center; }
+    @media (min-width: 768px) {
+      .hero__grid { grid-template-columns: 1.1fr 1fr; text-align: left; gap: var(--sp-16); }
+    }
+    .hero__sub { font-size: 17px; line-height: 1.55; color: var(--ink-700); margin-top: var(--sp-5); max-width: 34em; }
+    @media (min-width: 768px) { .hero__sub { font-size: 19px; } }
+    @media (max-width: 767px) { .hero__sub { margin-inline: auto; } }
+    .hero__ctas { display: flex; flex-direction: column; gap: var(--sp-3); margin-top: var(--sp-8); align-items: center; }
+    @media (min-width: 640px) { .hero__ctas { flex-direction: row; } }
+    @media (min-width: 768px) { .hero__ctas { justify-content: flex-start; } }
+    .hero__note { font-size: 13px; color: var(--ink-500); margin-top: var(--sp-4); }
+    .hero__try {
+      display: inline-flex; align-items: center; gap: var(--sp-3); margin-top: var(--sp-5);
+      padding: var(--sp-2) var(--sp-4) var(--sp-2) var(--sp-2);
+      background: var(--surface-alt); border: 1px solid var(--border); border-radius: var(--r-full);
+    }
+    .hero__try-qr { width: 40px; height: 40px; border-radius: var(--r-sm); border: 1px solid var(--border); background: #fff; padding: 3px; flex-shrink: 0; }
+    .hero__try span { font-size: 13px; font-weight: 600; color: var(--ink-700); }
+
+    /* ---------- 3D badge mockup (matches physical qrebi sticker) ---------- */
+    .tilt-wrap { perspective: 1200px; }
+    .tilt { transition: transform .5s cubic-bezier(.22,.61,.36,1); transform-style: preserve-3d; will-change: transform; }
+    .tilt-float { animation: qrebi-float 6s ease-in-out infinite; }
+    @keyframes qrebi-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+    .badge-scene { position: relative; margin-inline: auto; width: fit-content; padding-bottom: 28px; }
+    .badge-shadow {
+      position: absolute; left: 50%; bottom: 6px; transform: translateX(-50%);
+      width: 68%; height: 22px; background: radial-gradient(ellipse at center, rgba(18,11,24,.24), transparent 72%);
+      filter: blur(3px); z-index: -1;
+    }
+    .qr-badge {
+      position: relative; width: var(--badge-size, 260px); aspect-ratio: 1; border-radius: 50%;
+      cursor: default;
+    }
+    .hero-badge { --badge-size: clamp(220px, 34vw, 300px); }
+    .product-badge { --badge-size: clamp(180px, 26vw, 240px); }
+    .qr-badge__ring {
+      position: absolute; inset: 0; border-radius: 50%;
+      background: conic-gradient(from -40deg,
+        var(--google-blue) 0deg 70deg,
+        var(--google-red) 90deg 160deg,
+        var(--google-yellow) 180deg 250deg,
+        var(--google-green) 270deg 340deg,
+        var(--google-blue) 360deg);
+      box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255,255,255,.5) inset;
+    }
+    .qr-badge__face {
+      position: absolute; inset: 7%;
+      border-radius: 50%; background: #fff;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 4px; padding: 6% 13%; text-align: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,.05) inset;
+    }
+    .qr-badge__eyebrow { font-size: calc(var(--badge-size, 260px) * 0.058); font-weight: 700; color: var(--ink-700); letter-spacing: -.01em; }
+    .qr-badge__google { font-size: calc(var(--badge-size, 260px) * 0.15); font-weight: 800; letter-spacing: -.02em; line-height: 1; font-family: 'Trebuchet MS', Arial, sans-serif; margin: 1px 0; }
+    .qr-badge__stars { display: flex; gap: 3px; margin: 1px 0 3px; }
+    .qr-badge__stars svg { width: calc(var(--badge-size, 260px) * 0.062); height: calc(var(--badge-size, 260px) * 0.062); fill: var(--google-gold); }
+    .qr-badge__methods { display: flex; align-items: center; gap: calc(var(--badge-size, 260px) * 0.035); margin-top: 2px; }
+    .qr-badge__method { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+    .qr-badge__method svg { width: calc(var(--badge-size, 260px) * 0.1); height: calc(var(--badge-size, 260px) * 0.1); color: var(--ink-900); }
+    .qr-badge__method span { font-size: calc(var(--badge-size, 260px) * 0.05); font-weight: 600; color: var(--ink-900); white-space: nowrap; }
+    .qr-badge__or { font-size: calc(var(--badge-size, 260px) * 0.048); color: var(--ink-500); }
+
+    .hero-badge-scene__pulse {
+      position: absolute; right: 4%; bottom: 26%; width: 34px; height: 34px; pointer-events: none;
+    }
+    .hero-badge-scene__pulse::before, .hero-badge-scene__pulse::after {
+      content: ""; position: absolute; inset: 0; border-radius: 50%;
+      border: 2px solid var(--teal-400); opacity: 0;
+      animation: qrebi-pulse 2.4s ease-out infinite;
+    }
+    .hero-badge-scene__pulse::after { animation-delay: 1.2s; }
+    @keyframes qrebi-pulse {
+      0%   { transform: scale(.4); opacity: .55; }
+      100% { transform: scale(2); opacity: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-badge-scene__pulse::before, .hero-badge-scene__pulse::after { animation: none; opacity: 0; }
+      .tilt-float { animation: none; }
+      .tilt { transition: none; }
+    }
+
+    /* ---------- Trust strip ---------- */
+    .trust-strip { background: var(--color-bg-alt); padding-block: var(--sp-6); }
+    .trust-strip__row { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--sp-4) var(--sp-10); }
+    .trust-item { display: flex; align-items: center; gap: var(--sp-2); font-size: 14px; font-weight: 600; color: var(--ink-700); }
+    .trust-item svg { width: 18px; height: 18px; color: var(--teal-600); flex-shrink: 0; }
+
+    /* ---------- How it works ---------- */
+    .steps { display: grid; gap: var(--sp-10); position: relative; }
+    @media (min-width: 768px) { .steps { grid-template-columns: repeat(3, 1fr); gap: var(--sp-8); } }
+    .step { position: relative; padding-left: var(--sp-16); transition: transform .3s ease; }
+    .step:hover { transform: translateY(-3px); }
+    @media (min-width: 768px) { .step { padding-left: 0; text-align: center; } }
+    .step__num {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--color-primary); color: #fff;
+      font-size: 18px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow-sm);
+      position: absolute; left: 0; top: 0; z-index: 1;
+      transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s ease;
+    }
+    .step:hover .step__num { transform: scale(1.08); box-shadow: var(--shadow-glow); }
+    @media (min-width: 768px) { .step__num { position: relative; margin: 0 auto var(--sp-5); } }
+    .step:not(:last-child)::before {
+      content: ""; position: absolute; left: 23px; top: 52px; bottom: -36px;
+      border-left: 2px dashed var(--teal-200);
+    }
+    @media (min-width: 768px) {
+      .step:not(:last-child)::before {
+        left: calc(50% + 28px); right: calc(-50% + 28px); top: 24px; bottom: auto;
+        border-left: none; border-top: 2px dashed var(--teal-200);
+      }
+    }
+    .step h3 { margin-bottom: var(--sp-2); }
+    .step p { font-size: 15px; color: var(--ink-700); }
+
+    /* ---------- Why it matters ---------- */
+    .why { background: var(--color-bg-alt); }
+    .why__intro { text-align: center; max-width: 680px; margin: 0 auto var(--sp-12); font-size: 17px; color: var(--ink-700); }
+    .why__grid { display: grid; gap: var(--sp-6); }
+    @media (min-width: 768px) { .why__grid { grid-template-columns: repeat(3, 1fr); } }
+    .why-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: var(--sp-6); box-shadow: var(--shadow-sm);
+      transition: transform .3s cubic-bezier(.22,.61,.36,1), box-shadow .3s ease, border-color .3s ease;
+    }
+    .why-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); border-color: var(--teal-100); }
+    .why-card__icon {
+      width: 44px; height: 44px; border-radius: var(--r-md);
+      background: var(--teal-50); color: var(--color-primary);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: var(--sp-4);
+      transition: background .3s ease, transform .3s ease;
+    }
+    .why-card:hover .why-card__icon { background: var(--teal-600); color: #fff; transform: rotate(-6deg) scale(1.05); }
+    .why-card__icon svg { width: 22px; height: 22px; }
+    .why-card h3 { font-size: 18px; margin-bottom: var(--sp-2); }
+    .why-card p { font-size: 15px; color: var(--ink-700); }
+
+    /* ---------- Reviews demo ---------- */
+    .reviews-demo { background: var(--color-bg); position: relative; overflow: clip; }
+    .reviews-demo__stage { display: grid; gap: var(--sp-12); align-items: center; margin-top: var(--sp-6); }
+    @media (min-width: 900px) { .reviews-demo__stage { grid-template-columns: auto 1fr; gap: var(--sp-16); } }
+
+    /* ---------- Tap-to-open intro (scanner card sits beside phone -> phone moves over and taps it -> Google review opens) ---------- */
+    .phone__screen.pre-tap .phone__browserbar,
+    .phone__screen.pre-tap .phone__content { opacity: 0; }
+    .phone__browserbar, .phone__content { transition: opacity .4s ease .15s; }
+    .phone { position: relative; z-index: 2; }
+    #rd-phone-wrap.rd-tapping .phone,
+    #rd-phone-wrap.rd-tapped .phone {
+      transform: translate(-30%, 20%) rotate(-4deg) scale(.92) !important;
+      transition: transform .55s cubic-bezier(.32,.72,.31,1.15) !important;
+    }
+    #rd-phone-wrap.rd-tap-back .phone { transform: translate(0, 0) rotate(0) scale(1) !important; transition: transform .5s cubic-bezier(.22,.61,.36,1) !important; }
+    .tap-card {
+      position: absolute; left: -20%; bottom: 4%; transform: scale(.5); z-index: 1;
+      width: 46%; max-width: 150px; aspect-ratio: 1; opacity: 0;
+      transition: opacity .55s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.34,1.56,.64,1);
+    }
+    #rd-phone-wrap.rd-card-in .tap-card,
+    #rd-phone-wrap.rd-tapping .tap-card,
+    #rd-phone-wrap.rd-tapped .tap-card { opacity: 1; transform: scale(1); }
+    #rd-phone-wrap.rd-done .tap-card {
+      opacity: 0; transform: scale(.7) translateY(14px); pointer-events: none;
+      transition: opacity .4s ease, transform .4s ease;
+    }
+    .tap-card__ring {
+      position: absolute; inset: 0; border-radius: 50%;
+      background: conic-gradient(from -40deg,
+        var(--google-blue) 0deg 70deg, var(--google-red) 90deg 160deg,
+        var(--google-yellow) 180deg 250deg, var(--google-green) 270deg 340deg, var(--google-blue) 360deg);
+      box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255,255,255,.5) inset;
+    }
+    .tap-card__face {
+      position: absolute; inset: 8%; border-radius: 50%; background: #fff;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+      transition: box-shadow .25s ease;
+    }
+    #rd-phone-wrap.rd-tapped .tap-card__face { box-shadow: 0 0 0 6px rgba(91,0,191,.18) inset; }
+    .tap-card__eyebrow { font-size: 12px; font-weight: 700; color: var(--ink-700); }
+    .tap-card__google {
+      font-size: 22px; font-weight: 800; letter-spacing: -.02em; font-family: 'Trebuchet MS', Arial, sans-serif;
+      background: linear-gradient(90deg, var(--google-blue), var(--google-red), var(--google-yellow), var(--google-green));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .tap-card__wave {
+      position: absolute; inset: -8px; border-radius: 50%; border: 3px solid var(--teal-500); opacity: 0; pointer-events: none;
+    }
+    #rd-phone-wrap.rd-tapping .tap-card__wave--1 { animation: rd-tap-wave 1s ease-out .35s; }
+    #rd-phone-wrap.rd-tapping .tap-card__wave--2 { animation: rd-tap-wave 1s ease-out .5s; }
+    #rd-phone-wrap.rd-tapping .tap-card__wave--3 { animation: rd-tap-wave 1s ease-out .65s; }
+    @keyframes rd-tap-wave { 0% { opacity: .6; transform: scale(.85); } 100% { opacity: 0; transform: scale(2.1); } }
+
+    .phone-wrap { position: relative; margin-inline: auto; width: fit-content; }
+    .phone {
+      width: 264px; background: var(--ink-900); border-radius: 40px; padding: 14px;
+      box-shadow: var(--shadow-lg); position: relative;
+    }
+    .phone__speaker { width: 50px; height: 5px; background: rgba(255,255,255,.22); border-radius: 3px; margin: 0 auto 12px; }
+    .phone__screen { background: #fff; border-radius: 26px; overflow: hidden; display: flex; flex-direction: column; min-height: 430px; }
+    .phone__browserbar { display: flex; align-items: center; gap: 8px; padding: 12px 14px; background: var(--surface-alt); border-bottom: 1px solid var(--border); }
+    .phone__browserbar .g-dot {
+      width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0;
+      background: conic-gradient(var(--google-blue) 0 25%, var(--google-red) 25% 50%, var(--google-yellow) 50% 75%, var(--google-green) 75% 100%);
+    }
+    .phone__browserbar span { font-size: 11px; color: var(--ink-500); font-weight: 500; }
+    .phone__content { padding: 22px 18px 18px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; flex: 1; transition: opacity .35s ease, transform .35s ease; }
+    .phone__content.is-out { opacity: 0; transform: translateY(8px); }
+    .phone__biz { display: flex; align-items: center; gap: 10px; width: 100%; }
+    .phone__biz-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--teal-50); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    .phone__biz-info { text-align: left; }
+    .phone__biz-name { font-size: 14px; font-weight: 700; color: var(--ink-900); }
+    .phone__biz-sub { font-size: 11px; color: var(--ink-500); }
+    .phone__stars { display: flex; gap: 4px; }
+    .phone__stars svg { width: 22px; height: 22px; fill: none; stroke: var(--ink-300); stroke-width: 1.5; transition: fill .25s ease, stroke .25s ease, transform .25s cubic-bezier(.16,1,.3,1); }
+    .phone__stars svg.filled { fill: var(--google-gold); stroke: var(--google-gold); transform: scale(1.1); }
+    .phone__review-text { font-size: 13.5px; line-height: 1.55; color: var(--ink-700); min-height: 4.6em; }
+    .phone__caret { display: inline-block; width: 2px; height: 1em; background: var(--teal-600); vertical-align: middle; margin-left: 2px; animation: qrebi-caret 1s step-start infinite; }
+    @keyframes qrebi-caret { 50% { opacity: 0; } }
+    .phone__who { font-size: 12px; color: var(--ink-500); font-weight: 600; }
+    .phone__posted {
+      opacity: 0; transition: opacity .35s ease; font-size: 12px; font-weight: 700; color: var(--teal-700);
+      background: var(--teal-50); padding: 7px 14px; border-radius: var(--r-full);
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .phone__posted svg { width: 13px; height: 13px; }
+    .phone__posted.show { opacity: 1; }
+    .phone-wrap__scan {
+      position: absolute; left: -14px; bottom: 40px; width: 40px; height: 40px;
+      background: #fff; border: 1px solid var(--border); border-radius: var(--r-md);
+      box-shadow: var(--shadow-md); display: flex; align-items: center; justify-content: center; color: var(--teal-600);
+    }
+    .phone-wrap__scan svg { width: 20px; height: 20px; }
+
+    .reviews-demo__cards { display: grid; gap: var(--sp-4); align-content: center; }
+    .mini-review {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg);
+      padding: var(--sp-5); box-shadow: var(--shadow-sm);
+      transition: transform .35s cubic-bezier(.22,.61,.36,1), box-shadow .35s ease;
+      transition-delay: var(--d, 0s);
+    }
+    .mini-review:hover { transform: translateY(-4px) scale(1.01); box-shadow: var(--shadow-md); }
+    .mini-review__stars { color: var(--google-gold); font-size: 14px; letter-spacing: 2px; margin-bottom: 6px; }
+    .mini-review p { font-size: 14.5px; color: var(--ink-900); font-weight: 500; line-height: 1.5; }
+    .mini-review__who { display: block; margin-top: 8px; font-size: 12.5px; color: var(--ink-500); }
+
+    /* ---------- Product detail ---------- */
+    .product__grid { display: grid; gap: var(--sp-12); align-items: center; }
+    @media (min-width: 768px) { .product__grid { grid-template-columns: 1fr 1.1fr; gap: var(--sp-16); } }
+    .product-scene { display: flex; justify-content: center; padding-block: var(--sp-6); }
+    .feature-list { list-style: none; margin-top: var(--sp-6); display: grid; gap: var(--sp-4); }
+    .feature-list li { display: flex; align-items: flex-start; gap: var(--sp-3); font-size: 15px; color: var(--ink-700); }
+    .feature-list .check {
+      width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0;
+      background: var(--teal-50); color: var(--teal-600);
+      display: flex; align-items: center; justify-content: center; margin-top: 1px;
+    }
+    .feature-list .check svg { width: 13px; height: 13px; }
+    .product__text p.lede { color: var(--ink-700); margin-top: var(--sp-3); }
+
+    /* ---------- Pricing ---------- */
+    .pricing { background: var(--color-bg-alt); }
+    .price-grid { display: grid; gap: var(--sp-6); align-items: stretch; }
+    @media (min-width: 1024px) { .price-grid { grid-template-columns: 1fr 1fr; } }
+    .price-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r-xl); padding: var(--sp-8) var(--sp-6);
+      box-shadow: var(--shadow-sm);
+      display: flex; flex-direction: column; gap: var(--sp-4);
+      transition: transform .3s cubic-bezier(.22,.61,.36,1), box-shadow .3s ease;
+    }
+    .price-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+    .price-card--highlight {
+      border: 2px solid var(--color-primary);
+      background: var(--teal-50);
+      box-shadow: var(--shadow-glow);
+      position: relative;
+    }
+    .price-card--highlight:hover { box-shadow: var(--shadow-glow), var(--shadow-md); }
+    .price-card__badge {
+      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--color-accent); color: var(--amber-ink);
+      font-size: 12px; font-weight: 600; letter-spacing: .04em;
+      padding: 5px 14px; border-radius: var(--r-full); white-space: nowrap;
+    }
+    .price-card__label { font-size: 16px; font-weight: 700; color: var(--ink-900); }
+    .price-card__price { font-size: clamp(36px, 6vw, 44px); font-weight: 800; line-height: 1; letter-spacing: -.01em; color: var(--ink-900); }
+    .price-card__price small { font-size: 15px; font-weight: 500; color: var(--ink-500); letter-spacing: 0; }
+    .price-card__desc { font-size: 15px; color: var(--ink-700); flex-grow: 1; }
+    .price-card__intro { font-size: 15px; color: var(--ink-700); }
+    .price-card__list { list-style: none; display: grid; gap: var(--sp-2); align-content: start; font-size: 15px; color: var(--ink-700); flex-grow: 1; }
+    .price-card__list li { display: flex; gap: var(--sp-2); }
+    .price-card__list li::before { content: "✓"; color: var(--teal-600); font-weight: 700; flex-shrink: 0; }
+    .price-card .btn { width: 100%; margin-top: var(--sp-2); }
+    .bundle-row {
+      margin-top: var(--sp-6);
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg);
+      padding: var(--sp-6); box-shadow: var(--shadow-sm);
+      display: flex; flex-direction: column; gap: var(--sp-4);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .bundle-row:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    @media (min-width: 768px) { .bundle-row { flex-direction: row; align-items: center; justify-content: space-between; gap: var(--sp-8); } }
+    .bundle-row__title { font-size: 17px; font-weight: 700; }
+    .bundle-row__desc { font-size: 14px; color: var(--ink-700); margin-top: var(--sp-1); }
+    .bundle-row .btn { flex-shrink: 0; }
+
+    /* ---------- FAQ ---------- */
+    .faq-list { max-width: 720px; margin-inline: auto; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+    .faq-trigger {
+      width: 100%; display: flex; justify-content: space-between; align-items: center; gap: var(--sp-4);
+      padding: var(--sp-5) var(--sp-2); background: none; border: none; text-align: left;
+      font-family: inherit; font-size: 16px; font-weight: 600; color: var(--ink-900); cursor: pointer;
+      transition: background-color .2s ease, transform .2s ease;
+    }
+    .faq-trigger:hover { background: var(--color-bg-alt); transform: translateX(4px); }
+    .faq-trigger:focus-visible { outline: 2px solid var(--teal-600); outline-offset: -2px; }
+    .faq-icon { width: 20px; height: 20px; flex-shrink: 0; transition: transform .25s ease; color: var(--teal-600); }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s ease; }
+    .faq-item.open .faq-panel { grid-template-rows: 1fr; }
+    .faq-panel__inner { overflow: hidden; min-height: 0; }
+    .faq-answer { padding: 0 var(--sp-2) var(--sp-5); font-size: 15px; line-height: 1.6; color: var(--ink-700); }
+
+    /* ---------- Final CTA ---------- */
+    .final-cta { background: var(--teal-900); color: #fff; text-align: center; padding-block: 72px; position: relative; overflow: clip; }
+    @media (min-width: 1024px) { .final-cta { padding-block: 96px; } }
+    .final-cta::before {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(circle at 20% 20%, rgba(255,255,255,.06), transparent 55%),
+                  radial-gradient(circle at 85% 80%, rgba(250,199,117,.1), transparent 50%);
+      pointer-events: none;
+    }
+    .final-cta h2 { color: #fff; }
+    .final-cta__body { color: var(--teal-100); max-width: 640px; margin: var(--sp-5) auto 0; }
+    .final-cta .btn { margin-top: var(--sp-8); }
+    .contact-lines { margin-top: var(--sp-10); display: grid; gap: var(--sp-3); justify-items: center; font-size: 15px; }
+    .contact-lines a { color: #fff; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+    .contact-lines a:hover { color: var(--amber-100); }
+    .contact-line { color: var(--teal-100); display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--sp-2); }
+
+    /* ---------- Footer ---------- */
+    .site-footer { background: var(--teal-900); color: var(--teal-100); padding-block: 56px 0; border-top: 1px solid rgba(255,255,255,.08); }
+    .site-footer__grid { display: grid; gap: var(--sp-10); padding-bottom: var(--sp-12); }
+    @media (min-width: 768px) { .site-footer__grid { grid-template-columns: 1.4fr 1fr 1.2fr; } }
+    .site-footer .wordmark { color: #fff; font-size: 20px; }
+    .site-footer .wordmark::after { background: var(--amber-400); }
+    .site-footer__tagline { font-size: 14px; margin-top: var(--sp-3); max-width: 30em; color: var(--teal-100); }
+    .site-footer h4 { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: var(--sp-4); }
+    .site-footer ul { list-style: none; display: grid; gap: var(--sp-3); }
+    .site-footer ul a { color: var(--teal-100); font-size: 14px; }
+    .site-footer ul a:hover { color: #fff; }
+    .site-footer__contact li { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2); font-size: 14px; }
+    .site-footer__bottom {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-block: var(--sp-5);
+      font-size: 13px; color: var(--teal-300); text-align: center;
+    }
+
+    /* ---------- Scroll reveal ---------- */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .5s cubic-bezier(.22,.61,.36,1), transform .5s cubic-bezier(.22,.61,.36,1); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .faq-panel, .faq-icon, .btn { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= Header ================= -->
+  <header class="site-header" id="top">
+    <div class="container site-header__inner">
+      <a href="#top" class="wordmark" aria-label="qrebi — მთავარი გვერდი">qrebi</a>
+      <nav class="site-nav" aria-label="ძირითადი ნავიგაცია">
+        <a href="#how-it-works">მუშაობა</a>
+        <a href="#reviews-demo">მაგალითი</a>
+        <a href="#pricing">ფასები</a>
+        <a href="#faq">კითხვები</a>
+      </nav>
+      <div class="site-header__actions">
+        <a href="mailto:bozukabozi@gmail.com?subject=qrebi%20%E2%80%94%20%E1%83%99%E1%83%98%E1%83%97%E1%83%AE%E1%83%95%E1%83%90" class="btn btn--primary btn--sm">დაგვიკავშირდით</a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="მენიუს გახსნა">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="მობილური ნავიგაცია">
+      <a href="#how-it-works">მუშაობა</a>
+      <a href="#reviews-demo">მაგალითი</a>
+      <a href="#pricing">ფასები</a>
+      <a href="#faq">კითხვები</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ================= Hero ================= -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero__grid">
+        <div>
+          <span class="eyebrow">NFC + QR თქვენი ბიზნესისთვის</span>
+          <h1 id="hero-title">მეტი შეფასება. მეტი მომხმარებელი.</h1>
+          <p class="hero__sub">მომხმარებელი ეხება ტელეფონით. 5 წამში Google შეფასება მზადაა.</p>
+          <div class="hero__ctas">
+            <a href="mailto:bozukabozi@gmail.com?subject=%E1%83%91%E1%83%90%E1%83%A0%E1%83%90%E1%83%97%E1%83%98%E1%83%A1%20%E1%83%A8%E1%83%94%E1%83%99%E1%83%95%E1%83%94%E1%83%97%E1%83%90%20%E2%80%94%20qrebi" class="btn btn--primary btn-full-mobile">შეუკვეთეთ ბარათი ახლავე</a>
+            <a href="#how-it-works" class="btn btn--ghost">როგორ მუშაობს?</a>
+          </div>
+          <p class="hero__note">დაყენება 2 წუთში · დამატებითი აპლიკაცია არ სჭირდება</p>
+          <div class="hero__try">
+            <img class="hero__try-qr" src="qrebi-qr.png" alt="qrebi.ge QR კოდი — სცადეთ სკანირება" width="40" height="40">
+            <span>სცადეთ თავად — დაასკანერეთ ტელეფონით</span>
+          </div>
+        </div>
+
+        <div class="tilt-wrap" aria-hidden="true">
+          <div class="badge-scene">
+            <div class="qr-badge hero-badge tilt tilt-float">
+              <div class="qr-badge__ring"></div>
+              <div class="qr-badge__face">
+                <span class="qr-badge__eyebrow">Review us on</span>
+                <div class="qr-badge__google">
+                  <span style="color:var(--google-blue)">G</span><span style="color:var(--google-red)">o</span><span style="color:var(--google-yellow)">o</span><span style="color:var(--google-blue)">g</span><span style="color:var(--google-green)">l</span><span style="color:var(--google-red)">e</span>
+                </div>
+                <div class="qr-badge__stars">
+                  <svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L10 14.9l-5.2 2.8 1-5.9L1.5 7.7l5.9-.8z"/></svg>
+                  <svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L10 14.9l-5.2 2.8 1-5.9L1.5 7.7l5.9-.8z"/></svg>
+                  <svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L10 14.9l-5.2 2.8 1-5.9L1.5 7.7l5.9-.8z"/></svg>
+                  <svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L10 14.9l-5.2 2.8 1-5.9L1.5 7.7l5.9-.8z"/></svg>
+                  <svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L10 14.9l-5.2 2.8 1-5.9L1.5 7.7l5.9-.8z"/></svg>
+                </div>
+                <div class="qr-badge__methods">
+                  <div class="qr-badge__method">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="transform: rotate(-45deg)">
+                      <path d="M4 15a5 5 0 0 1 5 5" opacity=".9"/>
+                      <path d="M4 10a10 10 0 0 1 10 10" opacity=".6"/>
+                      <path d="M4 5a15 15 0 0 1 15 15" opacity=".35"/>
+                      <circle cx="4" cy="20" r="1.4" fill="currentColor" stroke="none"/>
+                    </svg>
+                    <span>Tap phone</span>
+                  </div>
+                  <span class="qr-badge__or">or</span>
+                  <div class="qr-badge__method">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <rect x="2" y="2" width="7" height="7" rx="1"/><rect x="4" y="4" width="3" height="3" fill="#fff"/>
+                      <rect x="15" y="2" width="7" height="7" rx="1"/><rect x="17" y="4" width="3" height="3" fill="#fff"/>
+                      <rect x="2" y="15" width="7" height="7" rx="1"/><rect x="4" y="17" width="3" height="3" fill="#fff"/>
+                      <rect x="13" y="13" width="3" height="3"/><rect x="18" y="13" width="3" height="3"/>
+                      <rect x="13" y="18" width="3" height="3"/><rect x="18" y="18" width="3" height="3"/>
+                      <rect x="11" y="2" width="2" height="2"/><rect x="2" y="11" width="2" height="2"/>
+                    </svg>
+                    <span>Scan QR</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="badge-shadow"></div>
+            <div class="hero-badge-scene__pulse"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Trust strip ================= -->
+    <div class="trust-strip" role="presentation">
+      <div class="container trust-strip__row">
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          დაყენება — 2 წუთში
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M9.5 18.5h5"/></svg>
+          აპლიკაცია არ სჭირდება
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+          მუშაობს ნებისმიერ ტელეფონთან
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= How it works ================= -->
+    <section id="how-it-works" aria-labelledby="how-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 id="how-title">როგორ მუშაობს — 3 ნაბიჯად</h2>
+        </div>
+        <div class="steps">
+          <div class="step reveal">
+            <div class="step__num" aria-hidden="true">1</div>
+            <h3>ეხება ან სკანერავს</h3>
+            <p>ტელეფონს უახლოვებს ბარათს (NFC) ან ასკანერებს QR-ს. აპლიკაცია არ სჭირდება.</p>
+          </div>
+          <div class="step reveal">
+            <div class="step__num" aria-hidden="true">2</div>
+            <h3>Google იხსნება პირდაპირ</h3>
+            <p>თქვენი ბიზნესის შეფასების ფორმა მყისვე იხსნება, ძებნის გარეშე.</p>
+          </div>
+          <div class="step reveal">
+            <div class="step__num" aria-hidden="true">3</div>
+            <h3>შეფასება 5 წამში</h3>
+            <p>წერს დაუყოვნებლივ, სანამ დაავიწყდება ან ეზარება.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Why it matters ================= -->
+    <section id="why-it-matters" class="why" aria-labelledby="why-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 id="why-title">რატომ მოაქვს ამას ფული</h2>
+        </div>
+        <p class="why__intro reveal">Google Maps ძებნაში პოზიციას შეფასების რაოდენობა და სიხშირე წყვეტს.</p>
+        <div class="why__grid">
+          <div class="why-card reveal">
+            <div class="why-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19l5-6 4 3 7-9"/><path d="M15 7h5v5"/></svg>
+            </div>
+            <h3>მეტი შეფასება → მაღალი პოზიცია</h3>
+            <p>მეტი და ახალი შეფასება Google-ს აიძულებს, კონკურენტებზე მაღლა დაგსვათ.</p>
+          </div>
+          <div class="why-card reveal">
+            <div class="why-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.1-7-11a7 7 0 0 1 14 0c0 5.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            </div>
+            <h3>მაღალი პოზიცია → მეტი კლიენტი</h3>
+            <p>ხალხი პირველ სამ შედეგს ირჩევს. ხილვადობა = შემოსული კლიენტი.</p>
+          </div>
+          <div class="why-card reveal">
+            <div class="why-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 15.3l-4.8 2.6.9-5.4-3.9-3.8 5.4-.8z"/></svg>
+            </div>
+            <h3>ავტომატური, არა უხერხული თხოვნა</h3>
+            <p>პერსონალს აღარ სჭირდება თხოვნა. ბარათი ამას თავად აკეთებს.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Live reviews demo ================= -->
+    <section id="reviews-demo" class="reviews-demo" aria-labelledby="reviews-demo-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">ცოცხალი მაგალითი</span>
+          <h2 id="reviews-demo-title">რას წერენ თქვენი მომხმარებლები</h2>
+          <p>ასე გამოიყურება 5 წამი — სკანირებიდან გამოქვეყნებამდე.</p>
+        </div>
+        <div class="reviews-demo__stage reveal">
+          <div class="phone-wrap tilt-wrap" id="rd-phone-wrap">
+            <div class="phone tilt tilt-float">
+              <div class="phone__speaker"></div>
+              <div class="phone__screen pre-tap" id="rd-screen">
+                <div class="phone__browserbar">
+                  <span class="g-dot" aria-hidden="true"></span>
+                  <span>google.com/reviews</span>
+                </div>
+                <div class="phone__content" id="rd-content">
+                  <div class="phone__biz">
+                    <span class="phone__biz-avatar" id="rd-avatar" aria-hidden="true">✂️</span>
+                    <div class="phone__biz-info">
+                      <div class="phone__biz-name" id="rd-bizname">ბარბერშოპი “Fade”, ვაკე</div>
+                      <div class="phone__biz-sub">Google რევიუ</div>
+                    </div>
+                  </div>
+                  <div class="phone__stars" id="rd-stars" aria-hidden="true">
+                    <svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L10 14.9l-5.2 2.8 1-5.9L1.5 7.7l5.9-.8z"/></svg>
+                    <svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L10 14.9l-5.2 2.8 1-5.9L1.5 7.7l5.9-.8z"/></svg>
+                    <svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L10 14.9l-5.2 2.8 1-5.9L1.5 7.7l5.9-.8z"/></svg>
+                    <svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L10 14.9l-5.2 2.8 1-5.9L1.5 7.7l5.9-.8z"/></svg>
+                    <svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L10 14.9l-5.2 2.8 1-5.9L1.5 7.7l5.9-.8z"/></svg>
+                  </div>
+                  <p class="phone__review-text"><span id="rd-text"></span><span class="phone__caret" id="rd-caret"></span></p>
+                  <span class="phone__who" id="rd-who">— გიორგი მ.</span>
+                  <span class="phone__posted" id="rd-posted">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+                    გამოქვეყნდა
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="tap-card" id="rd-tap-card" aria-hidden="true">
+              <span class="tap-card__ring"></span>
+              <span class="tap-card__face">
+                <span class="tap-card__eyebrow">Review us on</span>
+                <span class="tap-card__google">Google</span>
+              </span>
+              <span class="tap-card__wave tap-card__wave--1"></span>
+              <span class="tap-card__wave tap-card__wave--2"></span>
+              <span class="tap-card__wave tap-card__wave--3"></span>
+            </div>
+            <div class="phone-wrap__scan" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <rect x="2" y="2" width="7" height="7" rx="1"/><rect x="4" y="4" width="3" height="3" fill="#fff"/>
+                <rect x="15" y="2" width="7" height="7" rx="1"/><rect x="17" y="4" width="3" height="3" fill="#fff"/>
+                <rect x="2" y="15" width="7" height="7" rx="1"/><rect x="4" y="17" width="3" height="3" fill="#fff"/>
+                <rect x="13" y="13" width="3" height="3"/><rect x="18" y="13" width="3" height="3"/>
+                <rect x="13" y="18" width="3" height="3"/><rect x="18" y="18" width="3" height="3"/>
+              </svg>
+            </div>
+          </div>
+          <div class="reviews-demo__cards">
+            <div class="mini-review reveal" style="--d:0s">
+              <div class="mini-review__stars">★★★★★</div>
+              <p>„უსწრაფესი და საუკეთესო შეჭრა ვაკეში, რეკომენდაციას ვუწევ ყველას.“</p>
+              <span class="mini-review__who">— სალონი Fade, ბარბერშოპი</span>
+            </div>
+            <div class="mini-review reveal" style="--d:.1s">
+              <div class="mini-review__stars">★★★★★</div>
+              <p>„გემრიელი კერძები, საუკეთესო მომსახურება. აუცილებლად დავბრუნდები.“</p>
+              <span class="mini-review__who">— რესტორანი „ტიფლისი“</span>
+            </div>
+            <div class="mini-review reveal" style="--d:.2s">
+              <div class="mini-review__stars">★★★★★</div>
+              <p>„საუკეთესო კაპუჩინო ძველ თბილისში, ატმოსფერო საოცარია.“</p>
+              <span class="mini-review__who">— კაფე „ლანჩი“</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Product detail ================= -->
+    <section id="product" aria-labelledby="product-title">
+      <div class="container product__grid">
+        <div class="tilt-wrap reveal" aria-hidden="true">
+          <div class="badge-scene">
+            <div class="qr-badge product-badge tilt tilt-float">
+              <div class="qr-badge__ring"></div>
+              <div class="qr-badge__face">
+                <span class="qr-badge__eyebrow">Review us on</span>
+                <div class="qr-badge__google">
+                  <span style="color:var(--google-blue)">G</span><span style="color:var(--google-red)">o</span><span style="color:var(--google-yellow)">o</span><span style="color:var(--google-blue)">g</span><span style="color:var(--google-green)">l</span><span style="color:var(--google-red)">e</span>
+                </div>
+                <div class="qr-badge__stars">
+                  <svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L10 14.9l-5.2 2.8 1-5.9L1.5 7.7l5.9-.8z"/></svg>
+                  <svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L10 14.9l-5.2 2.8 1-5.9L1.5 7.7l5.9-.8z"/></svg>
+                  <svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L10 14.9l-5.2 2.8 1-5.9L1.5 7.7l5.9-.8z"/></svg>
+                  <svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L10 14.9l-5.2 2.8 1-5.9L1.5 7.7l5.9-.8z"/></svg>
+                  <svg viewBox="0 0 20 20"><path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L10 14.9l-5.2 2.8 1-5.9L1.5 7.7l5.9-.8z"/></svg>
+                </div>
+                <div class="qr-badge__methods">
+                  <div class="qr-badge__method">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="transform: rotate(-45deg)">
+                      <path d="M4 15a5 5 0 0 1 5 5" opacity=".9"/>
+                      <path d="M4 10a10 10 0 0 1 10 10" opacity=".6"/>
+                      <path d="M4 5a15 15 0 0 1 15 15" opacity=".35"/>
+                      <circle cx="4" cy="20" r="1.4" fill="currentColor" stroke="none"/>
+                    </svg>
+                    <span>Tap phone</span>
+                  </div>
+                  <span class="qr-badge__or">or</span>
+                  <div class="qr-badge__method">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <rect x="2" y="2" width="7" height="7" rx="1"/><rect x="4" y="4" width="3" height="3" fill="#fff"/>
+                      <rect x="15" y="2" width="7" height="7" rx="1"/><rect x="17" y="4" width="3" height="3" fill="#fff"/>
+                      <rect x="2" y="15" width="7" height="7" rx="1"/><rect x="4" y="17" width="3" height="3" fill="#fff"/>
+                      <rect x="13" y="13" width="3" height="3"/><rect x="18" y="13" width="3" height="3"/>
+                      <rect x="13" y="18" width="3" height="3"/><rect x="18" y="18" width="3" height="3"/>
+                      <rect x="11" y="2" width="2" height="2"/><rect x="2" y="11" width="2" height="2"/>
+                    </svg>
+                    <span>Scan QR</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="badge-shadow"></div>
+          </div>
+        </div>
+        <div class="product__text">
+          <span class="eyebrow reveal">პროდუქტი</span>
+          <h2 class="reveal" id="product-title">ბარათი და სტენდი</h2>
+          <p class="lede reveal">აკრილის ბარათი და დახლის სტენდი, წინასწარ მიბმული ზუსტად თქვენი ბიზნესის Google გვერდზე.</p>
+          <ul class="feature-list">
+            <li class="reveal"><span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>NTAG213 NFC ჩიპი — ათასობით შეხებას უძლებს</li>
+            <li class="reveal"><span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>ნაბეჭდი QR კოდი — მუშაობს ნებისმიერ კამერაზე</li>
+            <li class="reveal"><span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>აკრილის მასალა — გამძლე და პრემიუმ იერის</li>
+            <li class="reveal"><span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>ბმულის შეცვლა ნებისმიერ დროს (გამოწერით)</li>
+            <li class="reveal"><span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>მალე: შეხებების ანალიტიკა</li>
+            <li class="reveal"><span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>კონფიგურაცია ჩვენზეა — თქვენ მხოლოდ დახლზე დებთ</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Pricing ================= -->
+    <section id="pricing" class="pricing" aria-labelledby="pricing-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 id="pricing-title">ფასი — გამჭვირვალედ</h2>
+          <p>პირველ თბილისელ კლიენტებს დამფუძნებლის ფასი, 5 ₾/თვე, სამუდამოდ რჩებათ.</p>
+        </div>
+        <div class="price-grid">
+          <div class="price-card reveal">
+            <span class="price-card__label">დამონტაჟება-დაპროგრამირება</span>
+            <div class="price-card__price">30 ₾ <small>ერთჯერადი</small></div>
+            <p class="price-card__desc">აკრილის NFC ბარათი, დაპროგრამებული და მიბმული ზუსტად თქვენი Google გვერდზე — მზად არის დღესვე.</p>
+            <a href="mailto:bozukabozi@gmail.com?subject=%E1%83%91%E1%83%90%E1%83%A0%E1%83%90%E1%83%97%E1%83%98%E1%83%A1%20%E1%83%A8%E1%83%94%E1%83%99%E1%83%95%E1%83%94%E1%83%97%E1%83%90%20%E2%80%94%20qrebi" class="btn btn--outline">შეუკვეთეთ</a>
+          </div>
+          <div class="price-card price-card--highlight reveal">
+            <span class="price-card__badge">პოპულარული</span>
+            <span class="price-card__label">მომსახურება</span>
+            <div class="price-card__price">5 ₾ <small>/ თვე</small></div>
+            <p class="price-card__intro">არა „საფასური“ ბარათისთვის — ბმულის მართვის სერვისია:</p>
+            <ul class="price-card__list">
+              <li>ბმულის მიმართულება იცვლება ნებისმიერ დროს, მაგ. ახალ ფილიალზე</li>
+              <li>მალე: tap ანალიტიკა კვირაში</li>
+              <li>დღეში 17 თეთრზე იაფი. ერთი დაკარგული კლიენტი ამაზე ძვირი ჯდება</li>
+            </ul>
+            <a href="mailto:bozukabozi@gmail.com?subject=%E1%83%92%E1%83%90%E1%83%9B%E1%83%9D%E1%83%AC%E1%83%94%E1%83%A0%E1%83%98%E1%83%A1%20%E1%83%93%E1%83%90%E1%83%AC%E1%83%A7%E1%83%94%E1%83%91%E1%83%90%20%E2%80%94%20qrebi" class="btn btn--primary">დაიწყეთ გამოწერა</a>
+          </div>
+        </div>
+        <div class="bundle-row reveal">
+          <div>
+            <div class="bundle-row__title">სტენდი + 2 ბარათი — <span style="white-space:nowrap">150 ₾-დან</span></div>
+            <p class="bundle-row__desc">დახლზე დასადგმელად. ფასი დამოკიდებულია ტირაჟზე, მოგვწერეთ ზუსტი შეთავაზებისთვის.</p>
+          </div>
+          <a href="mailto:bozukabozi@gmail.com?subject=%E1%83%A1%E1%83%A2%E1%83%94%E1%83%9C%E1%83%93%E1%83%98%E1%83%A1%20%E1%83%A8%E1%83%94%E1%83%97%E1%83%90%E1%83%95%E1%83%90%E1%83%96%E1%83%94%E1%83%91%E1%83%90%20%E2%80%94%20qrebi" class="btn btn--outline">მოითხოვეთ ფასი</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FAQ ================= -->
+    <section id="faq" aria-labelledby="faq-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 id="faq-title">ხშირად დასმული კითხვები</h2>
+        </div>
+        <div class="faq-list reveal">
+          <div class="faq-item">
+            <h3 style="font-size:inherit">
+              <button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-panel-1" id="faq-trigger-1">
+                მომხმარებელს რაიმე აპლიკაცია სჭირდება შეფასების დასაწერად?
+                <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+              </button>
+            </h3>
+            <div class="faq-panel" id="faq-panel-1" role="region" aria-labelledby="faq-trigger-1">
+              <div class="faq-panel__inner"><p class="faq-answer">არა — საკმარისია ტელეფონის მიტანა ბარათთან ან QR-ის დასკანერება ჩვეულებრივი კამერით. ბრაუზერში პირდაპირ იხსნება Google-ის შეფასების ფორმა.</p></div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <h3 style="font-size:inherit">
+              <button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-panel-2" id="faq-trigger-2">
+                მუშაობს iPhone-ზეც, თუ მხოლოდ Android-ზე?
+                <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+              </button>
+            </h3>
+            <div class="faq-panel" id="faq-panel-2" role="region" aria-labelledby="faq-trigger-2">
+              <div class="faq-panel__inner"><p class="faq-answer">მუშაობს ორივეზე. iPhone-ს NFC 2018 წლიდან აქვს ჩაშენებული; თუ არა — QR კოდი ყოველთვის მუშაობს, როგორც სათადარიგო გზა.</p></div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <h3 style="font-size:inherit">
+              <button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-panel-3" id="faq-trigger-3">
+                ეს Google-ის წესებთან თავსებადია? ხომ არ დამისჯის?
+                <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+              </button>
+            </h3>
+            <div class="faq-panel" id="faq-panel-3" role="region" aria-labelledby="faq-trigger-3">
+              <div class="faq-panel__inner"><p class="faq-answer">დიახ, სრულად. ბარათი უბრალოდ ხსნის თქვენი ბიზნესის სტანდარტულ, საჯარო Google ფორმას. არაფერი იყალბება, უბრალოდ უმარტივდება გზა.</p></div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <h3 style="font-size:inherit">
+              <button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-panel-4" id="faq-trigger-4">
+                რამდენ ხანში მივიღებ?
+                <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+              </button>
+            </h3>
+            <div class="faq-panel" id="faq-panel-4" role="region" aria-labelledby="faq-trigger-4">
+              <div class="faq-panel__inner"><p class="faq-answer">იმავე დღეს. მოგვწერეთ თქვენი Google გვერდის ბმული, დანარჩენს ჩვენ ვაკეთებთ, თქვენ მხოლოდ დახლზე დებთ.</p></div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <h3 style="font-size:inherit">
+              <button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-panel-5" id="faq-trigger-5">
+                თუ გამოწერის გადახდას შევწყვეტ, რა მოხდება?
+                <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+              </button>
+            </h3>
+            <div class="faq-panel" id="faq-panel-5" role="region" aria-labelledby="faq-trigger-5">
+              <div class="faq-panel__inner"><p class="faq-answer">ბარათი გამორთვება და მომხმარებელს აღარ გადაამისამართებს. გამოწერა ზუსტად ამ მუშაობას ფარავს (ბმულის მართვა, მალე tap ანალიტიკა).</p></div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <h3 style="font-size:inherit">
+              <button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-panel-6" id="faq-trigger-6">
+                თუ ცუდი შეფასება მომივა, ხომ არ გამიმწვავებს სიტუაციას?
+                <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+              </button>
+            </h3>
+            <div class="faq-panel" id="faq-panel-6" role="region" aria-labelledby="faq-trigger-6">
+              <div class="faq-panel__inner"><p class="faq-answer">უკმაყოფილო მომხმარებელი ისედაც დაწერს ცუდ შეფასებას. ბარათი უბრალოდ კმაყოფილ მომხმარებელს უადვილებს წერას. ჯამში რეიტინგი მაღლა იწევს, არა დაბლა.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Final CTA ================= -->
+    <section id="final-cta" class="final-cta" aria-labelledby="cta-title">
+      <div class="container">
+        <h2 id="cta-title" class="reveal">მზად ხართ მეტი შეფასების მისაღებად?</h2>
+        <p class="final-cta__body reveal">ყოველი დღე ბარათის გარეშე შეფასებაა, რომელსაც კონკურენტი იღებს. დღესვე ვაკონფიგურირებთ და გიგზავნით.</p>
+        <a href="mailto:bozukabozi@gmail.com?subject=%E1%83%91%E1%83%90%E1%83%A0%E1%83%90%E1%83%97%E1%83%98%E1%83%A1%20%E1%83%A8%E1%83%94%E1%83%99%E1%83%95%E1%83%94%E1%83%97%E1%83%90%20%E2%80%94%20qrebi" class="btn btn--amber reveal">შეუკვეთეთ ბარათი ახლავე</a>
+        <div class="contact-lines reveal">
+          <div class="contact-line">მოგვწერეთ: <a href="mailto:bozukabozi@gmail.com?subject=qrebi%20%E2%80%94%20%E1%83%99%E1%83%98%E1%83%97%E1%83%AE%E1%83%95%E1%83%90">bozukabozi@gmail.com</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= Footer ================= -->
+  <footer class="site-footer">
+    <div class="container site-footer__grid">
+      <div>
+        <a href="#top" class="wordmark">qrebi</a>
+        <p class="site-footer__tagline">qrebi — NFC ბარათები და სტენდები, რომლებიც Google შეფასებებს წამებში გიგროვებენ.</p>
+      </div>
+      <nav aria-label="ქვედა ნავიგაცია">
+        <h4>ნავიგაცია</h4>
+        <ul>
+          <li><a href="#how-it-works">მუშაობა</a></li>
+          <li><a href="#reviews-demo">მაგალითი</a></li>
+          <li><a href="#pricing">ფასები</a></li>
+          <li><a href="#faq">კითხვები</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h4>კონტაქტი</h4>
+        <ul class="site-footer__contact">
+          <li><a href="mailto:bozukabozi@gmail.com?subject=qrebi%20%E2%80%94%20%E1%83%99%E1%83%98%E1%83%97%E1%83%AE%E1%83%95%E1%83%90">bozukabozi@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <div class="container">© 2026 qrebi.ge · bozukabozi@gmail.com</div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Sticky header border on scroll
+      var header = document.querySelector('.site-header');
+      var onScroll = function () {
+        header.classList.toggle('scrolled', window.scrollY > 8);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      // Mobile menu
+      var toggle = document.querySelector('.menu-toggle');
+      var mobileNav = document.getElementById('mobile-nav');
+      toggle.addEventListener('click', function () {
+        var open = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!open));
+        toggle.setAttribute('aria-label', open ? 'მენიუს გახსნა' : 'მენიუს დახურვა');
+        mobileNav.classList.toggle('open', !open);
+      });
+      mobileNav.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.setAttribute('aria-label', 'მენიუს გახსნა');
+          mobileNav.classList.remove('open');
+        });
+      });
+
+      // FAQ accordion
+      document.querySelectorAll('.faq-trigger').forEach(function (trigger) {
+        trigger.addEventListener('click', function () {
+          var item = trigger.closest('.faq-item');
+          var isOpen = trigger.getAttribute('aria-expanded') === 'true';
+          trigger.setAttribute('aria-expanded', String(!isOpen));
+          item.classList.toggle('open', !isOpen);
+        });
+      });
+
+      // Scroll reveal
+      var reveals = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window && !reduceMotion) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+        reveals.forEach(function (el) { io.observe(el); });
+      } else {
+        reveals.forEach(function (el) { el.classList.add('in'); });
+      }
+
+      // 3D tilt on hover (badges + phone mockup)
+      if (!reduceMotion && window.matchMedia('(hover: hover)').matches) {
+        document.querySelectorAll('.tilt-wrap').forEach(function (wrap) {
+          var el = wrap.querySelector('.tilt');
+          if (!el) return;
+          wrap.addEventListener('mousemove', function (e) {
+            var r = wrap.getBoundingClientRect();
+            var x = (e.clientX - r.left) / r.width - 0.5;
+            var y = (e.clientY - r.top) / r.height - 0.5;
+            el.style.transform = 'perspective(1000px) rotateX(' + (y * -10) + 'deg) rotateY(' + (x * 14) + 'deg) scale(1.03)';
+          });
+          wrap.addEventListener('mouseleave', function () {
+            el.style.transform = '';
+          });
+        });
+      }
+
+      // Live reviews demo — cycles Google-review scenarios in the phone mockup
+      var reviewsData = [
+        { avatar: '✂️', biz: 'ბარბერშოპი “Fade”, ვაკე', who: '— გიორგი მ.',
+          text: 'უსწრაფესი და საუკეთესო შეჭრა ვაკეში. რეკომენდაციას ვუწევ ყველას!' },
+        { avatar: '🍽️', biz: 'რესტორანი „ტიფლისი“', who: '— ნინო კ.',
+          text: 'გემრიელი კერძები და საუკეთესო მომსახურება. აუცილებლად დავბრუნდები.' },
+        { avatar: '☕', biz: 'კაფე „ლანჩი“', who: '— ლუკა ბ.',
+          text: 'საუკეთესო კაპუჩინო ძველ თბილისში. ატმოსფერო — საოცარია.' }
+      ];
+
+      var rdPhoneWrap = document.getElementById('rd-phone-wrap');
+      var rdScreen = document.getElementById('rd-screen');
+      var rdTapCard = document.getElementById('rd-tap-card');
+      var rdContent = document.getElementById('rd-content');
+      var rdAvatar = document.getElementById('rd-avatar');
+      var rdBizname = document.getElementById('rd-bizname');
+      var rdStars = rdContent ? rdContent.querySelectorAll('#rd-stars svg') : [];
+      var rdText = document.getElementById('rd-text');
+      var rdCaret = document.getElementById('rd-caret');
+      var rdWho = document.getElementById('rd-who');
+      var rdPosted = document.getElementById('rd-posted');
+
+      function fillStars(done) {
+        var i = 0;
+        (function next() {
+          if (i >= rdStars.length) { done(); return; }
+          rdStars[i].classList.add('filled');
+          i++;
+          setTimeout(next, 140);
+        })();
+      }
+      function clearStars() {
+        rdStars.forEach(function (s) { s.classList.remove('filled'); });
+      }
+      function typeText(str, done) {
+        var i = 0;
+        rdText.textContent = '';
+        (function next() {
+          if (i >= str.length) { done(); return; }
+          rdText.textContent += str.charAt(i);
+          i++;
+          setTimeout(next, 26);
+        })();
+      }
+
+      // Tap intro: big scanner card grows in -> phone lowers and taps it -> Google review screen opens -> normal cycle follows
+      function playTapIntro(done) {
+        if (!rdPhoneWrap || !rdTapCard || !rdScreen || reduceMotion) { done(); return; }
+        setTimeout(function () {
+          rdPhoneWrap.classList.add('rd-card-in');            // scanner card pops into view, large
+          setTimeout(function () {
+            rdPhoneWrap.classList.add('rd-tapping');           // phone lowers onto it, NFC waves ripple
+            setTimeout(function () {
+              rdPhoneWrap.classList.remove('rd-tapping');
+              rdPhoneWrap.classList.add('rd-tapped');          // contact made — screen wakes up
+              rdScreen.classList.remove('pre-tap');
+              setTimeout(function () {
+                rdPhoneWrap.classList.remove('rd-tapped');
+                rdPhoneWrap.classList.add('rd-tap-back');      // phone lifts back up
+                rdPhoneWrap.classList.add('rd-done');          // scanner card fades away
+                setTimeout(done, 450);
+              }, 700);
+            }, 550);
+          }, 650);
+        }, 500);
+      }
+
+      var rdIndex = 0;
+      var rdRunning = false;
+      function runCycle() {
+        if (!rdContent) return;
+        var scenario = reviewsData[rdIndex % reviewsData.length];
+        rdIndex++;
+
+        rdAvatar.textContent = scenario.avatar;
+        rdBizname.textContent = scenario.biz;
+        rdWho.textContent = scenario.who;
+        clearStars();
+        rdText.textContent = '';
+        rdCaret.style.display = 'inline-block';
+        rdPosted.classList.remove('show');
+
+        fillStars(function () {
+          setTimeout(function () {
+            typeText(scenario.text, function () {
+              rdCaret.style.display = 'none';
+              setTimeout(function () {
+                rdPosted.classList.add('show');
+                setTimeout(function () {
+                  rdContent.classList.add('is-out');
+                  setTimeout(function () {
+                    rdContent.classList.remove('is-out');
+                    runCycle();
+                  }, 400);
+                }, 2200);
+              }, 300);
+            });
+          }, 250);
+        });
+      }
+
+      if (rdContent) {
+        if (reduceMotion) {
+          var s0 = reviewsData[0];
+          if (rdScreen) rdScreen.classList.remove('pre-tap');
+          if (rdTapCard) rdTapCard.style.display = 'none';
+          rdAvatar.textContent = s0.avatar;
+          rdBizname.textContent = s0.biz;
+          rdWho.textContent = s0.who;
+          rdText.textContent = s0.text;
+          rdCaret.style.display = 'none';
+          rdStars.forEach(function (s) { s.classList.add('filled'); });
+          rdPosted.classList.add('show');
+        } else if ('IntersectionObserver' in window) {
+          var rdObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting && !rdRunning) {
+                rdRunning = true;
+                playTapIntro(runCycle);
+                rdObserver.disconnect();
+              }
+            });
+          }, { threshold: 0.35 });
+          rdObserver.observe(rdContent);
+        } else {
+          playTapIntro(runCycle);
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
