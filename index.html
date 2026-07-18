@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>qrebi — მეტი Google შეფასება ერთი შეხებით | qrebi.ge</title>
-<meta name="description" content="qrebi — NFC ბარათი თბილისის ბიზნესებისთვის, რომელიც კმაყოფილ კლიენტებს Google შეფასებად აქცევს. ერთი შეხება — მეტი შეფასება, მაღალი პოზიცია რუკაზე და მეტი კლიენტი.">
+<title>qrebi: მეტი Google შეფასება ერთი შეხებით | qrebi.ge</title>
+<meta name="description" content="qrebi: NFC ბარათი თბილისის ბიზნესებისთვის, რომელიც კმაყოფილ კლიენტებს Google შეფასებად აქცევს. ერთი შეხება: მეტი შეფასება, მაღალი პოზიცია რუკაზე და მეტი კლიენტი.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://qrebi.ge/">
 <meta property="og:title" content="ერთი შეხება. მეტი შეფასება. მეტი კლიენტი. | qrebi.ge">
-<meta property="og:description" content="კლიენტი ეხება ბარათს ტელეფონით — თქვენი Google გვერდი მაშინვე იხსნება. აპლიკაციის გარეშე. 30 წამში.">
+<meta property="og:description" content="კლიენტი ეხება ბარათს ტელეფონით და თქვენი Google გვერდი მაშინვე იხსნება. აპლიკაციის გარეშე. 30 წამში.">
 <meta property="og:image" content="https://qrebi.ge/qrebi-og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -42,8 +42,16 @@ body:not(.lang-en) .seg-ge{background:#fff;color:#5B00BF}
 body:not(.lang-en) .seg-en{background:transparent;color:#fff}
 body.lang-en .seg-ge{background:transparent;color:#fff}
 body.lang-en .seg-en{background:#fff;color:#5B00BF}
+/* places gallery */
+.placesGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.placesGrid figure{margin:0;position:relative;border-radius:20px;overflow:hidden;box-shadow:0 10px 28px rgba(26,16,51,.12)}
+.placesGrid img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:4/3;transition:transform .5s ease}
+.placesGrid figure:hover img{transform:scale(1.04)}
+.placesGrid figcaption{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.94);border-radius:100px;padding:7px 15px;font-size:13.5px;font-weight:800;color:#1A1033;box-shadow:0 4px 12px rgba(26,16,51,.18)}
 /* responsive */
 @media(max-width:900px){
+  .placesGrid{grid-template-columns:1fr 1fr;gap:12px}
+  .placesGrid figcaption{left:8px;bottom:8px;padding:5px 11px;font-size:12px}
   .page{min-width:0!important}
   .grid2{grid-template-columns:1fr!important}
   .grid3{grid-template-columns:1fr!important}
@@ -98,8 +106,8 @@ body.lang-en .seg-en{background:#fff;color:#5B00BF}
           <span class="en">One tap.<br>More reviews.<br><span style="color:#F5B301">More customers.</span></span>
         </h1>
         <p style="margin:0;font-size:18px;line-height:1.55;color:#E4D3F9;max-width:44ch;text-wrap:pretty">
-          <span class="ge">კლიენტი ეხება ბარათს ტელეფონით — თქვენი Google გვერდი მაშინვე იხსნება. აპლიკაციის გარეშე. 30 წამში.</span>
-          <span class="en">A customer taps the card with their phone — your Google review page opens instantly. No app. 30 seconds.</span>
+          <span class="ge">კლიენტი ეხება ბარათს ტელეფონით და თქვენი Google გვერდი მაშინვე იხსნება. აპლიკაციის გარეშე. 30 წამში.</span>
+          <span class="en">A customer taps the card with their phone and your Google review page opens instantly. No app. 30 seconds.</span>
         </p>
         <div style="display:flex;align-items:center;gap:22px;flex-wrap:wrap">
           <div style="display:flex;align-items:center;gap:9px">
@@ -176,9 +184,9 @@ body.lang-en .seg-en{background:#fff;color:#5B00BF}
   <div class="darkpad" style="background:#1A1033;color:#fff;border-radius:28px;overflow:hidden;padding:80px 56px">
   <div class="grid2" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.05fr 1fr;gap:64px;align-items:center">
     <div style="display:flex;flex-direction:column;gap:22px" data-reveal="left">
-      <span style="font-size:12.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#B98BEE"><span class="ge">2026 — რეკომენდაციების ერა</span><span class="en">the era of recommendations</span></span>
+      <span style="font-size:12.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#B98BEE"><span class="ge">2026: რეკომენდაციების ერა</span><span class="en">the era of recommendations</span></span>
       <h2 style="margin:0;font-size:44px;font-weight:900;letter-spacing:-.015em;line-height:1.15;text-wrap:pretty"><span class="ge">შეფასებების გარეშე<br><span style="color:#B98BEE">უხილავი ხარ.</span></span><span class="en">Without reviews<br><span style="color:#B98BEE">you're invisible.</span></span></h2>
-      <p style="margin:0;font-size:18px;line-height:1.6;color:#B4A6CE;max-width:44ch;text-wrap:pretty"><span class="ge">Google, რუკა, AI — ყველა ერთ რამეს უყურებს: შენს შეფასებებს.</span><span class="en">Google, Maps, AI — they all look at one thing: your reviews.</span></p>
+      <p style="margin:0;font-size:18px;line-height:1.6;color:#B4A6CE;max-width:44ch;text-wrap:pretty"><span class="ge">Google, რუკა, AI. ყველა ერთ რამეს უყურებს: შენს შეფასებებს.</span><span class="en">Google, Maps, AI. They all look at one thing: your reviews.</span></p>
       <div style="display:flex;flex-direction:column;gap:14px;margin-top:6px">
         <div style="display:flex;gap:14px;align-items:center">
           <span style="flex:none;width:40px;height:40px;display:grid;place-items:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:11px;font-size:18px">📍</span>
@@ -186,7 +194,7 @@ body.lang-en .seg-en{background:#fff;color:#5B00BF}
         </div>
         <div style="display:flex;gap:14px;align-items:center;padding:14px 16px;background:rgba(91,0,191,.3);border:1px solid rgba(185,139,238,.45);border-radius:14px">
           <span style="flex:none;width:40px;height:40px;display:grid;place-items:center;background:#5B00BF;border-radius:11px;font-size:18px;color:#fff">✦</span>
-          <p style="margin:0;font-size:16.5px;line-height:1.45;color:#DCC8F5;flex:1"><strong style="color:#fff"><span class="ge">ძებნა AI-ზე გადადის. არ ჩანხარ შეფასებებში — AI-სთვის არ არსებობ.</span><span class="en">Search is moving to AI. Not in the reviews — you don't exist for AI.</span></strong></p>
+          <p style="margin:0;font-size:16.5px;line-height:1.45;color:#DCC8F5;flex:1"><strong style="color:#fff"><span class="ge">ძებნა AI-ზე გადადის. არ ჩანხარ შეფასებებში? AI-სთვის არ არსებობ.</span><span class="en">Search is moving to AI. Not in the reviews? You don't exist for AI.</span></strong></p>
           <span style="flex:none;padding:3px 10px;background:#fff;color:#5B00BF;border-radius:100px;font-size:11px;font-weight:800;white-space:nowrap"><span class="ge">მომდევნო 5 წელი</span><span class="en">next 5 years</span></span>
         </div>
         <div style="display:flex;gap:14px;align-items:center">
@@ -208,7 +216,7 @@ body.lang-en .seg-en{background:#fff;color:#5B00BF}
       <div style="display:flex;align-items:center;gap:14px;padding:16px;border:2px solid #5B00BF;border-radius:16px;background:#FBF9FE;animation:qPulse 3.2s ease-out infinite">
         <span style="flex:none;width:42px;height:42px;display:grid;place-items:center;background:#5B00BF;color:#fff;border-radius:12px;font-weight:900;font-size:17px">1</span>
         <div style="flex:1;min-width:0">
-          <div style="display:flex;align-items:center;gap:8px;font-weight:800;font-size:15.5px"><span class="ge">შენი კაფე — ბარათით</span><span class="en">Your café — with the card</span></div>
+          <div style="display:flex;align-items:center;gap:8px;font-weight:800;font-size:15.5px"><span class="ge">შენი კაფე ბარათით</span><span class="en">Your café, with the card</span></div>
           <div style="font-size:13.5px;color:#4A3D63;font-weight:600"><span style="color:#F5B301">★★★★★</span> 4.9 · <span class="ge">214 შეფასება</span><span class="en">214 reviews</span></div>
         </div>
         <span style="flex:none;padding:6px 11px;background:#5B00BF;color:#fff;border-radius:100px;font-size:11.5px;font-weight:800;white-space:nowrap">✦ <span class="ge">AI გირჩევს</span><span class="en">AI recommends</span></span>
@@ -231,8 +239,8 @@ body.lang-en .seg-en{background:#fff;color:#5B00BF}
       <div style="display:flex;align-items:center;gap:14px;padding:15px 16px;border:1.5px dashed #E5484D;border-radius:16px;background:#FFF5F5;animation:qPulseRed 3.2s ease-out infinite">
         <span style="flex:none;width:42px;height:42px;display:grid;place-items:center;background:#FDE3E3;color:#C62A2F;border-radius:12px;font-weight:900;font-size:15px">14</span>
         <div style="flex:1;min-width:0">
-          <div style="font-weight:800;font-size:15px;color:#C62A2F"><span class="ge">შენი კაფე — ბარათის გარეშე</span><span class="en">Your café — without the card</span></div>
-          <div style="font-size:13px;color:#D4646A;font-weight:600">★ — · <span class="ge">6 შეფასება · ამ ეკრანამდე ვერავინ ჩადის</span><span class="en">6 reviews · nobody scrolls this far</span></div>
+          <div style="font-weight:800;font-size:15px;color:#C62A2F"><span class="ge">შენი კაფე ბარათის გარეშე</span><span class="en">Your café, without the card</span></div>
+          <div style="font-size:13px;color:#D4646A;font-weight:600">★ 3.8 · <span class="ge">6 შეფასება · ამ ეკრანამდე ვერავინ ჩადის</span><span class="en">6 reviews · nobody scrolls this far</span></div>
         </div>
         <span style="flex:none;display:flex;align-items:center;gap:5px;padding:6px 11px;background:#E5484D;color:#fff;border-radius:100px;font-size:11.5px;font-weight:800;white-space:nowrap">⚠ <span class="ge">რისკის ზონა</span><span class="en">at risk</span></span>
       </div>
@@ -252,7 +260,7 @@ body.lang-en .seg-en{background:#fff;color:#5B00BF}
     <div style="padding:34px 30px;background:#FBF9FE;border:1px solid #F0EAF8;border-radius:20px;display:flex;flex-direction:column;gap:14px" data-hover="border-color:#5B00BF;transform:translateY(-4px);box-shadow:0 16px 36px rgba(91,0,191,.1)" data-reveal="up">
       <span style="width:44px;height:44px;display:grid;place-items:center;background:#5B00BF;color:#fff;border-radius:12px;font-weight:900;font-size:19px">1</span>
       <h3 style="margin:0;font-size:20px;font-weight:800"><span class="ge">დადეთ ბარათი მაგიდაზე</span><span class="en">Place the card on a table</span></h3>
-      <p style="margin:0;font-size:15px;line-height:1.6;color:#4A3D63"><span class="ge">აკრილის ბარათი 3M წებოთი — მაგიდაზე, სალაროსთან ან კართან. ერთხელ და სამუდამოდ.</span><span class="en">Acrylic card with 3M adhesive — on a table, by the register, or at the door. Once, forever.</span></p>
+      <p style="margin:0;font-size:15px;line-height:1.6;color:#4A3D63"><span class="ge">აკრილის ბარათი 3M წებოთი: მაგიდაზე, სალაროსთან ან კართან. ერთხელ და სამუდამოდ.</span><span class="en">Acrylic card with 3M adhesive: on a table, by the register, or at the door. Once, forever.</span></p>
     </div>
     <div style="padding:34px 30px;background:#FBF9FE;border:1px solid #F0EAF8;border-radius:20px;display:flex;flex-direction:column;gap:14px" data-hover="border-color:#5B00BF;transform:translateY(-4px);box-shadow:0 16px 36px rgba(91,0,191,.1)" data-reveal="up" data-reveal-delay="120">
       <span style="width:44px;height:44px;display:grid;place-items:center;background:#5B00BF;color:#fff;border-radius:12px;font-weight:900;font-size:19px">2</span>
@@ -262,8 +270,25 @@ body.lang-en .seg-en{background:#fff;color:#5B00BF}
     <div style="padding:34px 30px;background:#FBF9FE;border:1px solid #F0EAF8;border-radius:20px;display:flex;flex-direction:column;gap:14px" data-hover="border-color:#5B00BF;transform:translateY(-4px);box-shadow:0 16px 36px rgba(91,0,191,.1)" data-reveal="up" data-reveal-delay="240">
       <span style="width:44px;height:44px;display:grid;place-items:center;background:#5B00BF;color:#fff;border-radius:12px;font-weight:900;font-size:19px">3</span>
       <h3 style="margin:0;font-size:20px;font-weight:800"><span class="ge">შეფასება 30 წამში</span><span class="en">A review in 30 seconds</span></h3>
-      <p style="margin:0;font-size:15px;line-height:1.6;color:#4A3D63"><span class="ge">★★★★★ — და თქვენი რეიტინგი იზრდება. ყოველი შეფასება ახალი კლიენტია Google რუკაზე.</span><span class="en">★★★★★ — and your rating grows. Every review is a new customer on Google Maps.</span></p>
+      <p style="margin:0;font-size:15px;line-height:1.6;color:#4A3D63"><span class="ge">★★★★★. თქვენი რეიტინგი იზრდება. ყოველი შეფასება ახალი კლიენტია Google რუკაზე.</span><span class="en">★★★★★. Your rating grows. Every review is a new customer on Google Maps.</span></p>
     </div>
+  </div>
+</section>
+
+<!-- PLACES -->
+<section id="places" class="secpad" style="padding:0 48px 88px;max-width:1200px;margin:0 auto">
+  <div style="text-align:center;margin-bottom:44px;display:flex;flex-direction:column;align-items:center;gap:12px" data-reveal="up">
+    <span style="font-size:12.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#8B4DDB"><span class="ge">ვისთვისაა</span><span class="en">who it's for</span></span>
+    <h2 style="margin:0;font-size:38px;font-weight:900;letter-spacing:-.01em"><span class="ge">მუშაობს ყველგან</span><span class="en">Works everywhere</span></h2>
+    <p style="margin:0;font-size:17px;color:#7A6D93;font-weight:500;text-wrap:pretty"><span class="ge">კაფე, სალონი თუ საცხობი: სადაც კმაყოფილი კლიენტია, იქ შეფასებაც იბადება.</span><span class="en">Café, salon or bakery: wherever there's a happy customer, there's a review.</span></p>
+  </div>
+  <div class="placesGrid" data-reveal="up">
+    <figure><img src="img/places/cafe.jpg" alt="Qrebi ბარათი კაფეში" loading="lazy" width="900" height="672"><figcaption><span class="ge">კაფე</span><span class="en">Café</span></figcaption></figure>
+    <figure><img src="img/places/restaurant.jpg" alt="Qrebi ბარათი რესტორანში" loading="lazy" width="900" height="672"><figcaption><span class="ge">რესტორანი</span><span class="en">Restaurant</span></figcaption></figure>
+    <figure><img src="img/places/barbershop.jpg" alt="Qrebi ბარათი ბარბერშოპში" loading="lazy" width="900" height="672"><figcaption><span class="ge">ბარბერშოპი</span><span class="en">Barbershop</span></figcaption></figure>
+    <figure><img src="img/places/salon.jpg" alt="Qrebi ბარათი სილამაზის სალონში" loading="lazy" width="900" height="672"><figcaption><span class="ge">სილამაზის სალონი</span><span class="en">Beauty salon</span></figcaption></figure>
+    <figure><img src="img/places/bakery.jpg" alt="Qrebi ბარათი საცხობში" loading="lazy" width="900" height="672"><figcaption><span class="ge">საცხობი</span><span class="en">Bakery</span></figcaption></figure>
+    <figure><img src="img/places/flowershop.jpg" alt="Qrebi ბარათი ყვავილების მაღაზიაში" loading="lazy" width="900" height="672"><figcaption><span class="ge">ყვავილების მაღაზია</span><span class="en">Flower shop</span></figcaption></figure>
   </div>
 </section>
 
@@ -274,7 +299,7 @@ body.lang-en .seg-en{background:#fff;color:#5B00BF}
       <div style="display:flex;flex-direction:column;gap:18px" data-reveal="left">
         <span style="font-size:12.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#8B4DDB"><span class="ge">რიცხვები</span><span class="en">the numbers</span></span>
         <h2 style="margin:0;font-size:38px;font-weight:900;letter-spacing:-.01em;line-height:1.2;text-wrap:pretty"><span class="ge">შეფასებები = ახალი კლიენტები</span><span class="en">Reviews = new customers</span></h2>
-        <p style="margin:0;font-size:17.5px;line-height:1.6;color:#4A3D63;text-wrap:pretty"><span class="ge">როცა ვინმე ეძებს „კაფე ჩემთან ახლოს", Google პირველად მაღალრეიტინგულებს აჩვენებს — და ახლა AI ასისტენტებიც შეფასებებით ირჩევენ. მეტი შეფასება ნიშნავს: პირველი ხარ რუკაზეც, ძებნაშიც და AI-ს პასუხშიც.</span><span class="en">When someone searches "café near me", Google shows the highest-rated first — and now AI assistants choose by reviews too. More reviews means you're first on the map, in search, and in the AI's answer.</span></p>
+        <p style="margin:0;font-size:17.5px;line-height:1.6;color:#4A3D63;text-wrap:pretty"><span class="ge">როცა ვინმე ეძებს „კაფე ჩემთან ახლოს", Google პირველად მაღალრეიტინგულებს აჩვენებს, და ახლა AI ასისტენტებიც შეფასებებით ირჩევენ. მეტი შეფასება ნიშნავს: პირველი ხარ რუკაზეც, ძებნაშიც და AI-ს პასუხშიც.</span><span class="en">When someone searches "café near me", Google shows the highest-rated first, and now AI assistants choose by reviews too. More reviews means you're first on the map, in search, and in the AI's answer.</span></p>
         <a href="#order" style="align-self:flex-start;margin-top:8px;padding:15px 28px;background:#5B00BF;color:#fff;border-radius:12px;font-weight:800;font-size:16px;box-shadow:0 8px 24px rgba(91,0,191,.25)" data-hover="background:#4A009C;color:#fff;transform:translateY(-2px)"><span class="ge">დაიწყე დღესვე →</span><span class="en">Start today →</span></a>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
@@ -313,9 +338,9 @@ body.lang-en .seg-en{background:#fff;color:#5B00BF}
         <span style="font-size:58px;font-weight:900;letter-spacing:-.02em">50 ₾</span>
         <span style="font-size:17px;color:#7A6D93;font-weight:600"><span class="ge">/ თვე</span><span class="en">/ month</span></span>
       </div>
-      <p style="margin:-6px 0 0;font-size:14px;line-height:1.5;color:#5B00BF;font-weight:700"><span class="ge">ერთი ახალი კლიენტი თვეში — და ბარათი უკვე ანაზღაურებულია.</span><span class="en">One new customer a month — and the card has paid for itself.</span></p>
+      <p style="margin:-6px 0 0;font-size:14px;line-height:1.5;color:#5B00BF;font-weight:700"><span class="ge">ერთი ახალი კლიენტი თვეში და ბარათი უკვე ანაზღაურებულია.</span><span class="en">One new customer a month and the card has paid for itself.</span></p>
       <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:15px;color:#4A3D63;font-weight:500">
-        <li style="display:flex;gap:10px"><span style="color:#5B00BF;font-weight:900">✓</span><span><span class="ge">NFC ბარათი — აკრილი, 120×120 მმ</span><span class="en">NFC card — acrylic, 120×120 mm</span></span></li>
+        <li style="display:flex;gap:10px"><span style="color:#5B00BF;font-weight:900">✓</span><span><span class="ge">NFC ბარათი: აკრილი, 120×120 მმ</span><span class="en">NFC card: acrylic, 120×120 mm</span></span></li>
         <li style="display:flex;gap:10px"><span style="color:#5B00BF;font-weight:900">✓</span><span><span class="ge">პირდაპირი ბმული თქვენს Google გვერდზე</span><span class="en">Direct link to your Google page</span></span></li>
         <li style="display:flex;gap:10px"><span style="color:#5B00BF;font-weight:900">✓</span><span><span class="ge">3M წებოვანი მიმაგრება</span><span class="en">3M adhesive mounting</span></span></li>
         <li style="display:flex;gap:10px"><span style="color:#5B00BF;font-weight:900">✓</span><span><span class="ge">შეხებების სტატისტიკა ყოველთვიურად</span><span class="en">Monthly tap statistics</span></span></li>
@@ -343,13 +368,13 @@ body.lang-en .seg-en{background:#fff;color:#5B00BF}
     <div style="color:#fff;display:flex;flex-direction:column;gap:18px" data-reveal="left">
       <span style="font-size:12.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#B98BEE"><span class="ge">დაწყება</span><span class="en">get started</span></span>
       <h2 style="margin:0;font-size:38px;font-weight:900;letter-spacing:-.01em;line-height:1.2;text-wrap:pretty"><span class="ge">შეუკვეთე შენი ბარათი</span><span class="en">Order your card</span></h2>
-      <p style="margin:0;font-size:17px;line-height:1.6;color:#B4A6CE;text-wrap:pretty"><span class="ge">დატოვე ნომერი — დაგირეკავთ დღესვე, გავარკვევთ დეტალებს და ბარათი 5 დღეში მაგიდაზე გექნება.</span><span class="en">Leave your number — we'll call you today, sort out the details, and your card is on the table in 5 days.</span></p>
+      <p style="margin:0;font-size:17px;line-height:1.6;color:#B4A6CE;text-wrap:pretty"><span class="ge">დატოვე ნომერი. დაგირეკავთ დღესვე, გავარკვევთ დეტალებს და ბარათი 5 დღეში მაგიდაზე გექნება.</span><span class="en">Leave your number. We'll call you today, sort out the details, and your card is on the table in 5 days.</span></p>
       <div style="display:flex;flex-direction:column;gap:12px;font-size:15px;color:#DCC8F5;font-weight:600">
-        <span>① <span class="ge">ავსებ ფორმას — 30 წამი</span><span class="en">Fill the form — 30 seconds</span></span>
+        <span>① <span class="ge">ავსებ ფორმას: 30 წამი</span><span class="en">Fill the form: 30 seconds</span></span>
         <span>② <span class="ge">გირეკავთ დღესვე</span><span class="en">We call you today</span></span>
         <span>③ <span class="ge">ბარათი 5 დღეში</span><span class="en">Card in 5 days</span></span>
       </div>
-      <p style="margin:6px 0 0;padding:14px 18px;background:rgba(91,0,191,.3);border:1px solid rgba(185,139,238,.35);border-radius:12px;font-size:14.5px;line-height:1.55;color:#DCC8F5;font-weight:600;text-wrap:pretty"><span class="ge">ყოველი დღე ლოდინი — დაკარგული შეფასებები. კონკურენტი არ გელოდება.</span><span class="en">Every day you wait is reviews lost. Your competitor isn't waiting.</span></p>
+      <p style="margin:6px 0 0;padding:14px 18px;background:rgba(91,0,191,.3);border:1px solid rgba(185,139,238,.35);border-radius:12px;font-size:14.5px;line-height:1.55;color:#DCC8F5;font-weight:600;text-wrap:pretty"><span class="ge">ყოველი დღე ლოდინი დაკარგული შეფასებებია. კონკურენტი არ გელოდება.</span><span class="en">Every day you wait is reviews lost. Your competitor isn't waiting.</span></p>
     </div>
     <form id="orderForm" data-reveal="right" style="background:#fff;border-radius:24px;padding:38px 36px;display:flex;flex-direction:column;gap:16px;box-shadow:0 30px 70px rgba(0,0,0,.35)">
       <label style="display:flex;flex-direction:column;gap:7px;font-size:13.5px;font-weight:700;color:#4A3D63">
@@ -365,7 +390,7 @@ body.lang-en .seg-en{background:#fff;color:#5B00BF}
         <input name="phone" required type="tel" placeholder="+995 5__ __ __ __" style="padding:14px 16px;border:1.5px solid #E4DAF2;border-radius:11px;font-size:15.5px;font-family:inherit;outline:none" data-focus="border-color:#5B00BF">
       </label>
       <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
-      <button type="submit" style="margin-top:6px;padding:17px;background:#5B00BF;color:#fff;border:none;border-radius:12px;font-weight:800;font-size:16.5px;font-family:inherit;cursor:pointer;box-shadow:0 8px 22px rgba(91,0,191,.35)" data-hover="background:#4A009C"><span class="ge">გამოგვიგზავნე — დაგირეკავთ დღესვე</span><span class="en">Send — we'll call you today</span></button>
+      <button type="submit" style="margin-top:6px;padding:17px;background:#5B00BF;color:#fff;border:none;border-radius:12px;font-weight:800;font-size:16.5px;font-family:inherit;cursor:pointer;box-shadow:0 8px 22px rgba(91,0,191,.35)" data-hover="background:#4A009C"><span class="ge">გამოგვიგზავნე და დაგირეკავთ დღესვე</span><span class="en">Send, we'll call you today</span></button>
       <p style="margin:0;text-align:center;font-size:12.5px;color:#9A8DB3"><span class="ge">არავითარი ვალდებულება. მხოლოდ ზარი.</span><span class="en">No obligation. Just a call.</span></p>
     </form>
     <div id="orderSuccess" style="display:none;background:#fff;border-radius:24px;padding:56px 40px;flex-direction:column;align-items:center;gap:14px;text-align:center;box-shadow:0 30px 70px rgba(0,0,0,.35)">
@@ -380,7 +405,7 @@ body.lang-en .seg-en{background:#fff;color:#5B00BF}
 <!-- FOOTER -->
 <footer class="secpad" style="padding:34px 48px;display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;font-size:14px;color:#7A6D93;flex-wrap:wrap;gap:12px">
   <span style="font-weight:800;color:#1A1033">Qrebi<span style="color:#5B00BF">.ge</span></span>
-  <span><span class="ge">© 2026 Qrebi.ge — მეტი შეფასება. მეტი კლიენტი.</span><span class="en">© 2026 Qrebi.ge — More reviews. More customers.</span></span>
+  <span><span class="ge">© 2026 Qrebi.ge · მეტი შეფასება. მეტი კლიენტი.</span><span class="en">© 2026 Qrebi.ge · More reviews. More customers.</span></span>
   <a href="mailto:hello@qrebi.ge">hello@qrebi.ge</a>
 </footer>
 </div>
@@ -452,9 +477,9 @@ body.lang-en .seg-en{background:#fff;color:#5B00BF}
       ok = r.ok && j && j.ok === true;
     } catch (err) { ok = false; }
     if (!ok) {
-      // safety net: never lose a lead — open a prefilled email to hello@qrebi.ge
+      // safety net: never lose a lead: open a prefilled email to hello@qrebi.ge
       var body = encodeURIComponent('სახელი: '+data.name+'\nბიზნესი: '+data.business+'\nტელეფონი: '+data.phone);
-      window.location.href = 'mailto:hello@qrebi.ge?subject='+encodeURIComponent('ახალი შეკვეთა — Qrebi.ge')+'&body='+body;
+      window.location.href = 'mailto:hello@qrebi.ge?subject='+encodeURIComponent('ახალი შეკვეთა: Qrebi.ge')+'&body='+body;
     }
     form.style.display = 'none';
     document.getElementById('orderSuccess').style.display = 'flex';

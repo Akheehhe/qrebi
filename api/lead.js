@@ -1,5 +1,5 @@
 // Qrebi order-form lead handler (Vercel serverless).
-// Delivers each lead to Telegram + email. All secrets come from env vars — never hard-coded.
+// Delivers each lead to Telegram + email. All secrets come from env vars - never hard-coded.
 // Required env vars (set in Vercel → Project → Settings → Environment Variables):
 //   TG_BOT_TOKEN   – Telegram bot token (from @BotFather)
 //   TG_CHAT_ID     – chat/user id that should receive the leads
@@ -28,7 +28,7 @@ export default async function handler(req, res) {
   if (website) return res.status(200).json({ ok: true });            // honeypot: silently accept bots
   if (!String(phone).trim()) return res.status(400).json({ ok: false, error: 'missing-phone' });
 
-  const line = `🟣 ახალი შეკვეთა — Qrebi.ge\n\n👤 ${esc(name) || '—'}\n🏢 ${esc(business) || '—'}\n📞 ${esc(phone)}`;
+  const line = `🟣 ახალი შეკვეთა: Qrebi.ge\n\n👤 ${esc(name) || '-'}\n🏢 ${esc(business) || '-'}\n📞 ${esc(phone)}`;
   const tasks = [];
 
   const { TG_BOT_TOKEN, TG_CHAT_ID, RESEND_API_KEY, LEAD_EMAIL_TO, LEAD_EMAIL_FROM } = process.env;
@@ -48,7 +48,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         from: LEAD_EMAIL_FROM || 'Qrebi <onboarding@resend.dev>',
         to: [LEAD_EMAIL_TO],
-        subject: `ახალი შეკვეთა — ${esc(business) || esc(name) || esc(phone)}`,
+        subject: `ახალი შეკვეთა - ${esc(business) || esc(name) || esc(phone)}`,
         text: line.replace(/^🟣 /, ''),
       }),
     }));
