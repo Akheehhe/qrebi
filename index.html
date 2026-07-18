@@ -389,6 +389,24 @@ body.lang-en .seg-en{background:#fff;color:#5B00BF}
         <span><span class="ge">ტელეფონი</span><span class="en">Phone</span></span>
         <input name="phone" required type="tel" placeholder="+995 5__ __ __ __" style="padding:14px 16px;border:1.5px solid #E4DAF2;border-radius:11px;font-size:15.5px;font-family:inherit;outline:none" data-focus="border-color:#5B00BF">
       </label>
+      <label id="mapsLabel" style="display:flex;flex-direction:column;gap:7px;font-size:13.5px;font-weight:700;color:#4A3D63">
+        <span><span class="ge">Google Maps ბმული</span><span class="en">Google Maps link</span></span>
+        <input name="maps" id="mapsInput" type="url" required placeholder="https://maps.app.goo.gl/…" style="padding:14px 16px;border:1.5px solid #E4DAF2;border-radius:11px;font-size:15.5px;font-family:inherit;outline:none" data-focus="border-color:#5B00BF">
+      </label>
+      <label style="display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:600;color:#4A3D63;cursor:pointer">
+        <input type="checkbox" id="noMaps" name="nomaps" style="width:17px;height:17px;accent-color:#5B00BF;cursor:pointer">
+        <span><span class="ge">ჯერ არ ვარ Google რუკაზე</span><span class="en">I'm not on Google Maps yet</span></span>
+      </label>
+      <div id="regWrap" style="display:none;flex-direction:column;gap:16px">
+        <p style="margin:0;padding:11px 14px;background:#F3EBFC;border-radius:10px;font-size:13px;line-height:1.5;color:#5B00BF;font-weight:600">
+          <span class="ge">არაუშავს: შენს ბიზნესს ჩვენ დავარეგისტრირებთ Google რუკაზე და ბარათს პირდაპირ მივაბამთ. შეავსე მისამართი:</span>
+          <span class="en">No problem: we'll register your business on Google Maps and link the card to it. Fill in the address:</span>
+        </p>
+        <label style="display:flex;flex-direction:column;gap:7px;font-size:13.5px;font-weight:700;color:#4A3D63">
+          <span><span class="ge">ბიზნესის მისამართი</span><span class="en">Business address</span></span>
+          <input name="address" id="addrInput" placeholder="თბილისი, …" data-ph-ge="თბილისი, …" data-ph-en="Tbilisi, …" style="padding:14px 16px;border:1.5px solid #E4DAF2;border-radius:11px;font-size:15.5px;font-family:inherit;outline:none" data-focus="border-color:#5B00BF">
+        </label>
+      </div>
       <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
       <button type="submit" style="margin-top:6px;padding:17px;background:#5B00BF;color:#fff;border:none;border-radius:12px;font-weight:800;font-size:16.5px;font-family:inherit;cursor:pointer;box-shadow:0 8px 22px rgba(91,0,191,.35)" data-hover="background:#4A009C"><span class="ge">გამოგვიგზავნე და დაგირეკავთ დღესვე</span><span class="en">Send, we'll call you today</span></button>
       <p style="margin:0;text-align:center;font-size:12.5px;color:#9A8DB3"><span class="ge">არავითარი ვალდებულება. მხოლოდ ზარი.</span><span class="en">No obligation. Just a call.</span></p>
@@ -463,13 +481,27 @@ body.lang-en .seg-en{background:#fff;color:#5B00BF}
   }
 
   // ---- order form ----
+  // Google Maps: link is required; businesses not on Maps fill the registration path instead
+  var noMaps = document.getElementById('noMaps');
+  var mapsInput = document.getElementById('mapsInput');
+  var addrInput = document.getElementById('addrInput');
+  if (noMaps) noMaps.addEventListener('change', function(){
+    var reg = noMaps.checked;
+    document.getElementById('mapsLabel').style.display = reg ? 'none' : 'flex';
+    document.getElementById('regWrap').style.display = reg ? 'flex' : 'none';
+    mapsInput.required = !reg;
+    addrInput.required = reg;
+    if (reg) mapsInput.value = ''; else addrInput.value = '';
+  });
+
   var form = document.getElementById('orderForm');
   if (form) form.addEventListener('submit', async function(e){
     e.preventDefault();
     var btn = form.querySelector('button[type=submit]');
     if (btn) { btn.disabled = true; btn.style.opacity = '.75'; }
     var g = function(n){ var el = form.querySelector('[name="'+n+'"]'); return el ? el.value : ''; };
-    var data = { name:g('name'), business:g('business'), phone:g('phone'), website:g('website') };
+    var data = { name:g('name'), business:g('business'), phone:g('phone'),
+      maps:g('maps'), nomaps:!!(noMaps && noMaps.checked), address:g('address'), website:g('website') };
     var ok = false;
     try {
       var r = await fetch('/api/lead', { method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify(data) });
@@ -478,7 +510,8 @@ body.lang-en .seg-en{background:#fff;color:#5B00BF}
     } catch (err) { ok = false; }
     if (!ok) {
       // safety net: never lose a lead: open a prefilled email to hello@qrebi.ge
-      var body = encodeURIComponent('სახელი: '+data.name+'\nბიზნესი: '+data.business+'\nტელეფონი: '+data.phone);
+      var mapsInfo = data.nomaps ? ('სჭირდება რეგისტრაცია, მისამართი: '+data.address) : (data.maps || '-');
+      var body = encodeURIComponent('სახელი: '+data.name+'\nბიზნესი: '+data.business+'\nტელეფონი: '+data.phone+'\nGoogle Maps: '+mapsInfo);
       window.location.href = 'mailto:hello@qrebi.ge?subject='+encodeURIComponent('ახალი შეკვეთა: Qrebi.ge')+'&body='+body;
     }
     form.style.display = 'none';

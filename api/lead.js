@@ -24,11 +24,12 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).json({ ok: false, error: 'method' });
 
-  const { name = '', business = '', phone = '', website = '' } = await readBody(req);
+  const { name = '', business = '', phone = '', maps = '', nomaps = false, address = '', website = '' } = await readBody(req);
   if (website) return res.status(200).json({ ok: true });            // honeypot: silently accept bots
   if (!String(phone).trim()) return res.status(400).json({ ok: false, error: 'missing-phone' });
 
-  const line = `🟣 ახალი შეკვეთა: Qrebi.ge\n\n👤 ${esc(name) || '-'}\n🏢 ${esc(business) || '-'}\n📞 ${esc(phone)}`;
+  const mapsInfo = nomaps ? `სჭირდება რეგისტრაცია რუკაზე, მისამართი: ${esc(address) || '-'}` : (esc(maps) || '-');
+  const line = `🟣 ახალი შეკვეთა: Qrebi.ge\n\n👤 ${esc(name) || '-'}\n🏢 ${esc(business) || '-'}\n📞 ${esc(phone)}\n🗺️ ${mapsInfo}`;
   const tasks = [];
 
   const { TG_BOT_TOKEN, TG_CHAT_ID, RESEND_API_KEY, LEAD_EMAIL_TO, LEAD_EMAIL_FROM } = process.env;
