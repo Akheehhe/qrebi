@@ -227,6 +227,8 @@ export function seedDatabase(database: DatabaseSync): void {
     (t) => t.soonRank >= 0 && t.capacity <= 18
   );
   let bookingCounter = 0;
+  const bookedPerTrip: number[] = [];
+  const firstBookingPerTrip: (string | null)[] = [];
   for (let i = 0; i < Math.min(trips.length, 30); i++) {
     const trip = trips[i];
     let target =
@@ -236,6 +238,8 @@ export function seedDatabase(database: DatabaseSync): void {
     target = Math.min(target, trip.capacity);
     let remaining = target;
     let perTripBookings = 0;
+    let booked = 0;
+    firstBookingPerTrip[i] = null;
     while (remaining > 0 && perTripBookings < SEED_PASSENGERS.length) {
       const seats =
         i === soldOutIdx
@@ -244,8 +248,9 @@ export function seedDatabase(database: DatabaseSync): void {
       const passengerIdx = (i + perTripBookings) % SEED_PASSENGERS.length;
       const passenger = SEED_PASSENGERS[passengerIdx];
       const online = bookingCounter % 3 !== 2;
+      const bookingId = randomUUID();
       insertBooking.run(
-        randomUUID(),
+        bookingId,
         trip.id,
         passengerIds[passengerIdx],
         seats,
@@ -255,9 +260,33 @@ export function seedDatabase(database: DatabaseSync): void {
         online ? "online" : "cash",
         online ? "paid" : "pending"
       );
+      if (firstBookingPerTrip[i] === null) firstBookingPerTrip[i] = bookingId;
       remaining -= seats;
+      booked += seats;
       perTripBookings++;
       bookingCounter++;
     }
+    bookedPerTrip[i] = booked;
+  }
+
+  // Walk-in passengers the driver counted at the bus, on a few near trips.
+  const WALKINS = [2, 5, 1, 4, 0, 0, 3, 2];
+  const updateWalkin = database.prepare(
+    "UPDATE trips SET walkin_seats = ? WHERE id = ?"
+  );
+  for (let i = 0; i < Math.min(trips.length, WALKINS.length); i++) {
+    if (i === soldOutIdx) continue;
+    const free = trips[i].capacity - (bookedPerTrip[i] ?? 0);
+    const walkin = Math.min(WALKINS[i], Math.max(0, free));
+    if (walkin > 0) updateWalkin.run(walkin, trips[i].id);
+  }
+
+  // A couple of passengers already checked in on the nearest trips.
+  const markBoarded = database.prepare(
+    "UPDATE bookings SET boarded = 1 WHERE id = ?"
+  );
+  for (const i of [0, 1]) {
+    const bookingId = firstBookingPerTrip[i];
+    if (bookingId) markBoarded.run(bookingId);
   }
 }

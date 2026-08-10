@@ -6,11 +6,15 @@ import { randomUUID } from "node:crypto";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import {
+  adjustWalkin,
   cancelTrip,
   createTrip,
   createVehicle,
   getVehicleForDriver,
+  releaseNoShows,
   requireUser,
+  setBoarded,
+  setSalesClosed,
 } from "@/lib/dal";
 import { nowUtcIso, tbilisiLocalToUtcIso } from "@/lib/datetime";
 import { CITIES } from "@/lib/constants";
@@ -167,4 +171,45 @@ export async function cancelTripAction(formData: FormData): Promise<void> {
   revalidatePath("/trips");
   revalidatePath(`/trips/${tripId}`);
   revalidatePath("/driver");
+}
+
+// ---------- live boarding mode ----------
+
+export async function adjustWalkinAction(
+  tripId: string,
+  delta: number
+): Promise<void> {
+  const driver = await requireUser("driver");
+  if (delta !== 1 && delta !== -1) return;
+  adjustWalkin(tripId, driver.id, delta);
+  revalidatePath(`/trips/${tripId}`);
+  revalidatePath("/driver");
+}
+
+export async function toggleSalesAction(
+  tripId: string,
+  closed: boolean
+): Promise<void> {
+  const driver = await requireUser("driver");
+  setSalesClosed(tripId, driver.id, closed);
+  revalidatePath(`/trips/${tripId}`);
+  revalidatePath("/driver");
+}
+
+export async function toggleBoardedAction(
+  bookingId: string,
+  boarded: boolean
+): Promise<void> {
+  const driver = await requireUser("driver");
+  setBoarded(bookingId, driver.id, boarded);
+}
+
+export async function releaseNoShowsAction(tripId: string): Promise<number> {
+  const driver = await requireUser("driver");
+  const released = releaseNoShows(tripId, driver.id);
+  if (released > 0) {
+    revalidatePath(`/trips/${tripId}`);
+    revalidatePath("/driver");
+  }
+  return released;
 }

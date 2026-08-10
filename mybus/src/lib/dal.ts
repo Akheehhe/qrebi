@@ -6,8 +6,10 @@ import { redirect } from "next/navigation";
 import { db } from "./db";
 import { SESSION_COOKIE } from "./session";
 import { nowUtcIso, tbilisiDayRangeUtc } from "./datetime";
+import { freeCancelUntilIso, isSalesOpen, salesCloseAtIso } from "./policy";
 import type {
   BookingWithTrip,
+  LiveState,
   ManifestEntry,
   PaymentMethod,
   PaymentStatus,
@@ -120,31 +122,37 @@ interface DbTripRow {
   total_seats: number;
   status: string;
   notes: string | null;
+  walkin_seats: number;
+  sales_closed: number;
+  sales_cutoff_min: number;
+  cancel_cutoff_min: number;
   vehicle_name: string;
   vehicle_plate: string;
   vehicle_photo_url: string;
   driver_first_name: string;
   driver_last_name: string;
   driver_phone: string;
-  seats_taken: number;
+  online_taken: number;
 }
 
 const TRIP_SELECT = `
   SELECT t.id, t.driver_id, t.vehicle_id, t.origin_city, t.origin_station,
          t.destination_city, t.departure_at, t.price_gel, t.total_seats,
          t.status, t.notes,
+         t.walkin_seats, t.sales_closed, t.sales_cutoff_min, t.cancel_cutoff_min,
          v.name AS vehicle_name, v.plate_number AS vehicle_plate,
          v.photo_url AS vehicle_photo_url,
          u.first_name AS driver_first_name, u.last_name AS driver_last_name,
          u.phone AS driver_phone,
          COALESCE((SELECT SUM(b.seats) FROM bookings b
-                   WHERE b.trip_id = t.id AND b.status = 'confirmed'), 0) AS seats_taken
+                   WHERE b.trip_id = t.id AND b.status = 'confirmed'), 0) AS online_taken
   FROM trips t
   JOIN vehicles v ON v.id = t.vehicle_id
   JOIN users u ON u.id = t.driver_id
 `;
 
 function mapTrip(r: DbTripRow): TripSummary {
+  const seatsTaken = r.online_taken + r.walkin_seats;
   return {
     id: r.id,
     driverId: r.driver_id,
@@ -163,8 +171,13 @@ function mapTrip(r: DbTripRow): TripSummary {
     driverFirstName: r.driver_first_name,
     driverLastName: r.driver_last_name,
     driverPhone: r.driver_phone,
-    seatsTaken: r.seats_taken,
-    seatsLeft: Math.max(0, r.total_seats - r.seats_taken),
+    onlineSeatsTaken: r.online_taken,
+    walkinSeats: r.walkin_seats,
+    seatsTaken,
+    seatsLeft: Math.max(0, r.total_seats - seatsTaken),
+    salesClosed: r.sales_closed === 1,
+    salesCutoffMin: r.sales_cutoff_min,
+    cancelCutoffMin: r.cancel_cutoff_min,
   };
 }
 
@@ -316,6 +329,112 @@ export function cancelTrip(tripId: string, driverId: string): boolean {
   return result.changes > 0;
 }
 
+/**
+ * Adjusts the driver's walk-in seat counter by ±1, clamped to
+ * [0, totalSeats - online seats]. Returns the new value, or null if the
+ * trip is not the driver's scheduled trip or the clamp made it a no-op.
+ */
+export function adjustWalkin(
+  tripId: string,
+  driverId: string,
+  delta: number
+): number | null {
+  const row = db
+    .prepare(
+      `SELECT t.total_seats, t.walkin_seats,
+              COALESCE((SELECT SUM(b.seats) FROM bookings b
+                        WHERE b.trip_id = t.id AND b.status = 'confirmed'), 0) AS online
+       FROM trips t WHERE t.id = ? AND t.driver_id = ? AND t.status = 'scheduled'`
+    )
+    .get(tripId, driverId) as
+    | { total_seats: number; walkin_seats: number; online: number }
+    | undefined;
+  if (!row) return null;
+  const next = Math.max(
+    0,
+    Math.min(row.walkin_seats + delta, row.total_seats - row.online)
+  );
+  if (next === row.walkin_seats) return null;
+  db.prepare("UPDATE trips SET walkin_seats = ? WHERE id = ?").run(next, tripId);
+  return next;
+}
+
+export function setSalesClosed(
+  tripId: string,
+  driverId: string,
+  closed: boolean
+): boolean {
+  const result = db
+    .prepare(
+      `UPDATE trips SET sales_closed = ?
+       WHERE id = ? AND driver_id = ? AND status = 'scheduled'`
+    )
+    .run(closed ? 1 : 0, tripId, driverId);
+  return result.changes > 0;
+}
+
+export function setBoarded(
+  bookingId: string,
+  driverId: string,
+  boarded: boolean
+): boolean {
+  const result = db
+    .prepare(
+      `UPDATE bookings SET boarded = ?
+       WHERE id = ? AND status = 'confirmed'
+         AND trip_id IN (SELECT id FROM trips WHERE driver_id = ?)`
+    )
+    .run(boarded ? 1 : 0, bookingId, driverId);
+  return result.changes > 0;
+}
+
+/** Cancels every confirmed, not-boarded booking on the driver's trip. Returns freed booking count. */
+export function releaseNoShows(tripId: string, driverId: string): number {
+  const result = db
+    .prepare(
+      `UPDATE bookings SET status = 'cancelled', no_show = 1
+       WHERE trip_id = ? AND status = 'confirmed' AND boarded = 0
+         AND trip_id IN (SELECT id FROM trips WHERE id = ? AND driver_id = ?)`
+    )
+    .run(tripId, tripId, driverId);
+  return Number(result.changes);
+}
+
+export function getLiveState(
+  tripId: string,
+  driverId: string
+): LiveState | null {
+  const trip = getTrip(tripId);
+  if (!trip || trip.driverId !== driverId) return null;
+  return {
+    trip: {
+      id: trip.id,
+      originCity: trip.originCity,
+      destinationCity: trip.destinationCity,
+      departureAt: trip.departureAt,
+      status: trip.status,
+      totalSeats: trip.totalSeats,
+      onlineSeatsTaken: trip.onlineSeatsTaken,
+      walkinSeats: trip.walkinSeats,
+      seatsLeft: trip.seatsLeft,
+      salesClosed: trip.salesClosed,
+      salesOpen: isSalesOpen(trip),
+      salesCloseAt: salesCloseAtIso(trip.departureAt, trip.salesCutoffMin),
+      priceGel: trip.priceGel,
+    },
+    manifest: tripManifest(tripId).map((m) => ({
+      bookingId: m.bookingId,
+      name: m.name,
+      phone: m.phone,
+      seats: m.seats,
+      paymentStatus: m.paymentStatus,
+      status: m.status,
+      boarded: m.boarded,
+      noShow: m.noShow,
+    })),
+  };
+}
+
 // ---------- vehicles ----------
 
 interface DbVehicleRow {
@@ -386,6 +505,8 @@ interface DbBookingRow {
   payment_method: string;
   payment_status: string;
   booking_status: string;
+  refund_due: number;
+  no_show: number;
   created_at: string;
   passenger_name: string;
   passenger_phone: string;
@@ -406,7 +527,7 @@ interface DbBookingRow {
 
 const BOOKING_SELECT = `
   SELECT b.id, b.trip_id, b.seats, b.payment_method, b.payment_status,
-         b.status AS booking_status, b.created_at,
+         b.status AS booking_status, b.refund_due, b.no_show, b.created_at,
          b.passenger_name, b.passenger_phone, b.passenger_email,
          t.origin_city, t.origin_station, t.destination_city, t.departure_at,
          t.price_gel, t.status AS trip_status,
@@ -428,6 +549,8 @@ function mapBooking(r: DbBookingRow): BookingWithTrip {
     paymentMethod: r.payment_method as PaymentMethod,
     paymentStatus: r.payment_status as PaymentStatus,
     status: r.booking_status as BookingWithTrip["status"],
+    refundDue: r.refund_due === 1,
+    noShow: r.no_show === 1,
     createdAt: r.created_at,
     passengerName: r.passenger_name,
     passengerPhone: r.passenger_phone,
@@ -505,23 +628,46 @@ export function insertBooking(input: {
   return id;
 }
 
-/** Cancels a confirmed booking owned by the passenger, only before departure. Returns true if a row changed. */
-export function cancelBooking(bookingId: string, userId: string): boolean {
-  const result = db
+/**
+ * Cancels a confirmed booking owned by the passenger, only before departure.
+ * A paid booking cancelled before the trip's free-cancel cutoff is marked
+ * refund-due; inside the cutoff the seat frees up but the money stays.
+ */
+export function cancelBooking(
+  bookingId: string,
+  userId: string
+): { ok: boolean; refundDue: boolean } {
+  const row = db
     .prepare(
-      `UPDATE bookings SET status = 'cancelled'
-       WHERE id = ? AND passenger_id = ? AND status = 'confirmed'
-         AND trip_id IN (SELECT id FROM trips WHERE departure_at > ?)`
+      `SELECT b.id, b.payment_status, t.departure_at, t.cancel_cutoff_min
+       FROM bookings b JOIN trips t ON t.id = b.trip_id
+       WHERE b.id = ? AND b.passenger_id = ? AND b.status = 'confirmed'`
     )
-    .run(bookingId, userId, nowUtcIso());
-  return result.changes > 0;
+    .get(bookingId, userId) as
+    | {
+        id: string;
+        payment_status: string;
+        departure_at: string;
+        cancel_cutoff_min: number;
+      }
+    | undefined;
+  const now = nowUtcIso();
+  if (!row || row.departure_at <= now) return { ok: false, refundDue: false };
+  const refundDue =
+    row.payment_status === "paid" &&
+    now <= freeCancelUntilIso(row.departure_at, row.cancel_cutoff_min);
+  db.prepare(
+    "UPDATE bookings SET status = 'cancelled', refund_due = ? WHERE id = ?"
+  ).run(refundDue ? 1 : 0, row.id);
+  return { ok: true, refundDue };
 }
 
 export function tripManifest(tripId: string): ManifestEntry[] {
   const rows = db
     .prepare(
       `SELECT id AS booking_id, seats, payment_method, payment_status, status,
-              created_at, passenger_name, passenger_phone, passenger_email
+              boarded, no_show, created_at,
+              passenger_name, passenger_phone, passenger_email
        FROM bookings WHERE trip_id = ? ORDER BY created_at ASC`
     )
     .all(tripId) as unknown as {
@@ -530,6 +676,8 @@ export function tripManifest(tripId: string): ManifestEntry[] {
     payment_method: string;
     payment_status: string;
     status: string;
+    boarded: number;
+    no_show: number;
     created_at: string;
     passenger_name: string;
     passenger_phone: string;
@@ -541,6 +689,8 @@ export function tripManifest(tripId: string): ManifestEntry[] {
     paymentMethod: r.payment_method as PaymentMethod,
     paymentStatus: r.payment_status as PaymentStatus,
     status: r.status as ManifestEntry["status"],
+    boarded: r.boarded === 1,
+    noShow: r.no_show === 1,
     createdAt: r.created_at,
     name: r.passenger_name,
     phone: r.passenger_phone,

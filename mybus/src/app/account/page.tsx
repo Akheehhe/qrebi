@@ -25,6 +25,9 @@ function PaymentBadge({ status }: { status: BookingWithTrip["paymentStatus"] }) 
 
 function HistoryBadge({ booking }: { booking: BookingWithTrip }) {
   if (booking.status === "cancelled") {
+    if (booking.noShow) {
+      return <Badge variant="warning">არ გამოცხადდი</Badge>;
+    }
     return <Badge variant="neutral">გაუქმებული ჯავშანი</Badge>;
   }
   if (booking.tripStatus === "cancelled") {
@@ -147,7 +150,10 @@ export default async function AccountPage() {
                   {formatTbilisiDateTime(b.departureAt)}
                 </p>
                 <p className="text-sm text-subtle">{b.seats} ადგილი</p>
-                <span className="ml-auto">
+                <span className="ml-auto flex items-center gap-2">
+                  {b.status === "cancelled" && b.refundDue && (
+                    <Badge variant="brand">თანხა ბრუნდება</Badge>
+                  )}
                   <HistoryBadge booking={b} />
                 </span>
               </div>

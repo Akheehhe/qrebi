@@ -45,8 +45,51 @@ export interface TripSummary {
   driverFirstName: string;
   driverLastName: string;
   driverPhone: string;
+  /** Seats sold online (confirmed bookings). */
+  onlineSeatsTaken: number;
+  /** Walk-in passengers counted by the driver at the bus. */
+  walkinSeats: number;
+  /** Online + walk-in combined. */
   seatsTaken: number;
   seatsLeft: number;
+  /** Driver manually closed online sales ("ივსება ადგილზე"). */
+  salesClosed: boolean;
+  /** Online sales auto-close this many minutes before departure. */
+  salesCutoffMin: number;
+  /** Free cancellation ends this many minutes before departure. */
+  cancelCutoffMin: number;
+}
+
+export interface LiveTripState {
+  id: string;
+  originCity: string;
+  destinationCity: string;
+  departureAt: string;
+  status: TripStatus;
+  totalSeats: number;
+  onlineSeatsTaken: number;
+  walkinSeats: number;
+  seatsLeft: number;
+  salesClosed: boolean;
+  salesOpen: boolean;
+  salesCloseAt: string;
+  priceGel: number;
+}
+
+export interface LiveManifestEntry {
+  bookingId: string;
+  name: string;
+  phone: string;
+  seats: number;
+  paymentStatus: PaymentStatus;
+  status: BookingStatus;
+  boarded: boolean;
+  noShow: boolean;
+}
+
+export interface LiveState {
+  trip: LiveTripState;
+  manifest: LiveManifestEntry[];
 }
 
 export interface BookingWithTrip {
@@ -56,6 +99,10 @@ export interface BookingWithTrip {
   paymentMethod: PaymentMethod;
   paymentStatus: PaymentStatus;
   status: BookingStatus;
+  /** Cancelled outside the cutoff with online payment: money comes back. */
+  refundDue: boolean;
+  /** Released by the driver because the passenger never boarded. */
+  noShow: boolean;
   createdAt: string;
   passengerName: string;
   passengerPhone: string;
@@ -80,6 +127,8 @@ export interface ManifestEntry {
   paymentMethod: PaymentMethod;
   paymentStatus: PaymentStatus;
   status: BookingStatus;
+  boarded: boolean;
+  noShow: boolean;
   createdAt: string;
   name: string;
   phone: string;

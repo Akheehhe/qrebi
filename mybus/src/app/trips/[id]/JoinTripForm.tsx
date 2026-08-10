@@ -6,17 +6,20 @@ import { bookTripAction } from "@/app/actions/booking";
 import { ErrorBanner, Field, inputClass, selectClass } from "@/components/forms";
 import { SubmitButton } from "@/components/SubmitButton";
 import { formatPrice } from "@/lib/datetime";
+import { cutoffLabel } from "@/lib/policy";
 
 export function JoinTripForm({
   tripId,
   seatsLeft,
   priceGel,
   defaultPhone,
+  cancelCutoffMin,
 }: {
   tripId: string;
   seatsLeft: number;
   priceGel: number;
   defaultPhone: string;
+  cancelCutoffMin: number;
 }) {
   const [state, formAction] = useActionState(bookTripAction, undefined);
   const [seats, setSeats] = useState(1);
@@ -126,7 +129,8 @@ export function JoinTripForm({
       </SubmitButton>
 
       <p className="text-center text-xs text-faint">
-        ჯავშნის გაუქმება შესაძლებელია გასვლამდე
+        უფასო გაუქმება გასვლამდე {cutoffLabel(cancelCutoffMin)} ადრე, შემდეგ
+        ადგილი თავისუფლდება, თანხა კი აღარ ბრუნდება
       </p>
     </form>
   );

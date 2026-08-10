@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, Bus, Clock } from "lucide-react";
+import { ArrowRight, Bus, Clock, Radio } from "lucide-react";
 import { getTrip, requireUser, tripManifest } from "@/lib/dal";
 import { formatPrice, formatTbilisiDateTime } from "@/lib/datetime";
 import { Badge } from "@/components/Badge";
@@ -52,10 +52,23 @@ export default async function TripManifestPage({
               </span>
             </div>
           </div>
-          <Badge variant="brand" className="px-3 py-1.5 text-sm">
-            {trip.seatsTaken}/{trip.totalSeats} დაჯავშნილია
-          </Badge>
+          <div className="flex items-center gap-3">
+            <Badge variant="brand" className="px-3 py-1.5 text-sm">
+              {trip.seatsTaken}/{trip.totalSeats} დაკავებულია
+            </Badge>
+            <Link
+              href={`/driver/trips/${trip.id}/live`}
+              className="inline-flex items-center gap-1.5 rounded-xl bg-accent-500 px-4 py-2 text-sm font-bold text-ink transition hover:bg-accent-600"
+            >
+              <Radio className="h-4 w-4" />
+              LIVE ჩასხდომა
+            </Link>
+          </div>
         </div>
+        <p className="mt-3 text-sm text-subtle">
+          ონლაინ დაჯავშნილია {trip.onlineSeatsTaken}, ადგილზე ჩამჯდარი{" "}
+          {trip.walkinSeats}
+        </p>
       </div>
 
       <section>
@@ -114,7 +127,13 @@ export default async function TripManifestPage({
                       </td>
                       <td className="px-5 py-3">
                         {entry.status === "confirmed" ? (
-                          <Badge variant="success">დადასტურებული</Badge>
+                          entry.boarded ? (
+                            <Badge variant="success">ჩაჯდა</Badge>
+                          ) : (
+                            <Badge variant="success">დადასტურებული</Badge>
+                          )
+                        ) : entry.noShow ? (
+                          <Badge variant="warning">არ გამოცხადდა</Badge>
                         ) : (
                           <Badge variant="neutral">გაუქმებული</Badge>
                         )}

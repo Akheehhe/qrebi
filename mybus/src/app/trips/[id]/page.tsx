@@ -20,6 +20,7 @@ import {
   formatTbilisiWeekday,
   isPast,
 } from "@/lib/datetime";
+import { isSalesOpen, salesCloseAtIso } from "@/lib/policy";
 import { Badge } from "@/components/Badge";
 import { JoinTripForm } from "./JoinTripForm";
 
@@ -43,6 +44,10 @@ export default async function TripDetailPage({
   const user = await getCurrentUser();
   const booked = user ? userHasBooking(id, user.id) : false;
   const gone = trip.status === "departed" || isPast(trip.departureAt);
+  const salesOpen = isSalesOpen(trip);
+  const salesCloseTime = formatTbilisiTime(
+    salesCloseAtIso(trip.departureAt, trip.salesCutoffMin)
+  );
   const tripPath = `/trips/${trip.id}`;
 
   return (
@@ -224,17 +229,36 @@ export default async function TripDetailPage({
                     ჩემი ჯავშნები
                   </Link>
                 </div>
+              ) : !salesOpen ? (
+                <div className="space-y-4">
+                  <div className="rounded-xl bg-warning-50 p-4 text-sm font-semibold text-warning-500">
+                    ონლაინ ჯავშანი ამ რეისზე დახურულია, დარჩენილი ადგილები
+                    ნაწილდება ადგილზე, მძღოლთან
+                  </div>
+                  <Link
+                    href="/trips"
+                    className="flex w-full items-center justify-center rounded-xl border border-line bg-white px-5 py-3 font-semibold text-ink transition hover:bg-canvas"
+                  >
+                    სხვა რეისების ნახვა
+                  </Link>
+                </div>
               ) : trip.seatsLeft === 0 ? (
                 <div className="rounded-xl bg-danger-50 p-4 text-sm font-semibold text-danger-500">
                   ადგილები ამოიწურა
                 </div>
               ) : (
-                <JoinTripForm
-                  tripId={trip.id}
-                  seatsLeft={trip.seatsLeft}
-                  priceGel={trip.priceGel}
-                  defaultPhone={user.phone}
-                />
+                <div className="space-y-3">
+                  <JoinTripForm
+                    tripId={trip.id}
+                    seatsLeft={trip.seatsLeft}
+                    priceGel={trip.priceGel}
+                    defaultPhone={user.phone}
+                    cancelCutoffMin={trip.cancelCutoffMin}
+                  />
+                  <p className="text-center text-xs text-faint">
+                    ონლაინ ჯავშანი ღიაა {salesCloseTime}-მდე
+                  </p>
+                </div>
               )}
             </div>
           </div>

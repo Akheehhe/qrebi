@@ -11,6 +11,7 @@ import {
   userHasBooking,
 } from "@/lib/dal";
 import { nowUtcIso } from "@/lib/datetime";
+import { isSalesOpen } from "@/lib/policy";
 import type { ActionState } from "@/lib/types";
 
 const PHONE_RE = /^[+\d][\d\s-]{7,17}$/;
@@ -31,6 +32,11 @@ export async function bookTripAction(
   }
   if (trip.departureAt <= nowUtcIso()) {
     return { error: "ეს რეისი უკვე გავიდა" };
+  }
+  if (!isSalesOpen(trip)) {
+    return {
+      error: "ონლაინ ჯავშანი ამ რეისზე დახურულია, ადგილები ნაწილდება ადგილზე",
+    };
   }
   if (trip.driverId === user.id) {
     return { error: "საკუთარ რეისზე ადგილის დაჯავშნა შეუძლებელია" };

@@ -45,6 +45,10 @@ CREATE TABLE IF NOT EXISTS trips (
   total_seats INTEGER NOT NULL,
   status TEXT NOT NULL DEFAULT 'scheduled' CHECK (status IN ('scheduled', 'departed', 'cancelled')),
   notes TEXT,
+  walkin_seats INTEGER NOT NULL DEFAULT 0,
+  sales_closed INTEGER NOT NULL DEFAULT 0,
+  sales_cutoff_min INTEGER NOT NULL DEFAULT 30,
+  cancel_cutoff_min INTEGER NOT NULL DEFAULT 60,
   created_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
@@ -59,6 +63,9 @@ CREATE TABLE IF NOT EXISTS bookings (
   payment_method TEXT NOT NULL CHECK (payment_method IN ('online', 'cash')),
   payment_status TEXT NOT NULL CHECK (payment_status IN ('paid', 'pending')),
   status TEXT NOT NULL DEFAULT 'confirmed' CHECK (status IN ('confirmed', 'cancelled')),
+  boarded INTEGER NOT NULL DEFAULT 0,
+  no_show INTEGER NOT NULL DEFAULT 0,
+  refund_due INTEGER NOT NULL DEFAULT 0,
   created_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
@@ -74,6 +81,25 @@ declare global {
   var __mybusDb: DatabaseSync | undefined;
 }
 
+/** Adds a column to an existing table; ignores "duplicate column" on re-run. */
+function ensureColumn(database: DatabaseSync, table: string, columnDef: string) {
+  try {
+    database.exec(`ALTER TABLE ${table} ADD COLUMN ${columnDef}`);
+  } catch {
+    // column already exists
+  }
+}
+
+function migrate(database: DatabaseSync) {
+  ensureColumn(database, "trips", "walkin_seats INTEGER NOT NULL DEFAULT 0");
+  ensureColumn(database, "trips", "sales_closed INTEGER NOT NULL DEFAULT 0");
+  ensureColumn(database, "trips", "sales_cutoff_min INTEGER NOT NULL DEFAULT 30");
+  ensureColumn(database, "trips", "cancel_cutoff_min INTEGER NOT NULL DEFAULT 60");
+  ensureColumn(database, "bookings", "boarded INTEGER NOT NULL DEFAULT 0");
+  ensureColumn(database, "bookings", "no_show INTEGER NOT NULL DEFAULT 0");
+  ensureColumn(database, "bookings", "refund_due INTEGER NOT NULL DEFAULT 0");
+}
+
 function openDb(): DatabaseSync {
   const dataDir = path.join(process.cwd(), "data");
   if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
@@ -82,6 +108,7 @@ function openDb(): DatabaseSync {
   database.exec("PRAGMA busy_timeout = 10000");
   database.exec("PRAGMA foreign_keys = ON");
   database.exec(SCHEMA_SQL);
+  migrate(database);
   // Seed inside an immediate transaction: concurrent processes (e.g. build
   // workers) wait on the write lock, then see the rows and skip.
   database.exec("BEGIN IMMEDIATE");

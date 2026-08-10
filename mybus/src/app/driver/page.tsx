@@ -4,6 +4,7 @@ import {
   Bus,
   CalendarCheck,
   Plus,
+  Radio,
   Users,
 } from "lucide-react";
 import { driverTrips, driverVehicles, requireUser } from "@/lib/dal";
@@ -65,7 +66,7 @@ export default async function DriverDashboardPage() {
         />
         <StatCard
           icon={<Users className="h-5 w-5" />}
-          label="დაჯავშნილი ადგილი"
+          label="დაკავებული ადგილი"
           value={bookedSeats}
         />
         <StatCard
@@ -158,12 +159,21 @@ export default async function DriverDashboardPage() {
                   </div>
                   <TripStatusBadge trip={trip} past={past} />
                   <div className="ml-auto flex items-center gap-2">
+                    {active && (
+                      <Link
+                        href={`/driver/trips/${trip.id}/live`}
+                        className="inline-flex items-center gap-1.5 rounded-xl bg-accent-500 px-4 py-2 text-sm font-bold text-ink transition hover:bg-accent-600"
+                      >
+                        <Radio className="h-4 w-4" />
+                        LIVE ჩასხდომა
+                      </Link>
+                    )}
                     <Link
                       href={`/driver/trips/${trip.id}`}
                       className="inline-flex items-center gap-1.5 rounded-xl border border-line bg-white px-4 py-2 text-sm font-semibold text-ink transition hover:bg-canvas"
                     >
                       <Users className="h-4 w-4" />
-                      მგზავრები ({trip.seatsTaken})
+                      მგზავრები ({trip.onlineSeatsTaken})
                     </Link>
                     {active && (
                       <form action={cancelTripAction}>
