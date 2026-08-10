@@ -69,6 +69,17 @@ CREATE TABLE IF NOT EXISTS bookings (
   created_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
+CREATE TABLE IF NOT EXISTS platform_fees (
+  id TEXT PRIMARY KEY,
+  trip_id TEXT NOT NULL REFERENCES trips(id) ON DELETE CASCADE,
+  driver_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  amount_gel REAL NOT NULL,
+  status TEXT NOT NULL DEFAULT 'paid' CHECK (status IN ('paid', 'pending')),
+  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_platform_fees_driver ON platform_fees(driver_id, created_at);
+
 CREATE TABLE IF NOT EXISTS notifications (
   id TEXT PRIMARY KEY,
   driver_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,

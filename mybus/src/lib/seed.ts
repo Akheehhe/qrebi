@@ -1,5 +1,6 @@
 import type { DatabaseSync } from "node:sqlite";
 import { randomUUID } from "node:crypto";
+import { PLATFORM_FEE_GEL } from "./constants";
 import { hashPassword } from "./password";
 
 const HOUR = 60 * 60 * 1000;
@@ -338,5 +339,34 @@ export function seedDatabase(database: DatabaseSync): void {
       ].join("\n"),
       "simulated"
     );
+  }
+
+  // Yesterday's completed trips for the demo driver, with the flat platform
+  // fee already paid, so the balance page shows the revenue model at once.
+  const insertFee = database.prepare(
+    `INSERT INTO platform_fees (id, trip_id, driver_id, amount_gel, status)
+     VALUES (?, ?, ?, ?, 'paid')`
+  );
+  const markDeparted = database.prepare(
+    "UPDATE trips SET status = 'departed' WHERE id = ?"
+  );
+  for (const route of [DAILY_ROUTES[0], DAILY_ROUTES[3]]) {
+    const vehicle = VEHICLES[route.vehicleIdx];
+    if (vehicle.driverIdx !== 0) continue;
+    const tripId = randomUUID();
+    insertTrip.run(
+      tripId,
+      driverIds[0],
+      vehicleIds[route.vehicleIdx],
+      route.from,
+      route.station,
+      route.to,
+      departAt(-1, route.hour, route.minute ?? 0),
+      route.price,
+      vehicle.capacity,
+      route.notes ?? null
+    );
+    markDeparted.run(tripId);
+    insertFee.run(randomUUID(), tripId, driverIds[0], PLATFORM_FEE_GEL);
   }
 }

@@ -7,8 +7,10 @@ import { db } from "./db";
 import { SESSION_COOKIE } from "./session";
 import { nowUtcIso, tbilisiDayRangeUtc } from "./datetime";
 import { freeCancelUntilIso, isSalesOpen, salesCloseAtIso } from "./policy";
+import { PLATFORM_FEE_GEL } from "./constants";
 import type {
   BookingWithTrip,
+  DriverFee,
   DriverNotification,
   LiveState,
   ManifestEntry,
@@ -399,6 +401,64 @@ export function releaseNoShows(tripId: string, driverId: string): number {
     )
     .run(tripId, tripId, driverId);
   return Number(result.changes);
+}
+
+/**
+ * Marks the driver's scheduled trip as departed and charges the flat
+ * platform fee (5₾, simulated payment). This is the platform's only
+ * revenue event: no ticket commission, no subscription.
+ */
+export function markTripDeparted(tripId: string, driverId: string): boolean {
+  const result = db
+    .prepare(
+      `UPDATE trips SET status = 'departed'
+       WHERE id = ? AND driver_id = ? AND status = 'scheduled'`
+    )
+    .run(tripId, driverId);
+  if (result.changes === 0) return false;
+  db.prepare(
+    `INSERT INTO platform_fees (id, trip_id, driver_id, amount_gel, status)
+     VALUES (?, ?, ?, ?, 'paid')`
+  ).run(randomUUID(), tripId, driverId, PLATFORM_FEE_GEL);
+  return true;
+}
+
+export function driverFees(driverId: string): {
+  fees: DriverFee[];
+  totalGel: number;
+} {
+  const rows = db
+    .prepare(
+      `SELECT f.id, f.trip_id, f.amount_gel, f.status, f.created_at,
+              t.origin_city, t.destination_city, t.departure_at
+       FROM platform_fees f JOIN trips t ON t.id = f.trip_id
+       WHERE f.driver_id = ?
+       ORDER BY f.created_at DESC, f.rowid DESC LIMIT 200`
+    )
+    .all(driverId) as unknown as {
+    id: string;
+    trip_id: string;
+    amount_gel: number;
+    status: string;
+    created_at: string;
+    origin_city: string;
+    destination_city: string;
+    departure_at: string;
+  }[];
+  const fees = rows.map((r) => ({
+    id: r.id,
+    tripId: r.trip_id,
+    originCity: r.origin_city,
+    destinationCity: r.destination_city,
+    departureAt: r.departure_at,
+    amountGel: r.amount_gel,
+    status: r.status as DriverFee["status"],
+    createdAt: r.created_at,
+  }));
+  return {
+    fees,
+    totalGel: fees.reduce((sum, f) => sum + f.amountGel, 0),
+  };
 }
 
 export function driverNotifications(

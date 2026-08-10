@@ -43,3 +43,9 @@ export const PAYMENT_METHODS = [
   { value: "online", label: "ონლაინ გადახდა ბარათით" },
   { value: "cash", label: "ნაღდი ფული მძღოლთან" },
 ] as const;
+
+/**
+ * The whole business model: no ticket commission for anyone. The platform
+ * charges the driver a flat fee per departed trip, nothing else.
+ */
+export const PLATFORM_FEE_GEL = 5;

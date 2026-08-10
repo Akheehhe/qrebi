@@ -19,6 +19,17 @@ export interface DriverNotification {
   createdAt: string;
 }
 
+export interface DriverFee {
+  id: string;
+  tripId: string;
+  originCity: string;
+  destinationCity: string;
+  departureAt: string;
+  amountGel: number;
+  status: "paid" | "pending";
+  createdAt: string;
+}
+
 export interface User {
   id: string;
   role: Role;

@@ -12,6 +12,7 @@ import {
   Banknote,
   Check,
   CreditCard,
+  Flag,
   Lock,
   LockOpen,
   MessageCircle,
@@ -23,10 +24,12 @@ import {
 } from "lucide-react";
 import {
   adjustWalkinAction,
+  departTripAction,
   releaseNoShowsAction,
   toggleBoardedAction,
   toggleSalesAction,
 } from "@/app/actions/driver";
+import { PLATFORM_FEE_GEL } from "@/lib/constants";
 import { formatTbilisiTime } from "@/lib/datetime";
 import { waChatLink } from "@/lib/wa";
 import type { LiveManifestEntry, LiveState } from "@/lib/types";
@@ -93,6 +96,7 @@ export function LiveBoard({ initial }: { initial: LiveState }) {
   const [soundOn, setSoundOn] = useState(false);
   const [nowMs, setNowMs] = useState<number | null>(null);
   const [armRelease, setArmRelease] = useState(false);
+  const [armDepart, setArmDepart] = useState(false);
   const [, startTransition] = useTransition();
 
   const prevManifestRef = useRef<Map<string, LiveManifestEntry>>(
@@ -288,6 +292,28 @@ export function LiveBoard({ initial }: { initial: LiveState }) {
     );
   };
 
+  const handleDepart = () => {
+    if (!live) return;
+    if (!armDepart) {
+      setArmDepart(true);
+      setTimeout(() => setArmDepart(false), 4000);
+      return;
+    }
+    setArmDepart(false);
+    runAction(
+      (s) => s,
+      async () => {
+        const ok = await departTripAction(trip.id);
+        if (ok) {
+          pushEvent(
+            "info",
+            `რეისი გავიდა. პლატფორმის საფასური ${PLATFORM_FEE_GEL}₾ გადახდილია. კარგი გზა!`
+          );
+        }
+      }
+    );
+  };
+
   const toggleSound = () => {
     const next = !soundOn;
     setSoundOn(next);
@@ -335,11 +361,18 @@ export function LiveBoard({ initial }: { initial: LiveState }) {
             {soundOn ? "ხმა ჩართულია" : "ჩართე ხმა"}
           </button>
         </div>
-        {!live && (
-          <p className="mt-3 rounded-xl bg-danger-50 p-3 text-sm font-semibold text-danger-500">
-            ეს რეისი აღარ არის აქტიური
-          </p>
-        )}
+        {!live &&
+          (trip.status === "departed" ? (
+            <p className="mt-3 flex items-center gap-2 rounded-xl bg-success-50 p-3 text-sm font-semibold text-success-500">
+              <Flag className="h-4 w-4" />
+              რეისი გავიდა. პლატფორმის საფასური {PLATFORM_FEE_GEL}₾ დაფარულია,
+              ბილეთების სრული თანხა შენია.
+            </p>
+          ) : (
+            <p className="mt-3 rounded-xl bg-danger-50 p-3 text-sm font-semibold text-danger-500">
+              ეს რეისი აღარ არის აქტიური
+            </p>
+          ))}
       </div>
 
       {/* event feed */}
@@ -444,6 +477,30 @@ export function LiveBoard({ initial }: { initial: LiveState }) {
                 ? `ონლაინ გაყიდვები ავტომატურად იხურება ${formatTbilisiTime(trip.salesCloseAt)}-ზე`
                 : "ონლაინ გაყიდვები დახურულია დროის ამოწურვის გამო"}
           </p>
+
+          {live && (
+            <>
+              <button
+                type="button"
+                data-testid="depart-trip"
+                onClick={handleDepart}
+                className={`mt-4 flex w-full items-center justify-center gap-2 rounded-2xl px-5 py-4 text-lg font-bold transition ${
+                  armDepart
+                    ? "bg-success-500 text-white"
+                    : "bg-brand-900 text-white hover:bg-brand-700"
+                }`}
+              >
+                <Flag className="h-5 w-5" />
+                {armDepart
+                  ? `დაადასტურე: ვიხდი ${PLATFORM_FEE_GEL}₾-ს და გავდივარ`
+                  : "რეისი გავიდა"}
+              </button>
+              <p className="mt-2 text-xs text-faint">
+                გასვლისას იხდი მხოლოდ {PLATFORM_FEE_GEL}₾-ს. ბილეთებზე საკომისიო
+                არ იჭრება.
+              </p>
+            </>
+          )}
         </div>
 
         {/* boarding checklist */}

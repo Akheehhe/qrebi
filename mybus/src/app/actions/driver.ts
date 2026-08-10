@@ -11,6 +11,7 @@ import {
   createTrip,
   createVehicle,
   getVehicleForDriver,
+  markTripDeparted,
   releaseNoShows,
   requireUser,
   setBoarded,
@@ -212,4 +213,17 @@ export async function releaseNoShowsAction(tripId: string): Promise<number> {
     revalidatePath("/driver");
   }
   return released;
+}
+
+export async function departTripAction(tripId: string): Promise<boolean> {
+  const driver = await requireUser("driver");
+  const ok = markTripDeparted(tripId, driver.id);
+  if (ok) {
+    revalidatePath("/");
+    revalidatePath("/trips");
+    revalidatePath(`/trips/${tripId}`);
+    revalidatePath("/driver");
+    revalidatePath("/driver/fees");
+  }
+  return ok;
 }

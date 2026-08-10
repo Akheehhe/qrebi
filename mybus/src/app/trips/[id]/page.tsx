@@ -9,11 +9,13 @@ import {
   Clock,
   Info,
   MapPin,
+  MessageCircle,
   Phone,
   Users,
 } from "lucide-react";
 import { getCurrentUser, getTrip, userHasBooking } from "@/lib/dal";
 import {
+  departureDayLabel,
   formatPrice,
   formatTbilisiDateYear,
   formatTbilisiTime,
@@ -21,6 +23,7 @@ import {
   isPast,
 } from "@/lib/datetime";
 import { isSalesOpen, salesCloseAtIso } from "@/lib/policy";
+import { waChatLink } from "@/lib/wa";
 import { Badge } from "@/components/Badge";
 import { JoinTripForm } from "./JoinTripForm";
 
@@ -169,7 +172,45 @@ export default async function TripDetailPage({
               <SeatsBadge seatsLeft={trip.seatsLeft} />
             </div>
 
+            {trip.status === "scheduled" && !gone && (
+              <div className="mt-5 border-t border-line pt-5">
+                <p className="text-sm font-bold text-ink">
+                  დაჯავშნე პირდაპირ მძღოლთან
+                </p>
+                <p className="mt-1 text-xs text-subtle">
+                  ურეგისტრაციოდ, ერთი ზარით ან შეტყობინებით
+                </p>
+                <div className="mt-3 grid grid-cols-2 gap-2">
+                  <a
+                    href={`tel:${trip.driverPhone.replace(/\s/g, "")}`}
+                    className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-brand-500 bg-white px-4 py-3 font-bold text-brand-600 transition hover:bg-brand-50"
+                  >
+                    <Phone className="h-4 w-4" />
+                    დარეკვა
+                  </a>
+                  <a
+                    href={waChatLink(
+                      trip.driverPhone,
+                      `გამარჯობა! MyBus-ზე ვნახე თქვენი რეისი ${trip.originCity} → ${trip.destinationCity}, ${departureDayLabel(trip.departureAt)} ${formatTbilisiTime(trip.departureAt)}. მინდა ადგილის დაჯავშნა, თავისუფალია?`
+                    )}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 font-bold text-white transition hover:opacity-90"
+                    style={{ backgroundColor: "#25d366" }}
+                  >
+                    <MessageCircle className="h-4 w-4" />
+                    WhatsApp
+                  </a>
+                </div>
+              </div>
+            )}
+
             <div className="mt-5 border-t border-line pt-5">
+              {trip.status === "scheduled" && !gone && (
+                <p className="mb-4 text-sm font-bold text-ink">
+                  ან დაჯავშნე ონლაინ
+                </p>
+              )}
               {trip.status === "cancelled" ? (
                 <div className="rounded-xl bg-danger-50 p-4 text-sm font-semibold text-danger-500">
                   ეს რეისი გაუქმებულია

@@ -1,15 +1,19 @@
 import Link from "next/link";
 import {
   ArrowRight,
+  BadgePercent,
   BusFront,
   Check,
   CreditCard,
+  Flag,
   PhoneCall,
   Search,
   Ticket,
   TicketCheck,
+  UserRound,
 } from "lucide-react";
 import { getStats, listTrips, popularRoutes } from "@/lib/dal";
+import { PLATFORM_FEE_GEL } from "@/lib/constants";
 import { formatPrice, tbilisiTodayDateInput } from "@/lib/datetime";
 import { SearchTripsForm } from "@/components/SearchTripsForm";
 import { TripCard } from "@/components/TripCard";
@@ -42,6 +46,31 @@ const DRIVER_BULLETS = [
   "გამოაქვეყნე განრიგი წინასწარ",
   "ნახე მგზავრების სია და კონტაქტები",
   "შეავსე ადგილები ავტოსადგურზე ლოდინის ნაცვლად",
+  `გადაიხადე მხოლოდ ${PLATFORM_FEE_GEL}₾ შემდგარ რეისზე, ბილეთებზე საკომისიო არ იჭრება`,
+] as const;
+
+const PRICING = [
+  {
+    icon: UserRound,
+    title: "მგზავრი",
+    price: "0₾",
+    sub: "დამატებითი საფასური",
+    text: "იხდი მხოლოდ ბილეთის ფასს, რომელსაც მძღოლი ადებს. არანაირი მომსახურების გადასახადი.",
+  },
+  {
+    icon: BadgePercent,
+    title: "მძღოლი",
+    price: "100%",
+    sub: "ბილეთის თანხა შენია",
+    text: "საკომისიო არ იჭრება არც ონლაინ და არც ნაღდ გადახდაზე. რეგისტრაცია და რეისების დამატება უფასოა.",
+  },
+  {
+    icon: Flag,
+    title: "პლატფორმა",
+    price: `${PLATFORM_FEE_GEL}₾`,
+    sub: "მხოლოდ შემდგარ რეისზე",
+    text: "ერთი ფიქსირებული საფასური, როცა რეისი რეალურად გადის. გაუქმებულ რეისზე არაფერს იხდი. აბონემენტი არ არსებობს.",
+  },
 ] as const;
 
 export default async function HomePage() {
@@ -170,6 +199,39 @@ export default async function HomePage() {
               </div>
             ))}
           </div>
+        </section>
+
+        {/* PRICING */}
+        <section className="mt-12">
+          <h2 className="text-xl font-bold text-ink">
+            გამჭვირვალე პირობები, საკომისიოს გარეშე
+          </h2>
+          <div className="mt-5 grid gap-5 sm:grid-cols-3">
+            {PRICING.map(({ icon: Icon, title, price, sub, text }) => (
+              <div
+                key={title}
+                className="rounded-2xl border border-line bg-white p-6"
+              >
+                <p className="flex items-center gap-2 text-sm font-semibold text-subtle">
+                  <Icon className="h-4 w-4 text-brand-500" />
+                  {title}
+                </p>
+                <p className="mt-2 text-3xl font-extrabold text-ink">
+                  {price}{" "}
+                  <span className="text-sm font-semibold text-subtle">
+                    {sub}
+                  </span>
+                </p>
+                <p className="mt-2 text-sm leading-6 text-subtle">{text}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-4 rounded-2xl border border-brand-100 bg-brand-50 p-4 text-sm text-brand-900">
+            მხოლოდ დიდუბის ავტოსადგურიდან დღეში ორმოცდაათზე მეტი ავტობუსი
+            ორჯერ გადის. თითო შემდგარი რეისი პლატფორმისთვის{" "}
+            {formatPrice(PLATFORM_FEE_GEL)}-ია, მძღოლისთვის კი ნულოვანი ბარიერი
+            და სავსე სალონი.
+          </p>
         </section>
 
         {/* DRIVER CTA */}
