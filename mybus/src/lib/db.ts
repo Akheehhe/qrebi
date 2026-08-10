@@ -2,6 +2,7 @@ import "server-only";
 import { DatabaseSync } from "node:sqlite";
 import fs from "node:fs";
 import path from "node:path";
+import { dataDir } from "./paths";
 import { seedDatabase } from "./seed";
 
 const SCHEMA_SQL = `
@@ -125,9 +126,9 @@ function migrate(database: DatabaseSync) {
 }
 
 function openDb(): DatabaseSync {
-  const dataDir = path.join(process.cwd(), "data");
-  if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
-  const database = new DatabaseSync(path.join(dataDir, "mybus.db"));
+  const dir = dataDir();
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+  const database = new DatabaseSync(path.join(dir, "mybus.db"));
   database.exec("PRAGMA journal_mode = WAL");
   database.exec("PRAGMA busy_timeout = 10000");
   database.exec("PRAGMA foreign_keys = ON");

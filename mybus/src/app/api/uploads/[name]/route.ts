@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { dataDir } from "@/lib/paths";
 
 const MIME_TYPES: Record<string, string> = {
   ".jpg": "image/jpeg",
@@ -14,7 +15,7 @@ export async function GET(
 ) {
   const { name } = await params;
   const safeName = path.basename(name);
-  const filePath = path.join(process.cwd(), "data", "uploads", safeName);
+  const filePath = path.join(dataDir(), "uploads", safeName);
   try {
     const buffer = await fs.readFile(filePath);
     const mime =

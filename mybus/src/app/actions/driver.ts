@@ -18,6 +18,7 @@ import {
   setSalesClosed,
 } from "@/lib/dal";
 import { nowUtcIso, tbilisiLocalToUtcIso } from "@/lib/datetime";
+import { dataDir } from "@/lib/paths";
 import { CITIES } from "@/lib/constants";
 import type { ActionState } from "@/lib/types";
 
@@ -68,7 +69,7 @@ export async function createVehicleAction(
     if (file.size > MAX_PHOTO_BYTES) {
       return { fieldErrors: { photo: "ფოტო არ უნდა აღემატებოდეს 5MB-ს" } };
     }
-    const dir = path.join(process.cwd(), "data", "uploads");
+    const dir = path.join(dataDir(), "uploads");
     await fs.mkdir(dir, { recursive: true });
     const filename = `${randomUUID()}${ext}`;
     await fs.writeFile(
