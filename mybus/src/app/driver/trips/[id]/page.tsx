@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, Bus, Clock, Radio } from "lucide-react";
+import { ArrowRight, Bus, Clock, MessageCircle, Radio } from "lucide-react";
 import { getTrip, requireUser, tripManifest } from "@/lib/dal";
-import { formatPrice, formatTbilisiDateTime } from "@/lib/datetime";
+import { formatPrice, formatTbilisiDateTime, formatTbilisiTime } from "@/lib/datetime";
+import { waChatLink } from "@/lib/wa";
 import { Badge } from "@/components/Badge";
 
 export default async function TripManifestPage({
@@ -107,12 +108,27 @@ export default async function TripManifestPage({
                         {entry.name}
                       </td>
                       <td className="px-5 py-3">
-                        <a
-                          href={`tel:${entry.phone}`}
-                          className="text-brand-600 hover:text-brand-700"
-                        >
-                          {entry.phone}
-                        </a>
+                        <span className="inline-flex items-center gap-2">
+                          <a
+                            href={`tel:${entry.phone}`}
+                            className="text-brand-600 hover:text-brand-700"
+                          >
+                            {entry.phone}
+                          </a>
+                          <a
+                            href={waChatLink(
+                              entry.phone,
+                              `გამარჯობა, ${entry.name}! გწერთ MyBus-ის რეისიდან ${trip.originCity} → ${trip.destinationCity}, ${formatTbilisiTime(trip.departureAt)}.`
+                            )}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title="მისწერე WhatsApp-ში"
+                            className="grid h-7 w-7 place-items-center rounded-full text-white transition hover:opacity-85"
+                            style={{ backgroundColor: "#25d366" }}
+                          >
+                            <MessageCircle className="h-4 w-4" />
+                          </a>
+                        </span>
                       </td>
                       <td className="px-5 py-3 text-subtle">{entry.email}</td>
                       <td className="px-5 py-3 font-semibold text-ink">

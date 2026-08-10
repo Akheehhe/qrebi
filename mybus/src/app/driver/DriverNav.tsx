@@ -7,6 +7,7 @@ import { Plus } from "lucide-react";
 const TABS = [
   { href: "/driver", label: "მიმოხილვა", exact: true },
   { href: "/driver/vehicles", label: "ჩემი ავტობუსები", exact: false },
+  { href: "/driver/messages", label: "შეტყობინებები", exact: false },
 ] as const;
 
 export function DriverNav() {

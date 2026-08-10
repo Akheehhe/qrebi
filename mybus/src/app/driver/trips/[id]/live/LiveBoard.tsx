@@ -14,6 +14,7 @@ import {
   CreditCard,
   Lock,
   LockOpen,
+  MessageCircle,
   Minus,
   Plus,
   UserRoundX,
@@ -27,6 +28,7 @@ import {
   toggleSalesAction,
 } from "@/app/actions/driver";
 import { formatTbilisiTime } from "@/lib/datetime";
+import { waChatLink } from "@/lib/wa";
 import type { LiveManifestEntry, LiveState } from "@/lib/types";
 
 const POLL_MS = 4000;
@@ -460,11 +462,11 @@ export function LiveBoard({ initial }: { initial: LiveState }) {
           ) : (
             <ul className="mt-4 space-y-2.5">
               {confirmed.map((entry) => (
-                <li key={entry.bookingId}>
+                <li key={entry.bookingId} className="flex items-stretch gap-2">
                   <button
                     type="button"
                     onClick={() => handleBoardToggle(entry)}
-                    className={`flex w-full items-center gap-3 rounded-2xl border-2 p-3.5 text-left transition active:scale-[0.99] ${
+                    className={`flex min-w-0 flex-1 items-center gap-3 rounded-2xl border-2 p-3.5 text-left transition active:scale-[0.99] ${
                       entry.boarded
                         ? "border-success-500/50 bg-success-50"
                         : "border-line bg-white hover:bg-canvas"
@@ -501,6 +503,19 @@ export function LiveBoard({ initial }: { initial: LiveState }) {
                       )}
                     </span>
                   </button>
+                  <a
+                    href={waChatLink(
+                      entry.phone,
+                      `გამარჯობა, ${entry.name}! გწერთ MyBus-ის მძღოლი, თქვენი ჯავშნის შესახებ (${trip.originCity} → ${trip.destinationCity}).`
+                    )}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`მისწერე WhatsApp-ში: ${entry.name}`}
+                    className="grid w-12 shrink-0 place-items-center rounded-2xl text-white transition hover:opacity-85"
+                    style={{ backgroundColor: "#25d366" }}
+                  >
+                    <MessageCircle className="h-5 w-5" />
+                  </a>
                 </li>
               ))}
             </ul>

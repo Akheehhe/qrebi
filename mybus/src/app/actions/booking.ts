@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import {
   cancelBooking,
+  getBookingForUser,
   getCurrentUser,
   getTrip,
   insertBooking,
@@ -11,6 +12,7 @@ import {
   userHasBooking,
 } from "@/lib/dal";
 import { nowUtcIso } from "@/lib/datetime";
+import { notifyDriverBooking, notifyDriverCancellation } from "@/lib/notify";
 import { isSalesOpen } from "@/lib/policy";
 import type { ActionState } from "@/lib/types";
 
@@ -72,6 +74,12 @@ export async function bookTripAction(
     paymentStatus: paymentMethod === "online" ? "paid" : "pending",
   });
 
+  await notifyDriverBooking(
+    trip,
+    { name: `${user.firstName} ${user.lastName}`, phone, seats, paymentMethod },
+    trip.seatsLeft - seats
+  );
+
   revalidatePath(`/trips/${tripId}`);
   revalidatePath("/account");
   redirect(`/account/tickets/${bookingId}`);
@@ -80,6 +88,17 @@ export async function bookTripAction(
 export async function cancelBookingAction(formData: FormData): Promise<void> {
   const user = await requireUser();
   const bookingId = String(formData.get("bookingId") ?? "");
-  cancelBooking(bookingId, user.id);
+  const booking = getBookingForUser(bookingId, user.id);
+  const { ok } = cancelBooking(bookingId, user.id);
+  if (ok && booking) {
+    const trip = getTrip(booking.tripId);
+    if (trip) {
+      await notifyDriverCancellation(
+        trip,
+        { name: booking.passengerName, seats: booking.seats },
+        trip.seatsLeft
+      );
+    }
+  }
   revalidatePath("/account");
 }

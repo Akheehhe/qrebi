@@ -9,6 +9,7 @@ import { nowUtcIso, tbilisiDayRangeUtc } from "./datetime";
 import { freeCancelUntilIso, isSalesOpen, salesCloseAtIso } from "./policy";
 import type {
   BookingWithTrip,
+  DriverNotification,
   LiveState,
   ManifestEntry,
   PaymentMethod,
@@ -398,6 +399,34 @@ export function releaseNoShows(tripId: string, driverId: string): number {
     )
     .run(tripId, tripId, driverId);
   return Number(result.changes);
+}
+
+export function driverNotifications(
+  driverId: string,
+  limit = 50
+): DriverNotification[] {
+  const rows = db
+    .prepare(
+      `SELECT id, kind, to_phone, body, delivery, created_at
+       FROM notifications WHERE driver_id = ?
+       ORDER BY created_at DESC, rowid DESC LIMIT ${Math.min(limit, 200)}`
+    )
+    .all(driverId) as unknown as {
+    id: string;
+    kind: string;
+    to_phone: string;
+    body: string;
+    delivery: string;
+    created_at: string;
+  }[];
+  return rows.map((r) => ({
+    id: r.id,
+    kind: r.kind as DriverNotification["kind"],
+    toPhone: r.to_phone,
+    body: r.body,
+    delivery: r.delivery as DriverNotification["delivery"],
+    createdAt: r.created_at,
+  }));
 }
 
 export function getLiveState(

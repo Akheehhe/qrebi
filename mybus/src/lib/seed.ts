@@ -169,6 +169,7 @@ export function seedDatabase(database: DatabaseSync): void {
   });
 
   const trips: { id: string; capacity: number; soonRank: number }[] = [];
+  const demoDriverTrips: { id: string; route: SeedRoute }[] = [];
   const nowHour = currentTbilisiHour();
 
   for (let day = 0; day < 7; day++) {
@@ -191,6 +192,9 @@ export function seedDatabase(database: DatabaseSync): void {
         route.notes ?? null
       );
       trips.push({ id: tripId, capacity: vehicle.capacity, soonRank: day * 100 + r });
+      if (vehicle.driverIdx === 0 && demoDriverTrips.length < 2) {
+        demoDriverTrips.push({ id: tripId, route });
+      }
     }
   }
 
@@ -288,5 +292,51 @@ export function seedDatabase(database: DatabaseSync): void {
   for (const i of [0, 1]) {
     const bookingId = firstBookingPerTrip[i];
     if (bookingId) markBoarded.run(bookingId);
+  }
+
+  // Sample WhatsApp-bot messages for the demo driver's feed.
+  const insertNotification = database.prepare(
+    `INSERT INTO notifications (id, driver_id, trip_id, kind, to_phone, body, delivery)
+     VALUES (?, ?, ?, ?, ?, ?, ?)`
+  );
+  const timeOf = (r: SeedRoute) =>
+    `${String(r.hour).padStart(2, "0")}:${String(r.minute ?? 0).padStart(2, "0")}`;
+  if (demoDriverTrips.length > 0) {
+    const t = demoDriverTrips[0];
+    const p = SEED_PASSENGERS[1];
+    insertNotification.run(
+      randomUUID(),
+      driverIds[0],
+      t.id,
+      "booking",
+      DRIVERS[0].phone,
+      [
+        "🚌 ახალი ჯავშანი MyBus-ზე",
+        `${t.route.from} → ${t.route.to}, ${timeOf(t.route)}`,
+        `მგზავრი: ${p.firstName} ${p.lastName}`,
+        `ტელეფონი: ${p.phone}`,
+        "ადგილი: 4",
+        "გადახდა: ონლაინ, უკვე გადახდილია",
+      ].join("\n"),
+      "simulated"
+    );
+  }
+  if (demoDriverTrips.length > 1) {
+    const t = demoDriverTrips[1];
+    const p = SEED_PASSENGERS[2];
+    insertNotification.run(
+      randomUUID(),
+      driverIds[0],
+      t.id,
+      "cancellation",
+      DRIVERS[0].phone,
+      [
+        "❌ ჯავშანი გაუქმდა",
+        `${t.route.from} → ${t.route.to}, ${timeOf(t.route)}`,
+        `მგზავრი: ${p.firstName} ${p.lastName}, 2 ადგილი`,
+        "გათავისუფლდა 2 ადგილი",
+      ].join("\n"),
+      "simulated"
+    );
   }
 }

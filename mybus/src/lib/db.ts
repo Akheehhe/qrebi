@@ -69,6 +69,19 @@ CREATE TABLE IF NOT EXISTS bookings (
   created_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
+CREATE TABLE IF NOT EXISTS notifications (
+  id TEXT PRIMARY KEY,
+  driver_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  trip_id TEXT REFERENCES trips(id) ON DELETE SET NULL,
+  kind TEXT NOT NULL CHECK (kind IN ('booking', 'cancellation')),
+  to_phone TEXT NOT NULL,
+  body TEXT NOT NULL,
+  channel TEXT NOT NULL DEFAULT 'whatsapp',
+  delivery TEXT NOT NULL CHECK (delivery IN ('sent', 'simulated', 'failed')),
+  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_notifications_driver ON notifications(driver_id, created_at);
 CREATE INDEX IF NOT EXISTS idx_trips_departure ON trips(departure_at);
 CREATE INDEX IF NOT EXISTS idx_trips_driver ON trips(driver_id);
 CREATE INDEX IF NOT EXISTS idx_bookings_trip ON bookings(trip_id);

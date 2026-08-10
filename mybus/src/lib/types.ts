@@ -8,6 +8,17 @@ export type ActionState =
   | { error?: string; fieldErrors?: Record<string, string> }
   | undefined;
 
+export type NotificationKind = "booking" | "cancellation";
+
+export interface DriverNotification {
+  id: string;
+  kind: NotificationKind;
+  toPhone: string;
+  body: string;
+  delivery: "sent" | "simulated" | "failed";
+  createdAt: string;
+}
+
 export interface User {
   id: string;
   role: Role;

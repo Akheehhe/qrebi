@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, Bus, Phone } from "lucide-react";
+import { ArrowLeft, ArrowRight, Bus, MessageCircle, Phone } from "lucide-react";
 import { getBookingForUser, requireUser } from "@/lib/dal";
 import {
   formatPrice,
   formatTbilisiDateYear,
   formatTbilisiTime,
 } from "@/lib/datetime";
+import { waChatLink } from "@/lib/wa";
 import { Badge } from "@/components/Badge";
 
 function Detail({
@@ -109,6 +110,19 @@ export default async function TicketPage({
               >
                 <Phone className="h-4 w-4 text-brand-500" />
                 {b.driverPhone}
+              </a>
+              <a
+                href={waChatLink(
+                  b.driverPhone,
+                  `გამარჯობა! თქვენს რეისზე მაქვს ჯავშანი ${b.id.slice(0, 8).toUpperCase()} (${b.originCity} → ${b.destinationCity}, ${formatTbilisiTime(b.departureAt)}, ${b.seats} ადგილი).`
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold text-white transition hover:opacity-85"
+                style={{ backgroundColor: "#25d366" }}
+              >
+                <MessageCircle className="h-3.5 w-3.5" />
+                WhatsApp
               </a>
             </p>
           </div>
