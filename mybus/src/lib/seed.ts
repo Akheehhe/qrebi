@@ -218,25 +218,36 @@ export function seedDatabase(database: DatabaseSync): void {
   }
 
   // Deterministic bookings over the nearest ~30 trips so listings look alive.
+  // Invariant: at most one booking per passenger per trip, so bookings per
+  // trip are capped at the number of distinct seed passengers.
   trips.sort((a, b) => a.soonRank - b.soonRank);
+  // Sold-out showcase: a small vehicle that 6 passengers x 4 seats can fill,
+  // and not one of the "leaving soon" trips (those should stay bookable).
+  const soldOutIdx = trips.findIndex(
+    (t) => t.soonRank >= 0 && t.capacity <= 18
+  );
   let bookingCounter = 0;
   for (let i = 0; i < Math.min(trips.length, 30); i++) {
     const trip = trips[i];
-    // One trip filled completely, the rest partially, some empty.
     let target =
-      i === 5 ? trip.capacity : [7, 3, 0, 9, 2, 12, 5, 0, 4, 8][i % 10];
+      i === soldOutIdx
+        ? trip.capacity
+        : [7, 3, 0, 9, 2, 12, 5, 0, 4, 8][i % 10];
     target = Math.min(target, trip.capacity);
     let remaining = target;
-    let passengerCursor = i;
-    while (remaining > 0) {
-      const seats = Math.min(4, remaining, ((bookingCounter * 3) % 4) + 1);
-      const passenger = SEED_PASSENGERS[passengerCursor % SEED_PASSENGERS.length];
-      const passengerId = passengerIds[passengerCursor % passengerIds.length];
+    let perTripBookings = 0;
+    while (remaining > 0 && perTripBookings < SEED_PASSENGERS.length) {
+      const seats =
+        i === soldOutIdx
+          ? Math.min(4, remaining)
+          : Math.min(4, remaining, ((bookingCounter * 3) % 4) + 1);
+      const passengerIdx = (i + perTripBookings) % SEED_PASSENGERS.length;
+      const passenger = SEED_PASSENGERS[passengerIdx];
       const online = bookingCounter % 3 !== 2;
       insertBooking.run(
         randomUUID(),
         trip.id,
-        passengerId,
+        passengerIds[passengerIdx],
         seats,
         `${passenger.firstName} ${passenger.lastName}`,
         passenger.phone,
@@ -245,7 +256,7 @@ export function seedDatabase(database: DatabaseSync): void {
         online ? "paid" : "pending"
       );
       remaining -= seats;
-      passengerCursor++;
+      perTripBookings++;
       bookingCounter++;
     }
   }

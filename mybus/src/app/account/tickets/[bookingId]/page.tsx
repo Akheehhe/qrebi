@@ -55,7 +55,9 @@ export default async function TicketPage({
             <div className="mb-5 rounded-xl bg-danger-50 p-4 text-sm font-semibold text-danger-500">
               {b.status === "cancelled"
                 ? "ეს ჯავშანი გაუქმებულია"
-                : "ეს რეისი გაუქმდა, თანხა დაგიბრუნდება"}
+                : b.paymentStatus === "paid"
+                  ? "ეს რეისი გაუქმდა, თანხა დაგიბრუნდება"
+                  : "ეს რეისი გაუქმდა"}
             </div>
           )}
 

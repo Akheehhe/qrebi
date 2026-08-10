@@ -199,7 +199,7 @@ export function listTrips(filters: TripFilters = {}): TripSummary[] {
     filters.sort === "price"
       ? "t.price_gel ASC, t.departure_at ASC"
       : "t.departure_at ASC";
-  const limit = Math.min(filters.limit ?? 60, 200);
+  const limit = Math.min(filters.limit ?? 200, 500);
   const rows = db
     .prepare(
       `${TRIP_SELECT} WHERE ${where.join(" AND ")} ORDER BY ${order} LIMIT ${limit}`
@@ -305,14 +305,14 @@ export function createTrip(input: {
   return id;
 }
 
-/** Cancels a scheduled trip owned by the driver. Returns true if a row changed. */
+/** Cancels a not-yet-departed scheduled trip owned by the driver. Returns true if a row changed. */
 export function cancelTrip(tripId: string, driverId: string): boolean {
   const result = db
     .prepare(
       `UPDATE trips SET status = 'cancelled'
-       WHERE id = ? AND driver_id = ? AND status = 'scheduled'`
+       WHERE id = ? AND driver_id = ? AND status = 'scheduled' AND departure_at > ?`
     )
-    .run(tripId, driverId);
+    .run(tripId, driverId, nowUtcIso());
   return result.changes > 0;
 }
 
@@ -505,14 +505,15 @@ export function insertBooking(input: {
   return id;
 }
 
-/** Cancels a confirmed booking owned by the passenger. Returns true if a row changed. */
+/** Cancels a confirmed booking owned by the passenger, only before departure. Returns true if a row changed. */
 export function cancelBooking(bookingId: string, userId: string): boolean {
   const result = db
     .prepare(
       `UPDATE bookings SET status = 'cancelled'
-       WHERE id = ? AND passenger_id = ? AND status = 'confirmed'`
+       WHERE id = ? AND passenger_id = ? AND status = 'confirmed'
+         AND trip_id IN (SELECT id FROM trips WHERE departure_at > ?)`
     )
-    .run(bookingId, userId);
+    .run(bookingId, userId, nowUtcIso());
   return result.changes > 0;
 }
 

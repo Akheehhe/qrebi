@@ -208,7 +208,7 @@ export default async function TripDetailPage({
                     href="/driver"
                     className="flex w-full items-center justify-center rounded-xl bg-brand-500 px-5 py-3 font-semibold text-white transition hover:bg-brand-600"
                   >
-                    მართვა კაბინეტში
+                    გახსენი მძღოლის კაბინეტი
                   </Link>
                 </div>
               ) : booked ? (

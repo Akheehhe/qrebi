@@ -41,7 +41,7 @@ const STEPS = [
 const DRIVER_BULLETS = [
   "გამოაქვეყნე განრიგი წინასწარ",
   "ნახე მგზავრების სია და კონტაქტები",
-  "შეავსე ადგილები ცარიელი მოლოდინის ნაცვლად",
+  "შეავსე ადგილები ავტოსადგურზე ლოდინის ნაცვლად",
 ] as const;
 
 export default async function HomePage() {
@@ -113,7 +113,7 @@ export default async function HomePage() {
                   </span>
                   <span className="mt-2 flex items-center justify-between text-sm">
                     <span className="font-semibold text-brand-500">
-                      დან {formatPrice(r.minPrice)}
+                      {formatPrice(r.minPrice)}-დან
                     </span>
                     <span className="text-faint">{r.count} რეისი</span>
                   </span>
@@ -143,7 +143,7 @@ export default async function HomePage() {
             </div>
           ) : (
             <div className="mt-5 rounded-2xl border border-line bg-white p-10 text-center text-subtle">
-              ამ მომენტში დაგეგმილი რეისები არ არის. შემოიხედე მოგვიანებით.
+              ამჟამად დაგეგმილი რეისები არ არის. შემოიხედე მოგვიანებით.
             </div>
           )}
         </section>

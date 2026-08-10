@@ -4,20 +4,14 @@ import { redirect } from "next/navigation";
 import { createUser, findUserByEmail } from "@/lib/dal";
 import { hashPassword, verifyPassword } from "@/lib/password";
 import { createSession, destroySession } from "@/lib/session";
+import { sanitizeNextPath } from "@/lib/urls";
 import type { ActionState, Role } from "@/lib/types";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_RE = /^[+\d][\d\s-]{7,17}$/;
 
 function safeNext(value: FormDataEntryValue | null, fallback: string): string {
-  if (
-    typeof value === "string" &&
-    value.startsWith("/") &&
-    !value.startsWith("//")
-  ) {
-    return value;
-  }
-  return fallback;
+  return sanitizeNextPath(value) ?? fallback;
 }
 
 export async function signupAction(

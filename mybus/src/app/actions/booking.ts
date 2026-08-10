@@ -36,7 +36,7 @@ export async function bookTripAction(
     return { error: "საკუთარ რეისზე ადგილის დაჯავშნა შეუძლებელია" };
   }
   if (userHasBooking(tripId, user.id)) {
-    return { error: "ამ რეისზე ჯავშანი უკვე გაქვთ" };
+    return { error: "ამ რეისზე ჯავშანი უკვე გაქვს" };
   }
 
   const seats = Number.parseInt(String(formData.get("seats") ?? "1"), 10);

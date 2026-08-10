@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { sanitizeNextPath } from "@/lib/urls";
 import { SignupForm } from "./SignupForm";
 
 export default async function SignupPage({
@@ -7,13 +8,7 @@ export default async function SignupPage({
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const params = await searchParams;
-  const rawNext = params.next;
-  const next =
-    typeof rawNext === "string" &&
-    rawNext.startsWith("/") &&
-    !rawNext.startsWith("//")
-      ? rawNext
-      : undefined;
+  const next = sanitizeNextPath(params.next);
   const role: "passenger" | "driver" =
     params.role === "driver" ? "driver" : "passenger";
 

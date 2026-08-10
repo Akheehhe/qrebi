@@ -9,7 +9,7 @@ const PRESETS = [
   { key: "sprinter-blue", label: "ლურჯი სპრინტერი" },
   { key: "sprinter-yellow", label: "ყვითელი სპრინტერი" },
   { key: "marshrutka-white", label: "თეთრი მიკროავტობუსი" },
-  { key: "minibus-green", label: "მწვანე მინიბუსი" },
+  { key: "minibus-green", label: "მწვანე მიკროავტობუსი" },
   { key: "coach-blue", label: "ლურჯი ავტობუსი" },
   { key: "coach-red", label: "წითელი ავტობუსი" },
 ] as const;

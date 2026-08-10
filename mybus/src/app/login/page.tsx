@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Info } from "lucide-react";
+import { sanitizeNextPath } from "@/lib/urls";
 import { LoginForm } from "./LoginForm";
 
 export default async function LoginPage({
@@ -8,13 +9,7 @@ export default async function LoginPage({
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const params = await searchParams;
-  const rawNext = params.next;
-  const next =
-    typeof rawNext === "string" &&
-    rawNext.startsWith("/") &&
-    !rawNext.startsWith("//")
-      ? rawNext
-      : undefined;
+  const next = sanitizeNextPath(params.next);
 
   return (
     <div className="mx-auto max-w-md px-4 py-14">
