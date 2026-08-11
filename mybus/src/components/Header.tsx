@@ -1,17 +1,18 @@
 import Link from "next/link";
-import { Bus, LayoutDashboard, LogOut, Ticket } from "lucide-react";
+import {
+  Bus,
+  Car,
+  Home,
+  Info,
+  LayoutDashboard,
+  LogOut,
+  Route,
+  Ticket,
+} from "lucide-react";
 import { getCurrentUser } from "@/lib/dal";
 import { logoutAction } from "@/app/actions/auth";
 
-const TNET_FAMILY = [
-  "myauto.ge",
-  "myhome.ge",
-  "mymarket.ge",
-  "tkt.ge",
-  "swoop.ge",
-  "myparts.ge",
-  "myjobs.ge",
-];
+const TNET_FAMILY = ["myauto.ge", "myhome.ge", "mymarket.ge"];
 
 export async function Header() {
   const user = await getCurrentUser();
@@ -19,16 +20,13 @@ export async function Header() {
   return (
     <>
       <div className="hidden bg-brand-900 sm:block">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-1.5 text-[11px] font-medium text-white/50">
-          <div className="flex items-center gap-4">
-            {TNET_FAMILY.map((site) => (
-              <span key={site}>{site}</span>
-            ))}
-            <span className="rounded-full bg-accent-500 px-2 py-0.5 font-bold text-ink">
-              mybus.ge
-            </span>
-          </div>
-          <span>ერთიანი ეკოსისტემა შენი ყოველდღიურობისთვის</span>
+        <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-1.5 text-[11px] font-medium text-white/50">
+          {TNET_FAMILY.map((site) => (
+            <span key={site}>{site}</span>
+          ))}
+          <span className="rounded-full bg-accent-500 px-2 py-0.5 font-bold text-ink">
+            mybus.ge
+          </span>
         </div>
       </div>
 
@@ -45,19 +43,32 @@ export async function Header() {
           </Link>
 
           <nav className="hidden items-center gap-6 text-sm font-medium text-subtle md:flex">
-            <Link href="/" className="transition hover:text-ink">
+            <Link
+              href="/"
+              className="flex items-center gap-1.5 transition hover:text-ink"
+            >
+              <Home className="h-4 w-4" />
               მთავარი
             </Link>
-            <Link href="/trips" className="transition hover:text-ink">
+            <Link
+              href="/trips"
+              className="flex items-center gap-1.5 transition hover:text-ink"
+            >
+              <Route className="h-4 w-4" />
               რეისები
             </Link>
-            <Link href="/#how-it-works" className="transition hover:text-ink">
+            <Link
+              href="/#how-it-works"
+              className="flex items-center gap-1.5 transition hover:text-ink"
+            >
+              <Info className="h-4 w-4" />
               როგორ მუშაობს
             </Link>
             <Link
               href={user?.role === "driver" ? "/driver" : "/signup?role=driver"}
-              className="transition hover:text-ink"
+              className="flex items-center gap-1.5 transition hover:text-ink"
             >
+              <Car className="h-4 w-4" />
               მძღოლებისთვის
             </Link>
           </nav>

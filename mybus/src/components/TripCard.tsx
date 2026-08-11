@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, CalendarDays, Clock, MapPin } from "lucide-react";
+import { ArrowRight, Clock, MapPin } from "lucide-react";
 import {
   departureDayLabel,
   formatPrice,
@@ -26,7 +26,7 @@ export function TripCard({ trip }: { trip: TripSummary }) {
         <img
           src={trip.vehiclePhotoUrl}
           alt={trip.vehicleName}
-          className="h-44 w-full object-cover"
+          className="h-40 w-full object-cover"
         />
         <span className="absolute right-3 top-3 rounded-full bg-white/95 px-3 py-1 text-sm font-bold text-ink shadow-sm">
           {formatPrice(trip.priceGel)}
@@ -40,23 +40,14 @@ export function TripCard({ trip }: { trip: TripSummary }) {
         </div>
         <p className="mt-1 flex items-center gap-1 truncate text-sm text-subtle">
           <MapPin className="h-3.5 w-3.5 shrink-0" />
-          {trip.originStation} · {trip.vehicleName}
+          {trip.originStation}
         </p>
-        <div className="mt-3 flex flex-wrap items-center gap-2 text-sm">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-canvas px-3 py-1 font-medium text-subtle">
-            <CalendarDays className="h-3.5 w-3.5" />
-            {departureDayLabel(trip.departureAt)}
-          </span>
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-canvas px-3 py-1 font-medium text-subtle">
-            <Clock className="h-3.5 w-3.5" />
-            {formatTbilisiTime(trip.departureAt)}
-          </span>
-        </div>
         <div className="mt-3 flex items-center justify-between gap-2 border-t border-line pt-3">
-          <SeatsBadge seatsLeft={trip.seatsLeft} />
-          <span className="truncate text-xs text-faint">
-            {trip.driverFirstName} {trip.driverLastName}
+          <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink">
+            <Clock className="h-4 w-4 text-brand-500" />
+            {departureDayLabel(trip.departureAt)}, {formatTbilisiTime(trip.departureAt)}
           </span>
+          <SeatsBadge seatsLeft={trip.seatsLeft} />
         </div>
       </div>
     </Link>
