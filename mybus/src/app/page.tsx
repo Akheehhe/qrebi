@@ -3,14 +3,10 @@ import {
   ArrowRight,
   BadgePercent,
   BusFront,
-  Check,
-  CreditCard,
   Flag,
-  PhoneCall,
   Search,
   Ticket,
-  TicketCheck,
-  UserRound,
+  Wallet,
 } from "lucide-react";
 import { getStats, listTrips, popularRoutes } from "@/lib/dal";
 import { PLATFORM_FEE_GEL } from "@/lib/constants";
@@ -18,59 +14,16 @@ import { formatPrice, tbilisiTodayDateInput } from "@/lib/datetime";
 import { SearchTripsForm } from "@/components/SearchTripsForm";
 import { TripCard } from "@/components/TripCard";
 
-const TRUST_CHIPS = [
-  { icon: TicketCheck, label: "უფასო ჯავშანი" },
-  { icon: CreditCard, label: "ონლაინ ან ადგილზე გადახდა" },
-  { icon: PhoneCall, label: "პირდაპირი კავშირი მძღოლთან" },
-] as const;
-
 const STEPS = [
-  {
-    icon: Search,
-    title: "მოძებნე მარშრუტი",
-    text: "აირჩიე საიდან მიდიხარ, სად და როდის.",
-  },
-  {
-    icon: Ticket,
-    title: "დაჯავშნე ადგილი",
-    text: "აირჩიე ადგილების რაოდენობა და გადაიხადე ონლაინ ან მძღოლთან.",
-  },
-  {
-    icon: BusFront,
-    title: "იმგზავრე",
-    text: "მიდი გასვლის ადგილზე ზუსტ დროს, შენი ადგილი უკვე დაჯავშნილია.",
-  },
-] as const;
-
-const DRIVER_BULLETS = [
-  "გამოაქვეყნე განრიგი წინასწარ",
-  "ნახე მგზავრების სია და კონტაქტები",
-  "შეავსე ადგილები ავტოსადგურზე ლოდინის ნაცვლად",
-  `გადაიხადე მხოლოდ ${PLATFORM_FEE_GEL}₾ შემდგარ რეისზე, ბილეთებზე საკომისიო არ იჭრება`,
+  { icon: Search, title: "მოძებნე" },
+  { icon: Ticket, title: "დაჯავშნე" },
+  { icon: BusFront, title: "იმგზავრე" },
 ] as const;
 
 const PRICING = [
-  {
-    icon: UserRound,
-    title: "მგზავრი",
-    price: "0₾",
-    sub: "დამატებითი საფასური",
-    text: "იხდი მხოლოდ ბილეთის ფასს, რომელსაც მძღოლი ადებს. არანაირი მომსახურების გადასახადი.",
-  },
-  {
-    icon: BadgePercent,
-    title: "მძღოლი",
-    price: "100%",
-    sub: "ბილეთის თანხა შენია",
-    text: "საკომისიო არ იჭრება არც ონლაინ და არც ნაღდ გადახდაზე. რეგისტრაცია და რეისების დამატება უფასოა.",
-  },
-  {
-    icon: Flag,
-    title: "პლატფორმა",
-    price: `${PLATFORM_FEE_GEL}₾`,
-    sub: "მხოლოდ შემდგარ რეისზე",
-    text: "ერთი ფიქსირებული საფასური, როცა რეისი რეალურად გადის. გაუქმებულ რეისზე არაფერს იხდი. აბონემენტი არ არსებობს.",
-  },
+  { icon: BadgePercent, value: "0%", label: "საკომისიო" },
+  { icon: Wallet, value: "100%", label: "თანხა შენია" },
+  { icon: Flag, value: `${PLATFORM_FEE_GEL}₾`, label: "რეისზე" },
 ] as const;
 
 export default async function HomePage() {
@@ -91,32 +44,22 @@ export default async function HomePage() {
           aria-hidden="true"
           className="pointer-events-none absolute -bottom-48 -left-24 h-80 w-80 rounded-full bg-brand-900/20"
         />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute right-1/4 top-10 h-24 w-24 rounded-full bg-accent-500/20"
-        />
-        <div className="relative mx-auto max-w-6xl px-4 py-14 sm:py-20">
-          <span className="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-1.5 text-sm font-medium text-white">
-            <BusFront className="h-4 w-4" />
-            ავტობუსები და მიკროავტობუსები მთელ საქართველოში
-          </span>
-          <h1 className="mt-5 max-w-2xl text-3xl font-extrabold leading-tight text-white sm:text-5xl">
-            იმგზავრე საქართველოში ლოდინის გარეშე
-          </h1>
-          <p className="mt-4 max-w-2xl text-base text-white/80 sm:text-lg">
-            აღარ არის საჭირო ავტოსადგურზე მისვლა და საათობით ლოდინი. მძღოლები
-            აქვეყნებენ რეისებს წინასწარ, შენ კი ჯავშნი ადგილს ონლაინ.
-          </p>
+        <div className="relative mx-auto max-w-6xl px-4 py-12 sm:py-16">
+          <div className="flex items-center justify-between gap-8">
+            <h1 className="text-4xl font-extrabold leading-tight text-white sm:text-6xl">
+              იმგზავრე
+              <br />
+              მარტივად
+            </h1>
+            <img
+              src="/images/buses/coach-blue.svg"
+              alt=""
+              aria-hidden="true"
+              className="hidden w-72 shrink-0 rounded-3xl md:block"
+            />
+          </div>
           <div className="mt-8">
             <SearchTripsForm variant="hero" minDate={minDate} />
-          </div>
-          <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white/70">
-            {TRUST_CHIPS.map(({ icon: Icon, label }) => (
-              <span key={label} className="inline-flex items-center gap-2">
-                <Icon className="h-4 w-4" />
-                {label}
-              </span>
-            ))}
           </div>
         </div>
       </section>
@@ -140,11 +83,8 @@ export default async function HomePage() {
                     <ArrowRight className="h-4 w-4 shrink-0 text-brand-500" />
                     <span className="truncate">{r.to}</span>
                   </span>
-                  <span className="mt-2 flex items-center justify-between text-sm">
-                    <span className="font-semibold text-brand-500">
-                      {formatPrice(r.minPrice)}-დან
-                    </span>
-                    <span className="text-faint">{r.count} რეისი</span>
+                  <span className="mt-2 block text-sm font-semibold text-brand-500">
+                    {formatPrice(r.minPrice)}-დან
                   </span>
                 </Link>
               ))}
@@ -160,7 +100,7 @@ export default async function HomePage() {
               href="/trips"
               className="inline-flex items-center gap-1.5 font-semibold text-brand-500 transition hover:text-brand-600"
             >
-              ყველა რეისი
+              ყველა
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -172,133 +112,98 @@ export default async function HomePage() {
             </div>
           ) : (
             <div className="mt-5 rounded-2xl border border-line bg-white p-10 text-center text-subtle">
-              ამჟამად დაგეგმილი რეისები არ არის. შემოიხედე მოგვიანებით.
+              რეისები ჯერ არ არის
             </div>
           )}
         </section>
 
         {/* HOW IT WORKS */}
         <section id="how-it-works" className="mt-12">
-          <h2 className="text-xl font-bold text-ink">როგორ მუშაობს</h2>
-          <div className="mt-5 grid gap-5 sm:grid-cols-3">
-            {STEPS.map(({ icon: Icon, title, text }, i) => (
+          <div className="grid grid-cols-3 gap-3 sm:gap-5">
+            {STEPS.map(({ icon: Icon, title }, i) => (
               <div
                 key={title}
-                className="rounded-2xl border border-line bg-white p-6"
+                className="rounded-2xl border border-line bg-white p-5 text-center sm:p-6"
               >
-                <div className="flex items-center gap-3">
-                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-brand-50 text-sm font-extrabold text-brand-500">
-                    {i + 1}
-                  </span>
-                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-accent-500/15 text-accent-600">
-                    <Icon className="h-5 w-5" />
-                  </span>
-                </div>
-                <h3 className="mt-4 font-bold text-ink">{title}</h3>
-                <p className="mt-1.5 text-sm text-subtle">{text}</p>
+                <span className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-brand-50 text-brand-500 sm:h-14 sm:w-14">
+                  <Icon className="h-6 w-6 sm:h-7 sm:w-7" />
+                </span>
+                <p className="mt-3 text-sm font-extrabold text-ink sm:text-base">
+                  {i + 1}. {title}
+                </p>
               </div>
             ))}
           </div>
         </section>
 
         {/* PRICING */}
-        <section className="mt-12">
-          <h2 className="text-xl font-bold text-ink">
-            გამჭვირვალე პირობები, საკომისიოს გარეშე
-          </h2>
-          <div className="mt-5 grid gap-5 sm:grid-cols-3">
-            {PRICING.map(({ icon: Icon, title, price, sub, text }) => (
-              <div
-                key={title}
-                className="rounded-2xl border border-line bg-white p-6"
-              >
-                <p className="flex items-center gap-2 text-sm font-semibold text-subtle">
-                  <Icon className="h-4 w-4 text-brand-500" />
-                  {title}
-                </p>
-                <p className="mt-2 text-3xl font-extrabold text-ink">
-                  {price}{" "}
-                  <span className="text-sm font-semibold text-subtle">
-                    {sub}
-                  </span>
-                </p>
-                <p className="mt-2 text-sm leading-6 text-subtle">{text}</p>
-              </div>
-            ))}
-          </div>
-          <p className="mt-4 rounded-2xl border border-brand-100 bg-brand-50 p-4 text-sm text-brand-900">
-            მხოლოდ დიდუბის ავტოსადგურიდან დღეში ორმოცდაათზე მეტი ავტობუსი
-            ორჯერ გადის. თითო შემდგარი რეისი პლატფორმისთვის{" "}
-            {formatPrice(PLATFORM_FEE_GEL)}-ია, მძღოლისთვის კი ნულოვანი ბარიერი
-            და სავსე სალონი.
-          </p>
+        <section className="mt-12 grid grid-cols-3 gap-3 sm:gap-5">
+          {PRICING.map(({ icon: Icon, value, label }) => (
+            <div
+              key={label}
+              className="rounded-2xl border border-line bg-white p-5 text-center sm:p-6"
+            >
+              <Icon className="mx-auto h-6 w-6 text-brand-500" />
+              <p className="mt-2 text-2xl font-extrabold text-ink sm:text-3xl">
+                {value}
+              </p>
+              <p className="mt-1 text-xs font-medium text-subtle sm:text-sm">
+                {label}
+              </p>
+            </div>
+          ))}
         </section>
 
         {/* DRIVER CTA */}
         <section className="mt-12">
-          <div className="relative overflow-hidden rounded-3xl bg-brand-900 p-8 sm:p-10">
+          <div className="relative overflow-hidden rounded-3xl bg-brand-900 p-8 text-center sm:p-10">
             <div
               aria-hidden="true"
               className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-brand-500/20"
             />
-            <div
+            <img
+              src="/images/buses/sprinter-yellow.svg"
+              alt=""
               aria-hidden="true"
-              className="pointer-events-none absolute -bottom-28 right-1/4 h-56 w-56 rounded-full bg-accent-500/10"
+              className="relative mx-auto w-44 rounded-2xl sm:w-52"
             />
-            <div className="relative flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
-              <div className="max-w-xl">
-                <h2 className="text-2xl font-extrabold text-white sm:text-3xl">
-                  ხარ მძღოლი? დაამატე შენი რეისები უფასოდ
-                </h2>
-                <ul className="mt-5 space-y-2.5">
-                  {DRIVER_BULLETS.map((bullet) => (
-                    <li
-                      key={bullet}
-                      className="flex items-start gap-2.5 text-white/80"
-                    >
-                      <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-accent-500 text-ink">
-                        <Check className="h-3.5 w-3.5" />
-                      </span>
-                      {bullet}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <Link
-                href="/signup?role=driver"
-                className="inline-flex shrink-0 items-center justify-center gap-2 self-start rounded-xl bg-accent-500 px-7 py-3.5 font-bold text-ink transition hover:bg-accent-600 md:self-center"
-              >
-                დაიწყე ახლავე
-                <ArrowRight className="h-5 w-5" />
-              </Link>
-            </div>
+            <h2 className="relative mt-4 text-2xl font-extrabold text-white sm:text-3xl">
+              ხარ მძღოლი?
+            </h2>
+            <Link
+              href="/signup?role=driver"
+              className="relative mt-5 inline-flex items-center gap-2 rounded-xl bg-accent-500 px-8 py-4 text-lg font-bold text-ink transition hover:bg-accent-600"
+            >
+              დაიწყე ახლავე
+              <ArrowRight className="h-5 w-5" />
+            </Link>
           </div>
         </section>
 
         {/* STATS */}
         <section className="mt-12">
-          <div className="grid gap-4 rounded-2xl border border-line bg-white p-8 text-center sm:grid-cols-3">
+          <div className="grid grid-cols-3 gap-4 rounded-2xl border border-line bg-white p-6 text-center sm:p-8">
             <div>
-              <p className="text-3xl font-extrabold text-brand-500">
+              <p className="text-2xl font-extrabold text-brand-500 sm:text-3xl">
                 {stats.trips}
               </p>
-              <p className="mt-1 text-sm font-medium text-subtle">
-                დაგეგმილი რეისი
+              <p className="mt-1 text-xs font-medium text-subtle sm:text-sm">
+                რეისი
               </p>
             </div>
             <div>
-              <p className="text-3xl font-extrabold text-brand-500">
+              <p className="text-2xl font-extrabold text-brand-500 sm:text-3xl">
                 {stats.drivers}
               </p>
-              <p className="mt-1 text-sm font-medium text-subtle">
-                პარტნიორი მძღოლი
+              <p className="mt-1 text-xs font-medium text-subtle sm:text-sm">
+                მძღოლი
               </p>
             </div>
             <div>
-              <p className="text-3xl font-extrabold text-brand-500">
+              <p className="text-2xl font-extrabold text-brand-500 sm:text-3xl">
                 {stats.routes}
               </p>
-              <p className="mt-1 text-sm font-medium text-subtle">
+              <p className="mt-1 text-xs font-medium text-subtle sm:text-sm">
                 მიმართულება
               </p>
             </div>
