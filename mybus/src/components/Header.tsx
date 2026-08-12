@@ -12,25 +12,11 @@ import {
 import { getCurrentUser } from "@/lib/dal";
 import { logoutAction } from "@/app/actions/auth";
 
-const TNET_FAMILY = ["myauto.ge", "myhome.ge", "mymarket.ge"];
-
 export async function Header() {
   const user = await getCurrentUser();
 
   return (
-    <>
-      <div className="hidden bg-brand-900 sm:block">
-        <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-1.5 text-[11px] font-medium text-white/50">
-          {TNET_FAMILY.map((site) => (
-            <span key={site}>{site}</span>
-          ))}
-          <span className="rounded-full bg-accent-500 px-2 py-0.5 font-bold text-ink">
-            mybus.ge
-          </span>
-        </div>
-      </div>
-
-      <header className="sticky top-0 z-40 border-b border-line bg-white/95 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-line bg-white/95 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4">
           <Link href="/" className="flex items-center gap-2.5">
             <span className="grid h-9 w-9 place-items-center rounded-xl bg-brand-500 text-white">
@@ -116,7 +102,6 @@ export async function Header() {
             )}
           </div>
         </div>
-      </header>
-    </>
+    </header>
   );
 }

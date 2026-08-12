@@ -61,8 +61,16 @@
   --color-warning-50: var(--color-warning-50);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--color-canvas);
   color: var(--color-ink);
   font-family: var(--font-sans);
+}
+
+::selection {
+  background: var(--color-brand-100);
 }

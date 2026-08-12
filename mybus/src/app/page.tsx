@@ -15,9 +15,9 @@ import { SearchTripsForm } from "@/components/SearchTripsForm";
 import { TripCard } from "@/components/TripCard";
 
 const STEPS = [
-  { icon: Search, title: "მოძებნე" },
-  { icon: Ticket, title: "დაჯავშნე" },
-  { icon: BusFront, title: "იმგზავრე" },
+  { icon: Search, title: "მოძებნე", tone: "bg-brand-50 text-brand-500" },
+  { icon: Ticket, title: "დაჯავშნე", tone: "bg-accent-400/20 text-accent-600" },
+  { icon: BusFront, title: "იმგზავრე", tone: "bg-success-50 text-success-500" },
 ] as const;
 
 const PRICING = [
@@ -44,18 +44,27 @@ export default async function HomePage() {
           aria-hidden="true"
           className="pointer-events-none absolute -bottom-48 -left-24 h-80 w-80 rounded-full bg-brand-900/20"
         />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 opacity-15"
+          style={{
+            backgroundImage:
+              "radial-gradient(rgba(255,255,255,0.5) 1.5px, transparent 1.5px)",
+            backgroundSize: "26px 26px",
+          }}
+        />
         <div className="relative mx-auto max-w-6xl px-4 py-12 sm:py-16">
           <div className="flex items-center justify-between gap-8">
             <h1 className="text-4xl font-extrabold leading-tight text-white sm:text-6xl">
               იმგზავრე
               <br />
-              მარტივად
+              <span className="text-accent-400">მარტივად</span>
             </h1>
             <img
               src="/images/buses/coach-blue.svg"
               alt=""
               aria-hidden="true"
-              className="hidden w-72 shrink-0 rounded-3xl md:block"
+              className="hidden w-72 shrink-0 rotate-2 rounded-3xl shadow-2xl shadow-brand-900/40 md:block"
             />
           </div>
           <div className="mt-8">
@@ -120,12 +129,14 @@ export default async function HomePage() {
         {/* HOW IT WORKS */}
         <section id="how-it-works" className="mt-12">
           <div className="grid grid-cols-3 gap-3 sm:gap-5">
-            {STEPS.map(({ icon: Icon, title }, i) => (
+            {STEPS.map(({ icon: Icon, title, tone }, i) => (
               <div
                 key={title}
                 className="rounded-2xl border border-line bg-white p-5 text-center sm:p-6"
               >
-                <span className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-brand-50 text-brand-500 sm:h-14 sm:w-14">
+                <span
+                  className={`mx-auto grid h-12 w-12 place-items-center rounded-full sm:h-14 sm:w-14 ${tone}`}
+                >
                   <Icon className="h-6 w-6 sm:h-7 sm:w-7" />
                 </span>
                 <p className="mt-3 text-sm font-extrabold text-ink sm:text-base">

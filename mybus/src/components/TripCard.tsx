@@ -22,13 +22,13 @@ export function TripCard({ trip }: { trip: TripSummary }) {
       href={`/trips/${trip.id}`}
       className="group block overflow-hidden rounded-2xl border border-line bg-white transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand-900/10"
     >
-      <div className="relative">
+      <div className="relative overflow-hidden">
         <img
           src={trip.vehiclePhotoUrl}
           alt={trip.vehicleName}
-          className="h-40 w-full object-cover"
+          className="h-40 w-full object-cover transition duration-300 group-hover:scale-105"
         />
-        <span className="absolute right-3 top-3 rounded-full bg-white/95 px-3 py-1 text-sm font-bold text-ink shadow-sm">
+        <span className="absolute right-3 top-3 rounded-full bg-accent-500 px-3 py-1 text-sm font-bold text-ink shadow-sm">
           {formatPrice(trip.priceGel)}
         </span>
       </div>
