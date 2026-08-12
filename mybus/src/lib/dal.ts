@@ -111,6 +111,15 @@ export function createUser(input: {
   };
 }
 
+export function updateUserProfile(
+  userId: string,
+  input: { firstName: string; lastName: string; phone: string }
+): void {
+  db.prepare(
+    "UPDATE users SET first_name = ?, last_name = ?, phone = ? WHERE id = ?"
+  ).run(input.firstName, input.lastName, input.phone, userId);
+}
+
 // ---------- trips ----------
 
 interface DbTripRow {

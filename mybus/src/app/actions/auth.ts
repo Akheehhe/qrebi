@@ -1,7 +1,13 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { createUser, findUserByEmail } from "@/lib/dal";
+import {
+  createUser,
+  findUserByEmail,
+  requireUser,
+  updateUserProfile,
+} from "@/lib/dal";
 import { hashPassword, verifyPassword } from "@/lib/password";
 import { createSession, destroySession } from "@/lib/session";
 import { sanitizeNextPath } from "@/lib/urls";
@@ -87,4 +93,26 @@ export async function loginAction(
 export async function logoutAction(): Promise<void> {
   await destroySession();
   redirect("/");
+}
+
+export async function updateProfileAction(
+  _prev: ActionState,
+  formData: FormData
+): Promise<ActionState> {
+  const user = await requireUser();
+  const firstName = String(formData.get("firstName") ?? "").trim();
+  const lastName = String(formData.get("lastName") ?? "").trim();
+  const phone = String(formData.get("phone") ?? "").trim();
+
+  const fieldErrors: Record<string, string> = {};
+  if (firstName.length < 2) fieldErrors.firstName = "შეიყვანეთ სახელი";
+  if (lastName.length < 2) fieldErrors.lastName = "შეიყვანეთ გვარი";
+  if (!PHONE_RE.test(phone)) {
+    fieldErrors.phone = "შეიყვანეთ სწორი ტელეფონის ნომერი";
+  }
+  if (Object.keys(fieldErrors).length > 0) return { fieldErrors };
+
+  updateUserProfile(user.id, { firstName, lastName, phone });
+  revalidatePath("/account");
+  return { ok: true };
 }

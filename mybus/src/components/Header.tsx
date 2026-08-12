@@ -7,7 +7,7 @@ import {
   LayoutDashboard,
   LogOut,
   Route,
-  Ticket,
+  UserRound,
 } from "lucide-react";
 import { getCurrentUser } from "@/lib/dal";
 import { logoutAction } from "@/app/actions/auth";
@@ -83,7 +83,7 @@ export async function Header() {
                   {user.role === "driver" ? (
                     <LayoutDashboard className="h-4 w-4 text-brand-500" />
                   ) : (
-                    <Ticket className="h-4 w-4 text-brand-500" />
+                    <UserRound className="h-4 w-4 text-brand-500" />
                   )}
                   <span className="max-w-28 truncate">{user.firstName}</span>
                 </Link>

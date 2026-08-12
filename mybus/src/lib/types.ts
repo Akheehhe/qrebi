@@ -5,7 +5,7 @@ export type PaymentStatus = "paid" | "pending";
 export type BookingStatus = "confirmed" | "cancelled";
 
 export type ActionState =
-  | { error?: string; fieldErrors?: Record<string, string> }
+  | { error?: string; fieldErrors?: Record<string, string>; ok?: boolean }
   | undefined;
 
 export type NotificationKind = "booking" | "cancellation";

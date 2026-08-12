@@ -5,6 +5,7 @@ import { formatPrice, formatTbilisiDateTime, isPast } from "@/lib/datetime";
 import { Badge } from "@/components/Badge";
 import { SubmitButton } from "@/components/SubmitButton";
 import { cancelBookingAction } from "@/app/actions/booking";
+import { ProfileCard } from "./ProfileCard";
 import type { BookingWithTrip } from "@/lib/types";
 
 function isUpcoming(b: BookingWithTrip): boolean {
@@ -47,8 +48,12 @@ export default async function AccountPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
       <h1 className="text-2xl font-extrabold text-ink sm:text-3xl">
-        ჩემი ჯავშნები
+        ჩემი პროფილი
       </h1>
+
+      <div className="mt-6">
+        <ProfileCard user={user} />
+      </div>
 
       <section className="mt-8">
         <h2 className="text-xl font-bold text-ink">მოახლოებული მგზავრობები</h2>
