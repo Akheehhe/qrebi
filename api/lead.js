@@ -4,8 +4,8 @@
 //   TG_BOT_TOKEN   – Telegram bot token (from @BotFather)
 //   TG_CHAT_ID     – chat/user id that should receive the leads
 //   RESEND_API_KEY – Resend API key (resend.com) for email
-//   LEAD_EMAIL_TO  – address that should receive lead emails
 // Optional:
+//   LEAD_EMAIL_TO   – recipient override (defaults to qrebinfc@gmail.com)
 //   LEAD_EMAIL_FROM – verified "from" (defaults to Resend's shared sender)
 
 async function readBody(req) {
@@ -32,7 +32,8 @@ export default async function handler(req, res) {
   const line = `🟣 ახალი შეკვეთა: Qrebi.ge\n\n👤 ${esc(name) || '-'}\n🏢 ${esc(business) || '-'}\n📞 ${esc(phone)}\n🗺️ ${mapsInfo}`;
   const tasks = [];
 
-  const { TG_BOT_TOKEN, TG_CHAT_ID, RESEND_API_KEY, LEAD_EMAIL_TO, LEAD_EMAIL_FROM } = process.env;
+  const { TG_BOT_TOKEN, TG_CHAT_ID, RESEND_API_KEY, LEAD_EMAIL_FROM } = process.env;
+  const LEAD_EMAIL_TO = process.env.LEAD_EMAIL_TO || 'qrebinfc@gmail.com';
 
   if (TG_BOT_TOKEN && TG_CHAT_ID) {
     tasks.push(fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`, {
