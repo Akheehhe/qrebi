@@ -34,7 +34,7 @@ html{scroll-behavior:smooth}
 section{scroll-margin-top:74px}
 body{margin:0;background:#fff;font-family:'Montserrat','Noto Sans Georgian',system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
 a{color:var(--purple);text-decoration:none}
-img{max-width:100%;display:block}
+img{max-width:100%;height:auto;display:block}
 .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
 
 /* language visibility */
@@ -120,7 +120,7 @@ h2{margin:8px 0 10px;font-size:31px;font-weight:900;letter-spacing:-.01em}
 /* gallery */
 .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .gallery figure{margin:0;position:relative;border-radius:16px;overflow:hidden;box-shadow:0 8px 22px rgba(10,7,28,.1)}
-.gallery img{width:100%;object-fit:cover;aspect-ratio:4/3}
+.gallery img{width:100%;object-fit:cover;aspect-ratio:1/1}
 .gallery figcaption{position:absolute;left:10px;bottom:10px;background:rgba(255,255,255,.94);border-radius:100px;padding:6px 13px;font-size:12.5px;font-weight:800}
 
 /* pricing */
@@ -196,7 +196,6 @@ footer{background:var(--ink);color:#A99BC9;padding:30px 0;font-size:14px}
   .wa-fab svg{width:26px;height:26px}
   .gallery{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding:10px 0 30px;margin:-10px 0 -24px;-webkit-overflow-scrolling:touch}
   .gallery figure{flex:0 0 80%;scroll-snap-align:center}
-  .gallery img{aspect-ratio:4/3;height:auto}
 }
 </style>
 </head>
@@ -248,8 +247,8 @@ footer{background:var(--ink);color:#A99BC9;padding:30px 0;font-size:14px}
 <section id="value" class="value">
   <div class="wrap">
     <div class="sec-head">
-      <h2><span class="ge">ბარათს ბევრი ყიდის. შედეგს ჩვენ ვაძლევთ.</span><span class="en">Many sell cards. We deliver results.</span></h2>
-      <p class="sub"><span class="ge">ყოველ შეკვეთას მოჰყვება:</span><span class="en">Every order comes with:</span></p>
+      <h2><span class="ge">NFC ბარათების საუკეთესო იმპორტიორი საქართველოში</span><span class="en">Georgia's best importer of NFC cards</span></h2>
+      <p class="sub"><span class="ge">გთავაზობთ SEO ავტომატიზაციასაც. ყოველ შეკვეთას მოჰყვება:</span><span class="en">We offer SEO automation too. Every order comes with:</span></p>
     </div>
     <div class="vcards">
       <div class="vcard">
@@ -259,8 +258,8 @@ footer{background:var(--ink);color:#A99BC9;padding:30px 0;font-size:14px}
       </div>
       <div class="vcard">
         <span class="ic">🚀</span>
-        <h3><span class="ge">SEO: პირველი თვე უფასოდ</span><span class="en">SEO: first month free</span></h3>
-        <p><span class="ge">გავზრდით შენს ხილვადობას Google-ში.</span><span class="en">We boost your visibility on Google.</span></p>
+        <h3><span class="ge">SEO ავტომატიზაცია</span><span class="en">SEO automation</span></h3>
+        <p><span class="ge">პირველი თვე უფასოდ. გავზრდით შენს ხილვადობას Google-ში.</span><span class="en">First month free. We boost your visibility on Google.</span></p>
       </div>
       <div class="vcard">
         <span class="ic">⭐</span>
@@ -327,12 +326,12 @@ footer{background:var(--ink);color:#A99BC9;padding:30px 0;font-size:14px}
       <h2><span class="ge">ბარათი შენს ბიზნესში</span><span class="en">The card in your business</span></h2>
     </div>
     <div class="gallery">
-      <figure><img src="img/places/cafe.jpg" alt="QRebi ბარათი კაფეში" loading="lazy" width="900" height="672"><figcaption><span class="ge">კაფე</span><span class="en">Café</span></figcaption></figure>
-      <figure><img src="img/places/restaurant.jpg" alt="QRebi ბარათი რესტორანში" loading="lazy" width="900" height="672"><figcaption><span class="ge">რესტორანი</span><span class="en">Restaurant</span></figcaption></figure>
-      <figure><img src="img/places/barbershop.jpg" alt="QRebi ბარათი ბარბერშოპში" loading="lazy" width="900" height="672"><figcaption><span class="ge">ბარბერშოპი</span><span class="en">Barbershop</span></figcaption></figure>
-      <figure><img src="img/places/salon.jpg" alt="QRebi ბარათი სილამაზის სალონში" loading="lazy" width="900" height="672"><figcaption><span class="ge">სილამაზის სალონი</span><span class="en">Beauty salon</span></figcaption></figure>
-      <figure><img src="img/places/bakery.jpg" alt="QRebi ბარათი საცხობში" loading="lazy" width="900" height="672"><figcaption><span class="ge">საცხობი</span><span class="en">Bakery</span></figcaption></figure>
-      <figure><img src="img/places/flowershop.jpg" alt="QRebi ბარათი ყვავილების მაღაზიაში" loading="lazy" width="900" height="672"><figcaption><span class="ge">ყვავილების მაღაზია</span><span class="en">Flower shop</span></figcaption></figure>
+      <figure><img src="img/places/cafe.jpg" alt="QRebi ბარათი კაფეში" loading="lazy" width="900" height="672" style="object-position:0% 50%"><figcaption><span class="ge">კაფე</span><span class="en">Café</span></figcaption></figure>
+      <figure><img src="img/places/restaurant.jpg" alt="QRebi ბარათი რესტორანში" loading="lazy" width="900" height="672" style="object-position:68% 50%"><figcaption><span class="ge">რესტორანი</span><span class="en">Restaurant</span></figcaption></figure>
+      <figure><img src="img/places/barbershop.jpg" alt="QRebi ბარათი ბარბერშოპში" loading="lazy" width="900" height="672" style="object-position:0% 50%"><figcaption><span class="ge">ბარბერშოპი</span><span class="en">Barbershop</span></figcaption></figure>
+      <figure><img src="img/places/salon.jpg" alt="QRebi ბარათი სილამაზის სალონში" loading="lazy" width="900" height="672" style="object-position:54% 50%"><figcaption><span class="ge">სილამაზის სალონი</span><span class="en">Beauty salon</span></figcaption></figure>
+      <figure><img src="img/places/bakery.jpg" alt="QRebi ბარათი საცხობში" loading="lazy" width="900" height="672" style="object-position:10% 50%"><figcaption><span class="ge">საცხობი</span><span class="en">Bakery</span></figcaption></figure>
+      <figure><img src="img/places/flowershop.jpg" alt="QRebi ბარათი ყვავილების მაღაზიაში" loading="lazy" width="900" height="672" style="object-position:80% 50%"><figcaption><span class="ge">ყვავილების მაღაზია</span><span class="en">Flower shop</span></figcaption></figure>
     </div>
   </div>
 </section>
