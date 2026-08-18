@@ -95,13 +95,10 @@ h2{margin:8px 0 10px;font-size:31px;font-weight:900;letter-spacing:-.01em}
 
 /* value / why us */
 .value{background:var(--lilac)}
-.vcards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
-.vcard{padding:28px 26px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 26px rgba(63,28,146,.06)}
-.vcard .ic{display:grid;place-items:center;width:46px;height:46px;background:var(--lilac);border-radius:13px;font-size:22px;margin-bottom:14px}
-.vcard h3{margin:0 0 8px;font-size:18px;font-weight:800}
-.vcard p{margin:0;font-size:14.5px;line-height:1.6;color:var(--text)}
-.get{margin:34px auto 0;max-width:760px;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;font-size:16px;font-weight:800}
-.get .pill{padding:10px 20px;background:var(--purple);color:#fff;border-radius:100px;font-size:15px}
+.vlist{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.vrow{display:flex;align-items:center;gap:14px;padding:15px 20px;background:#fff;border:1px solid var(--line);border-radius:14px;font-size:15.5px;font-weight:700;box-shadow:0 6px 18px rgba(63,28,146,.05)}
+.vrow .ic{flex:none;display:grid;place-items:center;width:40px;height:40px;background:var(--lilac);border-radius:11px;font-size:20px}
+.get-line{margin:22px 0 0;text-align:center;font-size:15px;font-weight:800;color:var(--purple)}
 
 /* steps */
 .steps{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
@@ -156,6 +153,12 @@ input:focus{border-color:var(--purple)}
 .success{background:#fff;border-radius:20px;padding:48px 34px;flex-direction:column;align-items:center;gap:12px;text-align:center;box-shadow:0 14px 38px rgba(10,7,28,.08)}
 .success .tick{width:58px;height:58px;display:grid;place-items:center;background:var(--lilac);border-radius:50%;font-size:26px;color:var(--purple);font-weight:900}
 
+/* mobile sticky CTA bar */
+.cta-bar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:60;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid var(--line);box-shadow:0 -8px 24px rgba(10,7,28,.08)}
+.cta-bar .btn{flex:1;text-align:center;padding:14px}
+.cta-bar .wa-sq{flex:none;display:grid;place-items:center;width:50px;border-radius:11px;background:#25D366}
+.cta-bar .wa-sq svg{width:26px;height:26px;fill:#fff}
+
 /* whatsapp fab */
 .wa-fab{position:fixed;right:16px;bottom:16px;z-index:50;width:56px;height:56px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 10px 24px rgba(37,211,102,.45);transition:transform .2s}
 .wa-fab:hover{transform:scale(1.07)}
@@ -170,6 +173,9 @@ footer{background:var(--ink);color:#A99BC9;padding:30px 0;font-size:14px}
 .foot-contacts a.wa{color:#4ADE80}
 
 @media(max-width:860px){
+  .cta-bar{display:flex}
+  .wa-fab{display:none}
+  body{padding-bottom:74px}
   h1{font-size:30px}
   h2{font-size:25px}
   .hero{padding:40px 0 52px}
@@ -191,9 +197,6 @@ footer{background:var(--ink);color:#A99BC9;padding:30px 0;font-size:14px}
   .hero-cta{flex-direction:column;align-items:stretch}
   .hero-cta a{text-align:center;justify-content:center}
   .foot{flex-direction:column;text-align:center}
-  footer{padding-bottom:96px}
-  .wa-fab{width:48px;height:48px}
-  .wa-fab svg{width:26px;height:26px}
   .gallery{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding:10px 0 30px;margin:-10px 0 -24px;-webkit-overflow-scrolling:touch}
   .gallery figure{flex:0 0 80%;scroll-snap-align:center}
 }
@@ -222,16 +225,14 @@ footer{background:var(--ink);color:#A99BC9;padding:30px 0;font-size:14px}
   <svg class="hero-qr" viewBox="0 0 64 64" aria-hidden="true"><rect x="4" y="4" width="56" height="56" rx="8" fill="none" stroke="#fff" stroke-width="8"/><rect x="24" y="24" width="16" height="16" fill="#fff"/></svg>
   <div class="wrap hero-grid">
     <div style="display:flex;flex-direction:column;align-items:flex-start">
-      <span class="hero-badge"><b>★</b> <span class="ge">NFC ბარათი + გუნდი შენს გვერდით</span><span class="en">An NFC card + a team behind you</span></span>
       <h1><span class="ge">ჩვენ არ ვყიდით<br>უბრალოდ ბარათს.<br><span class="accent">ვზრდით შენს რეიტინგს.</span></span><span class="en">We don't just<br>sell a card.<br><span class="accent">We grow your rating.</span></span></h1>
-      <p class="lead"><span class="ge">ერთი შეხება და კლიენტი შენს Google გვერდზეა. დანარჩენს ჩვენი გუნდი აკეთებს: ფოტოები, SEO, რეიტინგი.</span><span class="en">One tap and the customer is on your Google page. Our team does the rest: photos, SEO, rating.</span></p>
+      <p class="lead"><span class="ge">კლიენტი ეხება ბარათს და შენს Google გვერდზე ხვდება.</span><span class="en">A customer taps the card and lands on your Google page.</span></p>
       <div class="hero-cta">
         <a class="btn btn-gold" href="#order"><span class="ge">შეუკვეთე ბარათი →</span><span class="en">Order your card →</span></a>
         <a class="btn-wa" href="https://wa.me/995592105419?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90!%20Qrebi%20%E1%83%91%E1%83%90%E1%83%A0%E1%83%90%E1%83%97%E1%83%98%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>WhatsApp</a>
       </div>
       <div class="hero-note">
-        <span>✓ <span class="ge">მიწოდება მთელ საქართველოში</span><span class="en">Delivery across Georgia</span></span>
-        <span>✓ <span class="ge">დაყენება 2 წუთში</span><span class="en">Set up in 2 minutes</span></span>
+        <span><b style="color:var(--gold)">50 ₾-დან</b> · <span class="ge">ერთჯერადი გადახდა · მიწოდება მთელ საქართველოში</span><span class="en">one-time payment · delivery across Georgia</span></span>
       </div>
     </div>
     <div class="hero-photo">
@@ -247,32 +248,15 @@ footer{background:var(--ink);color:#A99BC9;padding:30px 0;font-size:14px}
 <section id="value" class="value">
   <div class="wrap">
     <div class="sec-head">
-      <h2><span class="ge">NFC ბარათების საუკეთესო იმპორტიორი საქართველოში</span><span class="en">Georgia's best importer of NFC cards</span></h2>
-      <p class="sub"><span class="ge">გთავაზობთ SEO ავტომატიზაციასაც. ყოველ შეკვეთას მოჰყვება:</span><span class="en">We offer SEO automation too. Every order comes with:</span></p>
+      <h2><span class="ge">NFC ბარათების საუკეთესო იმპორტიორი</span><span class="en">The best importer of NFC cards</span></h2>
+      <p class="sub"><span class="ge">ყოველ შეკვეთას მოჰყვება:</span><span class="en">Every order comes with:</span></p>
     </div>
-    <div class="vcards">
-      <div class="vcard">
-        <span class="ic">📸</span>
-        <h3><span class="ge">პროფესიონალური ფოტოები</span><span class="en">Professional photos</span></h3>
-        <p><span class="ge">გადავიღებთ შენს სივრცეს Google Maps-ისთვის.</span><span class="en">We shoot your space for Google Maps.</span></p>
-      </div>
-      <div class="vcard">
-        <span class="ic">🚀</span>
-        <h3><span class="ge">SEO ავტომატიზაცია</span><span class="en">SEO automation</span></h3>
-        <p><span class="ge">პირველი თვე უფასოდ. გავზრდით შენს ხილვადობას Google-ში.</span><span class="en">First month free. We boost your visibility on Google.</span></p>
-      </div>
-      <div class="vcard">
-        <span class="ic">⭐</span>
-        <h3><span class="ge">რეიტინგის ზრდა</span><span class="en">Rating growth</span></h3>
-        <p><span class="ge">გეხმარებით, რომ მეტი შეფასება მიიღო.</span><span class="en">We help you win more reviews.</span></p>
-      </div>
+    <div class="vlist">
+      <div class="vrow"><span class="ic">📸</span><span class="ge">პროფესიონალური ფოტოები Google Maps-ისთვის</span><span class="en">Professional photos for Google Maps</span></div>
+      <div class="vrow"><span class="ic">🚀</span><span class="ge">SEO ავტომატიზაცია: პირველი თვე უფასოდ</span><span class="en">SEO automation: first month free</span></div>
+      <div class="vrow"><span class="ic">⭐</span><span class="ge">მეტი შეფასება, მაღალი რეიტინგი</span><span class="en">More reviews, higher rating</span></div>
     </div>
-    <div class="get">
-      <span class="ge">ჩვენთან ყიდვისას იღებ:</span><span class="en">Buying from us you get:</span>
-      <span class="pill"><span class="ge">ყურადღებას</span><span class="en">attention</span></span>
-      <span class="pill"><span class="ge">ხარისხს</span><span class="en">quality</span></span>
-      <span class="pill"><span class="ge">გუნდს</span><span class="en">a team</span></span>
-    </div>
+    <p class="get-line"><span class="ge">ყურადღება · ხარისხი · გუნდი</span><span class="en">Attention · Quality · A team</span></p>
   </div>
 </section>
 
@@ -285,18 +269,18 @@ footer{background:var(--ink);color:#A99BC9;padding:30px 0;font-size:14px}
     <div class="steps">
       <div class="step">
         <span class="num">1</span>
-        <h3><span class="ge">მიაკარი ან დადგი ბარათი</span><span class="en">Stick it or stand it up</span></h3>
-        <p><span class="ge">უკან წებოვანი ფირი აქვს: მიაკარი მაგიდაზე, კედელზე ან ვიტრინაზე.</span><span class="en">It has adhesive backing: stick it on a table, wall or shop window.</span></p>
+        <h3><span class="ge">მიაკარი ან დადგი</span><span class="en">Stick it or stand it up</span></h3>
+        <p><span class="ge">წებოვანი ფირით ნებისმიერ ზედაპირზე.</span><span class="en">Adhesive backing, any surface.</span></p>
       </div>
       <div class="step">
         <span class="num">2</span>
-        <h3><span class="ge">კლიენტი ეხება ტელეფონით</span><span class="en">Customer taps their phone</span></h3>
+        <h3><span class="ge">კლიენტი ეხება</span><span class="en">Customer taps</span></h3>
         <p><span class="ge">შენი გვერდი მაშინვე იხსნება.</span><span class="en">Your page opens instantly.</span></p>
       </div>
       <div class="step">
         <span class="num">3</span>
         <h3><span class="ge">შეფასება 30 წამში</span><span class="en">A review in 30 seconds</span></h3>
-        <p><span class="ge">★★★★★ რეიტინგი იზრდება და მეტი კლიენტი გპოულობს.</span><span class="en">★★★★★ Your rating grows and more customers find you.</span></p>
+        <p><span class="ge">★★★★★ და მეტი კლიენტი გპოულობს.</span><span class="en">★★★★★ and more customers find you.</span></p>
       </div>
     </div>
   </div>
@@ -307,7 +291,6 @@ footer{background:var(--ink);color:#A99BC9;padding:30px 0;font-size:14px}
   <div class="wrap">
     <div class="sec-head">
       <h2><span class="ge">არა მხოლოდ Google</span><span class="en">Not just Google</span></h2>
-      <p class="sub"><span class="ge">შენ ირჩევ, რომელი გვერდი გაიხსნება შეხებისას.</span><span class="en">You choose which page opens on tap.</span></p>
     </div>
     <div class="plats">
       <span class="plat"><span><span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC05">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span></span></span>
@@ -341,7 +324,7 @@ footer{background:var(--ink);color:#A99BC9;padding:30px 0;font-size:14px}
   <div class="wrap">
     <div class="sec-head">
       <h2><span class="ge">ფასი</span><span class="en">Pricing</span></h2>
-      <p class="sub"><span class="ge">ერთჯერადი გადახდა. რაც მეტი ბარათი, მით იაფი.</span><span class="en">One-time payment. The more cards, the cheaper.</span></p>
+      <p class="sub"><span class="ge">ერთჯერადი გადახდა</span><span class="en">One-time payment</span></p>
     </div>
     <div class="tiers">
       <div class="tier">
@@ -380,7 +363,7 @@ footer{background:var(--ink);color:#A99BC9;padding:30px 0;font-size:14px}
   <div class="wrap order-grid">
     <div class="order-info">
       <h2><span class="ge">შეუკვეთე შენი ბარათი</span><span class="en">Order your card</span></h2>
-      <p><span class="ge">შეავსე ფორმა და დაგირეკავთ დღესვე. ან მოგვწერე პირდაპირ WhatsApp-ზე ან მეილზე:</span><span class="en">Fill in the form and we'll call you today. Or message us directly on WhatsApp or email:</span></p>
+      <p><span class="ge">დატოვე ნომერი, დაგირეკავთ დღესვე.</span><span class="en">Leave your number, we'll call you today.</span></p>
       <div class="contact-box">
         <a href="tel:+995592105419"><span class="ico">📞</span>+995 592 10 54 19</a>
         <a class="wa" href="https://wa.me/995592105419?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90!%20Qrebi%20%E1%83%91%E1%83%90%E1%83%A0%E1%83%90%E1%83%97%E1%83%98%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1" target="_blank" rel="noopener"><span class="ico" style="background:#E7F9EF"><svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></span><span class="ge">მოგვწერე WhatsApp-ზე</span><span class="en">Message us on WhatsApp</span></a>
@@ -394,28 +377,9 @@ footer{background:var(--ink);color:#A99BC9;padding:30px 0;font-size:14px}
           <input type="text" name="name" required placeholder="გიორგი" data-ph-ge="გიორგი" data-ph-en="Giorgi">
         </label>
         <label>
-          <span><span class="ge">ბიზნესის სახელი</span><span class="en">Business name</span></span>
-          <input type="text" name="business" required placeholder="კაფე …" data-ph-ge="კაფე …" data-ph-en="Café …">
-        </label>
-        <label>
           <span><span class="ge">ტელეფონი</span><span class="en">Phone</span></span>
           <input type="tel" name="phone" required placeholder="+995 5__ __ __ __">
         </label>
-        <label id="mapsLabel">
-          <span><span class="ge">Google Maps ბმული</span><span class="en">Google Maps link</span></span>
-          <input type="url" name="maps" id="mapsInput" required placeholder="https://maps.app.goo.gl/…">
-        </label>
-        <label class="check">
-          <input type="checkbox" id="noMaps" name="nomaps">
-          <span><span class="ge">ჯერ არ ვარ Google რუკაზე</span><span class="en">I'm not on Google Maps yet</span></span>
-        </label>
-        <div id="regWrap" style="display:none;flex-direction:column;gap:15px">
-          <p class="reg-note"><span class="ge">არაუშავს: შენს ბიზნესს ჩვენ დავარეგისტრირებთ Google რუკაზე და ბარათს პირდაპირ მივაბამთ. შეავსე მისამართი:</span><span class="en">No problem: we'll register your business on Google Maps and link the card to it. Fill in the address:</span></p>
-          <label>
-            <span><span class="ge">ბიზნესის მისამართი</span><span class="en">Business address</span></span>
-            <input type="text" name="address" id="addrInput" placeholder="თბილისი, …" data-ph-ge="თბილისი, …" data-ph-en="Tbilisi, …">
-          </label>
-        </div>
         <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
         <p id="sendFail" class="reg-note" style="display:none;background:#FDECEC;color:#B3261E"><span class="ge">ვერ გაიგზავნა. სცადე თავიდან ან მოგვწერე WhatsApp-ზე: +995 592 10 54 19</span><span class="en">Couldn't send. Try again or message us on WhatsApp: +995 592 10 54 19</span></p>
         <button type="submit" class="btn"><span class="ge">გაგზავნა</span><span class="en">Send</span></button>
@@ -446,6 +410,11 @@ footer{background:var(--ink);color:#A99BC9;padding:30px 0;font-size:14px}
   </div>
 </footer>
 
+<div class="cta-bar">
+  <a class="btn" href="#order"><span class="ge">შეუკვეთე · 50 ₾-დან</span><span class="en">Order · from 50 ₾</span></a>
+  <a class="wa-sq" href="https://wa.me/995592105419?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90!%20Qrebi%20%E1%83%91%E1%83%90%E1%83%A0%E1%83%90%E1%83%97%E1%83%98%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+</div>
+
 <a class="wa-fab" href="https://wa.me/995592105419?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90!%20Qrebi%20%E1%83%91%E1%83%90%E1%83%A0%E1%83%90%E1%83%97%E1%83%98%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1" target="_blank" rel="noopener" aria-label="მოგვწერე WhatsApp-ზე"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
 
 <script>
@@ -470,42 +439,25 @@ footer{background:var(--ink);color:#A99BC9;padding:30px 0;font-size:14px}
   });
 
   // ---- order form ----
-  // Google Maps: link is required; businesses not on Maps fill the registration path instead
-  var noMaps = document.getElementById('noMaps');
-  var mapsInput = document.getElementById('mapsInput');
-  var addrInput = document.getElementById('addrInput');
-  if (noMaps) noMaps.addEventListener('change', function(){
-    var reg = noMaps.checked;
-    document.getElementById('mapsLabel').style.display = reg ? 'none' : 'flex';
-    document.getElementById('regWrap').style.display = reg ? 'flex' : 'none';
-    mapsInput.required = !reg;
-    addrInput.required = reg;
-    if (reg) mapsInput.value = ''; else addrInput.value = '';
-  });
-
   var form = document.getElementById('orderForm');
   if (form) form.addEventListener('submit', async function(e){
     e.preventDefault();
     var btn = form.querySelector('button[type=submit]');
     if (btn) { btn.disabled = true; btn.style.opacity = '.75'; }
     var g = function(n){ var el = form.querySelector('[name="'+n+'"]'); return el ? el.value : ''; };
-    var data = { name:g('name'), business:g('business'), phone:g('phone'),
-      maps:g('maps'), nomaps:!!(noMaps && noMaps.checked), address:g('address'), website:g('website') };
-    var mapsInfo = data.nomaps ? ('სჭირდება რეგისტრაცია რუკაზე, მისამართი: ' + (data.address || '-')) : (data.maps || '-');
+    var data = { name:g('name'), phone:g('phone'), website:g('website') };
 
     // 1) FormSubmit: delivers the lead straight to LEAD_EMAIL
     var viaEmail = fetch('https://formsubmit.co/ajax/' + LEAD_EMAIL, {
       method: 'POST',
       headers: { 'content-type': 'application/json', 'accept': 'application/json' },
       body: JSON.stringify({
-        _subject: 'ახალი შეკვეთა: Qrebi.ge — ' + (data.business || data.name || data.phone),
+        _subject: 'ახალი შეკვეთა: Qrebi.ge — ' + (data.name || data.phone),
         _template: 'table',
         _captcha: 'false',
         _honey: data.website,
         'სახელი': data.name,
-        'ბიზნესი': data.business,
-        'ტელეფონი': data.phone,
-        'Google Maps': mapsInfo
+        'ტელეფონი': data.phone
       })
     }).then(function(r){ return r.json(); }).then(function(j){ return !!(j && (j.success === 'true' || j.success === true)); });
 
@@ -520,7 +472,7 @@ footer{background:var(--ink);color:#A99BC9;padding:30px 0;font-size:14px}
       // safety net: never lose a lead — keep the form, show the error, open a prefilled email
       if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
       document.getElementById('sendFail').style.display = 'block';
-      var body = encodeURIComponent('სახელი: '+data.name+'\nბიზნესი: '+data.business+'\nტელეფონი: '+data.phone+'\nGoogle Maps: '+mapsInfo);
+      var body = encodeURIComponent('სახელი: '+data.name+'\nტელეფონი: '+data.phone);
       window.location.href = 'mailto:' + LEAD_EMAIL + '?subject=' + encodeURIComponent('ახალი შეკვეთა: Qrebi.ge') + '&body=' + body;
       return;
     }
