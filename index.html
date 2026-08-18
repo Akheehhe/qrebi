@@ -87,6 +87,10 @@ h2{margin:8px 0 10px;font-size:32px;font-weight:900;letter-spacing:-.01em}
 .step h3{margin:0 0 8px;font-size:18.5px;font-weight:800}
 .step p{margin:0;font-size:14.5px;line-height:1.6;color:var(--text)}
 
+/* platforms */
+.plats{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
+.plat{display:flex;align-items:center;gap:8px;padding:15px 28px;background:#fff;border:1px solid var(--line);border-radius:14px;font-weight:800;font-size:17px;color:var(--ink)}
+
 /* gallery */
 .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .gallery figure{margin:0;position:relative;border-radius:16px;overflow:hidden;box-shadow:0 8px 22px rgba(26,16,51,.1)}
@@ -162,7 +166,7 @@ footer{border-top:1px solid var(--line);padding:28px 0;font-size:14px;color:var(
   <div class="wrap hero-grid">
     <div>
       <h1><span class="ge">ერთი შეხება.<br>მეტი Google შეფასება.<br><span class="accent">მეტი კლიენტი.</span></span><span class="en">One tap.<br>More Google reviews.<br><span class="accent">More customers.</span></span></h1>
-      <p class="lead"><span class="ge">კლიენტი ეხება ბარათს ტელეფონით და თქვენი Google შეფასების გვერდი მაშინვე იხსნება. აპლიკაციის გარეშე.</span><span class="en">A customer taps the card with their phone and your Google review page opens instantly. No app.</span></p>
+      <p class="lead"><span class="ge">კლიენტი ეხება ბარათს ტელეფონით და შენი გვერდი მაშინვე იხსნება: Google, Tripadvisor, Booking თუ სხვა. აპლიკაციის გარეშე.</span><span class="en">A customer taps the card and your page opens instantly: Google, Tripadvisor, Booking or any other. No app.</span></p>
       <div class="hero-cta">
         <a class="btn" href="#order"><span class="ge">შეუკვეთე ბარათი →</span><span class="en">Order your card →</span></a>
         <a class="btn-line" href="tel:+995592105419"><span class="ge">დაგვირეკე: 592 10 54 19</span><span class="en">Call us: 592 10 54 19</span></a>
@@ -188,13 +192,13 @@ footer{border-top:1px solid var(--line);padding:28px 0;font-size:14px;color:var(
     <div class="steps">
       <div class="step">
         <span class="num">1</span>
-        <h3><span class="ge">დადგი ბარათი მაგიდაზე</span><span class="en">Place the card on a table</span></h3>
-        <p><span class="ge">მაგიდაზე, სალაროსთან ან კართან.</span><span class="en">On a table, by the register, or at the door.</span></p>
+        <h3><span class="ge">მიაკარი ან დადგი ბარათი</span><span class="en">Stick or stand the card</span></h3>
+        <p><span class="ge">უკან წებოვანი ფირი აქვს: მიაკარი მაგიდაზე, კედელზე ან ვიტრინაზე.</span><span class="en">It has adhesive backing: stick it on a table, wall or shop window.</span></p>
       </div>
       <div class="step">
         <span class="num">2</span>
         <h3><span class="ge">კლიენტი ეხება ტელეფონით</span><span class="en">Customer taps their phone</span></h3>
-        <p><span class="ge">შენი Google გვერდი მაშინვე იხსნება.</span><span class="en">Your Google page opens instantly.</span></p>
+        <p><span class="ge">შენი გვერდი მაშინვე იხსნება.</span><span class="en">Your page opens instantly.</span></p>
       </div>
       <div class="step">
         <span class="num">3</span>
@@ -205,8 +209,25 @@ footer{border-top:1px solid var(--line);padding:28px 0;font-size:14px;color:var(
   </div>
 </section>
 
+<!-- PLATFORMS -->
+<section id="platforms" style="background:var(--bg-soft)">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><span class="ge">არა მხოლოდ Google</span><span class="en">Not just Google</span></h2>
+      <p class="sub"><span class="ge">შენ ირჩევ, რომელი გვერდი გაიხსნება შეხებისას.</span><span class="en">You choose which page opens on tap.</span></p>
+    </div>
+    <div class="plats">
+      <span class="plat"><span><span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC05">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span></span></span>
+      <span class="plat"><span style="color:#34E0A1">●</span>Tripadvisor</span>
+      <span class="plat" style="color:#003580">Booking.com</span>
+      <span class="plat" style="color:#FF5A5F">airbnb</span>
+      <span class="plat" style="color:var(--purple)">🔗 <span class="ge">შენი ბმული</span><span class="en">Custom link</span></span>
+    </div>
+  </div>
+</section>
+
 <!-- GALLERY -->
-<section id="places" style="padding-top:0">
+<section id="places">
   <div class="wrap">
     <div class="sec-head">
       <h2><span class="ge">ბარათი შენს ბიზნესში</span><span class="en">The card in your business</span></h2>
