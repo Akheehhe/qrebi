@@ -130,7 +130,7 @@ h2{margin:8px 0 10px;font-size:31px;font-weight:900;letter-spacing:-.01em}
 .tier .per{font-size:13px;color:var(--muted);font-weight:600}
 .tier .gift{position:absolute;top:-12px;left:50%;transform:translateX(-50%);padding:4px 12px;background:var(--purple);color:#fff;border-radius:100px;font-size:11.5px;font-weight:800;white-space:nowrap}
 .included{margin:24px auto 0;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;font-size:13.5px;font-weight:700;color:var(--text)}
-.included span{padding:8px 15px;background:#fff;border:1px solid var(--line);border-radius:100px}
+.included>span{padding:8px 15px;background:#fff;border:1px solid var(--line);border-radius:100px}
 .price-cta{margin-top:26px;text-align:center}
 
 /* order */
@@ -153,8 +153,9 @@ input:focus{border-color:var(--purple)}
 .success{background:#fff;border-radius:20px;padding:48px 34px;flex-direction:column;align-items:center;gap:12px;text-align:center;box-shadow:0 14px 38px rgba(10,7,28,.08)}
 .success .tick{width:58px;height:58px;display:grid;place-items:center;background:var(--lilac);border-radius:50%;font-size:26px;color:var(--purple);font-weight:900}
 
-/* mobile sticky CTA bar */
-.cta-bar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:60;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid var(--line);box-shadow:0 -8px 24px rgba(10,7,28,.08)}
+/* mobile sticky CTA bar (shown after scrolling past the hero) */
+.cta-bar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:60;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid var(--line);box-shadow:0 -8px 24px rgba(10,7,28,.08);transform:translateY(110%);transition:transform .25s ease}
+.cta-bar.show{transform:none}
 .cta-bar .btn{flex:1;text-align:center;padding:14px}
 .cta-bar .wa-sq{flex:none;display:grid;place-items:center;width:50px;border-radius:11px;background:#25D366}
 .cta-bar .wa-sq svg{width:26px;height:26px;fill:#fff}
@@ -225,6 +226,7 @@ footer{background:var(--ink);color:#A99BC9;padding:30px 0;font-size:14px}
   <svg class="hero-qr" viewBox="0 0 64 64" aria-hidden="true"><rect x="4" y="4" width="56" height="56" rx="8" fill="none" stroke="#fff" stroke-width="8"/><rect x="24" y="24" width="16" height="16" fill="#fff"/></svg>
   <div class="wrap hero-grid">
     <div style="display:flex;flex-direction:column;align-items:flex-start">
+      <span class="hero-badge"><span class="ge">NFC ბარათი → Google შეფასება ერთი შეხებით</span><span class="en">NFC card → a Google review in one tap</span></span>
       <h1><span class="ge">ჩვენ არ ვყიდით<br>უბრალოდ ბარათს.<br><span class="accent">ვზრდით შენს რეიტინგს.</span></span><span class="en">We don't just<br>sell a card.<br><span class="accent">We grow your rating.</span></span></h1>
       <p class="lead"><span class="ge">კლიენტი ეხება ბარათს და შენს Google გვერდზე ხვდება.</span><span class="en">A customer taps the card and lands on your Google page.</span></p>
       <div class="hero-cta">
@@ -330,30 +332,32 @@ footer{background:var(--ink);color:#A99BC9;padding:30px 0;font-size:14px}
       <div class="tier">
         <div class="qty"><span class="ge">1–5 ბარათი</span><span class="en">1–5 cards</span></div>
         <div class="amt">50 ₾</div>
-        <div class="per"><span class="ge">ცალი</span><span class="en">each</span></div>
+        <div class="per"><span class="ge">თითო</span><span class="en">each</span></div>
       </div>
       <div class="tier hot">
         <span class="gift"><span class="ge">+ SEO საჩუქრად</span><span class="en">+ free SEO</span></span>
         <div class="qty"><span class="ge">6–10 ბარათი</span><span class="en">6–10 cards</span></div>
         <div class="amt">40 ₾</div>
-        <div class="per"><span class="ge">ცალი</span><span class="en">each</span></div>
+        <div class="per"><span class="ge">თითო</span><span class="en">each</span></div>
       </div>
       <div class="tier">
         <div class="qty"><span class="ge">11–35 ბარათი</span><span class="en">11–35 cards</span></div>
         <div class="amt">35 ₾</div>
-        <div class="per"><span class="ge">ცალი</span><span class="en">each</span></div>
+        <div class="per"><span class="ge">თითო</span><span class="en">each</span></div>
       </div>
       <div class="tier">
         <div class="qty"><span class="ge">36+ ბარათი</span><span class="en">36+ cards</span></div>
         <div class="amt">30 ₾</div>
-        <div class="per"><span class="ge">ცალი</span><span class="en">each</span></div>
+        <div class="per"><span class="ge">თითო</span><span class="en">each</span></div>
       </div>
     </div>
     <div class="included">
+      <span style="background:var(--purple);color:#fff;border-color:var(--purple)"><span class="ge">ყველა პაკეტში:</span><span class="en">Every package:</span></span>
       <span>📸 <span class="ge">ფოტოები</span><span class="en">Photos</span></span>
       <span>🚀 <span class="ge">SEO: 1 თვე უფასოდ</span><span class="en">SEO: 1 month free</span></span>
       <span>🤝 <span class="ge">მხარდაჭერა</span><span class="en">Support</span></span>
     </div>
+    <p class="sub" style="margin-top:14px;text-align:center;font-size:13.5px"><span class="ge">SEO-ს გაგრძელება არჩევითია. ავტომატური გადახდა არ არის.</span><span class="en">Continuing SEO is optional. No automatic charges.</span></p>
     <div class="price-cta"><a class="btn" href="#order"><span class="ge">შეუკვეთე ახლავე</span><span class="en">Order now</span></a></div>
   </div>
 </section>
@@ -383,7 +387,7 @@ footer{background:var(--ink);color:#A99BC9;padding:30px 0;font-size:14px}
         <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
         <p id="sendFail" class="reg-note" style="display:none;background:#FDECEC;color:#B3261E"><span class="ge">ვერ გაიგზავნა. სცადე თავიდან ან მოგვწერე WhatsApp-ზე: +995 592 10 54 19</span><span class="en">Couldn't send. Try again or message us on WhatsApp: +995 592 10 54 19</span></p>
         <button type="submit" class="btn"><span class="ge">გაგზავნა</span><span class="en">Send</span></button>
-        <p class="form-foot"><span class="ge">არავითარი ვალდებულება. მხოლოდ ზარი.</span><span class="en">No obligation. Just a call.</span></p>
+        <p class="form-foot"><span class="ge">არავითარი ვალდებულება. წინასწარ არაფერს იხდი.</span><span class="en">No obligation. You pay nothing upfront.</span></p>
       </form>
       <div id="orderSuccess" class="success" style="display:none">
         <span class="tick">✓</span>
@@ -437,6 +441,17 @@ footer{background:var(--ink);color:#A99BC9;padding:30px 0;font-size:14px}
     document.body.classList.toggle('lang-en');
     applyPlaceholders();
   });
+
+  // ---- mobile CTA bar: appear only after the hero scrolls out ----
+  var bar = document.querySelector('.cta-bar');
+  var hero = document.querySelector('.hero');
+  if (bar && hero && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function(entries){
+      bar.classList.toggle('show', !entries[0].isIntersecting);
+    }, { threshold: 0.15 }).observe(hero);
+  } else if (bar) {
+    bar.classList.add('show');
+  }
 
   // ---- order form ----
   var form = document.getElementById('orderForm');
