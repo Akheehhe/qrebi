@@ -3,35 +3,36 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>qrebi: მეტი Google შეფასება ერთი შეხებით | qrebi.ge</title>
-<meta name="description" content="qrebi: NFC ბარათი ბიზნესებისთვის, რომელიც კმაყოფილ კლიენტებს Google შეფასებად აქცევს. ერთი შეხება: მეტი შეფასება, მაღალი პოზიცია რუკაზე და მეტი კლიენტი.">
+<title>QRebi: მეტი Google შეფასება ერთი შეხებით | qrebi.ge</title>
+<meta name="description" content="QRebi: NFC ბარათი + გუნდი, რომელიც შენს რეიტინგს ზრდის. პროფესიონალური ფოტოები Google Maps-ისთვის, SEO პირველი თვე უფასოდ და მეტი შეფასება ერთი შეხებით.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://qrebi.ge/">
-<meta property="og:title" content="ერთი შეხება. მეტი შეფასება. მეტი კლიენტი. | qrebi.ge">
-<meta property="og:description" content="კლიენტი ეხება ბარათს ტელეფონით და თქვენი Google გვერდი მაშინვე იხსნება. აპლიკაციის გარეშე. 30 წამში.">
+<meta property="og:title" content="ჩვენ არ ვყიდით უბრალოდ ბარათს. ვზრდით შენს რეიტინგს. | qrebi.ge">
+<meta property="og:description" content="NFC ბარათი + პროფესიონალური ფოტოები + SEO. ერთი შეხება და კლიენტი შენს Google გვერდზეა.">
 <meta property="og:image" content="https://qrebi.ge/qrebi-og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="ka_GE">
-<meta name="theme-color" content="#5B00BF">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%235B00BF'/%3E%3Cpath fill='%23fff' d='M12 12h16v16H12zM36 12h16v16H36zM12 36h16v16H12z'/%3E%3Cpath fill='%235B00BF' d='M16 16h8v8h-8zM40 16h8v8h-8zM16 40h8v8h-8z'/%3E%3Cpath fill='%23fff' d='M18 18h4v4h-4zM42 18h4v4h-4zM18 42h4v4h-4zM36 36h7v7h-7zM45 45h7v7h-7zM36 46h4v4h-4z'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#3F1C92">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233F1C92'/%3E%3Crect x='14' y='14' width='36' height='36' rx='6' fill='none' stroke='%23fff' stroke-width='9'/%3E%3Crect x='27' y='27' width='10' height='10' fill='%23fff'/%3E%3Cpath d='M38 64 L64 38 L64 64 Z' fill='%233F1C92'/%3E%3Cpath d='M44 58 L58 44 L58 58 Z' fill='%23fff'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&family=Noto+Sans+Georgian:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --purple:#5B00BF;
-  --purple-dark:#43008C;
-  --ink:#1A1033;
-  --text:#4A3D63;
-  --muted:#7A6D93;
-  --bg-soft:#F8F4FD;
-  --line:#EDE6F7;
+  --purple:#3F1C92;      /* Cosmic Blue */
+  --purple-dark:#31166F;
+  --lilac:#F7F0FF;       /* Soft Lilac */
+  --ink:#0A071C;         /* Ink Violet */
+  --gold:#F5B301;
+  --text:#3E3757;
+  --muted:#6E6187;
+  --line:#E9E0F6;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 section{scroll-margin-top:74px}
-body{margin:0;background:#fff;font-family:'Noto Sans Georgian',system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+body{margin:0;background:#fff;font-family:'Montserrat','Noto Sans Georgian',system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
 a{color:var(--purple);text-decoration:none}
 img{max-width:100%;display:block}
 .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
@@ -43,121 +44,157 @@ body.lang-en .en{display:inline}
 
 /* header */
 header{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line)}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 20px;max-width:1080px;margin:0 auto;flex-wrap:wrap}
-.logo{display:flex;align-items:center;gap:9px;font-weight:900;font-size:20px;color:var(--ink)}
-.logo span.q{display:grid;place-items:center;width:30px;height:30px;background:var(--purple);border-radius:8px;color:#fff;font-size:14px;font-weight:900}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 20px;max-width:1080px;margin:0 auto;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:8px;font-weight:900;font-size:21px;color:var(--purple);letter-spacing:.01em}
+.logo svg{width:30px;height:30px}
+.logo .ge-tld{color:var(--muted);font-weight:700}
 .navlinks{display:flex;align-items:center;gap:20px;font-size:14px;font-weight:600;flex-wrap:wrap}
 .navlinks a{color:var(--text)}
 .navlinks a:hover{color:var(--purple)}
+.navlinks a.btn,.navlinks a.btn:hover{color:#fff}
 .navphone{font-weight:800;color:var(--purple);white-space:nowrap}
 .btn{display:inline-block;padding:13px 24px;background:var(--purple);color:#fff;border-radius:11px;font-weight:800;font-size:15px;border:none;cursor:pointer;font-family:inherit;transition:background .2s}
 .btn:hover{background:var(--purple-dark);color:#fff}
 .btn-sm{padding:10px 18px;font-size:14px}
-.btn-line{display:inline-block;padding:12px 22px;border:1.5px solid var(--purple);color:var(--purple);border-radius:11px;font-weight:800;font-size:15px;transition:background .2s}
-.btn-line:hover{background:var(--bg-soft)}
+.btn-gold{background:var(--gold);color:var(--ink)}
+.btn-gold:hover{background:#E0A400;color:var(--ink)}
+.btn-wa{display:inline-flex;align-items:center;gap:9px;padding:13px 22px;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.35);color:#fff;border-radius:11px;font-weight:800;font-size:15px;transition:background .2s}
+.btn-wa:hover{background:rgba(255,255,255,.18);color:#fff}
+.btn-wa svg{width:19px;height:19px;fill:#25D366}
 
 /* language toggle */
-#langToggle{display:flex;gap:2px;padding:3px;background:var(--bg-soft);border:1px solid var(--line);border-radius:8px;cursor:pointer;font-family:inherit;font-size:12.5px;font-weight:700}
-.seg{padding:3px 8px;border-radius:6px}
+#langToggle{display:flex;gap:2px;padding:4px;background:var(--lilac);border:1px solid var(--line);border-radius:8px;cursor:pointer;font-family:inherit;font-size:12.5px;font-weight:700}
+.seg{padding:7px 10px;border-radius:6px}
 body:not(.lang-en) .seg-ge,body.lang-en .seg-en{background:var(--purple);color:#fff}
 body:not(.lang-en) .seg-en,body.lang-en .seg-ge{background:transparent;color:var(--muted)}
 
 /* hero */
-.hero{background:var(--bg-soft);padding:56px 0 64px}
-.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:44px;align-items:center}
-h1{margin:0;font-size:42px;line-height:1.18;font-weight:900;letter-spacing:-.015em}
-h1 .accent{color:var(--purple)}
-.hero p.lead{margin:18px 0 26px;font-size:17.5px;line-height:1.6;color:var(--text);max-width:46ch}
+.hero{position:relative;background:linear-gradient(150deg,#2A115E 0%,var(--purple) 55%,#1B0B45 100%);color:#fff;padding:64px 0 76px;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-160px;right:-120px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.16),rgba(255,255,255,0) 65%)}
+.hero-qr{position:absolute;left:-60px;bottom:-70px;width:280px;height:280px;opacity:.08;transform:rotate(-10deg);pointer-events:none}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;padding:7px 14px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:100px;font-size:12.5px;font-weight:700;color:#EDE4FC}
+.hero-badge b{color:var(--gold)}
+h1{margin:14px 0 0;font-size:41px;line-height:1.16;font-weight:900;letter-spacing:-.015em}
+h1 .accent{color:var(--gold)}
+.hero p.lead{margin:18px 0 26px;font-size:17px;line-height:1.6;color:#D9CCF3;max-width:46ch}
 .hero-cta{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-.hero-note{margin-top:18px;display:flex;gap:20px;font-size:13.5px;color:var(--muted);font-weight:600;flex-wrap:wrap}
-.hero-photo{border-radius:22px;overflow:hidden;box-shadow:0 18px 44px rgba(26,16,51,.16)}
-.hero-photo img{width:100%;height:100%;object-fit:cover}
-.photo-cap{margin-top:10px;text-align:center;font-size:13px;color:var(--muted);font-weight:600}
+.hero-note{margin-top:18px;display:flex;gap:20px;font-size:13px;color:#BCA9E4;font-weight:600;flex-wrap:wrap}
+.hero-photo{position:relative}
+.hero-photo img{width:100%;border-radius:22px;box-shadow:0 26px 60px rgba(5,2,20,.55);border:1px solid rgba(255,255,255,.15)}
+.chip{position:absolute;display:flex;align-items:center;gap:7px;padding:9px 14px;background:#fff;color:var(--ink);border-radius:100px;font-size:12.5px;font-weight:800;box-shadow:0 12px 30px rgba(5,2,20,.4);white-space:nowrap}
+.chip-1{top:-14px;left:-10px}
+.chip-2{bottom:-14px;right:-8px}
+.chip-3{top:42%;right:-16px;background:var(--gold);color:var(--ink)}
 
 /* sections */
 section{padding:64px 0}
 .sec-head{text-align:center;margin-bottom:38px}
-.kicker{font-size:12.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#8B4DDB}
-h2{margin:8px 0 10px;font-size:32px;font-weight:900;letter-spacing:-.01em}
+h2{margin:8px 0 10px;font-size:31px;font-weight:900;letter-spacing:-.01em}
 .sub{margin:0;font-size:16.5px;color:var(--muted);font-weight:500}
+
+/* value / why us */
+.value{background:var(--lilac)}
+.vcards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+.vcard{padding:28px 26px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 26px rgba(63,28,146,.06)}
+.vcard .ic{display:grid;place-items:center;width:46px;height:46px;background:var(--lilac);border-radius:13px;font-size:22px;margin-bottom:14px}
+.vcard h3{margin:0 0 8px;font-size:18px;font-weight:800}
+.vcard p{margin:0;font-size:14.5px;line-height:1.6;color:var(--text)}
+.get{margin:34px auto 0;max-width:760px;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;font-size:16px;font-weight:800}
+.get .pill{padding:10px 20px;background:var(--purple);color:#fff;border-radius:100px;font-size:15px}
 
 /* steps */
 .steps{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
-.step{padding:28px 26px;background:var(--bg-soft);border:1px solid var(--line);border-radius:18px}
+.step{padding:28px 26px;background:var(--lilac);border:1px solid var(--line);border-radius:18px}
 .step .num{display:grid;place-items:center;width:40px;height:40px;background:var(--purple);color:#fff;border-radius:11px;font-weight:900;font-size:18px;margin-bottom:14px}
 .step h3{margin:0 0 8px;font-size:18.5px;font-weight:800}
 .step p{margin:0;font-size:14.5px;line-height:1.6;color:var(--text)}
 
 /* platforms */
+.plat-sec{background:var(--ink);color:#fff}
+.plat-sec h2{color:#fff}
+.plat-sec .sub{color:#A99BC9}
 .plats{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
-.plat{display:flex;align-items:center;gap:8px;padding:15px 28px;background:#fff;border:1px solid var(--line);border-radius:14px;font-weight:800;font-size:17px;color:var(--ink)}
+.plat{display:flex;align-items:center;gap:8px;padding:15px 28px;background:#fff;border-radius:14px;font-weight:800;font-size:17px;color:var(--ink)}
 
 /* gallery */
 .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.gallery figure{margin:0;position:relative;border-radius:16px;overflow:hidden;box-shadow:0 8px 22px rgba(26,16,51,.1)}
+.gallery figure{margin:0;position:relative;border-radius:16px;overflow:hidden;box-shadow:0 8px 22px rgba(10,7,28,.1)}
 .gallery img{width:100%;object-fit:cover;aspect-ratio:4/3}
 .gallery figcaption{position:absolute;left:10px;bottom:10px;background:rgba(255,255,255,.94);border-radius:100px;padding:6px 13px;font-size:12.5px;font-weight:800}
 
 /* pricing */
+.price-sec{background:var(--lilac)}
 .tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:900px;margin:0 auto}
 .tier{position:relative;padding:28px 16px 24px;background:#fff;border:1px solid var(--line);border-radius:16px;text-align:center}
-.tier.hot{border:2px solid var(--purple);box-shadow:0 12px 30px rgba(91,0,191,.12)}
+.tier.hot{border:2px solid var(--purple);box-shadow:0 12px 30px rgba(63,28,146,.14)}
 .tier .qty{font-size:14px;font-weight:800;color:var(--text)}
 .tier .amt{margin-top:8px;font-size:34px;font-weight:900;color:var(--purple);letter-spacing:-.02em}
 .tier .per{font-size:13px;color:var(--muted);font-weight:600}
 .tier .gift{position:absolute;top:-12px;left:50%;transform:translateX(-50%);padding:4px 12px;background:var(--purple);color:#fff;border-radius:100px;font-size:11.5px;font-weight:800;white-space:nowrap}
-.price-cta{margin-top:28px;text-align:center}
+.included{margin:24px auto 0;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;font-size:13.5px;font-weight:700;color:var(--text)}
+.included span{padding:8px 15px;background:#fff;border:1px solid var(--line);border-radius:100px}
+.price-cta{margin-top:26px;text-align:center}
 
 /* order */
 .order-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start}
 .order-info h2{text-align:left}
 .order-info p{font-size:16px;line-height:1.6;color:var(--text)}
-.contact-box{margin-top:22px;padding:20px 22px;background:#fff;border:1px solid var(--line);border-radius:16px;display:flex;flex-direction:column;gap:10px;font-size:15.5px;font-weight:700}
+.contact-box{margin-top:22px;padding:20px 22px;background:var(--lilac);border:1px solid var(--line);border-radius:16px;display:flex;flex-direction:column;gap:10px;font-size:15.5px;font-weight:700}
 .contact-box a{display:flex;align-items:center;gap:10px;color:var(--ink)}
 .contact-box a:hover{color:var(--purple)}
-.contact-box .ico{display:grid;place-items:center;width:34px;height:34px;background:var(--bg-soft);border-radius:9px;font-size:16px}
-form{background:#fff;border-radius:20px;padding:32px 30px;display:flex;flex-direction:column;gap:15px;box-shadow:0 14px 38px rgba(26,16,51,.1)}
+.contact-box .ico{display:grid;place-items:center;width:34px;height:34px;background:#fff;border-radius:9px;font-size:16px}
+.wa{color:#1FA855;font-weight:800}
+form{background:#fff;border:1px solid var(--line);border-radius:20px;padding:32px 30px;display:flex;flex-direction:column;gap:15px;box-shadow:0 14px 38px rgba(10,7,28,.08)}
 label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;color:var(--text)}
-input[type=text],input[type=tel],input[type=url]{padding:13px 15px;border:1.5px solid #E4DAF2;border-radius:10px;font-size:16px;font-family:inherit;outline:none}
+input[type=text],input[type=tel],input[type=url]{padding:13px 15px;border:1.5px solid var(--line);border-radius:10px;font-size:16px;font-family:inherit;outline:none}
 input:focus{border-color:var(--purple)}
 .check{flex-direction:row;align-items:center;gap:9px;cursor:pointer;font-weight:600}
 .check input{width:16px;height:16px;accent-color:var(--purple);cursor:pointer}
-.reg-note{margin:0;padding:11px 14px;background:var(--bg-soft);border-radius:10px;font-size:13px;line-height:1.5;color:var(--purple);font-weight:600}
+.reg-note{margin:0;padding:11px 14px;background:var(--lilac);border-radius:10px;font-size:13px;line-height:1.5;color:var(--purple);font-weight:600}
 .form-foot{margin:0;text-align:center;font-size:12.5px;color:var(--muted)}
-.success{background:#fff;border-radius:20px;padding:48px 34px;flex-direction:column;align-items:center;gap:12px;text-align:center;box-shadow:0 14px 38px rgba(26,16,51,.1)}
-.success .tick{width:58px;height:58px;display:grid;place-items:center;background:var(--bg-soft);border-radius:50%;font-size:26px;color:var(--purple);font-weight:900}
+.success{background:#fff;border-radius:20px;padding:48px 34px;flex-direction:column;align-items:center;gap:12px;text-align:center;box-shadow:0 14px 38px rgba(10,7,28,.08)}
+.success .tick{width:58px;height:58px;display:grid;place-items:center;background:var(--lilac);border-radius:50%;font-size:26px;color:var(--purple);font-weight:900}
 
-/* whatsapp */
-.wa{color:#1FA855;font-weight:800}
+/* whatsapp fab */
 .wa-fab{position:fixed;right:16px;bottom:16px;z-index:50;width:56px;height:56px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 10px 24px rgba(37,211,102,.45);transition:transform .2s}
 .wa-fab:hover{transform:scale(1.07)}
 .wa-fab svg{width:30px;height:30px;fill:#fff}
 
 /* footer */
-footer{border-top:1px solid var(--line);padding:28px 0;font-size:14px;color:var(--muted)}
+footer{background:var(--ink);color:#A99BC9;padding:30px 0;font-size:14px}
 .foot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.foot .brand{font-weight:800;color:var(--ink)}
-.foot .brand b{color:var(--purple)}
+.foot .logo{color:#fff;font-size:18px}
 .foot-contacts{display:flex;gap:18px;flex-wrap:wrap;font-weight:600}
+.foot-contacts a{color:#EDE4FC}
+.foot-contacts a.wa{color:#4ADE80}
 
 @media(max-width:860px){
-  h1{font-size:31px}
-  h2{font-size:26px}
-  .hero{padding:36px 0 44px}
-  .hero-grid,.order-grid{grid-template-columns:1fr;gap:28px}
-  .steps{grid-template-columns:1fr}
+  h1{font-size:30px}
+  h2{font-size:25px}
+  .hero{padding:40px 0 52px}
+  .hero-grid,.order-grid{grid-template-columns:1fr;gap:34px}
+  .steps,.vcards{grid-template-columns:1fr}
   .tiers{grid-template-columns:1fr 1fr;gap:22px 12px}
   .gallery{grid-template-columns:1fr 1fr;gap:12px}
   .nav{justify-content:center}
   section{padding:48px 0}
+  .chip{font-size:11.5px;padding:8px 12px}
+  .chip-1{left:6px}
+  .chip-2{right:6px}
+  .chip-3{right:6px}
 }
 @media(max-width:560px){
-  .navhide{display:none}
+  .navhide,.navphone{display:none}
   .nav{padding:12px 16px;gap:10px}
+  section{scroll-margin-top:120px}
   .hero-cta{flex-direction:column;align-items:stretch}
-  .hero-cta a{text-align:center}
+  .hero-cta a{text-align:center;justify-content:center}
   .foot{flex-direction:column;text-align:center}
-  .gallery{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding-bottom:6px;-webkit-overflow-scrolling:touch}
+  footer{padding-bottom:96px}
+  .wa-fab{width:48px;height:48px}
+  .wa-fab svg{width:26px;height:26px}
+  .gallery{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding:10px 0 30px;margin:-10px 0 -24px;-webkit-overflow-scrolling:touch}
   .gallery figure{flex:0 0 80%;scroll-snap-align:center}
   .gallery img{aspect-ratio:4/3;height:auto}
 }
@@ -167,12 +204,15 @@ footer{border-top:1px solid var(--line);padding:28px 0;font-size:14px;color:var(
 
 <header>
   <div class="nav">
-    <a href="#top" class="logo"><span class="q">Q</span>Qrebi.ge</a>
+    <a href="#top" class="logo" aria-label="QRebi.ge">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#3F1C92"/><rect x="14" y="14" width="36" height="36" rx="6" fill="none" stroke="#fff" stroke-width="9"/><rect x="27" y="27" width="10" height="10" fill="#fff"/><path d="M38 64 L64 38 L64 64 Z" fill="#3F1C92"/><path d="M44 58 L58 44 L58 58 Z" fill="#fff"/></svg>
+      <span>Rebi<span class="ge-tld">.ge</span></span>
+    </a>
     <div class="navlinks">
       <a class="navhide" href="#how"><span class="ge">როგორ მუშაობს</span><span class="en">How it works</span></a>
       <a class="navhide" href="#price"><span class="ge">ფასი</span><span class="en">Pricing</span></a>
       <a class="navphone" href="tel:+995592105419">592 10 54 19</a>
-      <button id="langToggle" type="button"><span class="seg seg-ge">ქარ</span><span class="seg seg-en">ENG</span></button>
+      <button id="langToggle" type="button" aria-label="ქართული / English" aria-pressed="false"><span class="seg seg-ge">ქარ</span><span class="seg seg-en">ENG</span></button>
       <a class="btn btn-sm" href="#order"><span class="ge">შეუკვეთე ბარათი</span><span class="en">Order a card</span></a>
     </div>
   </div>
@@ -180,22 +220,59 @@ footer{border-top:1px solid var(--line);padding:28px 0;font-size:14px;color:var(
 
 <!-- HERO -->
 <section class="hero" id="top">
+  <svg class="hero-qr" viewBox="0 0 64 64" aria-hidden="true"><rect x="4" y="4" width="56" height="56" rx="8" fill="none" stroke="#fff" stroke-width="8"/><rect x="24" y="24" width="16" height="16" fill="#fff"/></svg>
   <div class="wrap hero-grid">
-    <div>
-      <h1><span class="ge">ერთი შეხება.<br>მეტი Google შეფასება.<br><span class="accent">მეტი კლიენტი.</span></span><span class="en">One tap.<br>More Google reviews.<br><span class="accent">More customers.</span></span></h1>
-      <p class="lead"><span class="ge">კლიენტი ეხება ბარათს ტელეფონით და შენი გვერდი მაშინვე იხსნება: Google, Tripadvisor, Booking თუ სხვა. აპლიკაციის გარეშე.</span><span class="en">A customer taps the card and your page opens instantly: Google, Tripadvisor, Booking or any other. No app.</span></p>
+    <div style="display:flex;flex-direction:column;align-items:flex-start">
+      <span class="hero-badge"><b>★</b> <span class="ge">NFC ბარათი + გუნდი შენს გვერდით</span><span class="en">An NFC card + a team behind you</span></span>
+      <h1><span class="ge">ჩვენ არ ვყიდით<br>უბრალოდ ბარათს.<br><span class="accent">ვზრდით შენს რეიტინგს.</span></span><span class="en">We don't just<br>sell a card.<br><span class="accent">We grow your rating.</span></span></h1>
+      <p class="lead"><span class="ge">ერთი შეხება და კლიენტი შენს Google გვერდზეა. დანარჩენს ჩვენი გუნდი აკეთებს: ფოტოები, SEO, რეიტინგი.</span><span class="en">One tap and the customer is on your Google page. Our team does the rest: photos, SEO, rating.</span></p>
       <div class="hero-cta">
-        <a class="btn" href="#order"><span class="ge">შეუკვეთე ბარათი →</span><span class="en">Order your card →</span></a>
-        <a class="btn-line" href="tel:+995592105419"><span class="ge">დაგვირეკე: 592 10 54 19</span><span class="en">Call us: 592 10 54 19</span></a>
+        <a class="btn btn-gold" href="#order"><span class="ge">შეუკვეთე ბარათი →</span><span class="en">Order your card →</span></a>
+        <a class="btn-wa" href="https://wa.me/995592105419?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90!%20Qrebi%20%E1%83%91%E1%83%90%E1%83%A0%E1%83%90%E1%83%97%E1%83%98%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>WhatsApp</a>
       </div>
       <div class="hero-note">
         <span>✓ <span class="ge">მიწოდება მთელ საქართველოში</span><span class="en">Delivery across Georgia</span></span>
         <span>✓ <span class="ge">დაყენება 2 წუთში</span><span class="en">Set up in 2 minutes</span></span>
       </div>
     </div>
-    <div>
-      <div class="hero-photo"><img src="img/places/restaurant.jpg" alt="Qrebi NFC ბარათი რესტორნის მაგიდაზე" width="900" height="672"></div>
-      <p class="photo-cap"><span class="ge">ეს არის Qrebi ბარათი</span><span class="en">This is the Qrebi card</span></p>
+    <div class="hero-photo">
+      <img src="img/places/restaurant.jpg" alt="QRebi NFC ბარათი რესტორნის მაგიდაზე" width="900" height="672">
+      <span class="chip chip-1">📸 <span class="ge">ფოტოები Google Maps-ისთვის</span><span class="en">Photos for Google Maps</span></span>
+      <span class="chip chip-2">🚀 <span class="ge">SEO: 1 თვე უფასოდ</span><span class="en">SEO: 1 month free</span></span>
+      <span class="chip chip-3">★ <span class="ge">მეტი შეფასება</span><span class="en">More reviews</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- VALUE / WHY US -->
+<section id="value" class="value">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><span class="ge">ბარათს ბევრი ყიდის. შედეგს ჩვენ ვაძლევთ.</span><span class="en">Many sell cards. We deliver results.</span></h2>
+      <p class="sub"><span class="ge">ყოველ შეკვეთას მოჰყვება:</span><span class="en">Every order comes with:</span></p>
+    </div>
+    <div class="vcards">
+      <div class="vcard">
+        <span class="ic">📸</span>
+        <h3><span class="ge">პროფესიონალური ფოტოები</span><span class="en">Professional photos</span></h3>
+        <p><span class="ge">გადავიღებთ შენს სივრცეს Google Maps-ისთვის.</span><span class="en">We shoot your space for Google Maps.</span></p>
+      </div>
+      <div class="vcard">
+        <span class="ic">🚀</span>
+        <h3><span class="ge">SEO: პირველი თვე უფასოდ</span><span class="en">SEO: first month free</span></h3>
+        <p><span class="ge">გავზრდით შენს ხილვადობას Google-ში.</span><span class="en">We boost your visibility on Google.</span></p>
+      </div>
+      <div class="vcard">
+        <span class="ic">⭐</span>
+        <h3><span class="ge">რეიტინგის ზრდა</span><span class="en">Rating growth</span></h3>
+        <p><span class="ge">გეხმარებით, რომ მეტი შეფასება მიიღო.</span><span class="en">We help you win more reviews.</span></p>
+      </div>
+    </div>
+    <div class="get">
+      <span class="ge">ჩვენთან ყიდვისას იღებ:</span><span class="en">Buying from us you get:</span>
+      <span class="pill"><span class="ge">ყურადღებას</span><span class="en">attention</span></span>
+      <span class="pill"><span class="ge">ხარისხს</span><span class="en">quality</span></span>
+      <span class="pill"><span class="ge">გუნდს</span><span class="en">a team</span></span>
     </div>
   </div>
 </section>
@@ -209,7 +286,7 @@ footer{border-top:1px solid var(--line);padding:28px 0;font-size:14px;color:var(
     <div class="steps">
       <div class="step">
         <span class="num">1</span>
-        <h3><span class="ge">მიაკარი ან დადგი ბარათი</span><span class="en">Stick or stand the card</span></h3>
+        <h3><span class="ge">მიაკარი ან დადგი ბარათი</span><span class="en">Stick it or stand it up</span></h3>
         <p><span class="ge">უკან წებოვანი ფირი აქვს: მიაკარი მაგიდაზე, კედელზე ან ვიტრინაზე.</span><span class="en">It has adhesive backing: stick it on a table, wall or shop window.</span></p>
       </div>
       <div class="step">
@@ -227,7 +304,7 @@ footer{border-top:1px solid var(--line);padding:28px 0;font-size:14px;color:var(
 </section>
 
 <!-- PLATFORMS -->
-<section id="platforms" style="background:var(--bg-soft)">
+<section id="platforms" class="plat-sec">
   <div class="wrap">
     <div class="sec-head">
       <h2><span class="ge">არა მხოლოდ Google</span><span class="en">Not just Google</span></h2>
@@ -250,22 +327,22 @@ footer{border-top:1px solid var(--line);padding:28px 0;font-size:14px;color:var(
       <h2><span class="ge">ბარათი შენს ბიზნესში</span><span class="en">The card in your business</span></h2>
     </div>
     <div class="gallery">
-      <figure><img src="img/places/cafe.jpg" alt="Qrebi ბარათი კაფეში" loading="lazy" width="900" height="672"><figcaption><span class="ge">კაფე</span><span class="en">Café</span></figcaption></figure>
-      <figure><img src="img/places/restaurant.jpg" alt="Qrebi ბარათი რესტორანში" loading="lazy" width="900" height="672"><figcaption><span class="ge">რესტორანი</span><span class="en">Restaurant</span></figcaption></figure>
-      <figure><img src="img/places/barbershop.jpg" alt="Qrebi ბარათი ბარბერშოპში" loading="lazy" width="900" height="672"><figcaption><span class="ge">ბარბერშოპი</span><span class="en">Barbershop</span></figcaption></figure>
-      <figure><img src="img/places/salon.jpg" alt="Qrebi ბარათი სილამაზის სალონში" loading="lazy" width="900" height="672"><figcaption><span class="ge">სილამაზის სალონი</span><span class="en">Beauty salon</span></figcaption></figure>
-      <figure><img src="img/places/bakery.jpg" alt="Qrebi ბარათი საცხობში" loading="lazy" width="900" height="672"><figcaption><span class="ge">საცხობი</span><span class="en">Bakery</span></figcaption></figure>
-      <figure><img src="img/places/flowershop.jpg" alt="Qrebi ბარათი ყვავილების მაღაზიაში" loading="lazy" width="900" height="672"><figcaption><span class="ge">ყვავილების მაღაზია</span><span class="en">Flower shop</span></figcaption></figure>
+      <figure><img src="img/places/cafe.jpg" alt="QRebi ბარათი კაფეში" loading="lazy" width="900" height="672"><figcaption><span class="ge">კაფე</span><span class="en">Café</span></figcaption></figure>
+      <figure><img src="img/places/restaurant.jpg" alt="QRebi ბარათი რესტორანში" loading="lazy" width="900" height="672"><figcaption><span class="ge">რესტორანი</span><span class="en">Restaurant</span></figcaption></figure>
+      <figure><img src="img/places/barbershop.jpg" alt="QRebi ბარათი ბარბერშოპში" loading="lazy" width="900" height="672"><figcaption><span class="ge">ბარბერშოპი</span><span class="en">Barbershop</span></figcaption></figure>
+      <figure><img src="img/places/salon.jpg" alt="QRebi ბარათი სილამაზის სალონში" loading="lazy" width="900" height="672"><figcaption><span class="ge">სილამაზის სალონი</span><span class="en">Beauty salon</span></figcaption></figure>
+      <figure><img src="img/places/bakery.jpg" alt="QRebi ბარათი საცხობში" loading="lazy" width="900" height="672"><figcaption><span class="ge">საცხობი</span><span class="en">Bakery</span></figcaption></figure>
+      <figure><img src="img/places/flowershop.jpg" alt="QRebi ბარათი ყვავილების მაღაზიაში" loading="lazy" width="900" height="672"><figcaption><span class="ge">ყვავილების მაღაზია</span><span class="en">Flower shop</span></figcaption></figure>
     </div>
   </div>
 </section>
 
 <!-- PRICING -->
-<section id="price" style="background:var(--bg-soft)">
+<section id="price" class="price-sec">
   <div class="wrap">
     <div class="sec-head">
       <h2><span class="ge">ფასი</span><span class="en">Pricing</span></h2>
-      <p class="sub"><span class="ge">ერთჯერადი გადასახადი. რაც მეტი ბარათი, მით იაფი.</span><span class="en">One-time payment. The more cards, the cheaper.</span></p>
+      <p class="sub"><span class="ge">ერთჯერადი გადახდა. რაც მეტი ბარათი, მით იაფი.</span><span class="en">One-time payment. The more cards, the cheaper.</span></p>
     </div>
     <div class="tiers">
       <div class="tier">
@@ -290,16 +367,21 @@ footer{border-top:1px solid var(--line);padding:28px 0;font-size:14px;color:var(
         <div class="per"><span class="ge">ცალი</span><span class="en">each</span></div>
       </div>
     </div>
+    <div class="included">
+      <span>📸 <span class="ge">ფოტოები</span><span class="en">Photos</span></span>
+      <span>🚀 <span class="ge">SEO: 1 თვე უფასოდ</span><span class="en">SEO: 1 month free</span></span>
+      <span>🤝 <span class="ge">მხარდაჭერა</span><span class="en">Support</span></span>
+    </div>
     <div class="price-cta"><a class="btn" href="#order"><span class="ge">შეუკვეთე ახლავე</span><span class="en">Order now</span></a></div>
   </div>
 </section>
 
 <!-- ORDER -->
-<section id="order" class="order">
+<section id="order">
   <div class="wrap order-grid">
     <div class="order-info">
       <h2><span class="ge">შეუკვეთე შენი ბარათი</span><span class="en">Order your card</span></h2>
-      <p><span class="ge">შეავსე ფორმა და დაგირეკავთ დღესვე. ან მოგვწერე პირდაპირ WhatsApp-ზე ან მეილზე:</span><span class="en">Fill the form and we'll call you today. Or message us directly on WhatsApp or email:</span></p>
+      <p><span class="ge">შეავსე ფორმა და დაგირეკავთ დღესვე. ან მოგვწერე პირდაპირ WhatsApp-ზე ან მეილზე:</span><span class="en">Fill in the form and we'll call you today. Or message us directly on WhatsApp or email:</span></p>
       <div class="contact-box">
         <a href="tel:+995592105419"><span class="ico">📞</span>+995 592 10 54 19</a>
         <a class="wa" href="https://wa.me/995592105419?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90!%20Qrebi%20%E1%83%91%E1%83%90%E1%83%A0%E1%83%90%E1%83%97%E1%83%98%20%E1%83%9B%E1%83%90%E1%83%98%E1%83%9C%E1%83%A2%E1%83%94%E1%83%A0%E1%83%94%E1%83%A1%E1%83%94%E1%83%91%E1%83%A1" target="_blank" rel="noopener"><span class="ico" style="background:#E7F9EF"><svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></span><span class="ge">მოგვწერე WhatsApp-ზე</span><span class="en">Message us on WhatsApp</span></a>
@@ -336,7 +418,8 @@ footer{border-top:1px solid var(--line);padding:28px 0;font-size:14px;color:var(
           </label>
         </div>
         <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
-        <button type="submit" class="btn"><span class="ge">გამოგვიგზავნე და დაგირეკავთ დღესვე</span><span class="en">Send, we'll call you today</span></button>
+        <p id="sendFail" class="reg-note" style="display:none;background:#FDECEC;color:#B3261E"><span class="ge">ვერ გაიგზავნა. სცადე თავიდან ან მოგვწერე WhatsApp-ზე: +995 592 10 54 19</span><span class="en">Couldn't send. Try again or message us on WhatsApp: +995 592 10 54 19</span></p>
+        <button type="submit" class="btn"><span class="ge">გაგზავნა</span><span class="en">Send</span></button>
         <p class="form-foot"><span class="ge">არავითარი ვალდებულება. მხოლოდ ზარი.</span><span class="en">No obligation. Just a call.</span></p>
       </form>
       <div id="orderSuccess" class="success" style="display:none">
@@ -351,13 +434,16 @@ footer{border-top:1px solid var(--line);padding:28px 0;font-size:14px;color:var(
 <!-- FOOTER -->
 <footer>
   <div class="wrap foot">
-    <span class="brand">Qrebi<b>.ge</b></span>
+    <span class="logo">
+      <svg viewBox="0 0 64 64" style="width:26px;height:26px" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#fff"/><rect x="14" y="14" width="36" height="36" rx="6" fill="none" stroke="#3F1C92" stroke-width="9"/><rect x="27" y="27" width="10" height="10" fill="#3F1C92"/><path d="M38 64 L64 38 L64 64 Z" fill="#fff"/><path d="M44 58 L58 44 L58 58 Z" fill="#3F1C92"/></svg>
+      <span>Rebi<span style="color:#A99BC9;font-weight:700">.ge</span></span>
+    </span>
     <div class="foot-contacts">
       <a href="tel:+995592105419">+995 592 10 54 19</a>
       <a class="wa" href="https://wa.me/995592105419" target="_blank" rel="noopener">WhatsApp</a>
       <a href="mailto:qrebinfc@gmail.com">qrebinfc@gmail.com</a>
     </div>
-    <span><span class="ge">© 2026 Qrebi.ge · მეტი შეფასება. მეტი კლიენტი.</span><span class="en">© 2026 Qrebi.ge · More reviews. More customers.</span></span>
+    <span><span class="ge">© 2026 QRebi.ge · მეტი შეფასება. მეტი კლიენტი.</span><span class="en">© 2026 QRebi.ge · More reviews. More customers.</span></span>
   </div>
 </footer>
 
@@ -375,6 +461,9 @@ footer{border-top:1px solid var(--line);padding:28px 0;font-size:14px;color:var(
       i.placeholder = en ? i.getAttribute('data-ph-en') : i.getAttribute('data-ph-ge');
     });
     document.documentElement.lang = en ? 'en' : 'ka';
+    if (toggle) toggle.setAttribute('aria-pressed', en ? 'true' : 'false');
+    var fab = document.querySelector('.wa-fab');
+    if (fab) fab.setAttribute('aria-label', en ? 'Message us on WhatsApp' : 'მოგვწერე WhatsApp-ზე');
   }
   if (toggle) toggle.addEventListener('click', function(){
     document.body.classList.toggle('lang-en');
@@ -429,9 +518,12 @@ footer{border-top:1px solid var(--line);padding:28px 0;font-size:14px;color:var(
     var ok = results.some(function(r){ return r.status === 'fulfilled' && r.value === true; });
 
     if (!ok) {
-      // safety net: never lose a lead — open a prefilled email
+      // safety net: never lose a lead — keep the form, show the error, open a prefilled email
+      if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
+      document.getElementById('sendFail').style.display = 'block';
       var body = encodeURIComponent('სახელი: '+data.name+'\nბიზნესი: '+data.business+'\nტელეფონი: '+data.phone+'\nGoogle Maps: '+mapsInfo);
       window.location.href = 'mailto:' + LEAD_EMAIL + '?subject=' + encodeURIComponent('ახალი შეკვეთა: Qrebi.ge') + '&body=' + body;
+      return;
     }
     form.style.display = 'none';
     document.getElementById('orderSuccess').style.display = 'flex';
