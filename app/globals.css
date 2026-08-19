@@ -1,0 +1,590 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   QRebi — design system.
+
+   The brief is a printed object: a card that sits on a counter in a Georgian
+   café. So the page is built like the poster that ships with it, not like a
+   SaaS site — 90° corners everywhere, one drenched brand colour, gold used as
+   a struck label rather than a tint, and shadows that are hard offsets with no
+   blur. Identity (Cosmic Blue / Ink Violet / Soft Lilac + Montserrat) comes
+   from the brandbook and is not up for negotiation; everything here is that
+   identity pushed harder.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root{
+  /* brandbook */
+  --purple:#3F1C92;        /* Cosmic Blue  */
+  --ink:#0A071C;           /* Ink Violet   */
+  --lilac:#F7F0FF;         /* Soft Lilac   */
+  --paper:#fff;
+  /* site extensions, all derived from the three above */
+  --purple-deep:#2A115E;
+  --purple-lift:#4E26AD;
+  --gold:#F5B301;
+  --gold-lift:#FFC629;
+  --text:#3E3757;          /* body on light   — 9.7:1 on paper */
+  --muted:#615478;         /* support on light — 6.4:1 on paper */
+  --on-dark:#DCCFF6;       /* body on purple/ink — 8:1+ */
+  --on-dark-dim:#B9A6E4;   /* support on purple/ink — 5.6:1+ */
+  --line:#E4D8F7;
+
+  /* rhythm — one scale, used everywhere so sections can't drift apart */
+  --gut:clamp(20px,4vw,32px);
+  --sec:clamp(64px,9vw,124px);   /* section padding, top and bottom */
+  --shadow-hard:14px 14px 0 var(--ink);
+  --shadow-hard-sm:8px 8px 0 var(--ink);
+
+  --z-bar:60; --z-fab:50; --z-head:70;
+  --head:66px;   /* locked on .nav, so the 100svh hero is exact */
+
+  --ease-quart:cubic-bezier(.25,1,.5,1);
+  --ease-quint:cubic-bezier(.22,1,.36,1);
+  --ease-expo:cubic-bezier(.16,1,.3,1);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;
+  font-family:var(--font-georgian),var(--font-display),system-ui,sans-serif;
+  font-size:17px;line-height:1.55;overflow-x:hidden}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+section{scroll-margin-top:calc(var(--head) + 10px)}
+.wrap{max-width:1160px;margin-inline:auto;padding-inline:var(--gut)}
+
+/* the ring has to survive every ground it can land on: gold buttons and the
+   gold ticker get an ink ring, everything else the gold one. */
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.btn:focus-visible,.ticker :focus-visible,mark :focus-visible,
+.rate.best :focus-visible{outline-color:var(--ink)}
+.btn-ink:focus-visible,.btn-ghost:focus-visible{outline-color:var(--gold)}
+
+/* language visibility */
+.en{display:none}
+body.lang-en .ge{display:none}
+body.lang-en .en{display:inline}
+
+/* ── type ──────────────────────────────────────────────────────────────
+   One family, four weights, a 1.3 ratio. The contrast is in weight and
+   size, never in a second typeface — the brandbook only has one.        */
+h1{font-size:clamp(36px,4.7vw,64px);line-height:1.2;font-weight:900;
+   letter-spacing:-.034em;text-wrap:balance}
+h2{font-size:clamp(29px,4.2vw,52px);line-height:1.2;font-weight:900;
+   letter-spacing:-.03em;text-wrap:balance}
+h3{font-size:clamp(18px,1.5vw,21px);font-weight:800;letter-spacing:-.012em;line-height:1.3}
+p{text-wrap:pretty}
+
+/* THE signature: a struck gold label, printed straight over the words.
+   `clone` keeps the block intact when the phrase wraps to a second line. */
+/* Painted as a band rather than an inline background: an inline background
+   fills the font's reported box (1.36em here), which put a third of an em of
+   empty gold above every marked word. The band is sized to the ink instead,
+   so it sits on the letters and consecutive marked lines stay tight. */
+mark{color:var(--ink);padding-block:0;padding-inline:.18em;
+  background:linear-gradient(var(--gold),var(--gold)) no-repeat;
+  background-size:100% 1.12em;background-position:0 .24em;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone}
+
+/* the rotating platform name in the headline. The slot keeps the line's own
+   metrics (height:1lh, aligned to the top of the line box) so swapping words
+   never nudges the baseline; only its width moves. */
+.cycle{position:relative;display:inline-block;vertical-align:top;height:1lh;
+  transition:width .42s var(--ease-quint)}
+.cycle-sizer{visibility:hidden}
+.cycle-word{position:absolute;inset:0 auto auto 0;white-space:nowrap;
+  animation:cycle-in .55s var(--ease-expo) both}
+@keyframes cycle-in{
+  from{opacity:0;transform:translateY(.24em) rotate(-1.2deg)}
+  to{opacity:1;transform:none}
+}
+
+.lede{font-size:clamp(16.5px,1.35vw,19.5px);line-height:1.55;font-weight:500;max-width:46ch}
+.sec-lede{margin-top:18px;max-width:52ch;font-size:clamp(16px,1.3vw,18.5px);
+  line-height:1.55;font-weight:500;color:var(--text)}
+
+/* the one kicker on the page — a mark, not a tracked-caps eyebrow */
+.kicker{display:inline-flex;align-items:center;gap:10px;margin-bottom:clamp(16px,2.2vw,24px);
+  padding:10px 15px 12px 12px;background:var(--ink);
+  font-size:13.5px;font-weight:800;color:#fff;letter-spacing:.005em;line-height:1.1}
+.kicker svg{width:13px;height:13px;color:var(--gold);flex:none}
+
+/* ── buttons ─────────────────────────────────────────────────────────── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:17px 26px 19px;font-family:inherit;font-weight:900;font-size:16px;line-height:1.1;
+  border:none;cursor:pointer;background:var(--gold);color:var(--ink);
+  transition:transform .2s var(--ease-quint),background .2s,box-shadow .2s var(--ease-quint)}
+.btn svg{width:18px;height:18px;flex:none;transition:transform .25s var(--ease-quint)}
+.btn:hover{background:var(--gold-lift);transform:translateY(-3px)}
+.btn:hover svg:last-child{transform:translateX(4px)}
+.btn:active{transform:translateY(0) scale(.98);transition-duration:.1s}
+.btn-ghost{background:transparent;color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.42)}
+.btn-ghost:hover{background:rgba(255,255,255,.14);color:#fff;box-shadow:inset 0 0 0 2px #fff}
+.btn-ghost svg:first-child{fill:#25D366;stroke:none}
+.btn-gold{background:var(--gold);color:var(--ink)}
+.btn-ink{background:var(--purple);color:#fff}
+.btn-ink:hover{background:var(--purple-lift)}
+.btn-ink:disabled{background:var(--muted);cursor:progress;transform:none}
+.btn-ghost:hover svg:last-child{transform:none}
+
+/* ── header ───────────────────────────────────────────────────────────
+   Sits in flow over the hero, so at rest it is the hero's own purple;
+   once the hero is behind it, it goes to Ink Violet.                    */
+header{position:sticky;top:0;z-index:var(--z-head);background:var(--purple);
+  transition:background .3s var(--ease-quart)}
+header.solid{background:var(--ink);box-shadow:0 1px 0 rgba(255,255,255,.16)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:18px;height:var(--head);
+  max-width:1160px;margin-inline:auto;padding:0 var(--gut)}
+.logo{display:flex;align-items:center;gap:9px;color:#fff;
+  font-family:var(--font-display),sans-serif;font-weight:900;font-size:22px;line-height:1.24}
+.logo svg{width:28px;height:28px;flex:none}
+.logo .tld{opacity:.5;font-weight:700}
+.navlinks{display:flex;align-items:center;gap:22px;font-size:15px;font-weight:700;color:#EDE4FC}
+
+.navlink{position:relative;padding:5px 0;transition:color .2s}
+.navlink::after{content:"";position:absolute;inset:auto 0 -2px;height:2px;background:var(--gold);
+  transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease-quart)}
+.navlink:hover{color:#fff}
+.navlink:hover::after,.navlink.active::after{transform:scaleX(1)}
+.navlink.active{color:#fff}
+
+.navphone{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-display),sans-serif;
+  font-weight:900;color:#fff;white-space:nowrap;transition:color .2s}
+.navphone svg{width:15px;height:15px;fill:var(--gold);flex:none}
+.navphone:hover{color:var(--gold)}
+.navrule{width:1px;height:20px;background:rgba(255,255,255,.24)}
+.navlinks .btn{padding:9px 19px;font-size:14.5px}
+
+#langToggle{display:flex;align-items:center;gap:8px;padding:0;background:none;border:none;
+  cursor:pointer;font-family:inherit;font-size:13.5px;font-weight:800;line-height:1.1}
+.seg{transition:color .2s}
+body:not(.lang-en) .seg-ge,body.lang-en .seg-en{color:#fff}
+body:not(.lang-en) .seg-en,body.lang-en .seg-ge{color:var(--on-dark-dim)}
+#langToggle:hover .seg{color:#fff}
+
+/* ── hero ─────────────────────────────────────────────────────────────
+   Drenched. Type on the left, the product drawn at full size on the
+   right, tapped, with the review it produces landing on top of it.     */
+.hero{position:relative;display:flex;flex-direction:column;
+  min-height:calc(100svh - var(--head));
+  background:var(--purple);color:#fff;overflow:hidden;isolation:isolate}
+.hero::before,.price-sec::before{content:"";position:absolute;inset:0;z-index:-1;
+  pointer-events:none;opacity:.045;
+  background-repeat:repeat;background-size:420px 420px;
+  background-image:
+    radial-gradient(circle at 68px 60px,#fff 0 35px,transparent 36px),
+    radial-gradient(circle at 250px 38px,#fff 0 16px,transparent 17px),
+    radial-gradient(circle at 360px 146px,#fff 0 44px,transparent 45px),
+    radial-gradient(circle at 146px 196px,#fff 0 22px,transparent 23px),
+    radial-gradient(circle at 46px 304px,#fff 0 29px,transparent 30px),
+    radial-gradient(circle at 244px 334px,#fff 0 50px,transparent 51px),
+    radial-gradient(circle at 368px 372px,#fff 0 21px,transparent 22px)}
+/* The right column runs to the viewport edge rather than stopping at the
+   container, so the card reads as an object laid on the page instead of an
+   asset parked in a box. The left column keeps the container's own margin. */
+.hero-grid{flex:1;display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(340px,clamp(340px,44%,620px));
+  column-gap:clamp(28px,4vw,64px);align-items:center;align-content:center;
+  padding:clamp(40px,5vw,60px) 0 clamp(40px,5vw,60px)
+    max(var(--gut),calc((100vw - 1160px) / 2))}
+.hero-copy{min-width:0;max-width:42rem}
+.hero .lede{margin-top:clamp(18px,2.2vw,26px);color:var(--on-dark)}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:clamp(28px,3.4vw,38px)}
+
+.hero-facts{display:flex;flex-wrap:wrap;
+  padding-inline:max(var(--gut),calc((100vw - 1160px) / 2));
+  border-top:1px solid rgba(255,255,255,.24);
+  font-size:15px;font-weight:600;color:var(--on-dark)}
+.hero-facts li{display:flex;align-items:center;gap:11px;
+  padding:clamp(15px,1.8vw,20px) clamp(20px,2.6vw,34px) clamp(15px,1.8vw,20px) 0}
+.hero-facts li+li{padding-left:clamp(20px,2.6vw,34px);
+  border-left:1px solid rgba(255,255,255,.2)}
+.hero-facts svg{width:17px;height:17px;color:var(--gold);flex:none}
+.hero-facts b{font-weight:900;color:#fff}
+
+/* ── the card, as an object ───────────────────────────────────────────
+   Built in markup rather than exported flat, so the Georgian type in it
+   is the same live font as the rest of the page.                       */
+.hero-stage{display:flex;align-items:center;justify-content:flex-end}
+.card-obj{position:relative;container-type:inline-size;width:min(600px,100%);rotate:-5deg;
+  filter:drop-shadow(20px 20px 0 rgba(10,7,28,.6))}
+.card-face{position:relative;overflow:hidden;aspect-ratio:1.586;background:var(--paper);color:var(--ink);
+  padding:7.5cqi 7.5cqi 6.5cqi;display:flex;flex-direction:column;gap:3.6cqi}
+.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:3cqi}
+.card-stars{display:flex;gap:1.4cqi;color:var(--gold)}
+.card-stars svg{width:5.2cqi;height:5.2cqi}
+.card-brand{font-family:var(--font-display),sans-serif;font-size:3.9cqi;font-weight:900;
+  line-height:1.24;color:var(--purple)}
+.card-brand i{font-style:normal;opacity:.5}
+.card-ask{max-width:64%;font-size:6.3cqi;font-weight:900;line-height:1.22;letter-spacing:-.024em}
+.card-ask b{display:inline-block;font-weight:inherit;
+  animation:cycle-in .55s var(--ease-expo) both}
+.card-foot{position:relative;display:flex;align-items:center;gap:2cqi;margin-top:auto;
+  padding-top:4cqi;font-size:3.4cqi;font-weight:800}
+/* the rule stops where the text column stops — it never runs under the tap disc */
+.card-foot::before{content:"";position:absolute;inset:0 auto auto 0;width:54%;height:.55cqi;
+  background:var(--ink)}
+.card-g{display:inline-flex;align-items:center;gap:1.6cqi;color:var(--text);
+  animation:cycle-in .55s var(--ease-expo) both}
+.card-g svg{width:4.2cqi;height:4.2cqi}
+/* no third-party mark is redrawn — Google keeps its own G, the rest get a star */
+.card-g-star,.toast-g .card-g-star{color:var(--gold)}
+
+/* the tap target, printed on the card and ringing when it is live */
+.card-zone{position:absolute;right:8%;top:46%;width:16cqi;height:16cqi;
+  display:grid;place-items:center}
+.card-disc{grid-area:1/1;display:grid;place-items:center;width:100%;height:100%;
+  border-radius:50%;background:var(--gold);color:var(--ink)}
+.card-disc svg{width:56%;height:64%}
+.card-zone i{grid-area:1/1;width:100%;height:100%;border:.7cqi solid var(--gold);
+  border-radius:50%;animation:ping 2.8s var(--ease-expo) infinite;opacity:0}
+.card-zone i:nth-child(2){animation-delay:.55s}
+.card-zone i:nth-child(3){animation-delay:1.1s}
+@keyframes ping{0%{transform:scale(1);opacity:.85}70%{opacity:0}100%{transform:scale(2.9);opacity:0}}
+
+/* the review it produced, landing over the card's bottom-left corner */
+.card-toast{position:absolute;left:-8%;bottom:-15%;rotate:5deg;
+  display:flex;align-items:center;gap:11px;padding:11px 16px 11px 12px;
+  background:var(--paper);color:var(--ink);box-shadow:var(--shadow-hard-sm);
+  animation:toast-in .7s var(--ease-expo) both;animation-delay:1.15s}
+.toast-g svg{width:22px;height:22px;display:block}
+.toast-body{display:flex;flex-direction:column;gap:3px}
+.toast-stars{display:flex;gap:2px;color:var(--gold)}
+.toast-stars svg{width:11px;height:11px}
+.card-toast b{font-size:13px;font-weight:800;white-space:nowrap}
+@keyframes toast-in{from{opacity:0;transform:translate(-14px,18px) scale(.94)}
+  to{opacity:1;transform:none}}
+
+/* hero entrance — the single orchestrated moment on the page */
+.hero-copy>*,.hero-facts{animation:rise .85s var(--ease-expo) both}
+.hero-facts{animation-name:fade}
+.hero-copy>*:nth-child(1){animation-delay:.02s}
+.hero-copy>*:nth-child(2){animation-delay:.09s}
+.hero-copy>*:nth-child(3){animation-delay:.17s}
+.hero-copy>*:nth-child(4){animation-delay:.25s}
+.hero-facts{animation-delay:.36s}
+.card-obj{animation:card-in 1.05s var(--ease-expo) both;animation-delay:.2s}
+@keyframes card-in{from{opacity:0;transform:translateY(34px) scale(.94);rotate:-13deg}
+  to{opacity:1;transform:none;rotate:-5deg}}
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+/* ── ticker ───────────────────────────────────────────────────────────
+   The offer at speed, in the second brand colour. Gold on ink is the
+   loudest pairing the brand owns, so it gets one strip and no more.    */
+.ticker{background:var(--gold);color:var(--ink);overflow:hidden;
+  border-block:3px solid var(--ink)}
+.ticker-track{display:flex;width:max-content;animation:roll 34s linear infinite}
+.ticker ul{display:flex;align-items:center}
+.ticker li{display:flex;align-items:center;gap:13px;padding:15px 0;font-size:15px;
+  font-weight:900;letter-spacing:-.005em;white-space:nowrap}
+.ticker li svg{width:11px;height:11px;margin-inline:26px;flex:none;opacity:.55}
+@keyframes roll{to{transform:translateX(-50%)}}
+.ticker:hover .ticker-track{animation-play-state:paused}
+
+/* ── steps ────────────────────────────────────────────────────────────
+   Three solid blocks butted together into one bar, running Soft Lilac →
+   Cosmic Blue → gold. The colour progression carries the sequence, so the
+   numbers are a label rather than the whole idea, and nothing here needs
+   an illustration to explain it.                                        */
+.steps-sec{padding-block:var(--sec)}
+.steps{margin-top:clamp(34px,4.4vw,52px);display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+.step{display:flex;flex-direction:column;align-items:flex-start;
+  min-height:clamp(300px,30vw,400px);
+  padding:clamp(26px,3.2vw,42px) clamp(22px,2.6vw,36px) clamp(30px,3.6vw,46px)}
+/* the bar runs edge to edge, but its text still lines up with the container */
+.step:first-child{padding-left:max(var(--gut),calc((100vw - 1160px) / 2))}
+.step:last-child{padding-right:max(var(--gut),calc((100vw - 1160px) / 2))}
+.step-ico{display:grid;place-items:center;width:44px;height:44px}
+.step-ico svg{width:100%;height:100%}
+.step-n{margin-top:clamp(30px,3.6vw,52px);font-family:var(--font-display),sans-serif;
+  font-size:clamp(46px,5.2vw,74px);font-weight:900;line-height:1;letter-spacing:-.045em}
+.step h3{margin:clamp(14px,1.6vw,20px) 0 9px}
+.step p{font-size:16px;line-height:1.55;max-width:34ch}
+
+.step-a{background:var(--lilac);color:var(--ink)}
+.step-a .step-ico,.step-a .step-n{color:var(--purple)}
+.step-a p{color:var(--text)}
+
+.step-b{background:var(--purple);color:#fff}
+.step-b .step-ico,.step-b .step-n{color:var(--gold)}
+.step-b p{color:var(--on-dark)}
+
+.step-c{background:var(--gold);color:var(--ink)}
+.step-c .step-ico,.step-c .step-n{color:var(--ink)}
+.step-c p{color:#3B2E05}
+
+/* ── proof ────────────────────────────────────────────────────────────
+   The dark band that breaks up two white sections, and where the brand's
+   core line finally gets to be the biggest thing on screen.            */
+.proof{display:grid;grid-template-columns:minmax(0,44%) minmax(0,56%);
+  background:var(--ink);color:#fff;align-items:stretch}
+.proof-shot{position:relative;min-height:clamp(420px,52vw,660px);overflow:hidden;background:var(--purple-deep)}
+.proof-shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  object-position:50% 68%;filter:saturate(.95) contrast(1.04)}
+.proof-copy{padding:var(--sec) var(--gut) var(--sec) clamp(28px,4.5vw,64px);
+  max-width:44rem}
+.proof-copy>.btn{margin-top:clamp(28px,3.4vw,38px)}
+
+.included{margin-top:clamp(30px,4vw,44px);display:flex;flex-direction:column}
+.included li{display:flex;gap:clamp(14px,1.8vw,20px);padding:clamp(18px,2.4vw,24px) 0;
+  border-top:1px solid rgba(255,255,255,.18)}
+.included li:last-child{border-bottom:1px solid rgba(255,255,255,.18)}
+.inc-icon{flex:none;display:grid;place-items:center;width:46px;height:46px;
+  color:var(--gold);box-shadow:inset 0 0 0 2px rgba(245,179,1,.45)}
+.inc-icon svg{width:23px;height:23px}
+.included h3{color:#fff}
+.included p{margin-top:7px;font-size:15.5px;line-height:1.55;color:var(--on-dark-dim);max-width:44ch}
+
+/* ── places ───────────────────────────────────────────────────────────
+   A shelf that drifts on its own; the track holds the six photographs
+   twice, so translating by exactly one set loops seamlessly.           */
+.places{padding-block:var(--sec);--card:clamp(244px,30vw,392px);--gap:10px}
+.gallery{margin-top:clamp(34px,4vw,48px);overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.gallery-track{display:flex;gap:var(--gap);width:max-content;animation:shelf 58s linear infinite}
+.gallery:hover .gallery-track,.gallery:focus-within .gallery-track{animation-play-state:paused}
+@keyframes shelf{to{transform:translateX(calc(-6 * (var(--card) + var(--gap))))}}
+.gallery figure{position:relative;flex:0 0 var(--card);overflow:hidden;
+  background:var(--ink);isolation:isolate}
+.gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;
+  transition:transform .8s var(--ease-quart)}
+.gallery figure:hover img{transform:scale(1.05)}
+.gallery figcaption{position:absolute;inset:auto 0 0;display:flex;align-items:center;gap:11px;
+  padding:14px 18px 17px;background:var(--ink);color:#fff;
+  font-size:15.5px;font-weight:800;letter-spacing:-.005em}
+.gallery figcaption svg{width:19px;height:19px;color:var(--gold);flex:none}
+.note{max-width:58ch;margin-top:clamp(32px,4vw,48px);font-size:clamp(16px,1.4vw,18.5px);
+  line-height:1.5;font-weight:700;color:var(--purple)}
+
+/* ── pricing ──────────────────────────────────────────────────────────
+   A price list, set like one: quantity, leader dots, figure. The tier we
+   want you on is a solid gold bar rather than a badged card.           */
+.price-sec{position:relative;background:var(--purple);color:#fff;padding-block:var(--sec);
+  overflow:hidden;isolation:isolate}
+.price-head .sec-lede{color:var(--on-dark)}
+.rates{margin-top:clamp(34px,4.4vw,52px);border-top:1px solid rgba(255,255,255,.24)}
+.rate{display:flex;align-items:baseline;gap:clamp(12px,2vw,20px);padding:clamp(17px,2vw,23px) 0;
+  border-bottom:1px solid rgba(255,255,255,.24)}
+.rate .qty{font-size:clamp(17.5px,1.9vw,23px);font-weight:800}
+.rate .dots{flex:1;min-width:24px;height:1px;transform:translateY(-6px);
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.42) 0 4px,transparent 4px 11px)}
+.rate .amt{display:inline-flex;align-items:baseline;
+  font-family:var(--font-display),sans-serif;font-size:clamp(32px,4.4vw,54px);font-weight:900;
+  line-height:1.18;letter-spacing:-.035em;white-space:nowrap}
+.rate .amt i{font-style:normal;font-size:.52em;margin-left:.06em}
+.rate .amt em{font-style:normal;font-family:var(--font-georgian),sans-serif;
+  font-size:13.5px;font-weight:700;color:var(--on-dark-dim);margin-left:10px}
+
+.rate.best{background:var(--gold);color:var(--ink);border-bottom-color:transparent;
+  margin-inline:calc(var(--gut) * -.6);padding-inline:calc(var(--gut) * .6);
+  padding-block:clamp(22px,2.8vw,32px)}
+.rate.best .qty{font-size:clamp(19px,2.2vw,27px);font-weight:900}
+.rate.best .amt{font-size:clamp(38px,5.4vw,66px)}
+.rate.best .amt em{color:rgba(10,7,28,.62)}
+.rate.best .dots{background:repeating-linear-gradient(90deg,rgba(10,7,28,.34) 0 4px,transparent 4px 11px)}
+.rate-tag{align-self:center;padding:7px 11px 9px;background:var(--ink);color:var(--gold);
+  font-size:12px;font-weight:900;line-height:1.1;white-space:nowrap}
+
+.price-foot{margin-top:clamp(30px,3.6vw,42px);display:flex;align-items:center;
+  gap:clamp(18px,2.4vw,30px);flex-wrap:wrap}
+.price-note{display:flex;align-items:center;gap:10px;max-width:46ch;
+  font-size:15px;font-weight:700;color:var(--on-dark)}
+.price-note svg{width:16px;height:16px;color:var(--gold);flex:none}
+
+/* ── order ────────────────────────────────────────────────────────────── */
+.order-sec{padding-block:var(--sec);background:var(--lilac)}
+.order-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(36px,5vw,72px);align-items:start}
+.order-info p{margin-top:18px;font-size:17.5px;line-height:1.55;color:var(--text);max-width:40ch}
+.contacts{margin-top:clamp(28px,3.4vw,38px);display:flex;flex-direction:column}
+.contacts a{display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+  padding:17px 0;border-top:1px solid var(--line);font-weight:800;font-size:17px;
+  transition:color .18s}
+.contacts a:last-child{border-bottom:1px solid var(--line)}
+.contacts a:hover{color:var(--purple)}
+.contacts .lab{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;
+  font-weight:700;color:var(--muted)}
+.contacts .lab svg{width:13px;height:13px;transition:transform .25s var(--ease-quint)}
+.contacts a:hover .lab svg{transform:translateX(4px)}
+.contacts .wa{color:#12703A}
+
+form{background:var(--paper);padding:clamp(26px,3.4vw,38px) clamp(22px,3vw,34px);
+  display:flex;flex-direction:column;gap:16px;box-shadow:var(--shadow-hard)}
+label{display:flex;flex-direction:column;gap:7px;font-size:13.5px;font-weight:800;color:var(--text)}
+input[type=text],input[type=tel]{padding:15px 16px;border:2px solid var(--line);
+  font-size:16px;font-family:inherit;color:var(--ink);outline:none;
+  transition:border-color .15s,box-shadow .15s}
+input::placeholder{color:var(--muted);opacity:1}
+input:focus{border-color:var(--purple);outline:none;box-shadow:0 0 0 3px rgba(63,28,146,.16)}
+form .btn{margin-top:4px}
+.reg-note{padding:13px 15px;font-size:13.5px;line-height:1.5;font-weight:700}
+.form-foot{display:flex;align-items:center;justify-content:center;gap:8px;
+  font-size:13px;color:var(--muted);font-weight:600;text-align:center}
+.form-foot svg{width:13px;height:13px;color:var(--purple);flex:none}
+.success{background:var(--paper);padding:clamp(44px,6vw,64px) 32px;display:flex;
+  flex-direction:column;align-items:center;gap:14px;text-align:center;box-shadow:var(--shadow-hard)}
+.success .tick{display:grid;place-items:center;width:64px;height:64px;
+  background:var(--purple);color:#fff}
+.success .tick svg{width:30px;height:30px}
+
+/* ── footer ───────────────────────────────────────────────────────────── */
+footer{background:var(--ink);color:var(--on-dark-dim);padding-block:clamp(34px,4vw,52px);
+  font-size:14.5px}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.foot-contacts{display:flex;gap:22px;flex-wrap:wrap;font-weight:700}
+.foot-contacts a{color:#EDE4FC;transition:color .18s}
+.foot-contacts a:hover{color:var(--gold)}
+
+/* ── sticky mobile bar + whatsapp ─────────────────────────────────────── */
+.cta-bar{display:none;position:fixed;inset:auto 0 0;z-index:var(--z-bar);gap:8px;
+  padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:var(--ink);
+  transform:translateY(115%);transition:transform .35s var(--ease-quint)}
+.cta-bar.show{transform:none}
+.cta-bar .btn{flex:1;padding:14px 12px;font-size:15.5px}
+.cta-bar .wa-sq{flex:none;display:grid;place-items:center;width:54px;background:#25D366}
+.cta-bar .wa-sq svg{width:26px;height:26px;fill:#fff}
+.wa-fab{position:fixed;right:22px;bottom:22px;z-index:var(--z-fab);width:58px;height:58px;
+  background:#25D366;display:grid;place-items:center;box-shadow:var(--shadow-hard-sm);
+  transition:transform .22s var(--ease-quint)}
+.wa-fab:hover{transform:translateY(-3px)}
+.wa-fab svg{width:29px;height:29px;fill:#fff}
+
+/* ── scroll reveals ───────────────────────────────────────────────────
+   Content is visible by default; JS only opts elements into the reveal,
+   so a headless render or a background tab can never ship a blank page. */
+html.js [data-rise]{opacity:0;transform:translateY(18px)}
+html.js [data-rise].seen{opacity:1;transform:none;
+  transition:opacity .7s var(--ease-expo),transform .7s var(--ease-expo)}
+html.js [data-stagger]>*{opacity:0;transform:translateY(16px)}
+html.js [data-stagger].seen>*{animation:rise .65s var(--ease-quint) both;
+  animation-delay:calc(var(--i,0) * 75ms)}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  html.js [data-rise],html.js [data-stagger]>*{opacity:1;transform:none;animation:none}
+  .hero-copy>*,.hero-facts,.card-obj,.card-toast,.cycle-word{animation:none}
+  .cycle{transition:none}
+  .card-ask b,.card-g{animation:none}
+  .card-zone i{animation:none;opacity:0}
+  .ticker-track{animation:none}
+  /* hand the shelf back as a plain scroller instead of drifting */
+  .gallery{overflow-x:auto;scroll-snap-type:x mandatory;
+    padding-inline:max(var(--gut),calc((100vw - 1160px) / 2 + var(--gut)))}
+  .gallery-track{animation:none;width:auto}
+  .gallery figure{scroll-snap-align:start}
+  .gallery figure:hover img{transform:none}
+  .btn:hover,.wa-fab:hover{transform:none}
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+
+/* ═══ responsive ═══════════════════════════════════════════════════════
+   Four stops, ascending, each with one job:
+     1080  the hero's two columns stop fitting side by side comfortably
+      900  every two-column band becomes one column
+      680  phone layout: sticky order bar takes over the primary CTA
+      420  smallest phones — tighten the chrome, never the tap targets
+   ═════════════════════════════════════════════════════════════════════ */
+@media (max-width:1080px){
+  .hero-grid{column-gap:clamp(22px,3vw,40px);
+    grid-template-columns:minmax(0,1fr) minmax(300px,46%)}
+  .proof{grid-template-columns:minmax(0,40%) minmax(0,60%)}
+}
+
+@media (max-width:900px){
+  .hero{min-height:0}
+  .hero-grid{grid-template-columns:1fr;
+    padding:clamp(36px,6vw,56px) var(--gut) clamp(40px,6vw,60px)}
+  .hero-copy{max-width:38rem}
+  .hero-stage{justify-content:flex-start;padding-top:clamp(36px,6vw,52px)}
+  .card-obj{width:min(460px,92%);translate:none}
+
+  /* one column: the three tones now stack into a single vertical bar */
+  .steps{grid-template-columns:1fr}
+  .step{min-height:0;padding:clamp(24px,4vw,34px) var(--gut) clamp(28px,4.4vw,38px)}
+  .step:first-child,.step:last-child{padding-inline:var(--gut)}
+  .step-n{margin-top:clamp(16px,2.6vw,24px)}
+  .step p{max-width:46ch}
+
+  .proof{grid-template-columns:1fr}
+  .proof-shot{min-height:clamp(300px,62vw,460px)}
+  .proof-copy{padding:var(--sec) var(--gut);max-width:none}
+
+  .order-grid{grid-template-columns:1fr}
+  /* the form is the point of the section — put it above the phone numbers */
+  .order-form-col{order:-1}
+}
+
+@media (max-width:680px){
+  .cta-bar{display:flex}
+  .wa-fab{display:none}
+  body{padding-bottom:78px}
+  /* the phone number is the point on mobile — the section links are not */
+  .navhide{display:none}
+  .navlinks{gap:14px}
+  .navphone{font-size:15.5px}
+
+  .hero-cta{flex-direction:column;align-items:stretch}
+  .hero-cta .btn{width:100%}
+  .card-obj{width:min(400px,88%);margin-left:5%;rotate:-3deg;
+    filter:drop-shadow(13px 13px 0 rgba(10,7,28,.6))}
+  /* a divided row cannot hold three Georgian facts at phone width */
+  .hero-facts{flex-direction:column}
+  .hero-facts li{padding:13px 0}
+  .hero-facts li+li{padding-left:0;border-left:none;
+    border-top:1px solid rgba(255,255,255,.16)}
+
+
+  .rate{flex-wrap:wrap;gap:8px 14px}
+  .rate .dots{display:none}
+  .rate .qty{flex:1 0 auto}
+  .rate .amt{margin-left:auto}
+  .rate-tag{order:3;flex:0 0 auto}
+  .rate.best{margin-inline:calc(var(--gut) * -1);padding-inline:var(--gut)}
+
+  .contacts a{flex-direction:column;align-items:flex-start;gap:5px}
+  .foot{flex-direction:column;align-items:flex-start;gap:18px}
+}
+
+@media (max-width:420px){
+  .nav{gap:10px;padding-inline:16px}
+  .navlinks .btn{padding:8px 15px}
+  .logo{font-size:18px;gap:6px}
+  .logo svg{width:24px;height:24px}
+  .navlinks{gap:11px}
+  .navphone{font-size:14px}
+  #langToggle{font-size:12.5px;gap:6px}
+  .ticker li{font-size:14px}
+  .ticker li svg{margin-inline:18px}
+  .card-toast{left:-6%;padding:9px 12px 9px 9px;gap:9px}
+  .card-toast b{font-size:12px}
+  .toast-g svg{width:19px;height:19px}
+}
+
+/* form error state — the only red on the page, so it needs no other signal */
+.reg-note{background:#FDECEC;color:#9F1F19}
+
+/* 320px-class phones: the header is the one row with no slack left in it. */
+@media (max-width:365px){
+  .nav{gap:8px;padding-inline:13px}
+  .logo{font-size:16px;gap:5px}
+  .logo svg{width:22px;height:22px}
+  .navlinks{gap:9px}
+  .navphone{font-size:13px;gap:5px}
+  .navphone svg{width:13px;height:13px}
+  #langToggle{font-size:12px;gap:5px}
+  .cta-bar .btn{min-width:0;font-size:14.5px;padding-inline:8px}
+}
+
+/* On the narrowest phones the headline sits one word from a line break, so an
+   animated slot width rewraps it mid-flight and settles back. Snap instead. */
+@media (max-width:400px){
+  .cycle{transition:none}
+}
+
+/* At 320px-class widths no word length leaves the wrap alone, so give the
+   platform its own line: the count is then the same whichever name is up. */
+@media (max-width:344px){
+  .cycle{display:block}
+}
