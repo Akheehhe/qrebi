@@ -1,0 +1,36 @@
+<!doctype html>
+<!--
+  TEMPORARY. GitHub Pages serves this repo's root at qrebi.ge, and the Next
+  rebuild moved the old static page to legacy/, which left the domain on a 404.
+  This forwards to the Vercel deployment until qrebi.ge's DNS is repointed:
+
+      A      @      76.76.21.21
+      CNAME  www    cname.vercel-dns.com
+
+  Once qrebi.ge resolves to Vercel, disable GitHub Pages on the repo and
+  delete this file — Next.js ignores it, so it affects nothing else.
+-->
+<html lang="ka">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QRebi.ge</title>
+<meta http-equiv="refresh" content="0; url=https://qrebi.vercel.app/">
+<link rel="canonical" href="https://qrebi.vercel.app/">
+<style>
+  html{background:#3F1C92;color:#fff;
+    font-family:system-ui,-apple-system,"Noto Sans Georgian",sans-serif}
+  body{min-height:100vh;margin:0;display:grid;place-items:center;
+    text-align:center;padding:24px;gap:18px;align-content:center}
+  b{font-size:22px;font-weight:900;letter-spacing:.01em}
+  a{display:inline-block;padding:15px 26px;background:#F5B301;color:#0A071C;
+    font-weight:900;text-decoration:none}
+</style>
+</head>
+<body>
+  <b>QRebi<span style="opacity:.5">.ge</span></b>
+  <p>გადამისამართება… / Redirecting…</p>
+  <a href="https://qrebi.vercel.app/">გახსენი საიტი / Open the site</a>
+  <script>location.replace('https://qrebi.vercel.app/')</script>
+</body>
+</html>
