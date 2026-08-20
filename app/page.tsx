@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Cycle from '@/components/Cycle'
-import HeroCard from '@/components/HeroCard'
 import { PlatformRotator } from '@/components/platform'
 import OrderForm from '@/components/OrderForm'
 import { EMAIL, PHONE, T, WHATSAPP, WhatsAppIcon } from '@/components/shared'
@@ -115,10 +114,6 @@ export default function Page() {
                 WhatsApp
               </a>
             </div>
-          </div>
-
-          <div className="hero-stage">
-            <HeroCard />
           </div>
         </div>
         </PlatformRotator>

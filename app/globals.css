@@ -67,7 +67,7 @@ body.lang-en .en{display:inline}
 /* ── type ──────────────────────────────────────────────────────────────
    One family, four weights, a 1.3 ratio. The contrast is in weight and
    size, never in a second typeface — the brandbook only has one.        */
-h1{font-size:clamp(36px,4.7vw,64px);line-height:1.2;font-weight:900;
+h1{font-size:clamp(40px,7.4vw,88px);line-height:1.14;font-weight:900;
    letter-spacing:-.034em;text-wrap:balance}
 h2{font-size:clamp(29px,4.2vw,52px);line-height:1.2;font-weight:900;
    letter-spacing:-.03em;text-wrap:balance}
@@ -181,13 +181,12 @@ body:not(.lang-en) .seg-en,body.lang-en .seg-ge{color:var(--on-dark-dim)}
 /* The right column runs to the viewport edge rather than stopping at the
    container, so the card reads as an object laid on the page instead of an
    asset parked in a box. The left column keeps the container's own margin. */
-.hero-grid{flex:1;display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(340px,clamp(340px,44%,620px));
-  column-gap:clamp(28px,4vw,64px);align-items:center;align-content:center;
-  padding:clamp(40px,5vw,60px) 0 clamp(40px,5vw,60px)
-    max(var(--gut),calc((100vw - 1160px) / 2))}
-.hero-copy{min-width:0;max-width:42rem}
-.hero .lede{margin-top:clamp(18px,2.2vw,26px);color:var(--on-dark)}
+.hero-grid{flex:1;display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(44px,6vw,84px) var(--gut);
+  max-width:1160px;margin-inline:auto;width:100%}
+.hero-copy{min-width:0;max-width:none}
+.hero h1{max-width:15ch}
+.hero .lede{margin-top:clamp(20px,2.4vw,30px);max-width:44ch;color:var(--on-dark)}
 .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:clamp(28px,3.4vw,38px)}
 
 .hero-facts{display:flex;flex-wrap:wrap;
@@ -201,59 +200,6 @@ body:not(.lang-en) .seg-en,body.lang-en .seg-ge{color:var(--on-dark-dim)}
 .hero-facts svg{width:17px;height:17px;color:var(--gold);flex:none}
 .hero-facts b{font-weight:900;color:#fff}
 
-/* ── the card, as an object ───────────────────────────────────────────
-   Built in markup rather than exported flat, so the Georgian type in it
-   is the same live font as the rest of the page.                       */
-.hero-stage{display:flex;align-items:center;justify-content:flex-end}
-.card-obj{position:relative;container-type:inline-size;width:min(600px,100%);rotate:-5deg;
-  filter:drop-shadow(20px 20px 0 rgba(10,7,28,.6))}
-.card-face{position:relative;overflow:hidden;aspect-ratio:1.586;background:var(--paper);color:var(--ink);
-  padding:7.5cqi 7.5cqi 6.5cqi;display:flex;flex-direction:column;gap:3.6cqi}
-.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:3cqi}
-.card-stars{display:flex;gap:1.4cqi;color:var(--gold)}
-.card-stars svg{width:5.2cqi;height:5.2cqi}
-.card-brand{font-family:var(--font-display),sans-serif;font-size:3.9cqi;font-weight:900;
-  line-height:1.24;color:var(--purple)}
-.card-brand i{font-style:normal;opacity:.5}
-.card-ask{max-width:64%;font-size:6.3cqi;font-weight:900;line-height:1.22;letter-spacing:-.024em}
-.card-ask b{display:inline-block;font-weight:inherit;
-  animation:cycle-in .55s var(--ease-expo) both}
-.card-foot{position:relative;display:flex;align-items:center;gap:2cqi;margin-top:auto;
-  padding-top:4cqi;font-size:3.4cqi;font-weight:800}
-/* the rule stops where the text column stops — it never runs under the tap disc */
-.card-foot::before{content:"";position:absolute;inset:0 auto auto 0;width:54%;height:.55cqi;
-  background:var(--ink)}
-.card-g{display:inline-flex;align-items:center;gap:1.6cqi;color:var(--text);
-  animation:cycle-in .55s var(--ease-expo) both}
-.card-g svg{width:4.2cqi;height:4.2cqi}
-/* no third-party mark is redrawn — Google keeps its own G, the rest get a star */
-.card-g-star,.toast-g .card-g-star{color:var(--gold)}
-
-/* the tap target, printed on the card and ringing when it is live */
-.card-zone{position:absolute;right:8%;top:46%;width:16cqi;height:16cqi;
-  display:grid;place-items:center}
-.card-disc{grid-area:1/1;display:grid;place-items:center;width:100%;height:100%;
-  border-radius:50%;background:var(--gold);color:var(--ink)}
-.card-disc svg{width:56%;height:64%}
-.card-zone i{grid-area:1/1;width:100%;height:100%;border:.7cqi solid var(--gold);
-  border-radius:50%;animation:ping 2.8s var(--ease-expo) infinite;opacity:0}
-.card-zone i:nth-child(2){animation-delay:.55s}
-.card-zone i:nth-child(3){animation-delay:1.1s}
-@keyframes ping{0%{transform:scale(1);opacity:.85}70%{opacity:0}100%{transform:scale(2.9);opacity:0}}
-
-/* the review it produced, landing over the card's bottom-left corner */
-.card-toast{position:absolute;left:-8%;bottom:-15%;rotate:5deg;
-  display:flex;align-items:center;gap:11px;padding:11px 16px 11px 12px;
-  background:var(--paper);color:var(--ink);box-shadow:var(--shadow-hard-sm);
-  animation:toast-in .7s var(--ease-expo) both;animation-delay:1.15s}
-.toast-g svg{width:22px;height:22px;display:block}
-.toast-body{display:flex;flex-direction:column;gap:3px}
-.toast-stars{display:flex;gap:2px;color:var(--gold)}
-.toast-stars svg{width:11px;height:11px}
-.card-toast b{font-size:13px;font-weight:800;white-space:nowrap}
-@keyframes toast-in{from{opacity:0;transform:translate(-14px,18px) scale(.94)}
-  to{opacity:1;transform:none}}
-
 /* hero entrance — the single orchestrated moment on the page */
 .hero-copy>*,.hero-facts{animation:rise .85s var(--ease-expo) both}
 .hero-facts{animation-name:fade}
@@ -262,9 +208,6 @@ body:not(.lang-en) .seg-en,body.lang-en .seg-ge{color:var(--on-dark-dim)}
 .hero-copy>*:nth-child(3){animation-delay:.17s}
 .hero-copy>*:nth-child(4){animation-delay:.25s}
 .hero-facts{animation-delay:.36s}
-.card-obj{animation:card-in 1.05s var(--ease-expo) both;animation-delay:.2s}
-@keyframes card-in{from{opacity:0;transform:translateY(34px) scale(.94);rotate:-13deg}
-  to{opacity:1;transform:none;rotate:-5deg}}
 @keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 
@@ -464,10 +407,8 @@ html.js [data-stagger].seen>*{animation:rise .65s var(--ease-quint) both;
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   html.js [data-rise],html.js [data-stagger]>*{opacity:1;transform:none;animation:none}
-  .hero-copy>*,.hero-facts,.card-obj,.card-toast,.cycle-word{animation:none}
+  .hero-copy>*,.hero-facts,.cycle-word{animation:none}
   .cycle{transition:none}
-  .card-ask b,.card-g{animation:none}
-  .card-zone i{animation:none;opacity:0}
   .ticker-track{animation:none}
   /* hand the shelf back as a plain scroller instead of drifting */
   .gallery{overflow-x:auto;scroll-snap-type:x mandatory;
@@ -487,18 +428,13 @@ html.js [data-stagger].seen>*{animation:rise .65s var(--ease-quint) both;
       420  smallest phones — tighten the chrome, never the tap targets
    ═════════════════════════════════════════════════════════════════════ */
 @media (max-width:1080px){
-  .hero-grid{column-gap:clamp(22px,3vw,40px);
-    grid-template-columns:minmax(0,1fr) minmax(300px,46%)}
   .proof{grid-template-columns:minmax(0,40%) minmax(0,60%)}
 }
 
 @media (max-width:900px){
   .hero{min-height:0}
-  .hero-grid{grid-template-columns:1fr;
-    padding:clamp(36px,6vw,56px) var(--gut) clamp(40px,6vw,60px)}
-  .hero-copy{max-width:38rem}
-  .hero-stage{justify-content:flex-start;padding-top:clamp(36px,6vw,52px)}
-  .card-obj{width:min(460px,92%);translate:none}
+  .hero-grid{padding:clamp(40px,7vw,64px) var(--gut) clamp(44px,7vw,68px)}
+  .hero-copy{max-width:none}
 
   /* one column: the three tones now stack into a single vertical bar */
   .steps{grid-template-columns:1fr}
@@ -527,8 +463,6 @@ html.js [data-stagger].seen>*{animation:rise .65s var(--ease-quint) both;
 
   .hero-cta{flex-direction:column;align-items:stretch}
   .hero-cta .btn{width:100%}
-  .card-obj{width:min(400px,88%);margin-left:5%;rotate:-3deg;
-    filter:drop-shadow(13px 13px 0 rgba(10,7,28,.6))}
   /* a divided row cannot hold three Georgian facts at phone width */
   .hero-facts{flex-direction:column}
   .hero-facts li{padding:13px 0}
@@ -557,9 +491,6 @@ html.js [data-stagger].seen>*{animation:rise .65s var(--ease-quint) both;
   #langToggle{font-size:12.5px;gap:6px}
   .ticker li{font-size:14px}
   .ticker li svg{margin-inline:18px}
-  .card-toast{left:-6%;padding:9px 12px 9px 9px;gap:9px}
-  .card-toast b{font-size:12px}
-  .toast-g svg{width:19px;height:19px}
 }
 
 /* form error state — the only red on the page, so it needs no other signal */
@@ -583,8 +514,8 @@ html.js [data-stagger].seen>*{animation:rise .65s var(--ease-quint) both;
   .cycle{transition:none}
 }
 
-/* At 320px-class widths no word length leaves the wrap alone, so give the
-   platform its own line: the count is then the same whichever name is up. */
-@media (max-width:344px){
+/* Below ~375px no word length leaves the wrap alone, so give the platform its
+   own line: the line count is then the same whichever name is up. */
+@media (max-width:374px){
   .cycle{display:block}
 }
