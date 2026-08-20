@@ -329,6 +329,10 @@ body:not(.lang-en) .seg-en,body.lang-en .seg-ge{color:var(--on-dark-dim)}
 .rate.best .dots{background:repeating-linear-gradient(90deg,rgba(10,7,28,.34) 0 4px,transparent 4px 11px)}
 .rate-tag{align-self:center;padding:7px 11px 9px;background:var(--ink);color:var(--gold);
   font-size:12px;font-weight:900;line-height:1.1;white-space:nowrap}
+/* Two badges, deliberately unequal: 36+ already owns a full gold bar, so the
+   popular tier gets a gold chip on the purple — louder than the rows around
+   it, quieter than the bar below it. */
+.rate-tag-pop{background:var(--gold);color:var(--ink)}
 
 .price-foot{margin-top:clamp(30px,3.6vw,42px);display:flex;align-items:center;
   gap:clamp(18px,2.4vw,30px);flex-wrap:wrap}

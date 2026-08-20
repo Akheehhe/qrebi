@@ -19,7 +19,7 @@ const PLACES = [
 
 const TIERS = [
   { ge: '1–5 ბარათი', en: '1–5 cards', amt: '50' },
-  { ge: '6–10 ბარათი', en: '6–10 cards', amt: '40' },
+  { ge: '6–10 ბარათი', en: '6–10 cards', amt: '40', popular: true },
   { ge: '11–35 ბარათი', en: '11–35 cards', amt: '35' },
   { ge: '36+ ბარათი', en: '36+ cards', amt: '30', best: true },
 ]
@@ -267,6 +267,11 @@ export default function Page() {
             {TIERS.map((t, i) => (
               <li key={t.amt} className={`rate${t.best ? ' best' : ''}`} style={{ '--i': i } as React.CSSProperties}>
                 <span className="qty"><T ge={t.ge} en={t.en} /></span>
+                {t.popular && (
+                  <span className="rate-tag rate-tag-pop">
+                    <T ge="ყველაზე პოპულარული" en="Most popular" />
+                  </span>
+                )}
                 {t.best && (
                   <span className="rate-tag">
                     <T ge="ყველაზე მომგებიანი" en="Best value" />
