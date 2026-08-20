@@ -29,7 +29,7 @@ export default function OrderForm() {
       method: 'POST',
       headers: { 'content-type': 'application/json', accept: 'application/json' },
       body: JSON.stringify({
-        _subject: `ახალი შეკვეთა: Qrebi.ge — ${name || phone}`,
+        _subject: `ახალი შეკვეთა: Qrebi.ge · ${name || phone}`,
         _template: 'table',
         _captcha: 'false',
         _honey: website,

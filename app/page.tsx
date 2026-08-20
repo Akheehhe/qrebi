@@ -38,8 +38,8 @@ const STEPS = [
   {
     n: '01', tone: 'a', Icon: Stand,
     hGe: 'მიაკარი ან დადგი', hEn: 'Stick it or stand it up',
-    pGe: 'წებოვანი ფირით ნებისმიერ ზედაპირზე — დახლზე, სარკესთან, კასასთან.',
-    pEn: 'Adhesive backing, any surface — the counter, the mirror, the till.',
+    pGe: 'წებოვანი ფირით ნებისმიერ ზედაპირზე: დახლზე, სარკესთან, კასასთან.',
+    pEn: 'Adhesive backing, any surface: the counter, the mirror, the till.',
   },
   {
     n: '02', tone: 'b', Icon: Tap,
@@ -59,8 +59,8 @@ const INCLUDED = [
   {
     Icon: Tap,
     hGe: 'NFC ბარათი', hEn: 'The NFC card',
-    pGe: 'შენი ლოგოთი და შენი ბმულით. ბმულს ნებისმიერ დროს შეცვლი — ბარათს არ ცვლი.',
-    pEn: 'Your logo, your link. Change the link any time — you never change the card.',
+    pGe: 'შენი ლოგოთი და შენი ბმულით. ბმულს ნებისმიერ დროს შეცვლი, ბარათს არ ცვლი.',
+    pEn: 'Your logo, your link. Change the link any time, never the card.',
   },
   {
     Icon: Camera,
@@ -70,7 +70,7 @@ const INCLUDED = [
   },
   {
     Icon: Rank,
-    hGe: 'SEO — პირველი თვე უფასოდ', hEn: 'SEO — first month free',
+    hGe: 'SEO პირველი თვე უფასოდ', hEn: 'SEO, first month free',
     pGe: 'ვამუშავებთ შენს Google პროფილს, რომ ძებნაში მაღლა იყო.',
     pEn: 'We work your Google profile so you climb the local results.',
   },
@@ -88,7 +88,7 @@ export default function Page() {
           <div className="hero-copy">
             <p className="kicker">
               <Finder />
-              <T ge="ერთი ბარათი — ნებისმიერი ბმული" en="One card — any link" />
+              <T ge="ერთი ბარათი · ნებისმიერი ბმული" en="One card · any link" />
             </p>
 
             <h1>
@@ -155,7 +155,7 @@ export default function Page() {
           <h2 data-rise><T ge="როგორ მუშაობს" en="How it works" /></h2>
           <p className="sec-lede" data-rise>
             <T
-              ge="დაყენებას ორი წუთი სჭირდება — მერე ბარათი თავისით მუშაობს."
+              ge="დაყენებას ორი წუთი სჭირდება. მერე ბარათი თავისით მუშაობს."
               en="Setup takes two minutes, and after that the card works on its own."
             />
           </p>
@@ -225,7 +225,7 @@ export default function Page() {
                 <figure key={`${copy}-${p.src}`} aria-hidden={copy === 1 || undefined}>
                   <Image
                     src={p.src}
-                    alt={copy === 0 ? `QRebi ბარათი — ${p.ge}` : ''}
+                    alt={copy === 0 ? `QRebi ბარათი, ${p.ge}` : ''}
                     width={900}
                     height={672}
                     sizes="(max-width:900px) 62vw, 400px"
@@ -243,8 +243,8 @@ export default function Page() {
         <div className="wrap">
           <p className="note" data-rise>
             <T
-              ge="ბმული შენი არჩევანია: Google, Tripadvisor, Booking, Airbnb — ან შენი საკუთარი გვერდი."
-              en="The link is your call: Google, Tripadvisor, Booking, Airbnb — or your own page."
+              ge="ბმული შენი არჩევანია: Google, Tripadvisor, Booking, Airbnb, ან შენი საკუთარი გვერდი."
+              en="The link is your call: Google, Tripadvisor, Booking, Airbnb, or your own page."
             />
           </p>
         </div>
@@ -309,8 +309,8 @@ export default function Page() {
             <h2 data-rise><T ge="შეუკვეთე შენი ბარათი" en="Order your card" /></h2>
             <p data-rise>
               <T
-                ge="დატოვე ნომერი — დაგირეკავთ დღესვე სამუშაო საათებში და ერთად შევარჩევთ რაოდენობას."
-                en="Leave your number — we'll call you today during working hours and work out the quantity together."
+                ge="დატოვე ნომერი და დაგირეკავთ დღესვე სამუშაო საათებში, ერთად შევარჩევთ რაოდენობას."
+                en="Leave your number and we'll call you today during working hours to work out the quantity together."
               />
             </p>
             <div className="contacts" data-rise>
