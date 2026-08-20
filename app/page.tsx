@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Cycle from '@/components/Cycle'
 import Gallery from '@/components/Gallery'
+import HeroBackground from '@/components/HeroBackground'
 import { PlatformRotator } from '@/components/platform'
 import OrderForm from '@/components/OrderForm'
 import { EMAIL, PHONE, T, WHATSAPP, WhatsAppIcon } from '@/components/shared'
@@ -75,6 +76,7 @@ export default function Page() {
           size on the right, tapped, and the review lands. Nothing floats. */}
       <section className="hero">
         <PlatformRotator>
+        <HeroBackground />
         <div className="hero-grid">
           <div className="hero-copy">
             <p className="kicker">
@@ -108,31 +110,6 @@ export default function Page() {
             </div>
           </div>
         </div>
-        </PlatformRotator>
-
-        {/* The brand banner, full bleed. Art-directed rather than scaled: the
-            wide crop on desktop, the square one on phones, so the card and the
-            phone stay legible instead of shrinking to nothing. A plain
-            <picture> because next/image cannot switch art between sources. */}
-        <figure className="hero-banner">
-          <picture>
-            <source
-              media="(min-width:760px)"
-              srcSet="/img/banner-wide-1600.webp 1600w, /img/banner-wide-2560.webp 2560w"
-              sizes="100vw"
-            />
-            <img
-              src="/img/banner-sq-1400.webp"
-              srcSet="/img/banner-sq-800.webp 800w, /img/banner-sq-1400.webp 1400w"
-              sizes="100vw"
-              alt="QRebi-ს NFC ბარათი ხუთი ვარსკვლავითა და ტელეფონით, რომელიც შეხებაზე იხსნება"
-              width={2048}
-              height={2048}
-              fetchPriority="high"
-              decoding="async"
-            />
-          </picture>
-        </figure>
 
         {/* the hero stands on its own facts rather than trailing off */}
         <ul className="hero-facts">
@@ -140,6 +117,7 @@ export default function Page() {
           <li><Truck /><span><T ge="მიწოდება მთელ საქართველოში" en="Delivery across Georgia" /></span></li>
           <li><NoFee /><span><T ge="ყოველთვიური გადასახადის გარეშე" en="No monthly fee" /></span></li>
         </ul>
+        </PlatformRotator>
       </section>
 
       {/* ── TICKER ─── the offer, at speed, in the brand's second colour ── */}

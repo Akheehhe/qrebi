@@ -2,10 +2,15 @@
 
 import { createContext, useContext, useEffect, useState } from 'react'
 
-/** The card points wherever you want it to. One rotation drives both the
- *  headline and the card, so the two always name the same platform. */
-export const PLATFORMS = ['Google', 'Tripadvisor', 'Booking', 'Airbnb']
-const HOLD = 2600
+/** The card points wherever you want it to. One rotation drives the headline
+ *  and the hero background together, so the two always name the same place.
+ *  Only platforms we have banner artwork for belong here. */
+export const PLATFORMS = [
+  { name: 'Google', slug: 'google' },
+  { name: 'Tripadvisor', slug: 'tripadvisor' },
+  { name: 'Booking', slug: 'booking' },
+]
+const HOLD = 3200
 
 const Ctx = createContext(0)
 export const usePlatformIndex = () => useContext(Ctx)

@@ -37,8 +37,10 @@ export default function SiteRuntime() {
         io.observe(hero)
         observers.push(io)
       }
-    } else if (bar) {
-      bar.classList.add('show')
+    } else {
+      // no hero on this page: the header has nothing to be transparent over
+      header?.classList.add('solid')
+      bar?.classList.add('show')
     }
 
     // scroll spy — the nav marks the section you are actually looking at

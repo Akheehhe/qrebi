@@ -21,9 +21,9 @@ export default function Cycle() {
 
   return (
     <span className="cycle" style={w ? { width: `${w}px` } : undefined}>
-      <span className="cycle-sizer" aria-hidden="true">{PLATFORMS[0]}</span>
+      <span className="cycle-sizer" aria-hidden="true">{PLATFORMS[0].name}</span>
       <span key={i} ref={word} className="cycle-word">
-        {PLATFORMS[i]}
+        {PLATFORMS[i].name}
       </span>
     </span>
   )
