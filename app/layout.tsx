@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Montserrat, Noto_Sans_Georgian, Noto_Serif_Georgian } from 'next/font/google'
+import { Montserrat, Noto_Sans_Georgian } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
@@ -18,14 +18,6 @@ const georgian = Noto_Sans_Georgian({
   subsets: ['georgian'],
   weight: ['400', '500', '600', '700', '800', '900'],
   variable: '--font-georgian',
-  display: 'swap',
-})
-
-// The serif voice for the big headlines — poster contrast against the sans body.
-const serif = Noto_Serif_Georgian({
-  subsets: ['georgian'],
-  weight: ['700', '800', '900'],
-  variable: '--font-serif',
   display: 'swap',
 })
 
@@ -56,7 +48,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ka" className={`${display.variable} ${georgian.variable} ${serif.variable}`}>
+    <html lang="ka" className={`${display.variable} ${georgian.variable}`}>
       <body>
         <Header />
         {children}
