@@ -681,9 +681,8 @@ html.js [data-stagger].seen>*{animation:rise .65s var(--ease-quint) both;
    language as the gallery arrows. The dots are a position readout as much
    as a control — arrows alone never say how many there are.            */
 .hero-nav{order:2;position:relative;z-index:1;display:flex;align-items:center;
-  gap:clamp(9px,1.2vw,13px);align-self:flex-end;
-  padding-inline:max(var(--gut),calc((100vw - 1160px) / 2));
-  margin-bottom:clamp(14px,2vw,22px)}
+  gap:clamp(12px,1.8vw,20px);align-self:center;
+  margin-bottom:clamp(16px,2.2vw,26px)}
 .hero-arw{display:grid;place-items:center;width:46px;height:46px;padding:0;
   border:none;cursor:pointer;background:var(--ink);color:var(--gold);
   box-shadow:var(--shadow-hard-sm);
@@ -700,8 +699,7 @@ html.js [data-stagger].seen>*{animation:rise .65s var(--ease-quint) both;
 .hero-dot.on{width:26px;background:var(--gold)}
 
 @media (max-width:759px){
-  .hero-nav{order:3;align-self:center;
-    margin-top:clamp(14px,3vw,20px);margin-bottom:clamp(18px,3vw,26px)}
+  .hero-nav{order:3;margin-top:clamp(14px,3vw,20px);margin-bottom:clamp(18px,3vw,26px)}
 }
 @media (prefers-reduced-motion:reduce){
   .hero-arw:hover{transform:none}
