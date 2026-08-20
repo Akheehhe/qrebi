@@ -165,7 +165,6 @@ body:not(.lang-en) .seg-en,body.lang-en .seg-ge{color:var(--on-dark-dim)}
    Drenched. Type on the left, the product drawn at full size on the
    right, tapped, with the review it produces landing on top of it.     */
 .hero{position:relative;display:flex;flex-direction:column;
-  min-height:calc(100svh - var(--head));
   background:var(--purple);color:#fff;overflow:hidden;isolation:isolate}
 .hero::before,.price-sec::before{content:"";position:absolute;inset:0;z-index:-1;
   pointer-events:none;opacity:.045;
@@ -181,8 +180,8 @@ body:not(.lang-en) .seg-en,body.lang-en .seg-ge{color:var(--on-dark-dim)}
 /* The right column runs to the viewport edge rather than stopping at the
    container, so the card reads as an object laid on the page instead of an
    asset parked in a box. The left column keeps the container's own margin. */
-.hero-grid{flex:1;display:flex;flex-direction:column;justify-content:center;
-  padding:clamp(44px,6vw,84px) var(--gut);
+.hero-grid{display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(40px,5vw,68px) var(--gut) clamp(32px,4vw,52px);
   max-width:1160px;margin-inline:auto;width:100%}
 .hero-copy{min-width:0;max-width:none}
 .hero h1{max-width:15ch}
@@ -522,4 +521,19 @@ html.js [data-stagger].seen>*{animation:rise .65s var(--ease-quint) both;
    own line: the line count is then the same whichever name is up. */
 @media (max-width:374px){
   .cycle{display:block}
+}
+
+/* ── hero banner ──────────────────────────────────────────────────────
+   Full bleed, and never cropped: the artwork is a finished composition,
+   so the aspect ratio is pinned per source to hold its own space and
+   keep the swap between the two crops free of layout shift. */
+.hero-banner{position:relative;width:100%;line-height:0}
+/* the artwork's own field is a shade darker than --purple, which leaves a
+   step where the two meet; this carries one into the other */
+.hero-banner::before{content:"";position:absolute;inset:0 0 auto;z-index:1;
+  height:clamp(36px,6vw,88px);pointer-events:none;
+  background:linear-gradient(var(--purple),transparent)}
+.hero-banner img{display:block;width:100%;height:auto;aspect-ratio:2048/2048}
+@media (min-width:760px){
+  .hero-banner img{aspect-ratio:3168/1344}
 }

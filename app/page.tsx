@@ -118,6 +118,30 @@ export default function Page() {
         </div>
         </PlatformRotator>
 
+        {/* The brand banner, full bleed. Art-directed rather than scaled: the
+            wide crop on desktop, the square one on phones, so the card and the
+            phone stay legible instead of shrinking to nothing. A plain
+            <picture> because next/image cannot switch art between sources. */}
+        <figure className="hero-banner">
+          <picture>
+            <source
+              media="(min-width:760px)"
+              srcSet="/img/banner-wide-1600.webp 1600w, /img/banner-wide-2560.webp 2560w"
+              sizes="100vw"
+            />
+            <img
+              src="/img/banner-sq-1400.webp"
+              srcSet="/img/banner-sq-800.webp 800w, /img/banner-sq-1400.webp 1400w"
+              sizes="100vw"
+              alt="QRebi-ს NFC ბარათი ხუთი ვარსკვლავითა და ტელეფონით, რომელიც შეხებაზე იხსნება"
+              width={2048}
+              height={2048}
+              fetchPriority="high"
+              decoding="async"
+            />
+          </picture>
+        </figure>
+
         {/* the hero stands on its own facts rather than trailing off */}
         <ul className="hero-facts">
           <li><Check /><span><T ge={<><b>50 ₾</b>-დან, ერთჯერადად</>} en={<>From <b>50 ₾</b>, one-time</>} /></span></li>
