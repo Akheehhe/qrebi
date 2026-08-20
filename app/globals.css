@@ -595,3 +595,82 @@ html.js [data-stagger].seen>*{animation:rise .65s var(--ease-quint) both;
   .hero-scrim{background:linear-gradient(96deg,rgba(10,7,28,.9) 0%,rgba(10,7,28,.74) 34%,
     rgba(10,7,28,.34) 62%,rgba(10,7,28,.06) 88%,transparent 100%)}
 }
+
+/* ── campaign ─────────────────────────────────────────────────────────
+   One deadline, stated the same way everywhere: a percentage, what it
+   applies to, and how long is left. The clock is the only moving part,
+   and it stops for good when the date passes.                          */
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
+  clip-path:inset(50%);white-space:nowrap;border:0}
+
+.promo-bar{background:var(--gold);color:var(--ink);border-bottom:3px solid var(--ink)}
+.promo-bar a{display:flex;align-items:center;justify-content:center;gap:clamp(9px,1.4vw,16px);
+  flex-wrap:wrap;max-width:1160px;margin-inline:auto;padding:9px var(--gut) 11px;
+  font-size:clamp(13px,1.15vw,15px);font-weight:800;line-height:1.25;text-align:center}
+.promo-pct{font-family:var(--font-display),sans-serif;font-size:1.5em;font-weight:900;
+  letter-spacing:-.03em;line-height:1}
+.promo-copy{opacity:.85}
+
+.cdown{display:flex;align-items:stretch;gap:6px}
+.cdown-cell{display:flex;flex-direction:column;align-items:center;gap:2px;
+  min-width:2.6em;padding:5px 6px 6px;background:var(--ink);color:var(--gold)}
+.cdown-cell b{font-family:var(--font-display),sans-serif;font-size:1.05em;font-weight:900;
+  line-height:1;font-variant-numeric:tabular-nums}
+.cdown-cell i{font-style:normal;font-size:.62em;font-weight:700;opacity:.7;line-height:1}
+.cdown-inline .cdown-cell{padding:4px 5px 5px;min-width:2.4em}
+.price-sec .cdown-cell{background:var(--ink);color:var(--gold)}
+
+/* the deadline, restated where the prices actually are */
+.price-promo{display:flex;align-items:center;justify-content:space-between;gap:clamp(16px,2.4vw,32px);
+  flex-wrap:wrap;margin-top:clamp(26px,3.2vw,38px);padding:clamp(16px,2vw,22px) clamp(18px,2.2vw,26px);
+  background:var(--gold);color:var(--ink)}
+.price-promo-l{display:flex;align-items:center;gap:clamp(12px,1.6vw,18px)}
+.price-pct{font-family:var(--font-display),sans-serif;font-size:clamp(34px,4.4vw,54px);
+  font-weight:900;letter-spacing:-.04em;line-height:1}
+.price-promo-l>span{display:flex;flex-direction:column;gap:3px;font-size:clamp(15px,1.4vw,18px);
+  font-weight:900;line-height:1.2}
+.price-promo-l i{font-style:normal;font-size:.78em;font-weight:700;color:rgba(10,7,28,.66)}
+.price-promo-r{display:flex;flex-direction:column;gap:7px;align-items:flex-start}
+.price-promo-lab{font-size:12.5px;font-weight:900;color:rgba(10,7,28,.7);line-height:1}
+
+/* the regular price, struck, beside the one being charged */
+.rate .amt s{font-family:var(--font-georgian),sans-serif;font-size:.36em;font-weight:700;
+  color:var(--on-dark-dim);text-decoration-thickness:2px;margin-right:.4em;white-space:nowrap}
+.rate.best .amt s{color:rgba(10,7,28,.55)}
+
+/* ── the email offer ──────────────────────────────────────────────── */
+.price-offer{margin-top:clamp(26px,3.2vw,38px)}
+.offer-form,.offer-done{background:rgba(10,7,28,.42);
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.16);
+  padding:clamp(20px,2.6vw,30px) clamp(18px,2.4vw,28px)}
+.offer-head{display:flex;align-items:baseline;justify-content:space-between;
+  gap:clamp(12px,2vw,26px);flex-wrap:wrap}
+.offer-title{font-size:clamp(17px,1.7vw,21px);font-weight:900;line-height:1.35;max-width:26ch}
+.offer-perks{display:flex;gap:clamp(12px,1.8vw,22px);flex-wrap:wrap;
+  font-size:14px;font-weight:700;color:var(--on-dark)}
+.offer-perks li{display:flex;align-items:center;gap:7px}
+.offer-perks svg{width:15px;height:15px;color:var(--gold);flex:none}
+.offer-row{display:flex;gap:10px;margin-top:clamp(16px,2vw,22px);flex-wrap:wrap}
+.offer-row input{flex:1 1 15rem;min-width:0;padding:15px 16px;border:2px solid rgba(255,255,255,.28);
+  background:rgba(255,255,255,.06);font-size:16px;font-family:inherit;color:#fff;outline:none;
+  transition:border-color .15s,background .15s}
+.offer-row input::placeholder{color:rgba(255,255,255,.55)}
+.offer-row input:focus{border-color:var(--gold);background:rgba(255,255,255,.1)}
+.offer-row .btn{flex:0 0 auto}
+.offer-err{margin-top:12px;font-size:14px;font-weight:700;color:#FFD4D0}
+
+.offer-done{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
+.offer-tick{display:grid;place-items:center;width:52px;height:52px;background:var(--gold);color:var(--ink)}
+.offer-tick svg{width:24px;height:24px}
+.offer-lead{font-size:15px;font-weight:800;color:var(--on-dark)}
+.offer-code{font-family:var(--font-display),sans-serif;font-size:clamp(28px,3.4vw,40px);
+  font-weight:900;letter-spacing:.04em;line-height:1;color:var(--gold);
+  font-variant-numeric:tabular-nums}
+.offer-note{font-size:15px;line-height:1.5;font-weight:600;color:var(--on-dark);max-width:44ch}
+
+@media (max-width:680px){
+  .promo-bar a{gap:8px;padding-inline:14px;font-size:12.5px}
+  .promo-copy{flex:1 1 100%;order:3;opacity:.8}
+  .price-promo{flex-direction:column;align-items:flex-start}
+  .offer-row .btn{width:100%}
+}

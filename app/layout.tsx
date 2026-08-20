@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Montserrat, Noto_Sans_Georgian } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/Header'
+import PromoBar from '@/components/PromoBar'
 import Footer from '@/components/Footer'
 import StickyBar from '@/components/StickyBar'
 import SiteRuntime from '@/components/SiteRuntime'
@@ -50,6 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ka" className={`${display.variable} ${georgian.variable}`}>
       <body>
+        <PromoBar />
         <Header />
         {children}
         <Footer />

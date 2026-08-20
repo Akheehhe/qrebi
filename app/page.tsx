@@ -1,5 +1,8 @@
 import Image from 'next/image'
+import Countdown from '@/components/Countdown'
 import Cycle from '@/components/Cycle'
+import OfferForm from '@/components/OfferForm'
+import { CAMPAIGN } from '@/lib/campaign'
 import Gallery from '@/components/Gallery'
 import HeroBackground from '@/components/HeroBackground'
 import { PlatformRotator } from '@/components/platform'
@@ -11,10 +14,10 @@ import {
 } from '@/components/icons'
 
 const TIERS = [
-  { ge: '1–5 ბარათი', en: '1–5 cards', amt: '50' },
-  { ge: '6–10 ბარათი', en: '6–10 cards', amt: '40', popular: true },
-  { ge: '11–35 ბარათი', en: '11–35 cards', amt: '35' },
-  { ge: '36+ ბარათი', en: '36+ cards', amt: '30', best: true },
+  { ge: '1–5 ბარათი', en: '1–5 cards', amt: '50', was: '83' },
+  { ge: '6–10 ბარათი', en: '6–10 cards', amt: '40', was: '67', popular: true },
+  { ge: '11–35 ბარათი', en: '11–35 cards', amt: '35', was: '58' },
+  { ge: '36+ ბარათი', en: '36+ cards', amt: '30', was: '50', best: true },
 ]
 
 const TICKER = [
@@ -236,6 +239,22 @@ export default function Page() {
             </p>
           </div>
 
+          <div className="price-promo" data-rise>
+            <div className="price-promo-l">
+              <b className="price-pct">−{CAMPAIGN.discountPct}%</b>
+              <span>
+                <T ge="ყველა ბარათზე" en="on every card" />
+                <i><T ge="ფასდაკლებული ფასები ქვემოთ" en="discounted prices below" /></i>
+              </span>
+            </div>
+            <div className="price-promo-r">
+              <span className="price-promo-lab">
+                <T ge="აქცია სრულდება" en="Offer ends in" />
+              </span>
+              <Countdown />
+            </div>
+          </div>
+
           <ul className="rates" data-stagger>
             {TIERS.map((t, i) => (
               <li key={t.amt} className={`rate${t.best ? ' best' : ''}`} style={{ '--i': i } as React.CSSProperties}>
@@ -252,12 +271,17 @@ export default function Page() {
                 )}
                 <span className="dots" aria-hidden="true" />
                 <span className="amt">
+                  <s aria-label="regular price">{t.was}₾</s>
                   {t.amt}<i>₾</i>
                   <em><T ge="თითო" en="each" /></em>
                 </span>
               </li>
             ))}
           </ul>
+
+          <div className="price-offer" data-rise>
+            <OfferForm />
+          </div>
 
           <div className="price-foot" data-rise>
             <a className="btn btn-gold" href="#order">
