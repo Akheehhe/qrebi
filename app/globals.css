@@ -185,7 +185,7 @@ body:not(.lang-en) .seg-en,body.lang-en .seg-ge{color:var(--on-dark-dim)}
 /* The right column runs to the viewport edge rather than stopping at the
    container, so the card reads as an object laid on the page instead of an
    asset parked in a box. The left column keeps the container's own margin. */
-.hero-grid{flex:1;display:flex;flex-direction:column;justify-content:center;
+.hero-grid{order:1;flex:1;display:flex;flex-direction:column;justify-content:center;
   padding:clamp(48px,6vw,80px) var(--gut);
   max-width:1160px;margin-inline:auto;width:100%}
 .hero-copy{min-width:0;max-width:none}
@@ -194,7 +194,7 @@ body:not(.lang-en) .seg-en,body.lang-en .seg-ge{color:var(--on-dark-dim)}
 .hero .lede{margin-top:clamp(20px,2.4vw,30px);max-width:44ch}
 .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:clamp(28px,3.4vw,38px)}
 
-.hero-facts{position:relative;display:flex;flex-wrap:wrap;
+.hero-facts{order:3;position:relative;display:flex;flex-wrap:wrap;
   padding-inline:max(var(--gut),calc((100vw - 1160px) / 2));
   background:rgba(10,7,28,.55);border-top:1px solid rgba(255,255,255,.24);
   font-size:15px;font-weight:600}
@@ -451,7 +451,7 @@ html.js [data-stagger].seen>*{animation:rise .65s var(--ease-quint) both;
   .hero-grid{order:1;justify-content:flex-start;
     padding:clamp(30px,5vw,46px) var(--gut) clamp(30px,5vw,44px)}
   .hero-copy{max-width:none}
-  .hero-facts{order:3;background:none}
+  .hero-facts{order:4;background:none}
 
   /* one column: the three tones now stack into a single vertical bar */
   .steps{grid-template-columns:1fr}
@@ -673,4 +673,37 @@ html.js [data-stagger].seen>*{animation:rise .65s var(--ease-quint) both;
   .promo-copy{flex:1 1 100%;order:3;opacity:.8}
   .price-promo{flex-direction:column;align-items:flex-start}
   .offer-row .btn{width:100%}
+}
+
+/* ── hero banner controls ─────────────────────────────────────────────
+   In flow rather than floated over the artwork, so nothing is covered and
+   the buttons cannot land on the copy at any width. Same hard-edged
+   language as the gallery arrows. The dots are a position readout as much
+   as a control — arrows alone never say how many there are.            */
+.hero-nav{order:2;position:relative;z-index:1;display:flex;align-items:center;
+  gap:clamp(9px,1.2vw,13px);align-self:flex-end;
+  padding-inline:max(var(--gut),calc((100vw - 1160px) / 2));
+  margin-bottom:clamp(14px,2vw,22px)}
+.hero-arw{display:grid;place-items:center;width:46px;height:46px;padding:0;
+  border:none;cursor:pointer;background:var(--ink);color:var(--gold);
+  box-shadow:var(--shadow-hard-sm);
+  transition:background .2s,transform .2s var(--ease-quint)}
+.hero-arw:hover{background:var(--purple);transform:translateY(-2px)}
+.hero-arw:active{transform:translateY(0) scale(.96)}
+.hero-arw svg{width:18px;height:18px}
+.hero-prev svg{transform:rotate(180deg)}
+.hero-dots{display:flex;align-items:center;gap:7px}
+.hero-dot{width:10px;height:10px;padding:0;border:none;cursor:pointer;
+  background:rgba(255,255,255,.45);
+  transition:background .25s,width .3s var(--ease-quint)}
+.hero-dot:hover{background:rgba(255,255,255,.75)}
+.hero-dot.on{width:26px;background:var(--gold)}
+
+@media (max-width:759px){
+  .hero-nav{order:3;align-self:center;
+    margin-top:clamp(14px,3vw,20px);margin-bottom:clamp(18px,3vw,26px)}
+}
+@media (prefers-reduced-motion:reduce){
+  .hero-arw:hover{transform:none}
+  .hero-dot{transition:background .25s}
 }
