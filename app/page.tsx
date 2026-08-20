@@ -155,7 +155,7 @@ export default function Page() {
           <h2 data-rise><T ge="როგორ მუშაობს" en="How it works" /></h2>
           <p className="sec-lede" data-rise>
             <T
-              ge="დაყენება ორ წუთში სრულდება და მერე ბარათი მარტო მუშაობს."
+              ge="დაყენებას ორი წუთი სჭირდება — მერე ბარათი თავისით მუშაობს."
               en="Setup takes two minutes, and after that the card works on its own."
             />
           </p>
