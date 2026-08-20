@@ -1,21 +1,13 @@
 import Image from 'next/image'
 import Cycle from '@/components/Cycle'
+import Gallery from '@/components/Gallery'
 import { PlatformRotator } from '@/components/platform'
 import OrderForm from '@/components/OrderForm'
 import { EMAIL, PHONE, T, WHATSAPP, WhatsAppIcon } from '@/components/shared'
 import {
-  Arrow, Bread, Camera, Check, Cup, Finder, Flower, Fork, NoFee,
-  Rank, Scissors, Sparkle, Stand, Star, Tap, Truck,
+  Arrow, Camera, Check, Finder, NoFee,
+  Rank, Stand, Star, Tap, Truck,
 } from '@/components/icons'
-
-const PLACES = [
-  { src: '/img/places/cafe.jpg', ge: 'კაფე', en: 'Café', pos: '0% 50%', Icon: Cup },
-  { src: '/img/places/restaurant.jpg', ge: 'რესტორანი', en: 'Restaurant', pos: '68% 50%', Icon: Fork },
-  { src: '/img/places/barbershop.jpg', ge: 'ბარბერშოპი', en: 'Barbershop', pos: '0% 50%', Icon: Scissors },
-  { src: '/img/places/salon.jpg', ge: 'სილამაზის სალონი', en: 'Beauty salon', pos: '54% 50%', Icon: Sparkle },
-  { src: '/img/places/bakery.jpg', ge: 'საცხობი', en: 'Bakery', pos: '10% 50%', Icon: Bread },
-  { src: '/img/places/flowershop.jpg', ge: 'ყვავილების მაღაზია', en: 'Flower shop', pos: '80% 50%', Icon: Flower },
-]
 
 const TIERS = [
   { ge: '1–5 ბარათი', en: '1–5 cards', amt: '50' },
@@ -237,28 +229,7 @@ export default function Page() {
             />
           </h2>
         </div>
-        <div className="gallery">
-          <div className="gallery-track">
-            {[0, 1].map((copy) =>
-              PLACES.map((p) => (
-                <figure key={`${copy}-${p.src}`} aria-hidden={copy === 1 || undefined}>
-                  <Image
-                    src={p.src}
-                    alt={copy === 0 ? `QRebi ბარათი, ${p.ge}` : ''}
-                    width={900}
-                    height={672}
-                    sizes="(max-width:900px) 62vw, 400px"
-                    style={{ objectPosition: p.pos }}
-                  />
-                  <figcaption>
-                    <p.Icon />
-                    <T ge={p.ge} en={p.en} />
-                  </figcaption>
-                </figure>
-              )),
-            )}
-          </div>
-        </div>
+        <Gallery />
         <div className="wrap">
           <p className="note" data-rise>
             <T
