@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { supabaseBrowser, supabaseConfigured, type Business } from '@/lib/supabase'
-import { addMonthsClamped, fmtDate, isActive, platformsOf, slugify, tbilisiToday } from '@/lib/funnel'
+import { supabaseBrowser, supabaseConfigured, type Business, type PlatformKey } from '@/lib/supabase'
+import { addMonthsClamped, fmtDate, isActive, PLATFORM_LABEL, platformsOf, slugify, tbilisiToday } from '@/lib/funnel'
 import DashShell from '@/components/funnel/DashShell'
+import LinkTools from '@/components/funnel/LinkTools'
 import PlatformIcon from '@/components/funnel/PlatformIcon'
 import { T } from '@/components/shared'
 import { Arrow, Check } from '@/components/icons'
@@ -36,6 +37,23 @@ const emptyDraft = (): Draft => ({
 /** '' → null, so the row stores real absence rather than empty strings. */
 const urlOrNull = (s: string) => s.trim() || null
 
+/** Every link a card can carry: the full page, and — when the business has
+ *  several platforms — a scoped variant per platform (?p=…), so a
+ *  Google-only card and a Booking-only card never mix. */
+function cardVariants(b: Business) {
+  const base = `${window.location.origin}/r/${b.slug}`
+  const out: { key: 'all' | PlatformKey; url: string; file: string }[] = [
+    { key: 'all', url: base, file: `qrebi-${b.slug}-qr.png` },
+  ]
+  const plats = platformsOf(b)
+  if (plats.length > 1) {
+    for (const p of plats) {
+      out.push({ key: p.key, url: `${base}?p=${p.key}`, file: `qrebi-${b.slug}-${p.key}-qr.png` })
+    }
+  }
+  return out
+}
+
 /** The operator's side of the manual subscription: create a business when
  *  they pay the first month, extend paid_until on every payment after that. */
 export default function AdminClient() {
@@ -46,6 +64,7 @@ export default function AdminClient() {
   const [slugTouched, setSlugTouched] = useState(false)
   const [editingId, setEditingId] = useState<string | null>(null)
   const [edit, setEdit] = useState<Draft | null>(null)
+  const [linksId, setLinksId] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
   const [err, setErr] = useState('')
 
@@ -296,7 +315,7 @@ export default function AdminClient() {
           onChange={(e) => set({ ...d, paid_until: e.target.value })} />
       </label>
       <label>
-        <span><T ge="ზღვარი Google-სთვის" en="Google threshold" /></span>
+        <span><T ge="საჯარო ზღვარი" en="Public threshold" /></span>
         <select value={d.min_public_stars}
           onChange={(e) => set({ ...d, min_public_stars: Number(e.target.value) })}>
           {[5, 4, 3, 2, 1].map((n) => <option key={n} value={n}>{n}★+</option>)}
@@ -385,10 +404,38 @@ export default function AdminClient() {
                 >
                   {editingId === b.id ? <T ge="დახურვა" en="Close" /> : <T ge="რედაქტირება" en="Edit" />}
                 </button>
+                <button
+                  type="button"
+                  className="btn adm-quiet"
+                  onClick={() => setLinksId(linksId === b.id ? null : b.id)}
+                >
+                  {linksId === b.id ? <T ge="დახურვა" en="Close" /> : <>ბმულები / NFC</>}
+                </button>
                 <button type="button" className="btn adm-danger" disabled={busy} onClick={() => remove(b)}>
                   <T ge="წაშლა" en="Delete" />
                 </button>
               </div>
+
+              {linksId === b.id && (
+                <div className="adm-links">
+                  {cardVariants(b).map((v) => (
+                    <div key={v.key} className="adm-link-row">
+                      <span className="adm-link-lab">
+                        {v.key === 'all'
+                          ? <T ge="სრული გვერდი" en="Full page" />
+                          : <><PlatformIcon k={v.key} />{PLATFORM_LABEL[v.key]}</>}
+                      </span>
+                      <LinkTools url={v.url} filename={v.file} />
+                    </div>
+                  ))}
+                  <p className="adm-links-hint">
+                    <T
+                      ge="NFC-ზე ჩაწერა მუშაობს Android Chrome-დან — დააჭირე და მიადე ბარათი ტელეფონს. iPhone-ზე ან კომპიუტერზე დააკოპირე ბმული და ჩაწერე NFC Tools აპით."
+                      en="Writing to NFC works from Android Chrome — press the button and hold the card to the phone. On iPhone or desktop, copy the link and write it with the NFC Tools app."
+                    />
+                  </p>
+                </div>
+              )}
 
               {editingId === b.id && edit && (
                 <form

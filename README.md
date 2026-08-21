@@ -47,7 +47,16 @@ no secret key ever reaches the browser):
 2. You open `/admin` (sign in at `/login` with your admin email) and create
    the business: name, slug, their Google review link, the owner's email.
    `paid_until` defaults to one month out.
-3. Encode their NFC cards with `https://qrebi.ge/r/<slug>`.
+3. Encode their NFC cards. Every business row in `/admin` has a
+   **"ბმულები / NFC"** panel listing each link the card can carry — the full
+   page (`https://qrebi.ge/r/<slug>`, with the platform chooser when several
+   are configured) and one scoped variant per platform
+   (`…/r/<slug>?p=google`, `…?p=booking`, …) so a Google-only card and a
+   Booking-only card never mix. Each row has copy, a print-ready QR, and a
+   **Write to NFC** button: open `/admin` in Chrome on an Android phone,
+   press it, hold the blank card to the phone — written. (Only Android
+   Chrome can do this; on iPhone/desktop copy the link into the NFC Tools
+   app instead.) Owners see the same variants in their own dashboard.
 4. The owner signs in at `/login` with their email — no password, they get a
    link — and lands on their dashboard.
 5. Every following month: they pay, you press **+1 month** on their row.

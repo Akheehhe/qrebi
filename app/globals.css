@@ -1017,3 +1017,26 @@ html.js [data-stagger].seen>*{animation:rise .65s var(--ease-quint) both;
   font-variant-numeric:tabular-nums}
 .adm-min{display:inline-flex;align-items:center;gap:5px}
 .adm-min svg{width:13px;height:13px;flex:none}
+
+/* ── card-link variants + the NFC bench ───────────────────────────────
+   The full page link, plus one scoped link per platform, each ready to be
+   copied, printed as QR, or written to a tag from an Android phone.     */
+.dash-variants{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.dash-chip svg{width:13px;height:13px;flex:none;margin-right:5px;vertical-align:-2px}
+.adm-links{margin-top:14px;padding-top:16px;border-top:1px solid var(--line);
+  display:flex;flex-direction:column;gap:14px}
+.adm-link-row{display:grid;grid-template-columns:140px minmax(0,1fr);gap:12px;
+  align-items:start}
+.adm-link-lab{display:inline-flex;align-items:center;gap:7px;padding-top:4px;
+  font-size:13.5px;font-weight:800;color:var(--text)}
+.adm-link-lab svg{width:15px;height:15px;flex:none}
+.adm-links-hint{padding:10px 12px;background:var(--lilac);font-size:13px;
+  line-height:1.5;font-weight:600;color:var(--purple)}
+.ltl{display:flex;flex-direction:column;gap:8px;min-width:0}
+.ltl-url{font-size:13.5px;font-weight:700;word-break:break-all;color:var(--muted)}
+.ltl-btns{display:flex;gap:8px;flex-wrap:wrap}
+.ltl-btns .btn{padding:9px 13px 11px;font-size:13px}
+.ltl-btns .btn svg{width:13px;height:13px}
+@media (max-width:680px){
+  .adm-link-row{grid-template-columns:1fr;gap:6px}
+}

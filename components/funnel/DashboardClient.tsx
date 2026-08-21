@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import QRCode from 'qrcode'
-import { supabaseBrowser, supabaseConfigured, type Business, type Review } from '@/lib/supabase'
+import { supabaseBrowser, supabaseConfigured, type Business, type PlatformKey, type Review } from '@/lib/supabase'
 import { fmtDate, fmtTimestampTbilisi, isActive, PLATFORM_LABEL, platformsOf } from '@/lib/funnel'
 import DashShell from '@/components/funnel/DashShell'
 import PlatformIcon from '@/components/funnel/PlatformIcon'
@@ -26,7 +26,9 @@ export default function DashboardClient() {
   const [reviews, setReviews] = useState<Review[]>([])
   const [selected, setSelected] = useState<string | null>(null)
   const [range, setRange] = useState<Range>('30d')
-  const [copiedSlug, setCopiedSlug] = useState<string | null>(null)
+  // which card link is shown: the full page, or one platform's scoped variant
+  const [variant, setVariant] = useState<'all' | PlatformKey>('all')
+  const [copiedLink, setCopiedLink] = useState<string | null>(null)
   const [qr, setQr] = useState<string | null>(null)
   const [inboxErr, setInboxErr] = useState(false)
   const copyTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
@@ -153,19 +155,25 @@ export default function DashboardClient() {
   )
   const unhandled = feedback.filter((r) => !r.handled_at).length
 
-  // printable QR of the card link, generated in the browser
+  // a different business means starting back at its full link
+  useEffect(() => {
+    setVariant('all')
+  }, [selected])
+
+  // printable QR of the shown card link, generated in the browser
   useEffect(() => {
     if (!biz) return
     let dead = false
-    QRCode.toDataURL(`${window.location.origin}/r/${biz.slug}`, {
+    const url = `${window.location.origin}/r/${biz.slug}${variant === 'all' ? '' : `?p=${variant}`}`
+    QRCode.toDataURL(url, {
       width: 512,
       margin: 2,
       color: { dark: '#0A071C', light: '#ffffff' },
     })
-      .then((url) => { if (!dead) setQr(url) })
+      .then((u) => { if (!dead) setQr(u) })
       .catch(() => { if (!dead) setQr(null) })
     return () => { dead = true }
-  }, [biz])
+  }, [biz, variant])
 
   async function signOut() {
     await supabaseBrowser().auth.signOut()
@@ -173,15 +181,16 @@ export default function DashboardClient() {
   }
 
   function ratingLink(slug: string) {
-    return `${window.location.origin}/r/${slug}`
+    return `${window.location.origin}/r/${slug}${variant === 'all' ? '' : `?p=${variant}`}`
   }
 
   async function copyLink(slug: string) {
+    const link = ratingLink(slug)
     try {
-      await navigator.clipboard.writeText(ratingLink(slug))
-      setCopiedSlug(slug)
+      await navigator.clipboard.writeText(link)
+      setCopiedLink(link)
       clearTimeout(copyTimer.current)
-      copyTimer.current = setTimeout(() => setCopiedSlug(null), 1800)
+      copyTimer.current = setTimeout(() => setCopiedLink(null), 1800)
     } catch {
       /* clipboard blocked — the visible link can still be selected by hand */
     }
@@ -341,17 +350,42 @@ export default function DashboardClient() {
           {/* the card's link */}
           <div className="dash-card">
             <h2 className="dash-h"><T ge="შენი ბარათის ბმული" en="Your card's link" /></h2>
+            {plats.length > 1 && (
+              <div className="dash-variants" role="group" aria-label="ბმულის ვარიანტი / link variant">
+                <button type="button" className={`dash-chip${variant === 'all' ? ' on' : ''}`}
+                  onClick={() => setVariant('all')}>
+                  <T ge="სრული" en="Full" />
+                </button>
+                {plats.map((p) => (
+                  <button key={p.key} type="button"
+                    className={`dash-chip${variant === p.key ? ' on' : ''}`}
+                    onClick={() => setVariant(p.key)}>
+                    <PlatformIcon k={p.key} />
+                    {PLATFORM_LABEL[p.key]}
+                  </button>
+                ))}
+              </div>
+            )}
             <p className="dash-link">{ratingLink(biz.slug)}</p>
             <div className="dash-actions">
               <button type="button" className="btn btn-ink" onClick={() => copyLink(biz.slug)}>
-                {copiedSlug === biz.slug
+                {copiedLink === ratingLink(biz.slug)
                   ? <><Check /><T ge="დაკოპირდა" en="Copied" /></>
                   : <T ge="კოპირება" en="Copy" />}
               </button>
-              <a className="btn" href={`/r/${biz.slug}`} target="_blank" rel="noopener">
+              <a className="btn" href={`/r/${biz.slug}${variant === 'all' ? '' : `?p=${variant}`}`}
+                target="_blank" rel="noopener">
                 <T ge="ნახვა" en="Open" /><Arrow />
               </a>
             </div>
+            {plats.length > 1 && variant !== 'all' && (
+              <p className="dash-note">
+                <T
+                  ge={`ეს ვარიანტი მხოლოდ ${PLATFORM_LABEL[variant]}-ზე უშვებს — ცალკე ბარათისთვის.`}
+                  en={`This variant funnels only to ${PLATFORM_LABEL[variant]} — for a dedicated card.`}
+                />
+              </p>
+            )}
             {qr && (
               <div className="dash-qr">
                 {/* generated locally, never fetched */}
@@ -364,7 +398,8 @@ export default function DashboardClient() {
                       en="The same link as a QR — for menus, receipts, the window."
                     />
                   </p>
-                  <a className="btn dash-qr-btn" href={qr} download={`qrebi-${biz.slug}-qr.png`}>
+                  <a className="btn dash-qr-btn" href={qr}
+                    download={`qrebi-${biz.slug}${variant === 'all' ? '' : `-${variant}`}-qr.png`}>
                     <T ge="QR-ის ჩამოტვირთვა" en="Download QR" />
                   </a>
                 </div>
