@@ -16,6 +16,9 @@ export default function Header() {
           <a className="navlink navhide" href="#price" data-spy="price">
             <T ge="ფასი" en="Pricing" />
           </a>
+          <a className="navlink navhide" href="/login">
+            <T ge="შესვლა" en="Log in" />
+          </a>
           <span className="navrule navhide" aria-hidden="true" />
           <a className="navphone" href={`tel:${PHONE}`}>
             <Phone />

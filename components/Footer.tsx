@@ -13,6 +13,9 @@ export default function Footer() {
             WhatsApp
           </a>
           <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+          <a href="/login">
+            <T ge="შესვლა" en="Log in" />
+          </a>
         </div>
         <span>
           <T
