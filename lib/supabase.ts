@@ -15,12 +15,18 @@ export const supabaseConfigured = Boolean(url && key)
 
 let browserClient: SupabaseClient | undefined
 
-/** Browser client with a persisted session — /login, /app and /admin.
- *  detectSessionInUrl picks the session out of the magic-link redirect. */
+/** Browser client with a persisted session — /login, /app, /admin, and the
+ *  rating widget. detectSessionInUrl picks the session out of the magic-link
+ *  redirect. keepalive lets the 5★ submit_review call finish even though the
+ *  page navigates to Google right behind it (every payload here is tiny). */
 export function supabaseBrowser(): SupabaseClient {
   if (!url || !key) throw new Error('supabase-not-configured')
   browserClient ??= createClient(url, key, {
     auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
+    global: {
+      fetch: (input: RequestInfo | URL, init?: RequestInit) =>
+        fetch(input, { ...init, keepalive: true }),
+    },
   })
   return browserClient
 }
@@ -42,6 +48,7 @@ export type ReviewPage = {
 
 export type SubmitReviewResult = {
   ok: boolean
+  review_id: string | null
   to_google: boolean
   google_review_url: string | null
 }
@@ -54,7 +61,6 @@ export type Business = {
   owner_email: string
   paid_until: string
   min_public_stars: number
-  notes: string | null
   created_at: string
 }
 

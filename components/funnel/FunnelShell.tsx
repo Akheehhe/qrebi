@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Logo, T } from '@/components/shared'
 import LangToggle from '@/components/LangToggle'
 
@@ -8,16 +9,16 @@ export default function FunnelShell({ children }: { children: React.ReactNode })
   return (
     <div className="rp-page">
       <header className="rp-head">
-        <a href="/" className="logo" aria-label="QRebi.ge">
+        <Link href="/" className="logo" aria-label="QRebi.ge">
           <Logo />
-        </a>
+        </Link>
         <LangToggle />
       </header>
       <main className="rp-main">{children}</main>
       <footer className="rp-foot">
-        <a href="/">
+        <Link href="/">
           <T ge="იმუშავებს შენს ბიზნესშიც — QRebi.ge" en="Works for your business too — QRebi.ge" />
-        </a>
+        </Link>
       </footer>
     </div>
   )

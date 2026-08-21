@@ -1,9 +1,9 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabaseBrowser, supabaseConfigured, type Business, type Review } from '@/lib/supabase'
-import { fmtDate, isActive } from '@/lib/funnel'
+import { fmtDate, fmtTimestampTbilisi, isActive } from '@/lib/funnel'
 import DashShell from '@/components/funnel/DashShell'
 import { EMAIL, T, WHATSAPP, WhatsAppIcon } from '@/components/shared'
 import { Arrow, Check, GoogleG, Star } from '@/components/icons'
@@ -18,13 +18,22 @@ export default function DashboardClient() {
   const [businesses, setBusinesses] = useState<Business[]>([])
   const [reviews, setReviews] = useState<Review[]>([])
   const [selected, setSelected] = useState<string | null>(null)
-  const [copied, setCopied] = useState(false)
+  const [copiedSlug, setCopiedSlug] = useState<string | null>(null)
+  const copyTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
   useEffect(() => {
     if (!supabaseConfigured) {
       setLoad('error')
       return
     }
+    // an expired or scanner-consumed magic link lands here with the failure
+    // in the hash — send it to /login so the owner learns what happened
+    // instead of silently bouncing
+    if (/[#&](error|error_code|error_description)=/.test(window.location.hash)) {
+      router.replace('/login#link-error')
+      return
+    }
+
     const sb = supabaseBrowser()
     let dead = false
 
@@ -46,13 +55,18 @@ export default function DashboardClient() {
       setBusinesses(list)
       setSelected(list[0]?.id ?? null)
       if (list.length) {
-        const { data: revs } = await sb
+        const { data: revs, error: revErr } = await sb
           .from('reviews')
           .select('*')
           .in('business_id', list.map((b) => b.id))
           .order('created_at', { ascending: false })
           .limit(500)
         if (dead) return
+        // a failed inbox query must not masquerade as "no feedback yet"
+        if (revErr) {
+          setLoad('error')
+          return
+        }
         setReviews((revs ?? []) as Review[])
       }
       setLoad('ready')
@@ -100,8 +114,9 @@ export default function DashboardClient() {
   async function copyLink(slug: string) {
     try {
       await navigator.clipboard.writeText(ratingLink(slug))
-      setCopied(true)
-      setTimeout(() => setCopied(false), 1800)
+      setCopiedSlug(slug)
+      clearTimeout(copyTimer.current)
+      copyTimer.current = setTimeout(() => setCopiedSlug(null), 1800)
     } catch {
       /* clipboard blocked — the visible link can still be selected by hand */
     }
@@ -202,7 +217,9 @@ export default function DashboardClient() {
             <p className="dash-link">{ratingLink(biz.slug)}</p>
             <div className="dash-actions">
               <button type="button" className="btn btn-ink" onClick={() => copyLink(biz.slug)}>
-                {copied ? <><Check /><T ge="დაკოპირდა" en="Copied" /></> : <T ge="კოპირება" en="Copy" />}
+                {copiedSlug === biz.slug
+                  ? <><Check /><T ge="დაკოპირდა" en="Copied" /></>
+                  : <T ge="კოპირება" en="Copy" />}
               </button>
               <a className="btn" href={`/r/${biz.slug}`} target="_blank" rel="noopener">
                 <T ge="ნახვა" en="Open" /><Arrow />
@@ -264,7 +281,7 @@ export default function DashboardClient() {
                           <Star key={i} className={i < r.stars ? 'on' : ''} />
                         ))}
                       </span>
-                      <time dateTime={r.created_at}>{fmtDate(r.created_at.slice(0, 10))}</time>
+                      <time dateTime={r.created_at}>{fmtTimestampTbilisi(r.created_at)}</time>
                     </div>
                     {r.comment && <p className="dash-feed-txt">{r.comment}</p>}
                     {(r.author_name || r.author_contact) && (

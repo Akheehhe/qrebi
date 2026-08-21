@@ -482,8 +482,12 @@ html.js [data-stagger].seen>*{animation:rise .65s var(--ease-quint) both;
   .cta-bar{display:flex}
   .wa-fab{display:none}
   .gal-btn{display:none}   /* on phones the swipe is the control */
-  /* only pages that actually carry the sticky order bar need the clearance */
+  /* only pages that actually carry the sticky order bar need the clearance;
+     engines too old for :has() get it everywhere — harmless on the funnel */
   body:has(.cta-bar){padding-bottom:78px}
+  @supports not selector(body:has(a)){
+    body{padding-bottom:78px}
+  }
   /* the phone number is the point on mobile — the section links are not */
   .navhide{display:none}
   .navlinks{gap:14px}
@@ -716,7 +720,9 @@ html.js [data-stagger].seen>*{animation:rise .65s var(--ease-quint) both;
    Everything happens inside one white card on the brand purple.          */
 .rp-page{display:flex;flex-direction:column;min-height:100svh;
   background:var(--purple);color:#fff}
-.rp-head{display:flex;align-items:center;justify-content:space-between;gap:16px;
+/* static on purpose: the global `header` rule is sticky+transparent for the
+   marketing hero, which here would float the brand strip over the card */
+.rp-head{position:static;display:flex;align-items:center;justify-content:space-between;gap:16px;
   height:var(--head);padding:0 var(--gut);max-width:1160px;margin-inline:auto;width:100%}
 .rp-main{flex:1;display:grid;place-items:center;
   padding:clamp(20px,4vw,44px) var(--gut) clamp(32px,5vw,56px)}
@@ -724,13 +730,16 @@ html.js [data-stagger].seen>*{animation:rise .65s var(--ease-quint) both;
   width:min(100%,460px);background:var(--paper);color:var(--ink);
   padding:clamp(28px,6vw,44px) clamp(22px,5vw,36px);box-shadow:var(--shadow-hard);
   animation:rise .6s var(--ease-expo) both}
-.rp-card :focus-visible{outline-color:var(--ink)}
-.rp-card .btn-ink:focus-visible{outline-color:var(--gold)}
+/* ink, buttons included: the ring is drawn on the white card, where the
+   global gold would all but vanish */
+.rp-card :focus-visible,.rp-card .btn-ink:focus-visible{outline-color:var(--ink)}
 .rp-biz{font-family:var(--font-display),sans-serif;font-weight:900;line-height:1.15;
   font-size:clamp(22px,5.6vw,30px);letter-spacing:-.02em;text-wrap:balance}
 .rp-ask{font-size:clamp(16px,3.8vw,18.5px);font-weight:600;color:var(--text);text-wrap:balance}
 .rp-stars{display:flex;gap:clamp(4px,1.6vw,10px);margin-top:clamp(16px,4vw,24px)}
-.rp-star{padding:6px;border:none;background:none;cursor:pointer;color:var(--line);
+/* empty stars in a mid purple rather than --line: the tap targets have to
+   survive direct sunlight on a counter-side phone */
+.rp-star{padding:6px;border:none;background:none;cursor:pointer;color:#8F7FBF;
   transition:color .15s,transform .18s var(--ease-quint)}
 .rp-star svg{width:clamp(40px,10.5vw,52px);height:clamp(40px,10.5vw,52px);display:block}
 .rp-star:hover{transform:translateY(-3px)}
@@ -755,11 +764,23 @@ html.js [data-stagger].seen>*{animation:rise .65s var(--ease-quint) both;
   text-align:center;font-size:13px;font-weight:700;color:var(--on-dark-dim)}
 .rp-foot a{transition:color .18s}
 .rp-foot a:hover{color:#fff}
+/* 320px-class phones: five 52px stars do not fit a 236px card interior */
+@media (max-width:380px){
+  .rp-stars{gap:2px}
+  .rp-star{padding:4px}
+  .rp-star svg{width:38px;height:38px}
+}
+@media (prefers-reduced-motion:reduce){
+  /* the universal .01ms rule would turn the infinite spin into flicker */
+  .rp-spin{animation:none}
+}
 
 /* ═══ dashboard + admin ════════════════════════════════════════════════
    The signed-in side. Same printed language, but working surfaces: white
    cards with the small hard shadow on Soft Lilac, an ink strip on top.  */
 .dash-page{display:flex;flex-direction:column;min-height:100svh;background:var(--lilac)}
+/* gold rings disappear on lilac/white working surfaces */
+.dash-page :focus-visible,.smart-sec :focus-visible{outline-color:var(--purple)}
 .dash-head{display:flex;align-items:center;justify-content:space-between;gap:16px;
   height:var(--head);padding:0 var(--gut);background:var(--ink)}
 .dash-head-r{display:flex;align-items:center;gap:18px}

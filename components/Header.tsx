@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Logo, PHONE, PHONE_DISPLAY, T } from './shared'
 import LangToggle from './LangToggle'
 import { Phone } from './icons'
@@ -16,9 +17,9 @@ export default function Header() {
           <a className="navlink navhide" href="#price" data-spy="price">
             <T ge="ფასი" en="Pricing" />
           </a>
-          <a className="navlink navhide" href="/login">
+          <Link className="navlink navhide" href="/login">
             <T ge="შესვლა" en="Log in" />
-          </a>
+          </Link>
           <span className="navrule navhide" aria-hidden="true" />
           <a className="navphone" href={`tel:${PHONE}`}>
             <Phone />

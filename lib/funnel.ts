@@ -17,6 +17,14 @@ export function fmtDate(iso: string): string {
   return `${d}.${m}.${y}`
 }
 
+/** A full timestamptz, shown as the calendar day it was in Tbilisi — slicing
+ *  the UTC string would date late-evening feedback a day early. */
+export function fmtTimestampTbilisi(iso: string): string {
+  return fmtDate(
+    new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Tbilisi' }).format(new Date(iso)),
+  )
+}
+
 /** Add months to an ISO date, clamping to the target month's last day
  *  (31 Jan + 1 month → 28/29 Feb, never 2/3 Mar). */
 export function addMonthsClamped(iso: string, months: number): string {

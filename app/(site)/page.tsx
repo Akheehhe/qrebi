@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import Countdown from '@/components/Countdown'
 import Cycle from '@/components/Cycle'
 import OfferForm from '@/components/OfferForm'
@@ -119,7 +120,7 @@ export default function Page() {
         <ul className="hero-facts">
           <li><Check /><span><T ge={<><b>50 ₾</b>-დან, ერთჯერადად</>} en={<>From <b>50 ₾</b>, one-time</>} /></span></li>
           <li><Truck /><span><T ge="მიწოდება მთელ საქართველოში" en="Delivery across Georgia" /></span></li>
-          <li><NoFee /><span><T ge="ყოველთვიური გადასახადის გარეშე" en="No monthly fee" /></span></li>
+          <li><NoFee /><span><T ge="ბარათი — ყოველთვიური გადასახადის გარეშე" en="The card: no monthly fee" /></span></li>
         </ul>
         </PlatformRotator>
       </section>
@@ -255,9 +256,9 @@ export default function Page() {
                 <T ge="დაუმატე შეკვეთას" en="Add it to your order" />
                 <Arrow />
               </a>
-              <a className="smart-login" href="/login">
+              <Link className="smart-login" href="/login">
                 <T ge="უკვე გაქვს? შესვლა" en="Already have it? Log in" />
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -320,8 +321,8 @@ export default function Page() {
             </h2>
             <p className="sec-lede" data-rise>
               <T
-                ge="ერთხელ იხდი. აბონენტი, თვიური გადასახადი და ხელშეკრულება არ არის."
-                en="You pay once. No subscription, no monthly fee, no contract."
+                ge="ბარათებში ერთხელ იხდი — თვიური გადასახადი და ხელშეკრულება არ არის."
+                en="You pay for the cards once — no monthly fee, no contract."
               />
             </p>
           </div>

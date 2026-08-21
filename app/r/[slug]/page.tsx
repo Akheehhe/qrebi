@@ -37,7 +37,7 @@ export default async function Page({ params }: Props) {
   if (!page.active) {
     return (
       <FunnelShell>
-        <div className="rp-card" data-reveal>
+        <div className="rp-card">
           <p className="rp-biz">{page.name}</p>
           <p className="rp-ask">
             <T ge="დაგვიტოვე შეფასება Google-ზე" en="Leave us a review on Google" />

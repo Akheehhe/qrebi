@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabaseBrowser, supabaseConfigured, type Business } from '@/lib/supabase'
 import { addMonthsClamped, fmtDate, isActive, slugify, tbilisiToday } from '@/lib/funnel'
@@ -55,8 +55,13 @@ export default function AdminClient() {
         router.replace('/login')
         return
       }
-      const { data: admin } = await sb.rpc('is_admin')
+      const { data: admin, error: adminErr } = await sb.rpc('is_admin')
       if (dead) return
+      // a network blip is not a verdict: only a clean false is 'denied'
+      if (adminErr) {
+        setLoad('error')
+        return
+      }
       if (!admin) {
         setLoad('denied')
         return
@@ -77,7 +82,10 @@ export default function AdminClient() {
     const { data, error } = await supabaseBrowser()
       .from('businesses').select('*').order('created_at', { ascending: false })
     if (error) {
-      setLoad('error')
+      // after a mutation the write has already landed — keep the panel up
+      // and say the list refresh failed, rather than tearing everything down
+      if (first) setLoad('error')
+      else setErr('სია ვერ განახლდა — განაახლე გვერდი. / List refresh failed — reload the page.')
       return
     }
     setBusinesses((data ?? []) as Business[])
@@ -91,7 +99,7 @@ export default function AdminClient() {
 
   function friendly(message: string): string {
     if (message.includes('businesses_slug_key')) return 'ეს slug უკვე დაკავებულია. / That slug is taken.'
-    if (message.includes('slug')) return 'slug: მხოლოდ a-z, 0-9 და defisi. / slug: only a-z, 0-9 and hyphens.'
+    if (message.includes('slug')) return 'slug: მხოლოდ a-z, 0-9 და დეფისი. / slug: only a-z, 0-9 and hyphens.'
     if (message.includes('google_review_url')) return 'Google-ის ბმული https://-ით უნდა იწყებოდეს. / The Google link must start with https://.'
     if (message.includes('owner_email')) return 'ელფოსტა პატარა ასოებით. / Email must be lowercase.'
     return message
@@ -121,6 +129,13 @@ export default function AdminClient() {
 
   async function saveEdit(id: string) {
     if (!edit) return
+    // printed NFC cards carry the old URL — renaming the slug kills them
+    const before = businesses.find((b) => b.id === id)
+    if (before && before.slug !== edit.slug.trim().toLowerCase() &&
+        !window.confirm(
+          `slug შეიცვლება: /r/${before.slug} → /r/${edit.slug}. უკვე ჩაწერილი NFC ბარათები ძველ ბმულზე გადავა და 404-ს მიიღებს. გავაგრძელო?\n` +
+          `Slug change: /r/${before.slug} → /r/${edit.slug}. NFC cards already encoded with the old link will 404. Continue?`,
+        )) return
     setBusy(true)
     setErr('')
     const { error } = await supabaseBrowser().from('businesses').update({
@@ -178,7 +193,9 @@ export default function AdminClient() {
     await reload()
   }
 
-  const today = useMemo(tbilisiToday, [])
+  // per render on purpose: a tab left open across Tbilisi midnight should
+  // not keep showing yesterday's active/paused states
+  const today = tbilisiToday()
 
   if (load === 'loading') {
     return <DashShell><div className="dash-wait" aria-busy="true"><span className="rp-spin" /></div></DashShell>
@@ -238,12 +255,12 @@ export default function AdminClient() {
           onChange={(e) => set({ ...d, owner_email: e.target.value })} />
       </label>
       <label>
-        <span><T ge="გადახდილია –მდე" en="Paid until" /></span>
+        <span><T ge="მოქმედების ვადა" en="Paid until" /></span>
         <input type="date" required value={d.paid_until}
           onChange={(e) => set({ ...d, paid_until: e.target.value })} />
       </label>
       <label>
-        <span><T ge="Google-ზე მიდის" en="Goes to Google from" /></span>
+        <span><T ge="ზღვარი Google-სთვის" en="Google threshold" /></span>
         <select value={d.min_public_stars}
           onChange={(e) => set({ ...d, min_public_stars: Number(e.target.value) })}>
           {[5, 4, 3, 2, 1].map((n) => <option key={n} value={n}>{n}★+</option>)}
@@ -256,7 +273,10 @@ export default function AdminClient() {
     <DashShell onSignOut={signOut}>
       <div className="dash-top">
         <h1 className="dash-title"><T ge="ადმინი" en="Admin" /></h1>
-        <span className="dash-badge">{businesses.length} <T ge="ბიზნესი" en="businesses" /></span>
+        <span className="dash-badge">
+          {businesses.length}{' '}
+          <T ge="ბიზნესი" en={businesses.length === 1 ? 'business' : 'businesses'} />
+        </span>
       </div>
 
       {err && <p className="reg-note adm-err" role="status">{err}</p>}

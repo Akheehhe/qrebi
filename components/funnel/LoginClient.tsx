@@ -14,9 +14,17 @@ type Status = 'idle' | 'sending' | 'sent' | 'failed'
 export default function LoginClient() {
   const router = useRouter()
   const [status, setStatus] = useState<Status>('idle')
+  const [linkErr, setLinkErr] = useState(false)
 
-  // already signed in? straight through.
   useEffect(() => {
+    // /app forwards a dead magic link here as #link-error (scanner-consumed
+    // or expired token) — say so, since the fix is simply asking again
+    if (window.location.hash === '#link-error') {
+      setLinkErr(true)
+      window.history.replaceState(null, '', window.location.pathname)
+      return
+    }
+    // already signed in? straight through.
     if (!supabaseConfigured) return
     supabaseBrowser().auth.getSession().then(({ data }) => {
       if (data.session) router.replace('/app')
@@ -79,6 +87,14 @@ export default function LoginClient() {
           />
         </p>
         <form className="rp-form" onSubmit={onSubmit}>
+          {linkErr && (
+            <p className="reg-note" role="status">
+              <T
+                ge="ბმულს ვადა გაუვიდა ან უკვე გამოყენებულია — გამოითხოვე ახალი."
+                en="That link expired or was already used — request a fresh one."
+              />
+            </p>
+          )}
           <label>
             <span><T ge="ელფოსტა" en="Email" /></span>
             <input
