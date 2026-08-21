@@ -7,8 +7,11 @@ Two offerings, one site:
    instead of straight at Google. The customer picks a star count; ratings at
    or above the business's threshold (default 4★) are recorded and the
    customer is carried on to the Google review form, lower ratings become a
-   private message only the owner sees. Owners watch it all from `/app`;
-   you run subscriptions from `/admin`.
+   private message only the owner sees. Owners watch it all from `/app` —
+   stat tiles with a 30-days/all-time switch, a star-distribution chart, a
+   day-by-day trend, the feedback inbox with mark-as-handled ticks, and a
+   downloadable print-ready QR of their link; you run subscriptions from
+   `/admin`.
 
 ## One-time setup
 
@@ -57,7 +60,11 @@ no secret key ever reaches the browser):
 **Getting a business's Google review link:** in their Google Business
 Profile, "Ask for reviews" gives a share link (`g.page/r/…/review`); the
 `search.google.com/local/writereview?placeid=…` form works too. Anything
-starting with `https://` is accepted.
+starting with `https://` is accepted — but always use one of these two
+*direct review* forms, never a plain Maps link: they open Google's own
+star picker immediately, so a 5★ customer lands with the stars already in
+front of them. (Google offers no way to pre-fill or auto-post the stars —
+no tool can; the customer confirms them on Google's side with one tap.)
 
 **Per-business threshold:** `min_public_stars` (admin panel, "Goes to Google
 from") decides which ratings continue to Google. Default 4★+. Setting it to

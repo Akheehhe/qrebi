@@ -238,7 +238,7 @@ export default function Page() {
               </li>
               <li style={{ '--i': 3 } as React.CSSProperties}>
                 <Rank />
-                <T ge="კაბინეტი: სტატისტიკა, საშუალო ქულა, გამოხმაურებები" en="A dashboard: stats, average score, the feedback inbox" />
+                <T ge="კაბინეტი: გრაფიკები, გამოხმაურებები, დასაბეჭდი QR" en="A dashboard: charts, the feedback inbox, a printable QR" />
               </li>
             </ul>
             <div className="smart-price" data-rise>

@@ -2,23 +2,32 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import QRCode from 'qrcode'
 import { supabaseBrowser, supabaseConfigured, type Business, type Review } from '@/lib/supabase'
 import { fmtDate, fmtTimestampTbilisi, isActive } from '@/lib/funnel'
 import DashShell from '@/components/funnel/DashShell'
+import { StarDistribution, TrendChart, type TrendDay } from '@/components/funnel/charts'
 import { EMAIL, T, WHATSAPP, WhatsAppIcon } from '@/components/shared'
 import { Arrow, Check, GoogleG, Star } from '@/components/icons'
 
 type Load = 'loading' | 'ready' | 'error'
+type Range = '30d' | 'all'
 
-/** The business owner's cabinet: how the funnel is doing, the private
- *  feedback inbox, the card link, and where the subscription stands. */
+const tbilisiDay = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Tbilisi' })
+
+/** The business owner's cabinet: how the funnel is doing (tiles, star
+ *  distribution, a 30-day trend), the private feedback inbox with a
+ *  handled-tick, the card link with a printable QR, and the subscription. */
 export default function DashboardClient() {
   const router = useRouter()
   const [load, setLoad] = useState<Load>('loading')
   const [businesses, setBusinesses] = useState<Business[]>([])
   const [reviews, setReviews] = useState<Review[]>([])
   const [selected, setSelected] = useState<string | null>(null)
+  const [range, setRange] = useState<Range>('30d')
   const [copiedSlug, setCopiedSlug] = useState<string | null>(null)
+  const [qr, setQr] = useState<string | null>(null)
+  const [inboxErr, setInboxErr] = useState(false)
   const copyTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
   useEffect(() => {
@@ -89,18 +98,73 @@ export default function DashboardClient() {
     () => reviews.filter((r) => r.business_id === biz?.id),
     [reviews, biz],
   )
+
+  const rangeReviews = useMemo(() => {
+    if (range === 'all') return bizReviews
+    const cutoff = Date.now() - 30 * 86400e3
+    return bizReviews.filter((r) => new Date(r.created_at).getTime() >= cutoff)
+  }, [bizReviews, range])
+
   const stats = useMemo(() => {
-    const total = bizReviews.length
-    const toGoogle = bizReviews.filter((r) => r.sent_to_google).length
+    const total = rangeReviews.length
+    const toGoogle = rangeReviews.filter((r) => r.sent_to_google).length
     const avg = total
-      ? (bizReviews.reduce((s, r) => s + r.stars, 0) / total).toFixed(1)
+      ? (rangeReviews.reduce((s, r) => s + r.stars, 0) / total).toFixed(1)
       : '—'
     return { total, toGoogle, avg }
+  }, [rangeReviews])
+
+  const distribution = useMemo(() => {
+    const counts = [0, 0, 0, 0, 0]
+    for (const r of rangeReviews) counts[r.stars - 1]++
+    return counts
+  }, [rangeReviews])
+
+  const trendDays = useMemo<TrendDay[]>(() => {
+    const byDay = new Map<string, { google: number; priv: number }>()
+    for (const r of bizReviews) {
+      const key = tbilisiDay.format(new Date(r.created_at))
+      const d = byDay.get(key) ?? { google: 0, priv: 0 }
+      if (r.sent_to_google) d.google++
+      else d.priv++
+      byDay.set(key, d)
+    }
+    const days: TrendDay[] = []
+    for (let i = 29; i >= 0; i--) {
+      const key = tbilisiDay.format(new Date(Date.now() - i * 86400e3))
+      const [, m, d] = key.split('-')
+      days.push({ key, label: `${d}.${m}`, ...(byDay.get(key) ?? { google: 0, priv: 0 }) })
+    }
+    return days
   }, [bizReviews])
+
+  // the inbox: everything that stayed private, unhandled first
   const feedback = useMemo(
-    () => bizReviews.filter((r) => !r.sent_to_google),
+    () =>
+      bizReviews
+        .filter((r) => !r.sent_to_google)
+        .slice()
+        .sort((a, b) =>
+          (a.handled_at ? 1 : 0) - (b.handled_at ? 1 : 0) ||
+          b.created_at.localeCompare(a.created_at),
+        ),
     [bizReviews],
   )
+  const unhandled = feedback.filter((r) => !r.handled_at).length
+
+  // printable QR of the card link, generated in the browser
+  useEffect(() => {
+    if (!biz) return
+    let dead = false
+    QRCode.toDataURL(`${window.location.origin}/r/${biz.slug}`, {
+      width: 512,
+      margin: 2,
+      color: { dark: '#0A071C', light: '#ffffff' },
+    })
+      .then((url) => { if (!dead) setQr(url) })
+      .catch(() => { if (!dead) setQr(null) })
+    return () => { dead = true }
+  }, [biz])
 
   async function signOut() {
     await supabaseBrowser().auth.signOut()
@@ -119,6 +183,21 @@ export default function DashboardClient() {
       copyTimer.current = setTimeout(() => setCopiedSlug(null), 1800)
     } catch {
       /* clipboard blocked — the visible link can still be selected by hand */
+    }
+  }
+
+  async function toggleHandled(r: Review) {
+    const next = r.handled_at ? null : new Date().toISOString()
+    setInboxErr(false)
+    // optimistic: tick now, revert if the server refuses
+    setReviews((rs) => rs.map((x) => (x.id === r.id ? { ...x, handled_at: next } : x)))
+    const { error } = await supabaseBrowser().rpc('set_feedback_handled', {
+      p_review_id: r.id,
+      p_handled: !r.handled_at,
+    })
+    if (error) {
+      setReviews((rs) => rs.map((x) => (x.id === r.id ? { ...x, handled_at: r.handled_at } : x)))
+      setInboxErr(true)
     }
   }
 
@@ -191,21 +270,45 @@ export default function DashboardClient() {
             ? <T ge={`აქტიურია ${fmtDate(biz.paid_until)}-მდე`} en={`Active until ${fmtDate(biz.paid_until)}`} />
             : <T ge="შეჩერებულია" en="Paused" />}
         </span>
+        <div className="dash-range" role="group" aria-label="პერიოდი / period">
+          <button type="button" className={`dash-chip${range === '30d' ? ' on' : ''}`}
+            onClick={() => setRange('30d')}>
+            <T ge="ბოლო 30 დღე" en="Last 30 days" />
+          </button>
+          <button type="button" className={`dash-chip${range === 'all' ? ' on' : ''}`}
+            onClick={() => setRange('all')}>
+            <T ge="სულ" en="All time" />
+          </button>
+        </div>
       </div>
 
       {/* the numbers the funnel exists for */}
       <div className="dash-stats">
         <div className="dash-stat">
           <b>{stats.total}</b>
-          <span><T ge="შეფასება სულ" en="Ratings total" /></span>
+          <span><T ge="შეფასება" en="Ratings" /></span>
         </div>
         <div className="dash-stat">
           <b>{stats.avg}{stats.avg !== '—' && <Star />}</b>
           <span><T ge="საშუალო ქულა" en="Average score" /></span>
         </div>
-        <div className="dash-stat dash-stat-g">
+        <div className="dash-stat">
           <b>{stats.toGoogle}<GoogleG /></b>
           <span><T ge="გადავიდა Google-ზე" en="Sent to Google" /></span>
+        </div>
+      </div>
+
+      {/* how the month actually went */}
+      <div className="dash-card dash-analytics">
+        <div className="dash-ana-col">
+          <h2 className="dash-h"><T ge="ვარსკვლავების განაწილება" en="Star distribution" /></h2>
+          {stats.total === 0
+            ? <p className="dash-p"><T ge="ამ პერიოდში შეფასებები არ არის." en="No ratings in this period." /></p>
+            : <StarDistribution counts={distribution} />}
+        </div>
+        <div className="dash-ana-col">
+          <h2 className="dash-h"><T ge="ბოლო 30 დღე, დღეების მიხედვით" en="Last 30 days, day by day" /></h2>
+          <TrendChart days={trendDays} />
         </div>
       </div>
 
@@ -225,6 +328,24 @@ export default function DashboardClient() {
                 <T ge="ნახვა" en="Open" /><Arrow />
               </a>
             </div>
+            {qr && (
+              <div className="dash-qr">
+                {/* generated locally, never fetched */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={qr} alt={`QR: ${ratingLink(biz.slug)}`} width={92} height={92} />
+                <div>
+                  <p className="dash-p">
+                    <T
+                      ge="იგივე ბმული QR-კოდად — მენიუზე, ჩეკზე, ვიტრინაზე."
+                      en="The same link as a QR — for menus, receipts, the window."
+                    />
+                  </p>
+                  <a className="btn dash-qr-btn" href={qr} download={`qrebi-${biz.slug}-qr.png`}>
+                    <T ge="QR-ის ჩამოტვირთვა" en="Download QR" />
+                  </a>
+                </div>
+              </div>
+            )}
             <p className="dash-note">
               <T
                 ge={`${biz.min_public_stars}★ და მეტი Google-ზე მიდის, დანარჩენი — მხოლოდ შენთან.`}
@@ -265,8 +386,13 @@ export default function DashboardClient() {
           <div className="dash-card">
             <h2 className="dash-h">
               <T ge="პირადი გამოხმაურებები" en="Private feedback" />
-              <span className="dash-count">{feedback.length}</span>
+              <span className="dash-count">{unhandled}</span>
             </h2>
+            {inboxErr && (
+              <p className="reg-note" role="status">
+                <T ge="ვერ შეინახა — სცადე თავიდან." en="Couldn't save — try again." />
+              </p>
+            )}
             {feedback.length === 0 ? (
               <p className="dash-p">
                 <T ge="ჯერ არაფერია — კარგი ნიშანია." en="Nothing yet — that's a good sign." />
@@ -274,7 +400,7 @@ export default function DashboardClient() {
             ) : (
               <ul className="dash-feed">
                 {feedback.map((r) => (
-                  <li key={r.id}>
+                  <li key={r.id} className={r.handled_at ? 'done' : undefined}>
                     <div className="dash-feed-top">
                       <span className="dash-feed-stars" aria-label={`${r.stars} ★`}>
                         {Array.from({ length: 5 }, (_, i) => (
@@ -289,6 +415,12 @@ export default function DashboardClient() {
                         {[r.author_name, r.author_contact].filter(Boolean).join(' · ')}
                       </p>
                     )}
+                    <button type="button" className="dash-feed-tick" onClick={() => toggleHandled(r)}>
+                      <Check />
+                      {r.handled_at
+                        ? <T ge="მოგვარებულია — დაბრუნება" en="Handled — reopen" />
+                        : <T ge="მოგვარებულად მონიშვნა" en="Mark as handled" />}
+                    </button>
                   </li>
                 ))}
               </ul>

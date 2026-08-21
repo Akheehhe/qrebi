@@ -110,13 +110,11 @@ export default function RatingWidget({ slug, name, minPublicStars, googleReviewU
     setStars(n)
     setFailed(false)
     if (n >= minPublicStars) {
+      // no waiting at all: the keepalive fetch finishes the write behind the
+      // navigation, and Google's own star picker is the next thing they see
       setPhase('google')
-      // keepalive on the client's fetch lets the write finish even after the
-      // navigation; the timer only bounds how long the customer waits here
-      const timer = new Promise<null>((res) => setTimeout(() => res(null), 2500))
-      Promise.race([enqueue(n), timer]).then((r) => {
-        window.location.assign(r?.res?.google_review_url || googleReviewUrl)
-      })
+      void enqueue(n)
+      window.location.assign(googleReviewUrl)
     } else {
       // the tap itself is the rating — record it now, ask for words after
       void enqueue(n)

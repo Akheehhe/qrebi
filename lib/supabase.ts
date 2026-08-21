@@ -72,5 +72,6 @@ export type Review = {
   author_name: string | null
   author_contact: string | null
   sent_to_google: boolean
+  handled_at: string | null
   created_at: string
 }

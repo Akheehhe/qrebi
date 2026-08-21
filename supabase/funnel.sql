@@ -44,6 +44,8 @@ create table if not exists public.reviews (
   author_contact text,
   -- true when the customer was passed on to the public Google review form
   sent_to_google boolean not null default false,
+  -- set by the owner when they consider a piece of feedback dealt with
+  handled_at     timestamptz,
   created_at     timestamptz not null default now()
 );
 
@@ -261,14 +263,37 @@ begin
 end;
 $$;
 
+-- The one write an owner gets: ticking feedback off. Scoped to their own
+-- business's rows (or the admin's reach), nothing else about a review moves.
+create or replace function public.set_feedback_handled(p_review_id uuid, p_handled boolean)
+returns void
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  update public.reviews r
+  set handled_at = case when p_handled then now() end
+  from public.businesses b
+  where r.id = p_review_id
+    and b.id = r.business_id
+    and (b.owner_email = public.jwt_email() or public.is_admin());
+  if not found then
+    raise exception 'not-available';
+  end if;
+end;
+$$;
+
 revoke all on function public.review_page(text) from public;
 revoke all on function public.submit_review(text, int, text, text, text) from public;
 revoke all on function public.add_feedback(uuid, int, text, text, text) from public;
+revoke all on function public.set_feedback_handled(uuid, boolean) from public;
 revoke all on function public.is_admin() from public;
 revoke all on function public.jwt_email() from public;
 grant execute on function public.review_page(text) to anon, authenticated;
 grant execute on function public.submit_review(text, int, text, text, text) to anon, authenticated;
 grant execute on function public.add_feedback(uuid, int, text, text, text) to anon, authenticated;
+grant execute on function public.set_feedback_handled(uuid, boolean) to authenticated;
 grant execute on function public.is_admin() to authenticated;
 grant execute on function public.jwt_email() to authenticated;
 
