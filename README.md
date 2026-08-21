@@ -57,14 +57,27 @@ no secret key ever reaches the browser):
    filtering and recording and simply forwards everyone to Google, so their
    cards never go dead.
 
-**Getting a business's Google review link:** in their Google Business
-Profile, "Ask for reviews" gives a share link (`g.page/r/…/review`); the
-`search.google.com/local/writereview?placeid=…` form works too. Anything
-starting with `https://` is accepted — but always use one of these two
-*direct review* forms, never a plain Maps link: they open Google's own
-star picker immediately, so a 5★ customer lands with the stars already in
-front of them. (Google offers no way to pre-fill or auto-post the stars —
-no tool can; the customer confirms them on Google's side with one tap.)
+**Platform links** — a business can have up to three (at least one), and a
+happy customer either goes straight there (one platform) or picks from a
+one-tap chooser (several — the hotel setup):
+
+- **Google:** in their Google Business Profile, "Ask for reviews" gives a
+  share link (`g.page/r/…/review`); the
+  `search.google.com/local/writereview?placeid=…` form works too. Always
+  use one of these *direct review* forms, never a plain Maps link: they
+  open Google's own star picker immediately, so a 5★ customer lands with
+  the stars already in front of them. (Google offers no way to pre-fill or
+  auto-post the stars — no tool can; the customer confirms them on
+  Google's side with one tap.)
+- **Tripadvisor:** open the property's Tripadvisor page, press "Write a
+  review", and copy that URL (`tripadvisor.com/UserReviewEdit-g…-d…`) —
+  it opens the review form directly for anyone with a Tripadvisor account.
+- **Booking.com:** use the property's page URL. Be straight with hotels
+  about this one: Booking has **no public review form** — only guests who
+  booked through Booking can review, from the email Booking itself sends
+  after checkout. The button still helps (guests find the property and
+  their invite), but Booking review volume is driven by Booking, not by
+  any link.
 
 **Per-business threshold:** `min_public_stars` (admin panel, "Goes to Google
 from") decides which ratings continue to Google. Default 4★+. Setting it to

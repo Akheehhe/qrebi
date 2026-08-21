@@ -1,31 +1,36 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { supabaseBrowser, type SubmitReviewResult } from '@/lib/supabase'
+import { supabaseBrowser, type Platform, type PlatformKey, type SubmitReviewResult } from '@/lib/supabase'
+import { PLATFORM_LABEL } from '@/lib/funnel'
+import PlatformIcon from '@/components/funnel/PlatformIcon'
 import { T } from '@/components/shared'
-import { Check, GoogleG, Star } from '@/components/icons'
+import { Check, Star } from '@/components/icons'
 
 type Props = {
   slug: string
   name: string
   minPublicStars: number
-  googleReviewUrl: string
+  platforms: Platform[]
 }
 
-type Phase = 'pick' | 'feedback' | 'sending' | 'thanks' | 'google' | 'gone'
-type Extra = { comment?: string; name?: string; contact?: string }
+type Phase = 'pick' | 'feedback' | 'sending' | 'thanks' | 'choose' | 'redirect' | 'gone'
+type Extra = { comment?: string; name?: string; contact?: string; platform?: PlatformKey }
 type Outcome = { res: SubmitReviewResult | null; gone: boolean }
 
 /** The funnel itself. The first tap on a star writes the rating immediately —
  *  an abandoned feedback form still counts — and everything after (a changed
- *  pick, the comment) amends that same row through add_feedback(). At or
- *  above the business's threshold the customer is carried straight on to the
- *  public Google review form; below it only the owner ever sees the visit. */
-export default function RatingWidget({ slug, name, minPublicStars, googleReviewUrl }: Props) {
+ *  pick, the comment, the platform choice) amends that same row through
+ *  add_feedback(). At or above the business's threshold the customer carries
+ *  straight on to the public review form — instantly when one platform is
+ *  configured, via a one-tap chooser when there are several; below it only
+ *  the owner ever sees the visit. */
+export default function RatingWidget({ slug, name, minPublicStars, platforms }: Props) {
   const [phase, setPhase] = useState<Phase>('pick')
   const [stars, setStars] = useState(0)
   const [failed, setFailed] = useState(false)
   const [returning, setReturning] = useState(false)
+  const [chosen, setChosen] = useState<Platform | null>(null)
   const reviewId = useRef<string | null>(null)
   const goneRef = useRef(false)
   // all writes go through one chain, so a quick second tap can never race the
@@ -74,6 +79,7 @@ export default function RatingWidget({ slug, name, minPublicStars, googleReviewU
           p_comment: extra?.comment ?? null,
           p_name: extra?.name ?? null,
           p_contact: extra?.contact ?? null,
+          p_platform: extra?.platform ?? null,
         })
         if (error) throw error
         return { res: data as SubmitReviewResult, gone: false }
@@ -84,6 +90,7 @@ export default function RatingWidget({ slug, name, minPublicStars, googleReviewU
         p_comment: extra?.comment ?? null,
         p_name: extra?.name ?? null,
         p_contact: extra?.contact ?? null,
+        p_platform: extra?.platform ?? null,
       })
       if (error) throw error
       const res = data as SubmitReviewResult
@@ -105,16 +112,27 @@ export default function RatingWidget({ slug, name, minPublicStars, googleReviewU
     return p
   }
 
+  function goTo(p: Platform, n: number) {
+    // no waiting at all: the keepalive fetch finishes the write behind the
+    // navigation, and the platform's own review form is the next thing they see
+    setChosen(p)
+    setPhase('redirect')
+    void enqueue(n, { platform: p.key })
+    window.location.assign(p.url)
+  }
+
   function pick(n: number) {
-    if (phase === 'sending' || phase === 'thanks' || phase === 'google' || phase === 'gone') return
+    if (phase === 'sending' || phase === 'thanks' || phase === 'redirect' || phase === 'gone') return
     setStars(n)
     setFailed(false)
     if (n >= minPublicStars) {
-      // no waiting at all: the keepalive fetch finishes the write behind the
-      // navigation, and Google's own star picker is the next thing they see
-      setPhase('google')
-      void enqueue(n)
-      window.location.assign(googleReviewUrl)
+      if (platforms.length === 1) {
+        goTo(platforms[0], n)
+      } else {
+        // the tap is already the rating; the customer only picks the venue
+        void enqueue(n)
+        setPhase('choose')
+      }
     } else {
       // the tap itself is the rating — record it now, ask for words after
       void enqueue(n)
@@ -154,24 +172,57 @@ export default function RatingWidget({ slug, name, minPublicStars, googleReviewU
         <p className="rp-ask">
           <T ge="ეს გვერდი დროებით არ იღებს შეფასებებს." en="This page isn't taking ratings right now." />
         </p>
-        <a className="btn btn-ink rp-google" href={googleReviewUrl} rel="noopener">
-          <GoogleG />
-          <T ge="დაწერე შეფასება Google-ზე" en="Leave a review on Google" />
+        <div className="rp-choice">
+          {platforms.map((p, i) => (
+            <a key={p.key} className={`btn rp-plat${i === 0 ? ' btn-ink' : ' btn-soft'}`}
+              href={p.url} rel="noopener">
+              <PlatformIcon k={p.key} />
+              <T ge={`შეფასება ${PLATFORM_LABEL[p.key]}-ზე`} en={`Review on ${PLATFORM_LABEL[p.key]}`} />
+            </a>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  if (phase === 'redirect') {
+    const p = chosen ?? platforms[0]
+    return (
+      <div className="rp-card" role="status">
+        <span className="rp-tick"><PlatformIcon k={p.key} /></span>
+        <p className="rp-biz">{name}</p>
+        <p className="rp-ask">
+          <T ge={`გმადლობთ! გადაგიყვანთ ${PLATFORM_LABEL[p.key]}-ზე…`}
+            en={`Thank you! Taking you to ${PLATFORM_LABEL[p.key]}…`} />
+        </p>
+        <a className="btn btn-ink rp-plat" href={p.url} rel="noopener">
+          <PlatformIcon k={p.key} />
+          <T ge="თუ არ გადახვედი — დააჭირე აქ" en="If nothing happens, tap here" />
         </a>
       </div>
     )
   }
 
-  if (phase === 'google') {
+  if (phase === 'choose') {
     return (
-      <div className="rp-card" role="status">
-        <span className="rp-tick"><GoogleG /></span>
+      <div className="rp-card">
         <p className="rp-biz">{name}</p>
-        <p className="rp-ask"><T ge="გმადლობთ! გადაგიყვანთ Google-ზე…" en="Thank you! Taking you to Google…" /></p>
-        <a className="btn btn-ink rp-google" href={googleReviewUrl} rel="noopener">
-          <GoogleG />
-          <T ge="თუ არ გადახვედი — დააჭირე აქ" en="If nothing happens, tap here" />
-        </a>
+        <p className="rp-ask">
+          <T ge="გმადლობთ! სად დაწერ შეფასებას?" en="Thank you! Where will you leave it?" />
+        </p>
+        <div className="rp-choice">
+          {platforms.map((p, i) => (
+            <button key={p.key} type="button"
+              className={`btn rp-plat${i === 0 ? ' btn-ink' : ' btn-soft'}`}
+              onClick={() => goTo(p, stars)}>
+              <PlatformIcon k={p.key} />
+              {PLATFORM_LABEL[p.key]}
+            </button>
+          ))}
+        </div>
+        <p className="rp-hint">
+          <T ge="აირჩიე, სადაც ანგარიში გაქვს" en="Pick the one you have an account on" />
+        </p>
       </div>
     )
   }

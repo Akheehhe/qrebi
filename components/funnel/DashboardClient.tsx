@@ -4,11 +4,12 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import QRCode from 'qrcode'
 import { supabaseBrowser, supabaseConfigured, type Business, type Review } from '@/lib/supabase'
-import { fmtDate, fmtTimestampTbilisi, isActive } from '@/lib/funnel'
+import { fmtDate, fmtTimestampTbilisi, isActive, PLATFORM_LABEL, platformsOf } from '@/lib/funnel'
 import DashShell from '@/components/funnel/DashShell'
+import PlatformIcon from '@/components/funnel/PlatformIcon'
 import { StarDistribution, TrendChart, type TrendDay } from '@/components/funnel/charts'
 import { EMAIL, T, WHATSAPP, WhatsAppIcon } from '@/components/shared'
-import { Arrow, Check, GoogleG, Star } from '@/components/icons'
+import { Arrow, Check, Star } from '@/components/icons'
 
 type Load = 'loading' | 'ready' | 'error'
 type Range = '30d' | 'all'
@@ -243,6 +244,10 @@ export default function DashboardClient() {
   }
 
   const active = isActive(biz.paid_until)
+  const plats = platformsOf(biz)
+  // rows from before the platform column existed can only be Google's
+  const platCount = (key: string) =>
+    rangeReviews.filter((r) => r.sent_to_google && (r.platform ?? 'google') === key).length
 
   return (
     <DashShell onSignOut={signOut}>
@@ -293,8 +298,16 @@ export default function DashboardClient() {
           <span><T ge="საშუალო ქულა" en="Average score" /></span>
         </div>
         <div className="dash-stat">
-          <b>{stats.toGoogle}<GoogleG /></b>
-          <span><T ge="გადავიდა Google-ზე" en="Sent to Google" /></span>
+          <b>
+            {stats.toGoogle}
+            {plats.length === 1 && <PlatformIcon k={plats[0].key} />}
+          </b>
+          <span>
+            {plats.length === 1
+              ? <T ge={`გადავიდა ${PLATFORM_LABEL[plats[0].key]}-ზე`}
+                  en={`Sent to ${PLATFORM_LABEL[plats[0].key]}`} />
+              : <T ge="გავიდა პლატფორმებზე" en="Sent to platforms" />}
+          </span>
         </div>
       </div>
 
@@ -305,6 +318,17 @@ export default function DashboardClient() {
           {stats.total === 0
             ? <p className="dash-p"><T ge="ამ პერიოდში შეფასებები არ არის." en="No ratings in this period." /></p>
             : <StarDistribution counts={distribution} />}
+          {plats.length > 1 && (
+            <div className="dash-plats">
+              {plats.map((p) => (
+                <span key={p.key}>
+                  <PlatformIcon k={p.key} />
+                  {PLATFORM_LABEL[p.key]}
+                  <b>{platCount(p.key)}</b>
+                </span>
+              ))}
+            </div>
+          )}
         </div>
         <div className="dash-ana-col">
           <h2 className="dash-h"><T ge="ბოლო 30 დღე, დღეების მიხედვით" en="Last 30 days, day by day" /></h2>
@@ -348,8 +372,8 @@ export default function DashboardClient() {
             )}
             <p className="dash-note">
               <T
-                ge={`${biz.min_public_stars}★ და მეტი Google-ზე მიდის, დანარჩენი — მხოლოდ შენთან.`}
-                en={`${biz.min_public_stars}★ and up goes to Google; the rest comes only to you.`}
+                ge={`${biz.min_public_stars}★ და მეტი ქვეყნდება, დანარჩენი — მხოლოდ შენთან.`}
+                en={`${biz.min_public_stars}★ and up goes public; the rest comes only to you.`}
               />
             </p>
           </div>

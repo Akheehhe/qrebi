@@ -10,8 +10,8 @@ import { PlatformRotator } from '@/components/platform'
 import OrderForm from '@/components/OrderForm'
 import { EMAIL, PHONE, T, WHATSAPP, WhatsAppIcon } from '@/components/shared'
 import {
-  Arrow, Camera, Check, Finder, GoogleG, NoFee,
-  Rank, Stand, Star, Tap, Truck,
+  Arrow, BookingMark, Camera, Check, Finder, GoogleG, NoFee,
+  Rank, Stand, Star, Tap, TripadvisorOwl, Truck,
 } from '@/components/icons'
 
 const TIERS = [
@@ -213,14 +213,14 @@ export default function Page() {
           <div className="smart-copy">
             <h2 data-rise>
               <T
-                ge={<>★★★★★ Google-ზე ქვეყნდება. უკმაყოფილება — <mark>მხოლოდ შენთან.</mark></>}
-                en={<>★★★★★ goes public on Google. Complaints come <mark>only to you.</mark></>}
+                ge={<>★★★★★ ქვეყნდება. უკმაყოფილება — <mark>მხოლოდ შენთან.</mark></>}
+                en={<>★★★★★ goes public. Complaints come <mark>only to you.</mark></>}
               />
             </h2>
             <p className="sec-lede" data-rise>
               <T
-                ge="ჭკვიანი გვერდი ბარათსა და Google-ს შორის დგას: კლიენტი ვარსკვლავებს ირჩევს — მაღალი შეფასება Google-ზე მიდის, დაბალი კი პირად შეტყობინებად მოგდის."
-                en="The smart page sits between your card and Google: the customer picks a star count — high ratings carry on to Google, low ones come to you as a private message."
+                ge="ჭკვიანი გვერდი ბარათსა და შეფასების საიტს შორის დგას: კლიენტი ვარსკვლავებს ირჩევს — მაღალი შეფასება Google-ზე, Tripadvisor-ზე ან Booking-ზე მიდის, დაბალი კი პირად შეტყობინებად მოგდის. კაფეს ერთი პლატფორმა ჰყოფნის, სასტუმროს — სამივე ერთ ბარათზე."
+                en="The smart page sits between your card and the review site: the customer picks a star count — high ratings carry on to Google, Tripadvisor or Booking, low ones come to you as a private message. A café needs one platform; a hotel gets all three on one card."
               />
             </p>
             <ul className="smart-list" data-stagger>
@@ -230,7 +230,7 @@ export default function Page() {
               </li>
               <li style={{ '--i': 1 } as React.CSSProperties}>
                 <Star />
-                <T ge="4★ და 5★ პირდაპირ Google-ზე მიდის" en="4★ and 5★ carry straight on to Google" />
+                <T ge="4★ და 5★ მიდის Google-ზე, Tripadvisor-ზე ან Booking-ზე" en="4★ and 5★ carry on to Google, Tripadvisor or Booking" />
               </li>
               <li style={{ '--i': 2 } as React.CSSProperties}>
                 <Check />
@@ -276,8 +276,10 @@ export default function Page() {
             <div className="smart-route smart-route-up">
               <span className="smart-route-stars">4–5★</span>
               <Arrow />
-              <GoogleG />
-              <b><T ge="Google-ზე" en="To Google" /></b>
+              <span className="smart-route-plats">
+                <GoogleG /><TripadvisorOwl /><BookingMark />
+              </span>
+              <b><T ge="ქვეყნდება" en="Goes public" /></b>
             </div>
             <div className="smart-route smart-route-down">
               <span className="smart-route-stars">1–3★</span>

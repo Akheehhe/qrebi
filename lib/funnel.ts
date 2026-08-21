@@ -1,5 +1,24 @@
 // Small shared helpers for the funnel dashboard and admin.
 
+import type { Business, Platform, PlatformKey } from '@/lib/supabase'
+
+export const PLATFORM_LABEL: Record<PlatformKey, string> = {
+  google: 'Google',
+  tripadvisor: 'Tripadvisor',
+  booking: 'Booking.com',
+}
+
+/** The business's configured destinations, same fixed order as the server. */
+export function platformsOf(
+  b: Pick<Business, 'google_review_url' | 'tripadvisor_url' | 'booking_url'>,
+): Platform[] {
+  const out: Platform[] = []
+  if (b.google_review_url) out.push({ key: 'google', url: b.google_review_url })
+  if (b.tripadvisor_url) out.push({ key: 'tripadvisor', url: b.tripadvisor_url })
+  if (b.booking_url) out.push({ key: 'booking', url: b.booking_url })
+  return out
+}
+
 /** Today as YYYY-MM-DD in the business's timezone — subscriptions flip at
  *  midnight in Tbilisi, matching the database's own check. */
 export function tbilisiToday(): string {

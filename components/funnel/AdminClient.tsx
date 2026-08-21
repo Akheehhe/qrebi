@@ -3,8 +3,9 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabaseBrowser, supabaseConfigured, type Business } from '@/lib/supabase'
-import { addMonthsClamped, fmtDate, isActive, slugify, tbilisiToday } from '@/lib/funnel'
+import { addMonthsClamped, fmtDate, isActive, platformsOf, slugify, tbilisiToday } from '@/lib/funnel'
 import DashShell from '@/components/funnel/DashShell'
+import PlatformIcon from '@/components/funnel/PlatformIcon'
 import { T } from '@/components/shared'
 import { Arrow, Check } from '@/components/icons'
 
@@ -14,6 +15,8 @@ type Draft = {
   name: string
   slug: string
   google_review_url: string
+  tripadvisor_url: string
+  booking_url: string
   owner_email: string
   paid_until: string
   min_public_stars: number
@@ -23,10 +26,15 @@ const emptyDraft = (): Draft => ({
   name: '',
   slug: '',
   google_review_url: '',
+  tripadvisor_url: '',
+  booking_url: '',
   owner_email: '',
   paid_until: addMonthsClamped(tbilisiToday(), 1),
   min_public_stars: 4,
 })
+
+/** '' → null, so the row stores real absence rather than empty strings. */
+const urlOrNull = (s: string) => s.trim() || null
 
 /** The operator's side of the manual subscription: create a business when
  *  they pay the first month, extend paid_until on every payment after that. */
@@ -100,19 +108,35 @@ export default function AdminClient() {
   function friendly(message: string): string {
     if (message.includes('businesses_slug_key')) return 'ეს slug უკვე დაკავებულია. / That slug is taken.'
     if (message.includes('slug')) return 'slug: მხოლოდ a-z, 0-9 და დეფისი. / slug: only a-z, 0-9 and hyphens.'
-    if (message.includes('google_review_url')) return 'Google-ის ბმული https://-ით უნდა იწყებოდეს. / The Google link must start with https://.'
+    if (message.includes('platform_present')) return 'მინიმუმ ერთი პლატფორმის ბმული აუცილებელია. / At least one platform link is required.'
+    if (message.includes('_url')) return 'ბმულები https://-ით უნდა იწყებოდეს. / Links must start with https://.'
     if (message.includes('owner_email')) return 'ელფოსტა პატარა ასოებით. / Email must be lowercase.'
     return message
   }
 
+  function platformPayload(d: Draft) {
+    const p = {
+      google_review_url: urlOrNull(d.google_review_url),
+      tripadvisor_url: urlOrNull(d.tripadvisor_url),
+      booking_url: urlOrNull(d.booking_url),
+    }
+    if (!p.google_review_url && !p.tripadvisor_url && !p.booking_url) {
+      setErr('მინიმუმ ერთი პლატფორმის ბმული აუცილებელია. / At least one platform link is required.')
+      return null
+    }
+    return p
+  }
+
   async function create(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    setBusy(true)
     setErr('')
+    const platforms = platformPayload(draft)
+    if (!platforms) return
+    setBusy(true)
     const { error } = await supabaseBrowser().from('businesses').insert({
       name: draft.name.trim(),
       slug: draft.slug.trim().toLowerCase(),
-      google_review_url: draft.google_review_url.trim(),
+      ...platforms,
       owner_email: draft.owner_email.trim().toLowerCase(),
       paid_until: draft.paid_until,
       min_public_stars: draft.min_public_stars,
@@ -136,12 +160,14 @@ export default function AdminClient() {
           `slug შეიცვლება: /r/${before.slug} → /r/${edit.slug}. უკვე ჩაწერილი NFC ბარათები ძველ ბმულზე გადავა და 404-ს მიიღებს. გავაგრძელო?\n` +
           `Slug change: /r/${before.slug} → /r/${edit.slug}. NFC cards already encoded with the old link will 404. Continue?`,
         )) return
-    setBusy(true)
     setErr('')
+    const platforms = platformPayload(edit)
+    if (!platforms) return
+    setBusy(true)
     const { error } = await supabaseBrowser().from('businesses').update({
       name: edit.name.trim(),
       slug: edit.slug.trim().toLowerCase(),
-      google_review_url: edit.google_review_url.trim(),
+      ...platforms,
       owner_email: edit.owner_email.trim().toLowerCase(),
       paid_until: edit.paid_until,
       min_public_stars: edit.min_public_stars,
@@ -246,8 +272,18 @@ export default function AdminClient() {
       </label>
       <label className="adm-wide">
         <span><T ge="Google შეფასების ბმული" en="Google review link" /></span>
-        <input type="url" required placeholder="https://g.page/r/…/review" value={d.google_review_url}
+        <input type="url" placeholder="https://g.page/r/…/review" value={d.google_review_url}
           onChange={(e) => set({ ...d, google_review_url: e.target.value })} />
+      </label>
+      <label>
+        <span>Tripadvisor</span>
+        <input type="url" placeholder="https://www.tripadvisor.com/UserReviewEdit-g…" value={d.tripadvisor_url}
+          onChange={(e) => set({ ...d, tripadvisor_url: e.target.value })} />
+      </label>
+      <label>
+        <span>Booking.com</span>
+        <input type="url" placeholder="https://www.booking.com/hotel/ge/…" value={d.booking_url}
+          onChange={(e) => set({ ...d, booking_url: e.target.value })} />
       </label>
       <label>
         <span><T ge="მფლობელის ელფოსტა" en="Owner's email" /></span>
@@ -308,7 +344,10 @@ export default function AdminClient() {
                       ? <T ge={`${fmtDate(b.paid_until)}-მდე`} en={`until ${fmtDate(b.paid_until)}`} />
                       : <T ge="შეჩერებულია" en="Paused" />}
                   </span>
-                  <span className="adm-min">{b.min_public_stars}★+ → Google</span>
+                  <span className="adm-min">
+                    {b.min_public_stars}★+ →
+                    {platformsOf(b).map((p) => <PlatformIcon key={p.key} k={p.key} />)}
+                  </span>
                 </div>
               </div>
 
@@ -334,7 +373,9 @@ export default function AdminClient() {
                       setEdit({
                         name: b.name,
                         slug: b.slug,
-                        google_review_url: b.google_review_url,
+                        google_review_url: b.google_review_url ?? '',
+                        tripadvisor_url: b.tripadvisor_url ?? '',
+                        booking_url: b.booking_url ?? '',
                         owner_email: b.owner_email,
                         paid_until: b.paid_until,
                         min_public_stars: b.min_public_stars,

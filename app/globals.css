@@ -997,3 +997,23 @@ html.js [data-stagger].seen>*{animation:rise .65s var(--ease-quint) both;
   .dash-range{margin-left:0;width:100%}
   .dash-qr{flex-direction:row}
 }
+
+/* ── platforms ────────────────────────────────────────────────────────
+   Up to three destinations per business. When there is a choice, it is a
+   short stack of buttons; brand marks are citations beside the label.   */
+.rp-choice{display:flex;flex-direction:column;gap:10px;width:100%;
+  margin-top:clamp(14px,3vw,20px)}
+.rp-plat{width:100%}
+.rp-plat svg{width:20px;height:20px}
+.btn-soft{background:var(--lilac);color:var(--purple)}
+.btn-soft:hover{background:#EFE3FF}
+.smart-route-plats{display:inline-flex;gap:6px;align-items:center}
+.dash-plats{display:flex;gap:clamp(12px,2vw,22px);flex-wrap:wrap;margin-top:14px;
+  padding-top:12px;border-top:1px solid var(--line)}
+.dash-plats>span{display:inline-flex;align-items:center;gap:7px;
+  font-size:13px;font-weight:700;color:var(--muted)}
+.dash-plats svg{width:15px;height:15px;flex:none}
+.dash-plats b{font-size:14.5px;font-weight:900;color:var(--ink);
+  font-variant-numeric:tabular-nums}
+.adm-min{display:inline-flex;align-items:center;gap:5px}
+.adm-min svg{width:13px;height:13px;flex:none}

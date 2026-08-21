@@ -39,25 +39,31 @@ export function supabaseAnon(): SupabaseClient {
 }
 
 // The shapes the funnel RPCs answer with (see supabase/funnel.sql).
+export type PlatformKey = 'google' | 'tripadvisor' | 'booking'
+
+export type Platform = { key: PlatformKey; url: string }
+
 export type ReviewPage = {
   name: string
   active: boolean
-  google_review_url: string
   min_public_stars: number
+  platforms: Platform[]
 }
 
 export type SubmitReviewResult = {
   ok: boolean
   review_id: string | null
-  to_google: boolean
-  google_review_url: string | null
+  to_public: boolean
+  platforms: Platform[] | null
 }
 
 export type Business = {
   id: string
   slug: string
   name: string
-  google_review_url: string
+  google_review_url: string | null
+  tripadvisor_url: string | null
+  booking_url: string | null
   owner_email: string
   paid_until: string
   min_public_stars: number
@@ -72,6 +78,7 @@ export type Review = {
   author_name: string | null
   author_contact: string | null
   sent_to_google: boolean
+  platform: PlatformKey | null
   handled_at: string | null
   created_at: string
 }

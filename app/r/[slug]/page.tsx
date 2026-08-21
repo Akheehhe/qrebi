@@ -2,10 +2,11 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { cache } from 'react'
 import { supabaseAnon, supabaseConfigured, type ReviewPage } from '@/lib/supabase'
+import { PLATFORM_LABEL } from '@/lib/funnel'
 import RatingWidget from '@/components/funnel/RatingWidget'
+import PlatformIcon from '@/components/funnel/PlatformIcon'
 import FunnelShell from '@/components/funnel/FunnelShell'
 import { T } from '@/components/shared'
-import { GoogleG } from '@/components/icons'
 
 // One row per request, shared between metadata and the page body.
 const getReviewPage = cache(async (slug: string): Promise<ReviewPage | null> => {
@@ -30,22 +31,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
   const { slug } = await params
   const page = await getReviewPage(slug)
-  if (!page) notFound()
+  if (!page || page.platforms.length === 0) notFound()
 
-  // Lapsed subscription: the card keeps working, but as a plain door to
-  // Google — no filtering, no recording, nothing for the visitor to notice.
+  // Lapsed subscription: the card keeps working, but as plain doors to the
+  // review platforms — no filtering, no recording, nothing for the visitor
+  // to notice.
   if (!page.active) {
     return (
       <FunnelShell>
         <div className="rp-card">
           <p className="rp-biz">{page.name}</p>
           <p className="rp-ask">
-            <T ge="დაგვიტოვე შეფასება Google-ზე" en="Leave us a review on Google" />
+            <T ge="დაგვიტოვე შეფასება" en="Leave us a review" />
           </p>
-          <a className="btn btn-ink rp-google" href={page.google_review_url} rel="noopener">
-            <GoogleG />
-            <T ge="შეფასების დაწერა" en="Write a review" />
-          </a>
+          <div className="rp-choice">
+            {page.platforms.map((p, i) => (
+              <a key={p.key} className={`btn rp-plat${i === 0 ? ' btn-ink' : ' btn-soft'}`}
+                href={p.url} rel="noopener">
+                <PlatformIcon k={p.key} />
+                {PLATFORM_LABEL[p.key]}
+              </a>
+            ))}
+          </div>
         </div>
       </FunnelShell>
     )
@@ -57,7 +64,7 @@ export default async function Page({ params }: Props) {
         slug={slug}
         name={page.name}
         minPublicStars={page.min_public_stars}
-        googleReviewUrl={page.google_review_url}
+        platforms={page.platforms}
       />
     </FunnelShell>
   )
