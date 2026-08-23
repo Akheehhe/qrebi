@@ -1,5 +1,9 @@
 # QRebi.ge
 
+> **📄 New here? Read [`HANDOVER.md`](./HANDOVER.md) first** — one file with
+> everything: product, architecture, database, setup, operations, honest
+> limitations, and suggested next steps. This README is the short version.
+
 Two offerings, one site:
 
 1. **NFC card** (one-time purchase) — taps open any link the business chooses.
