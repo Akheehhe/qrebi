@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { EMAIL, Logo, PHONE, T, WHATSAPP } from './shared'
 
 export default function Footer() {
@@ -13,6 +14,9 @@ export default function Footer() {
             WhatsApp
           </a>
           <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+          <Link href="/login">
+            <T ge="შესვლა" en="Log in" />
+          </Link>
         </div>
         <span>
           <T

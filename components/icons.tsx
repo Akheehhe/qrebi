@@ -66,6 +66,38 @@ export function GoogleG({ className }: P) {
   )
 }
 
+/* Tripadvisor's binocular owl, reduced to its brand green. A citation. */
+export function TripadvisorOwl({ className }: P) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M2.4 9.6C4 7.8 6.6 6.8 9.4 6.8c.9 0 1.8.1 2.6.3.8-.2 1.7-.3 2.6-.3 2.8 0 5.4 1 7 2.8"
+        stroke="#00AF87" strokeWidth="1.7" strokeLinecap="round"
+      />
+      <circle cx="7.2" cy="13.6" r="4.1" stroke="#00AF87" strokeWidth="1.7" />
+      <circle cx="16.8" cy="13.6" r="4.1" stroke="#00AF87" strokeWidth="1.7" />
+      <circle cx="7.2" cy="13.6" r="1.7" fill="#00AF87" />
+      <circle cx="16.8" cy="13.6" r="1.7" fill="#00AF87" />
+      <path d="M10.7 11.4h2.6L12 13.7z" fill="#00AF87" />
+    </svg>
+  )
+}
+
+/* Booking.com's B-square in its brand blue. A citation. */
+export function BookingMark({ className }: P) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
+      <rect width="24" height="24" rx="4" fill="#003580" />
+      <text
+        x="12" y="17.2" textAnchor="middle" fill="#fff"
+        fontFamily="Arial, Helvetica, sans-serif" fontSize="14.5" fontWeight="700"
+      >
+        B.
+      </text>
+    </svg>
+  )
+}
+
 export function Camera({ className }: P) {
   return (
     <svg className={className} {...box}>

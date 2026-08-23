@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import Countdown from '@/components/Countdown'
 import Cycle from '@/components/Cycle'
 import OfferForm from '@/components/OfferForm'
@@ -9,8 +10,8 @@ import { PlatformRotator } from '@/components/platform'
 import OrderForm from '@/components/OrderForm'
 import { EMAIL, PHONE, T, WHATSAPP, WhatsAppIcon } from '@/components/shared'
 import {
-  Arrow, Camera, Check, Finder, NoFee,
-  Rank, Stand, Star, Tap, Truck,
+  Arrow, BookingMark, Camera, Check, Finder, GoogleG, NoFee,
+  Rank, Stand, Star, Tap, TripadvisorOwl, Truck,
 } from '@/components/icons'
 
 const TIERS = [
@@ -27,6 +28,7 @@ const TICKER = [
   { ge: 'მიწოდება მთელ საქართველოში', en: 'Delivery across Georgia' },
   { ge: 'ფოტოები Google Maps-ისთვის', en: 'Photos for Google Maps' },
   { ge: 'SEO პირველი თვე უფასოდ', en: 'First month of SEO free' },
+  { ge: 'ჭკვიანი გვერდი 10 ₾/თვე', en: 'Smart page 10 ₾/mo' },
 ]
 
 const STEPS = [
@@ -118,7 +120,7 @@ export default function Page() {
         <ul className="hero-facts">
           <li><Check /><span><T ge={<><b>50 ₾</b>-დან, ერთჯერადად</>} en={<>From <b>50 ₾</b>, one-time</>} /></span></li>
           <li><Truck /><span><T ge="მიწოდება მთელ საქართველოში" en="Delivery across Georgia" /></span></li>
-          <li><NoFee /><span><T ge="ყოველთვიური გადასახადის გარეშე" en="No monthly fee" /></span></li>
+          <li><NoFee /><span><T ge="ბარათი — ყოველთვიური გადასახადის გარეშე" en="The card: no monthly fee" /></span></li>
         </ul>
         </PlatformRotator>
       </section>
@@ -200,6 +202,94 @@ export default function Page() {
         </div>
       </section>
 
+      {/* ── SMART PAGE ───────────────────────────────────────────────
+          The subscription product: the page between the card and Google.
+          High stars carry on to the public review form; low ones become a
+          private message to the owner. Optional, 10 ₾ a month, and the
+          card itself stays a one-time purchase — stated right here so the
+          two offers never contradict each other. */}
+      <section className="smart-sec" id="smart">
+        <div className="wrap smart-grid">
+          <div className="smart-copy">
+            <h2 data-rise>
+              <T
+                ge={<>★★★★★ ქვეყნდება. უკმაყოფილება — <mark>მხოლოდ შენთან.</mark></>}
+                en={<>★★★★★ goes public. Complaints come <mark>only to you.</mark></>}
+              />
+            </h2>
+            <p className="sec-lede" data-rise>
+              <T
+                ge="ჭკვიანი გვერდი ბარათსა და შეფასების საიტს შორის დგას: კლიენტი ვარსკვლავებს ირჩევს — მაღალი შეფასება Google-ზე, Tripadvisor-ზე ან Booking-ზე მიდის, დაბალი კი პირად შეტყობინებად მოგდის. კაფეს ერთი პლატფორმა ჰყოფნის, სასტუმროს — სამივე ერთ ბარათზე."
+                en="The smart page sits between your card and the review site: the customer picks a star count — high ratings carry on to Google, Tripadvisor or Booking, low ones come to you as a private message. A café needs one platform; a hotel gets all three on one card."
+              />
+            </p>
+            <ul className="smart-list" data-stagger>
+              <li style={{ '--i': 0 } as React.CSSProperties}>
+                <Tap />
+                <T ge="ბარათი ხსნის შენს გვერდს: qrebi.ge/r/შენი-სახელი" en="The card opens your page: qrebi.ge/r/your-name" />
+              </li>
+              <li style={{ '--i': 1 } as React.CSSProperties}>
+                <Star />
+                <T ge="4★ და 5★ მიდის Google-ზე, Tripadvisor-ზე ან Booking-ზე" en="4★ and 5★ carry on to Google, Tripadvisor or Booking" />
+              </li>
+              <li style={{ '--i': 2 } as React.CSSProperties}>
+                <Check />
+                <T ge="1–3★ მხოლოდ შენ ხედავ — რეაგირებ და აგვარებ" en="1–3★ only you see — you respond and put it right" />
+              </li>
+              <li style={{ '--i': 3 } as React.CSSProperties}>
+                <Rank />
+                <T ge="კაბინეტი: გრაფიკები, გამოხმაურებები, დასაბეჭდი QR" en="A dashboard: charts, the feedback inbox, a printable QR" />
+              </li>
+            </ul>
+            <div className="smart-price" data-rise>
+              <b className="smart-amt">10<i>₾</i></b>
+              <span className="smart-per"><T ge="თვეში" en="per month" /></span>
+            </div>
+            <p className="smart-opt" data-rise>
+              <T
+                ge="არასავალდებულოა — ბარათი ერთჯერადი ფასით რჩება. გააუქმებ ნებისმიერ დროს."
+                en="Optional — the card itself stays one-time. Cancel any time."
+              />
+            </p>
+            <div className="smart-cta" data-rise>
+              <a className="btn btn-ink" href="#order">
+                <T ge="დაუმატე შეკვეთას" en="Add it to your order" />
+                <Arrow />
+              </a>
+              <Link className="smart-login" href="/login">
+                <T ge="უკვე გაქვს? შესვლა" en="Already have it? Log in" />
+              </Link>
+            </div>
+          </div>
+
+          {/* a miniature of the real page, drawn with the same parts */}
+          <div className="smart-demo" data-rise aria-hidden="true">
+            <div className="smart-mock">
+              <p className="smart-mock-biz">Cafe Vino</p>
+              <p className="smart-mock-ask">
+                <T ge="როგორი იყო შენი გამოცდილება?" en="How was your experience?" />
+              </p>
+              <div className="smart-mock-stars">
+                {[0, 1, 2, 3, 4].map((i) => <Star key={i} />)}
+              </div>
+            </div>
+            <div className="smart-route smart-route-up">
+              <span className="smart-route-stars">4–5★</span>
+              <Arrow />
+              <span className="smart-route-plats">
+                <GoogleG /><TripadvisorOwl /><BookingMark />
+              </span>
+              <b><T ge="ქვეყნდება" en="Goes public" /></b>
+            </div>
+            <div className="smart-route smart-route-down">
+              <span className="smart-route-stars">1–3★</span>
+              <Arrow />
+              <b><T ge="მხოლოდ შენთან" en="Only to you" /></b>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── PLACES ───────────────────────────────────────────────────── */}
       <section className="places" id="places">
         <div className="wrap">
@@ -233,8 +323,8 @@ export default function Page() {
             </h2>
             <p className="sec-lede" data-rise>
               <T
-                ge="ერთხელ იხდი. აბონენტი, თვიური გადასახადი და ხელშეკრულება არ არის."
-                en="You pay once. No subscription, no monthly fee, no contract."
+                ge="ბარათებში ერთხელ იხდი — თვიური გადასახადი და ხელშეკრულება არ არის."
+                en="You pay for the cards once — no monthly fee, no contract."
               />
             </p>
           </div>
