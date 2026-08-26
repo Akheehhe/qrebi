@@ -2,28 +2,42 @@
 
 import { useState } from 'react'
 
-/* Same mechanism as the main site's LangToggle — flips `lang-en` on <body>
-   and lets the .ge/.en rules in globals.css do the switching — restyled as
-   a pill for a light page with no header to live in. */
-export default function LangSwitch() {
-  const [en, setEn] = useState(false)
+const LANGS = [
+  { code: 'ka', label: 'ქარ', name: 'ქართული' },
+  { code: 'en', label: 'ENG', name: 'English' },
+  { code: 'ru', label: 'РУС', name: 'Русский' },
+] as const
 
-  function toggle() {
-    const next = !en
-    setEn(next)
-    document.body.classList.toggle('lang-en', next)
-    document.documentElement.lang = next ? 'en' : 'ka'
+type Lang = (typeof LANGS)[number]['code']
+
+/* Three-way version of the site's language mechanism: the buttons swap a
+   class on <body> (none = ka, cg-en, cg-ru) and the .cg-t-* rules in
+   chito.css show exactly one language. */
+export default function LangSwitch() {
+  const [lang, setLang] = useState<Lang>('ka')
+
+  function pick(next: Lang) {
+    if (next === lang) return
+    setLang(next)
+    document.body.classList.toggle('cg-en', next === 'en')
+    document.body.classList.toggle('cg-ru', next === 'ru')
+    document.documentElement.lang = next
   }
 
   return (
-    <button
-      type="button"
-      className="cg-lang"
-      onClick={toggle}
-      aria-label={en ? 'გადართე ქართულზე' : 'Switch to English'}
-    >
-      <span className={en ? '' : 'on'}>ქარ</span>
-      <span className={en ? 'on' : ''}>ENG</span>
-    </button>
+    <div className="cg-lang" role="group" aria-label="ენა · Language · Язык">
+      {LANGS.map((l) => (
+        <button
+          key={l.code}
+          type="button"
+          className={lang === l.code ? 'on' : ''}
+          aria-pressed={lang === l.code}
+          aria-label={l.name}
+          onClick={() => pick(l.code)}
+        >
+          {l.label}
+        </button>
+      ))}
+    </div>
   )
 }

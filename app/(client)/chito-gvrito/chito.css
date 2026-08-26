@@ -34,6 +34,16 @@
   gap:clamp(22px,4.5vw,30px);max-width:520px;margin-inline:auto;
   padding:clamp(28px,7vw,52px) clamp(18px,5vw,28px) clamp(26px,6vw,40px)}
 
+/* ── three languages, one visible ─────────────────────────────────────
+   Same trick as the main site's .ge/.en pair, page-scoped and widened to
+   Russian: T3 ships all three spans, <body> (bare = ka, .cg-en, .cg-ru)
+   picks the one that shows. */
+.cg-t-en,.cg-t-ru{display:none}
+body.cg-en .cg-t-ka{display:none}
+body.cg-en .cg-t-en{display:inline}
+body.cg-ru .cg-t-ka{display:none}
+body.cg-ru .cg-t-ru{display:inline}
+
 /* ── header: the round logo, restaged ─────────────────────────────────── */
 /* globals.css dresses bare <header> and <footer> as qrebi chrome (sticky,
    z-index 70, ink band) — take that off before styling our own. */
@@ -44,6 +54,10 @@ footer.cg-foot{background:none;padding-block:0}
   animation:cg-rise .7s cubic-bezier(.22,1,.36,1) both}
 .cg-badge{width:clamp(148px,38vw,188px);filter:drop-shadow(0 10px 22px rgba(17,17,17,.12))}
 .cg-bird{display:block;width:100%;height:auto}
+/* the real logo artwork sits in a grey square — crop it to the brand circle */
+.cg-badge-photo{position:relative;aspect-ratio:1;border-radius:50%;overflow:hidden;
+  background:#fff}
+.cg-badge-photo img{object-fit:cover;transform:scale(1.18)}
 
 .cg-name{margin-top:clamp(14px,3vw,20px);
   font-family:var(--font-georgian),sans-serif;font-weight:900;
@@ -108,6 +122,16 @@ a.cg-link:hover .cg-chev{transform:translateX(3px);color:var(--cg-ink)}
 .cg-wifi.open .cg-chev{transform:rotate(180deg);color:var(--cg-ink)}
 
 .cg-wifi-body{width:100%;padding:4px 18px 16px;display:flex;flex-direction:column;gap:9px}
+
+/* the one-tap connect action, sized like the link cards around it */
+.cg-wifi-connect{display:flex;align-items:center;justify-content:center;gap:10px;
+  width:100%;min-height:48px;padding:12px 16px;border:none;border-radius:14px;
+  background:var(--cg-org);color:var(--cg-ink);font-family:inherit;
+  font-size:15.5px;font-weight:800;cursor:pointer;
+  transition:background .2s,transform .15s}
+.cg-wifi-connect svg{width:20px;height:20px;flex:none}
+.cg-wifi-connect:hover{background:#FF9B36}
+.cg-wifi-connect:active{transform:scale(.98)}
 .cg-wifi-row{display:flex;align-items:center;gap:10px;
   padding:11px 13px;background:var(--cg-cream);border-radius:12px}
 .cg-wifi-lab{flex:none;width:5.4em;font-size:12.5px;font-weight:800;
@@ -130,11 +154,12 @@ a.cg-link:hover .cg-chev{transform:translateX(3px);color:var(--cg-ink)}
 
 .cg-lang{position:absolute;z-index:2;top:clamp(14px,3vw,22px);right:clamp(14px,3vw,22px);
   display:flex;align-items:center;gap:2px;min-height:44px;padding:4px;
-  background:#fff;border:1.5px solid var(--cg-line);
-  border-radius:999px;cursor:pointer;font-family:inherit}
-.cg-lang span{padding:5px 11px 6px;border-radius:999px;
-  font-size:12px;font-weight:800;color:var(--cg-muted);transition:background .2s,color .2s}
-.cg-lang span.on{background:var(--cg-ink);color:#fff}
+  background:#fff;border:1.5px solid var(--cg-line);border-radius:999px}
+.cg-lang button{padding:6px 10px 7px;border:none;border-radius:999px;background:none;
+  cursor:pointer;font-family:inherit;font-size:12px;font-weight:800;
+  color:var(--cg-muted);transition:background .2s,color .2s}
+.cg-lang button:hover{color:var(--cg-ink)}
+.cg-lang button.on{background:var(--cg-ink);color:#fff}
 
 /* the pill anchors to the page, not the viewport */
 .cg-main{position:relative}

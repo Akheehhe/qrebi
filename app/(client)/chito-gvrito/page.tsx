@@ -1,33 +1,33 @@
-import { T } from '@/components/shared'
+import { existsSync } from 'node:fs'
+import { join } from 'node:path'
+import Image from 'next/image'
+import { LINKS } from './config'
+import { T3 } from './t3'
 import LangSwitch from './LangSwitch'
 import WifiCard from './WifiCard'
 
-/* ─── the three links on the card ────────────────────────────────────────
-   Everything a link swap ever touches lives here.                        */
-const LINKS = {
-  // TODO: მენიუს საბოლოო ბმული ცალკე მოგვეწოდება — მანამდე Wolt-ის გვერდი დგას
-  menu: 'https://wolt.com/en/geo/tbilisi/restaurant/chito-gvrito',
-  // TODO: ჩაანაცვლე ზუსტი შეფასების ბმულით (writereview?placeid=… ან g.page/r/…),
-  // როგორც კი Google Business პროფილიდან ამოვიღებთ — ეს Maps-ის ძებნაა ამავე ადგილზე
-  review:
-    'https://www.google.com/maps/search/?api=1&query=Chito%20Gvrito%2C%20Sioni%20Street%208%2C%20Tbilisi%2C%20Georgia',
-  maps:
-    'https://www.google.com/maps/search/?api=1&query=Chito%20Gvrito%2C%20Sioni%20Street%208%2C%20Tbilisi%2C%20Georgia',
-  // TODO: რესტორნის ნამდვილი ქსელი და პაროლი — სანამ ცარიელია, Wi-Fi ბარათი
-  // საერთოდ არ ჩანს, რომ სტუმარმა ყალბი პაროლი არ სცადოს. ჩასართავად:
-  // wifi: { ssid: 'ქსელის სახელი', password: 'პაროლი' },
-  wifi: null as { ssid: string; password: string } | null,
-}
+/* The real logo drops in as public/chito-gvrito-logo.png — the moment the
+   file lands in the repo the badge switches to it; until then the page
+   stands on the redrawn brand bird. */
+const LOGO = '/chito-gvrito-logo.png'
 
 export default function Page() {
+  const hasLogo = existsSync(join(process.cwd(), 'public', LOGO))
+
   return (
     <main className="cg-main">
       <LangSwitch />
 
       <header className="cg-head">
-        <div className="cg-badge">
-          <BirdOnNest />
-        </div>
+        {hasLogo ? (
+          <div className="cg-badge cg-badge-photo">
+            <Image src={LOGO} alt="ჩიტო გვრიტო · Chito Gvrito" fill sizes="188px" priority />
+          </div>
+        ) : (
+          <div className="cg-badge">
+            <BirdOnNest />
+          </div>
+        )}
         <h1 className="cg-name" lang="ka">ჩიტო გვრიტო</h1>
         <p className="cg-latin" lang="en">Chito Gvrito</p>
         <p className="cg-tags" lang="en">
@@ -37,7 +37,7 @@ export default function Page() {
         </p>
         <a className="cg-addr" href={LINKS.maps} target="_blank" rel="noopener">
           <Pin />
-          <T ge="სიონის 8, ძველი თბილისი" en="8 Sioni St, Old Tbilisi" />
+          <T3 ka="სიონის 8, ძველი თბილისი" en="8 Sioni St, Old Tbilisi" ru="Сиони 8, Старый Тбилиси" />
         </a>
       </header>
 
@@ -45,8 +45,8 @@ export default function Page() {
         <a className="cg-link" href={LINKS.menu} target="_blank" rel="noopener">
           <span className="cg-ico cg-ico-teal"><MenuIcon /></span>
           <span className="cg-txt">
-            <b><T ge="მენიუ" en="Menu" /></b>
-            <small><T ge="კერძები, ღვინო და ფასები" en="Dishes, wine & prices" /></small>
+            <b><T3 ka="მენიუ" en="Menu" ru="Меню" /></b>
+            <small><T3 ka="კერძები, ღვინო და ფასები" en="Dishes, wine & prices" ru="Блюда, вино и цены" /></small>
           </span>
           <Chev />
         </a>
@@ -54,9 +54,8 @@ export default function Page() {
         <a className="cg-link" href={LINKS.review} target="_blank" rel="noopener">
           <span className="cg-ico cg-ico-mag"><StarIcon /></span>
           <span className="cg-txt">
-            <b><T ge="შეგვაფასე Google-ზე" en="Review us on Google" /></b>
-            {/* პირდაპირი writereview ბმულის ჩასმისას დააბრუნე "★★★★★ — სულ 30 წამია" */}
-            <small><T ge="გაგვიზიარე შენი შთაბეჭდილება" en="Share your experience" /></small>
+            <b><T3 ka="შეგვაფასე Google-ზე" en="Review us on Google" ru="Оцените нас в Google" /></b>
+            <small><T3 ka="★★★★★ — სულ 30 წამია" en="★★★★★ — takes 30 seconds" ru="★★★★★ — всего 30 секунд" /></small>
           </span>
           <Chev />
         </a>
@@ -66,7 +65,7 @@ export default function Page() {
 
       <footer className="cg-foot">
         <a href="https://qrebi.ge" target="_blank" rel="noopener">
-          <T ge="გვერდი მუშაობს QRebi-ზე" en="Powered by QRebi" />
+          <T3 ka="გვერდი მუშაობს QRebi-ზე" en="Powered by QRebi" ru="Работает на QRebi" />
         </a>
       </footer>
     </main>
