@@ -6,7 +6,7 @@ import { NewTripForm } from "./NewTripForm";
 
 export default async function NewTripPage() {
   const user = await requireUser("driver");
-  const vehicles = driverVehicles(user.id);
+  const vehicles = await driverVehicles(user.id);
 
   return (
     <div className="space-y-5">

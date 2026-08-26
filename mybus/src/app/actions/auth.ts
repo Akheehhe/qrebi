@@ -43,13 +43,13 @@ export async function signupAction(
   }
   if (Object.keys(fieldErrors).length > 0) return { fieldErrors };
 
-  if (findUserByEmail(email)) {
+  if (await findUserByEmail(email)) {
     return { fieldErrors: { email: "ამ ელფოსტით ანგარიში უკვე არსებობს" } };
   }
 
   let userId: string;
   try {
-    const user = createUser({
+    const user = await createUser({
       role,
       firstName,
       lastName,
@@ -76,7 +76,7 @@ export async function loginAction(
     return { error: "შეიყვანეთ ელფოსტა და პაროლი" };
   }
 
-  const found = findUserByEmail(email);
+  const found = await findUserByEmail(email);
   if (!found || !verifyPassword(password, found.passwordHash)) {
     return { error: "ელფოსტა ან პაროლი არასწორია" };
   }
@@ -112,7 +112,7 @@ export async function updateProfileAction(
   }
   if (Object.keys(fieldErrors).length > 0) return { fieldErrors };
 
-  updateUserProfile(user.id, { firstName, lastName, phone });
+  await updateUserProfile(user.id, { firstName, lastName, phone });
   revalidatePath("/account");
   return { ok: true };
 }

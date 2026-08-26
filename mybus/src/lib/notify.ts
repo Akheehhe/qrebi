@@ -1,30 +1,27 @@
 import "server-only";
 import { randomUUID } from "node:crypto";
-import { db } from "./db";
+import { rpc } from "./rpc";
 import { sendWhatsApp } from "./whatsapp";
 import { departureDayLabel, formatTbilisiTime } from "./datetime";
 import type { NotificationKind, TripSummary } from "./types";
 
-function record(input: {
+async function record(input: {
   driverId: string;
   tripId: string;
   kind: NotificationKind;
   toPhone: string;
   body: string;
   delivery: string;
-}) {
-  db.prepare(
-    `INSERT INTO notifications (id, driver_id, trip_id, kind, to_phone, body, delivery)
-     VALUES (?, ?, ?, ?, ?, ?, ?)`
-  ).run(
-    randomUUID(),
-    input.driverId,
-    input.tripId,
-    input.kind,
-    input.toPhone,
-    input.body,
-    input.delivery
-  );
+}): Promise<void> {
+  await rpc("mybus_record_notification", {
+    p_id: randomUUID(),
+    p_driver: input.driverId,
+    p_trip: input.tripId,
+    p_kind: input.kind,
+    p_phone: input.toPhone,
+    p_body: input.body,
+    p_delivery: input.delivery,
+  });
 }
 
 function tripLine(trip: TripSummary): string {
@@ -57,7 +54,7 @@ export async function notifyDriverBooking(
       `დარჩა ${seatsLeftNow} თავისუფალი ადგილი`,
     ].join("\n");
     const delivery = await sendWhatsApp(trip.driverPhone, body);
-    record({
+    await record({
       driverId: trip.driverId,
       tripId: trip.id,
       kind: "booking",
@@ -84,7 +81,7 @@ export async function notifyDriverCancellation(
       `გათავისუფლდა ${booking.seats} ადგილი, ახლა თავისუფალია ${seatsLeftNow}`,
     ].join("\n");
     const delivery = await sendWhatsApp(trip.driverPhone, body);
-    record({
+    await record({
       driverId: trip.driverId,
       tripId: trip.id,
       kind: "cancellation",

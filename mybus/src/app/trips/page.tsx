@@ -33,7 +33,7 @@ export default async function TripsPage({
     rawDate && /^\d{4}-\d{2}-\d{2}$/.test(rawDate) ? rawDate : undefined;
   const sort = rawSort === "price" ? ("price" as const) : undefined;
 
-  const trips = listTrips({ from, to, date, sort });
+  const trips = await listTrips({ from, to, date, sort });
   const minDate = tbilisiTodayDateInput();
 
   return (

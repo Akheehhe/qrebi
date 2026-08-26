@@ -196,12 +196,15 @@ export function LiveBoard({ initial }: { initial: LiveState }) {
   );
 
   useEffect(() => {
-    setNowMs(Date.now());
+    const firstTick = setTimeout(() => setNowMs(Date.now()), 0);
     const timer = setInterval(() => {
       setNowMs(Date.now());
       if (!actingRef.current) void refetch(true);
     }, POLL_MS);
-    return () => clearInterval(timer);
+    return () => {
+      clearTimeout(firstTick);
+      clearInterval(timer);
+    };
   }, [refetch]);
 
   const runAction = useCallback(

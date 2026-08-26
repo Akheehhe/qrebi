@@ -6,7 +6,7 @@ import { Badge } from "@/components/Badge";
 
 export default async function DriverFeesPage() {
   const user = await requireUser("driver");
-  const { fees, totalGel } = driverFees(user.id);
+  const { fees, totalGel } = await driverFees(user.id);
 
   return (
     <div className="mx-auto max-w-3xl space-y-5">

@@ -41,11 +41,11 @@ export default async function TripDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const trip = getTrip(id);
+  const trip = await getTrip(id);
   if (!trip) notFound();
 
   const user = await getCurrentUser();
-  const booked = user ? userHasBooking(id, user.id) : false;
+  const booked = user ? await userHasBooking(id, user.id) : false;
   const gone = trip.status === "departed" || isPast(trip.departureAt);
   const salesOpen = isSalesOpen(trip);
   const salesCloseTime = formatTbilisiTime(

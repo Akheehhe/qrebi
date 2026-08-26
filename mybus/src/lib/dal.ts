@@ -3,10 +3,10 @@ import { randomUUID } from "node:crypto";
 import { cache } from "react";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { db } from "./db";
+import { rpc } from "./rpc";
 import { SESSION_COOKIE } from "./session";
 import { nowUtcIso, tbilisiDayRangeUtc } from "./datetime";
-import { freeCancelUntilIso, isSalesOpen, salesCloseAtIso } from "./policy";
+import { isSalesOpen, salesCloseAtIso } from "./policy";
 import { PLATFORM_FEE_GEL } from "./constants";
 import type {
   BookingWithTrip,
@@ -46,18 +46,13 @@ function mapUser(r: DbUserRow): User {
   };
 }
 
-const USER_COLS =
-  "u.id, u.role, u.first_name, u.last_name, u.email, u.phone, u.password_hash";
-
 export const getCurrentUser = cache(async (): Promise<User | null> => {
   const token = (await cookies()).get(SESSION_COOKIE)?.value;
   if (!token) return null;
-  const row = db
-    .prepare(
-      `SELECT ${USER_COLS} FROM sessions s JOIN users u ON u.id = s.user_id
-       WHERE s.token = ? AND s.expires_at > ?`
-    )
-    .get(token, nowUtcIso()) as DbUserRow | undefined;
+  const row = await rpc<DbUserRow | null>("mybus_get_user_by_token", {
+    p_token: token,
+    p_now: nowUtcIso(),
+  });
   return row ? mapUser(row) : null;
 });
 
@@ -70,37 +65,38 @@ export async function requireUser(role?: Role): Promise<User> {
   return user;
 }
 
-export function findUserByEmail(
+export async function findUserByEmail(
   email: string
-): { user: User; passwordHash: string } | null {
-  const row = db
-    .prepare(`SELECT ${USER_COLS} FROM users u WHERE u.email = ?`)
-    .get(email.trim().toLowerCase()) as DbUserRow | undefined;
+): Promise<{ user: User; passwordHash: string } | null> {
+  const row = await rpc<DbUserRow | null>("mybus_find_user_by_email", {
+    p_email: email.trim().toLowerCase(),
+  });
   return row ? { user: mapUser(row), passwordHash: row.password_hash } : null;
 }
 
-export function createUser(input: {
+export async function createUser(input: {
   role: Role;
   firstName: string;
   lastName: string;
   email: string;
   phone: string;
   passwordHash: string;
-}): User {
+}): Promise<User> {
   const id = randomUUID();
   const email = input.email.trim().toLowerCase();
-  db.prepare(
-    `INSERT INTO users (id, role, first_name, last_name, email, phone, password_hash)
-     VALUES (?, ?, ?, ?, ?, ?, ?)`
-  ).run(
-    id,
-    input.role,
-    input.firstName,
-    input.lastName,
-    email,
-    input.phone,
-    input.passwordHash
+  const result = await rpc<{ ok: boolean; duplicate?: boolean }>(
+    "mybus_create_user",
+    {
+      p_id: id,
+      p_role: input.role,
+      p_first: input.firstName,
+      p_last: input.lastName,
+      p_email: email,
+      p_phone: input.phone,
+      p_hash: input.passwordHash,
+    }
   );
+  if (!result.ok) throw new Error("duplicate email");
   return {
     id,
     role: input.role,
@@ -111,13 +107,16 @@ export function createUser(input: {
   };
 }
 
-export function updateUserProfile(
+export async function updateUserProfile(
   userId: string,
   input: { firstName: string; lastName: string; phone: string }
-): void {
-  db.prepare(
-    "UPDATE users SET first_name = ?, last_name = ?, phone = ? WHERE id = ?"
-  ).run(input.firstName, input.lastName, input.phone, userId);
+): Promise<void> {
+  await rpc("mybus_update_user_profile", {
+    p_id: userId,
+    p_first: input.firstName,
+    p_last: input.lastName,
+    p_phone: input.phone,
+  });
 }
 
 // ---------- trips ----------
@@ -146,22 +145,6 @@ interface DbTripRow {
   driver_phone: string;
   online_taken: number;
 }
-
-const TRIP_SELECT = `
-  SELECT t.id, t.driver_id, t.vehicle_id, t.origin_city, t.origin_station,
-         t.destination_city, t.departure_at, t.price_gel, t.total_seats,
-         t.status, t.notes,
-         t.walkin_seats, t.sales_closed, t.sales_cutoff_min, t.cancel_cutoff_min,
-         v.name AS vehicle_name, v.plate_number AS vehicle_plate,
-         v.photo_url AS vehicle_photo_url,
-         u.first_name AS driver_first_name, u.last_name AS driver_last_name,
-         u.phone AS driver_phone,
-         COALESCE((SELECT SUM(b.seats) FROM bookings b
-                   WHERE b.trip_id = t.id AND b.status = 'confirmed'), 0) AS online_taken
-  FROM trips t
-  JOIN vehicles v ON v.id = t.vehicle_id
-  JOIN users u ON u.id = t.driver_id
-`;
 
 function mapTrip(r: DbTripRow): TripSummary {
   const seatsTaken = r.online_taken + r.walkin_seats;
@@ -202,86 +185,41 @@ export interface TripFilters {
   limit?: number;
 }
 
-export function listTrips(filters: TripFilters = {}): TripSummary[] {
-  const where: string[] = ["t.status = 'scheduled'", "t.departure_at >= ?"];
-  const params: (string | number)[] = [nowUtcIso()];
-  if (filters.from) {
-    where.push("t.origin_city = ?");
-    params.push(filters.from);
-  }
-  if (filters.to) {
-    where.push("t.destination_city = ?");
-    params.push(filters.to);
-  }
-  if (filters.date) {
-    const range = tbilisiDayRangeUtc(filters.date);
-    if (range) {
-      where.push("t.departure_at >= ? AND t.departure_at < ?");
-      params.push(range[0], range[1]);
-    }
-  }
-  const order =
-    filters.sort === "price"
-      ? "t.price_gel ASC, t.departure_at ASC"
-      : "t.departure_at ASC";
-  const limit = Math.min(filters.limit ?? 200, 500);
-  const rows = db
-    .prepare(
-      `${TRIP_SELECT} WHERE ${where.join(" AND ")} ORDER BY ${order} LIMIT ${limit}`
-    )
-    .all(...params) as unknown as DbTripRow[];
+export async function listTrips(
+  filters: TripFilters = {}
+): Promise<TripSummary[]> {
+  const range = filters.date ? tbilisiDayRangeUtc(filters.date) : null;
+  const rows = await rpc<DbTripRow[]>("mybus_list_trips", {
+    p_now: nowUtcIso(),
+    p_from: filters.from ?? null,
+    p_to: filters.to ?? null,
+    p_date_start: range ? range[0] : null,
+    p_date_end: range ? range[1] : null,
+    p_sort: filters.sort ?? null,
+    p_limit: Math.min(filters.limit ?? 200, 500),
+  });
   return rows.map(mapTrip);
 }
 
-export function getTrip(id: string): TripSummary | null {
-  const row = db.prepare(`${TRIP_SELECT} WHERE t.id = ?`).get(id) as
-    | DbTripRow
-    | undefined;
+export async function getTrip(id: string): Promise<TripSummary | null> {
+  const row = await rpc<DbTripRow | null>("mybus_get_trip", { p_id: id });
   return row ? mapTrip(row) : null;
 }
 
-export function getStats(): { trips: number; drivers: number; routes: number } {
-  const now = nowUtcIso();
-  const trips = (
-    db
-      .prepare(
-        "SELECT COUNT(*) AS c FROM trips WHERE status = 'scheduled' AND departure_at >= ?"
-      )
-      .get(now) as { c: number }
-  ).c;
-  const drivers = (
-    db.prepare("SELECT COUNT(*) AS c FROM users WHERE role = 'driver'").get() as {
-      c: number;
-    }
-  ).c;
-  const routes = (
-    db
-      .prepare(
-        `SELECT COUNT(DISTINCT origin_city || '>' || destination_city) AS c
-         FROM trips WHERE status = 'scheduled' AND departure_at >= ?`
-      )
-      .get(now) as { c: number }
-  ).c;
-  return { trips, drivers, routes };
+export async function getStats(): Promise<{
+  trips: number;
+  drivers: number;
+  routes: number;
+}> {
+  return rpc("mybus_get_stats", { p_now: nowUtcIso() });
 }
 
-export function popularRoutes(
+export async function popularRoutes(
   limit = 8
-): { from: string; to: string; count: number; minPrice: number }[] {
-  const rows = db
-    .prepare(
-      `SELECT origin_city AS from_city, destination_city AS to_city,
-              COUNT(*) AS cnt, MIN(price_gel) AS min_price
-       FROM trips WHERE status = 'scheduled' AND departure_at >= ?
-       GROUP BY origin_city, destination_city
-       ORDER BY cnt DESC, min_price ASC LIMIT ${Math.min(limit, 24)}`
-    )
-    .all(nowUtcIso()) as unknown as {
-    from_city: string;
-    to_city: string;
-    cnt: number;
-    min_price: number;
-  }[];
+): Promise<{ from: string; to: string; count: number; minPrice: number }[]> {
+  const rows = await rpc<
+    { from_city: string; to_city: string; cnt: number; min_price: number }[]
+  >("mybus_popular_routes", { p_now: nowUtcIso(), p_limit: limit });
   return rows.map((r) => ({
     from: r.from_city,
     to: r.to_city,
@@ -290,16 +228,14 @@ export function popularRoutes(
   }));
 }
 
-export function driverTrips(driverId: string): TripSummary[] {
-  const rows = db
-    .prepare(
-      `${TRIP_SELECT} WHERE t.driver_id = ? ORDER BY t.departure_at DESC LIMIT 200`
-    )
-    .all(driverId) as unknown as DbTripRow[];
+export async function driverTrips(driverId: string): Promise<TripSummary[]> {
+  const rows = await rpc<DbTripRow[]>("mybus_driver_trips", {
+    p_driver: driverId,
+  });
   return rows.map(mapTrip);
 }
 
-export function createTrip(input: {
+export async function createTrip(input: {
   driverId: string;
   vehicleId: string;
   originCity: string;
@@ -309,36 +245,34 @@ export function createTrip(input: {
   priceGel: number;
   totalSeats: number;
   notes: string | null;
-}): string {
+}): Promise<string> {
   const id = randomUUID();
-  db.prepare(
-    `INSERT INTO trips (id, driver_id, vehicle_id, origin_city, origin_station,
-                        destination_city, departure_at, price_gel, total_seats, notes)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
-  ).run(
-    id,
-    input.driverId,
-    input.vehicleId,
-    input.originCity,
-    input.originStation,
-    input.destinationCity,
-    input.departureAtUtc,
-    input.priceGel,
-    input.totalSeats,
-    input.notes
-  );
+  await rpc("mybus_create_trip", {
+    p_id: id,
+    p_driver: input.driverId,
+    p_vehicle: input.vehicleId,
+    p_origin: input.originCity,
+    p_station: input.originStation,
+    p_destination: input.destinationCity,
+    p_departure: input.departureAtUtc,
+    p_price: input.priceGel,
+    p_seats: input.totalSeats,
+    p_notes: input.notes,
+  });
   return id;
 }
 
 /** Cancels a not-yet-departed scheduled trip owned by the driver. Returns true if a row changed. */
-export function cancelTrip(tripId: string, driverId: string): boolean {
-  const result = db
-    .prepare(
-      `UPDATE trips SET status = 'cancelled'
-       WHERE id = ? AND driver_id = ? AND status = 'scheduled' AND departure_at > ?`
-    )
-    .run(tripId, driverId, nowUtcIso());
-  return result.changes > 0;
+export async function cancelTrip(
+  tripId: string,
+  driverId: string
+): Promise<boolean> {
+  const result = await rpc<{ changed: boolean }>("mybus_cancel_trip", {
+    p_trip: tripId,
+    p_driver: driverId,
+    p_now: nowUtcIso(),
+  });
+  return result.changed;
 }
 
 /**
@@ -346,70 +280,55 @@ export function cancelTrip(tripId: string, driverId: string): boolean {
  * [0, totalSeats - online seats]. Returns the new value, or null if the
  * trip is not the driver's scheduled trip or the clamp made it a no-op.
  */
-export function adjustWalkin(
+export async function adjustWalkin(
   tripId: string,
   driverId: string,
   delta: number
-): number | null {
-  const row = db
-    .prepare(
-      `SELECT t.total_seats, t.walkin_seats,
-              COALESCE((SELECT SUM(b.seats) FROM bookings b
-                        WHERE b.trip_id = t.id AND b.status = 'confirmed'), 0) AS online
-       FROM trips t WHERE t.id = ? AND t.driver_id = ? AND t.status = 'scheduled'`
-    )
-    .get(tripId, driverId) as
-    | { total_seats: number; walkin_seats: number; online: number }
-    | undefined;
-  if (!row) return null;
-  const next = Math.max(
-    0,
-    Math.min(row.walkin_seats + delta, row.total_seats - row.online)
-  );
-  if (next === row.walkin_seats) return null;
-  db.prepare("UPDATE trips SET walkin_seats = ? WHERE id = ?").run(next, tripId);
-  return next;
+): Promise<number | null> {
+  const result = await rpc<{ next: number | null }>("mybus_adjust_walkin", {
+    p_trip: tripId,
+    p_driver: driverId,
+    p_delta: delta,
+  });
+  return result.next;
 }
 
-export function setSalesClosed(
+export async function setSalesClosed(
   tripId: string,
   driverId: string,
   closed: boolean
-): boolean {
-  const result = db
-    .prepare(
-      `UPDATE trips SET sales_closed = ?
-       WHERE id = ? AND driver_id = ? AND status = 'scheduled'`
-    )
-    .run(closed ? 1 : 0, tripId, driverId);
-  return result.changes > 0;
+): Promise<boolean> {
+  const result = await rpc<{ changed: boolean }>("mybus_set_sales_closed", {
+    p_trip: tripId,
+    p_driver: driverId,
+    p_closed: closed ? 1 : 0,
+  });
+  return result.changed;
 }
 
-export function setBoarded(
+export async function setBoarded(
   bookingId: string,
   driverId: string,
   boarded: boolean
-): boolean {
-  const result = db
-    .prepare(
-      `UPDATE bookings SET boarded = ?
-       WHERE id = ? AND status = 'confirmed'
-         AND trip_id IN (SELECT id FROM trips WHERE driver_id = ?)`
-    )
-    .run(boarded ? 1 : 0, bookingId, driverId);
-  return result.changes > 0;
+): Promise<boolean> {
+  const result = await rpc<{ changed: boolean }>("mybus_set_boarded", {
+    p_booking: bookingId,
+    p_driver: driverId,
+    p_boarded: boarded ? 1 : 0,
+  });
+  return result.changed;
 }
 
 /** Cancels every confirmed, not-boarded booking on the driver's trip. Returns freed booking count. */
-export function releaseNoShows(tripId: string, driverId: string): number {
-  const result = db
-    .prepare(
-      `UPDATE bookings SET status = 'cancelled', no_show = 1
-       WHERE trip_id = ? AND status = 'confirmed' AND boarded = 0
-         AND trip_id IN (SELECT id FROM trips WHERE id = ? AND driver_id = ?)`
-    )
-    .run(tripId, tripId, driverId);
-  return Number(result.changes);
+export async function releaseNoShows(
+  tripId: string,
+  driverId: string
+): Promise<number> {
+  const result = await rpc<{ count: number }>("mybus_release_no_shows", {
+    p_trip: tripId,
+    p_driver: driverId,
+  });
+  return result.count;
 }
 
 /**
@@ -417,43 +336,35 @@ export function releaseNoShows(tripId: string, driverId: string): number {
  * platform fee (5₾, simulated payment). This is the platform's only
  * revenue event: no ticket commission, no subscription.
  */
-export function markTripDeparted(tripId: string, driverId: string): boolean {
-  const result = db
-    .prepare(
-      `UPDATE trips SET status = 'departed'
-       WHERE id = ? AND driver_id = ? AND status = 'scheduled'`
-    )
-    .run(tripId, driverId);
-  if (result.changes === 0) return false;
-  db.prepare(
-    `INSERT INTO platform_fees (id, trip_id, driver_id, amount_gel, status)
-     VALUES (?, ?, ?, ?, 'paid')`
-  ).run(randomUUID(), tripId, driverId, PLATFORM_FEE_GEL);
-  return true;
+export async function markTripDeparted(
+  tripId: string,
+  driverId: string
+): Promise<boolean> {
+  const result = await rpc<{ ok: boolean }>("mybus_mark_trip_departed", {
+    p_trip: tripId,
+    p_driver: driverId,
+    p_fee_id: randomUUID(),
+    p_amount: PLATFORM_FEE_GEL,
+  });
+  return result.ok;
 }
 
-export function driverFees(driverId: string): {
+export async function driverFees(driverId: string): Promise<{
   fees: DriverFee[];
   totalGel: number;
-} {
-  const rows = db
-    .prepare(
-      `SELECT f.id, f.trip_id, f.amount_gel, f.status, f.created_at,
-              t.origin_city, t.destination_city, t.departure_at
-       FROM platform_fees f JOIN trips t ON t.id = f.trip_id
-       WHERE f.driver_id = ?
-       ORDER BY f.created_at DESC, f.rowid DESC LIMIT 200`
-    )
-    .all(driverId) as unknown as {
-    id: string;
-    trip_id: string;
-    amount_gel: number;
-    status: string;
-    created_at: string;
-    origin_city: string;
-    destination_city: string;
-    departure_at: string;
-  }[];
+}> {
+  const rows = await rpc<
+    {
+      id: string;
+      trip_id: string;
+      amount_gel: number;
+      status: string;
+      created_at: string;
+      origin_city: string;
+      destination_city: string;
+      departure_at: string;
+    }[]
+  >("mybus_driver_fees", { p_driver: driverId });
   const fees = rows.map((r) => ({
     id: r.id,
     tripId: r.trip_id,
@@ -470,24 +381,20 @@ export function driverFees(driverId: string): {
   };
 }
 
-export function driverNotifications(
+export async function driverNotifications(
   driverId: string,
   limit = 50
-): DriverNotification[] {
-  const rows = db
-    .prepare(
-      `SELECT id, kind, to_phone, body, delivery, created_at
-       FROM notifications WHERE driver_id = ?
-       ORDER BY created_at DESC, rowid DESC LIMIT ${Math.min(limit, 200)}`
-    )
-    .all(driverId) as unknown as {
-    id: string;
-    kind: string;
-    to_phone: string;
-    body: string;
-    delivery: string;
-    created_at: string;
-  }[];
+): Promise<DriverNotification[]> {
+  const rows = await rpc<
+    {
+      id: string;
+      kind: string;
+      to_phone: string;
+      body: string;
+      delivery: string;
+      created_at: string;
+    }[]
+  >("mybus_driver_notifications", { p_driver: driverId, p_limit: limit });
   return rows.map((r) => ({
     id: r.id,
     kind: r.kind as DriverNotification["kind"],
@@ -498,12 +405,13 @@ export function driverNotifications(
   }));
 }
 
-export function getLiveState(
+export async function getLiveState(
   tripId: string,
   driverId: string
-): LiveState | null {
-  const trip = getTrip(tripId);
+): Promise<LiveState | null> {
+  const trip = await getTrip(tripId);
   if (!trip || trip.driverId !== driverId) return null;
+  const manifest = await tripManifest(tripId);
   return {
     trip: {
       id: trip.id,
@@ -520,7 +428,7 @@ export function getLiveState(
       salesCloseAt: salesCloseAtIso(trip.departureAt, trip.salesCutoffMin),
       priceGel: trip.priceGel,
     },
-    manifest: tripManifest(tripId).map((m) => ({
+    manifest: manifest.map((m) => ({
       bookingId: m.bookingId,
       name: m.name,
       phone: m.phone,
@@ -555,42 +463,40 @@ function mapVehicle(r: DbVehicleRow): Vehicle {
   };
 }
 
-export function driverVehicles(driverId: string): Vehicle[] {
-  const rows = db
-    .prepare("SELECT * FROM vehicles WHERE driver_id = ? ORDER BY created_at ASC")
-    .all(driverId) as unknown as DbVehicleRow[];
+export async function driverVehicles(driverId: string): Promise<Vehicle[]> {
+  const rows = await rpc<DbVehicleRow[]>("mybus_driver_vehicles", {
+    p_driver: driverId,
+  });
   return rows.map(mapVehicle);
 }
 
-export function getVehicleForDriver(
+export async function getVehicleForDriver(
   vehicleId: string,
   driverId: string
-): Vehicle | null {
-  const row = db
-    .prepare("SELECT * FROM vehicles WHERE id = ? AND driver_id = ?")
-    .get(vehicleId, driverId) as DbVehicleRow | undefined;
+): Promise<Vehicle | null> {
+  const row = await rpc<DbVehicleRow | null>("mybus_get_vehicle_for_driver", {
+    p_vehicle: vehicleId,
+    p_driver: driverId,
+  });
   return row ? mapVehicle(row) : null;
 }
 
-export function createVehicle(input: {
+export async function createVehicle(input: {
   driverId: string;
   name: string;
   plateNumber: string;
   capacity: number;
   photoUrl: string;
-}): string {
+}): Promise<string> {
   const id = randomUUID();
-  db.prepare(
-    `INSERT INTO vehicles (id, driver_id, name, plate_number, capacity, photo_url)
-     VALUES (?, ?, ?, ?, ?, ?)`
-  ).run(
-    id,
-    input.driverId,
-    input.name,
-    input.plateNumber,
-    input.capacity,
-    input.photoUrl
-  );
+  await rpc("mybus_create_vehicle", {
+    p_id: id,
+    p_driver: input.driverId,
+    p_name: input.name,
+    p_plate: input.plateNumber,
+    p_capacity: input.capacity,
+    p_photo: input.photoUrl,
+  });
   return id;
 }
 
@@ -623,22 +529,6 @@ interface DbBookingRow {
   driver_phone: string;
 }
 
-const BOOKING_SELECT = `
-  SELECT b.id, b.trip_id, b.seats, b.payment_method, b.payment_status,
-         b.status AS booking_status, b.refund_due, b.no_show, b.created_at,
-         b.passenger_name, b.passenger_phone, b.passenger_email,
-         t.origin_city, t.origin_station, t.destination_city, t.departure_at,
-         t.price_gel, t.status AS trip_status,
-         v.name AS vehicle_name, v.plate_number AS vehicle_plate,
-         v.photo_url AS vehicle_photo_url,
-         u.first_name AS driver_first_name, u.last_name AS driver_last_name,
-         u.phone AS driver_phone
-  FROM bookings b
-  JOIN trips t ON t.id = b.trip_id
-  JOIN vehicles v ON v.id = t.vehicle_id
-  JOIN users u ON u.id = t.driver_id
-`;
-
 function mapBooking(r: DbBookingRow): BookingWithTrip {
   return {
     id: r.id,
@@ -668,36 +558,38 @@ function mapBooking(r: DbBookingRow): BookingWithTrip {
   };
 }
 
-export function passengerBookings(userId: string): BookingWithTrip[] {
-  const rows = db
-    .prepare(
-      `${BOOKING_SELECT} WHERE b.passenger_id = ? ORDER BY t.departure_at DESC LIMIT 200`
-    )
-    .all(userId) as unknown as DbBookingRow[];
+export async function passengerBookings(
+  userId: string
+): Promise<BookingWithTrip[]> {
+  const rows = await rpc<DbBookingRow[]>("mybus_passenger_bookings", {
+    p_user: userId,
+  });
   return rows.map(mapBooking);
 }
 
-export function getBookingForUser(
+export async function getBookingForUser(
   bookingId: string,
   userId: string
-): BookingWithTrip | null {
-  const row = db
-    .prepare(`${BOOKING_SELECT} WHERE b.id = ? AND b.passenger_id = ?`)
-    .get(bookingId, userId) as DbBookingRow | undefined;
+): Promise<BookingWithTrip | null> {
+  const row = await rpc<DbBookingRow | null>("mybus_get_booking_for_user", {
+    p_booking: bookingId,
+    p_user: userId,
+  });
   return row ? mapBooking(row) : null;
 }
 
-export function userHasBooking(tripId: string, userId: string): boolean {
-  const row = db
-    .prepare(
-      `SELECT 1 AS x FROM bookings
-       WHERE trip_id = ? AND passenger_id = ? AND status = 'confirmed'`
-    )
-    .get(tripId, userId);
-  return row !== undefined;
+export async function userHasBooking(
+  tripId: string,
+  userId: string
+): Promise<boolean> {
+  const result = await rpc<{ has: boolean }>("mybus_user_has_booking", {
+    p_trip: tripId,
+    p_user: userId,
+  });
+  return result.has;
 }
 
-export function insertBooking(input: {
+export async function insertBooking(input: {
   tripId: string;
   passengerId: string;
   seats: number;
@@ -706,23 +598,19 @@ export function insertBooking(input: {
   email: string;
   paymentMethod: PaymentMethod;
   paymentStatus: PaymentStatus;
-}): string {
+}): Promise<string> {
   const id = randomUUID();
-  db.prepare(
-    `INSERT INTO bookings (id, trip_id, passenger_id, seats, passenger_name,
-                           passenger_phone, passenger_email, payment_method, payment_status)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
-  ).run(
-    id,
-    input.tripId,
-    input.passengerId,
-    input.seats,
-    input.name,
-    input.phone,
-    input.email,
-    input.paymentMethod,
-    input.paymentStatus
-  );
+  await rpc("mybus_insert_booking", {
+    p_id: id,
+    p_trip: input.tripId,
+    p_passenger: input.passengerId,
+    p_seats: input.seats,
+    p_name: input.name,
+    p_phone: input.phone,
+    p_email: input.email,
+    p_method: input.paymentMethod,
+    p_status: input.paymentStatus,
+  });
   return id;
 }
 
@@ -731,56 +619,33 @@ export function insertBooking(input: {
  * A paid booking cancelled before the trip's free-cancel cutoff is marked
  * refund-due; inside the cutoff the seat frees up but the money stays.
  */
-export function cancelBooking(
+export async function cancelBooking(
   bookingId: string,
   userId: string
-): { ok: boolean; refundDue: boolean } {
-  const row = db
-    .prepare(
-      `SELECT b.id, b.payment_status, t.departure_at, t.cancel_cutoff_min
-       FROM bookings b JOIN trips t ON t.id = b.trip_id
-       WHERE b.id = ? AND b.passenger_id = ? AND b.status = 'confirmed'`
-    )
-    .get(bookingId, userId) as
-    | {
-        id: string;
-        payment_status: string;
-        departure_at: string;
-        cancel_cutoff_min: number;
-      }
-    | undefined;
-  const now = nowUtcIso();
-  if (!row || row.departure_at <= now) return { ok: false, refundDue: false };
-  const refundDue =
-    row.payment_status === "paid" &&
-    now <= freeCancelUntilIso(row.departure_at, row.cancel_cutoff_min);
-  db.prepare(
-    "UPDATE bookings SET status = 'cancelled', refund_due = ? WHERE id = ?"
-  ).run(refundDue ? 1 : 0, row.id);
-  return { ok: true, refundDue };
+): Promise<{ ok: boolean; refundDue: boolean }> {
+  const result = await rpc<{ ok: boolean; refund_due: boolean }>(
+    "mybus_cancel_booking",
+    { p_booking: bookingId, p_user: userId, p_now: nowUtcIso() }
+  );
+  return { ok: result.ok, refundDue: result.refund_due };
 }
 
-export function tripManifest(tripId: string): ManifestEntry[] {
-  const rows = db
-    .prepare(
-      `SELECT id AS booking_id, seats, payment_method, payment_status, status,
-              boarded, no_show, created_at,
-              passenger_name, passenger_phone, passenger_email
-       FROM bookings WHERE trip_id = ? ORDER BY created_at ASC`
-    )
-    .all(tripId) as unknown as {
-    booking_id: string;
-    seats: number;
-    payment_method: string;
-    payment_status: string;
-    status: string;
-    boarded: number;
-    no_show: number;
-    created_at: string;
-    passenger_name: string;
-    passenger_phone: string;
-    passenger_email: string;
-  }[];
+export async function tripManifest(tripId: string): Promise<ManifestEntry[]> {
+  const rows = await rpc<
+    {
+      booking_id: string;
+      seats: number;
+      payment_method: string;
+      payment_status: string;
+      status: string;
+      boarded: number;
+      no_show: number;
+      created_at: string;
+      passenger_name: string;
+      passenger_phone: string;
+      passenger_email: string;
+    }[]
+  >("mybus_trip_manifest", { p_trip: tripId });
   return rows.map((r) => ({
     bookingId: r.booking_id,
     seats: r.seats,

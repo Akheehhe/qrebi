@@ -42,7 +42,7 @@ function Bubble({ n }: { n: DriverNotification }) {
 
 export default async function DriverMessagesPage() {
   const user = await requireUser("driver");
-  const notifications = driverNotifications(user.id);
+  const notifications = await driverNotifications(user.id);
   const realMode =
     !!process.env.WHATSAPP_TOKEN && !!process.env.WHATSAPP_PHONE_NUMBER_ID;
 

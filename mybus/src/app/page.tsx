@@ -27,9 +27,11 @@ const PRICING = [
 ] as const;
 
 export default async function HomePage() {
-  const routes = popularRoutes(8);
-  const trips = listTrips({ limit: 6 });
-  const stats = getStats();
+  const [routes, trips, stats] = await Promise.all([
+    popularRoutes(8),
+    listTrips({ limit: 6 }),
+    getStats(),
+  ]);
   const minDate = tbilisiTodayDateInput();
 
   return (

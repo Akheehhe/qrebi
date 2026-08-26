@@ -5,7 +5,7 @@ import { Badge } from "@/components/Badge";
 
 export default async function DriverVehiclesPage() {
   const user = await requireUser("driver");
-  const vehicles = driverVehicles(user.id);
+  const vehicles = await driverVehicles(user.id);
 
   return (
     <div className="space-y-5">

@@ -32,7 +32,7 @@ export default async function TicketPage({
 }) {
   const { bookingId } = await params;
   const user = await requireUser();
-  const b = getBookingForUser(bookingId, user.id);
+  const b = await getBookingForUser(bookingId, user.id);
   if (!b) notFound();
 
   const cancelled = b.status === "cancelled" || b.tripStatus === "cancelled";

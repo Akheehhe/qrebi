@@ -79,7 +79,7 @@ export async function createVehicleAction(
     photoUrl = `/api/uploads/${filename}`;
   }
 
-  createVehicle({
+  await createVehicle({
     driverId: driver.id,
     name,
     plateNumber: plate,
@@ -97,7 +97,7 @@ export async function createTripAction(
   const driver = await requireUser("driver");
 
   const vehicleId = String(formData.get("vehicleId") ?? "");
-  const vehicle = getVehicleForDriver(vehicleId, driver.id);
+  const vehicle = await getVehicleForDriver(vehicleId, driver.id);
   if (!vehicle) {
     return { fieldErrors: { vehicleId: "აირჩიეთ ავტობუსი" } };
   }
@@ -147,7 +147,7 @@ export async function createTripAction(
   }
   if (Object.keys(fieldErrors).length > 0) return { fieldErrors };
 
-  createTrip({
+  await createTrip({
     driverId: driver.id,
     vehicleId,
     originCity,
@@ -168,7 +168,7 @@ export async function createTripAction(
 export async function cancelTripAction(formData: FormData): Promise<void> {
   const driver = await requireUser("driver");
   const tripId = String(formData.get("tripId") ?? "");
-  cancelTrip(tripId, driver.id);
+  await cancelTrip(tripId, driver.id);
   revalidatePath("/");
   revalidatePath("/trips");
   revalidatePath(`/trips/${tripId}`);
@@ -183,7 +183,7 @@ export async function adjustWalkinAction(
 ): Promise<void> {
   const driver = await requireUser("driver");
   if (delta !== 1 && delta !== -1) return;
-  adjustWalkin(tripId, driver.id, delta);
+  await adjustWalkin(tripId, driver.id, delta);
   revalidatePath(`/trips/${tripId}`);
   revalidatePath("/driver");
 }
@@ -193,7 +193,7 @@ export async function toggleSalesAction(
   closed: boolean
 ): Promise<void> {
   const driver = await requireUser("driver");
-  setSalesClosed(tripId, driver.id, closed);
+  await setSalesClosed(tripId, driver.id, closed);
   revalidatePath(`/trips/${tripId}`);
   revalidatePath("/driver");
 }
@@ -203,12 +203,12 @@ export async function toggleBoardedAction(
   boarded: boolean
 ): Promise<void> {
   const driver = await requireUser("driver");
-  setBoarded(bookingId, driver.id, boarded);
+  await setBoarded(bookingId, driver.id, boarded);
 }
 
 export async function releaseNoShowsAction(tripId: string): Promise<number> {
   const driver = await requireUser("driver");
-  const released = releaseNoShows(tripId, driver.id);
+  const released = await releaseNoShows(tripId, driver.id);
   if (released > 0) {
     revalidatePath(`/trips/${tripId}`);
     revalidatePath("/driver");
@@ -218,7 +218,7 @@ export async function releaseNoShowsAction(tripId: string): Promise<number> {
 
 export async function departTripAction(tripId: string): Promise<boolean> {
   const driver = await requireUser("driver");
-  const ok = markTripDeparted(tripId, driver.id);
+  const ok = await markTripDeparted(tripId, driver.id);
   if (ok) {
     revalidatePath("/");
     revalidatePath("/trips");

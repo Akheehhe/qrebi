@@ -13,10 +13,10 @@ export default async function TripManifestPage({
 }) {
   const { id } = await params;
   const user = await requireUser("driver");
-  const trip = getTrip(id);
+  const trip = await getTrip(id);
   if (!trip || trip.driverId !== user.id) notFound();
 
-  const manifest = tripManifest(id);
+  const manifest = await tripManifest(id);
   const confirmedSeats = manifest
     .filter((m) => m.status === "confirmed")
     .reduce((sum, m) => sum + m.seats, 0);

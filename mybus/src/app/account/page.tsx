@@ -39,7 +39,7 @@ function HistoryBadge({ booking }: { booking: BookingWithTrip }) {
 
 export default async function AccountPage() {
   const user = await requireUser();
-  const bookings = passengerBookings(user.id);
+  const bookings = await passengerBookings(user.id);
   const upcoming = bookings
     .filter(isUpcoming)
     .sort((a, b) => a.departureAt.localeCompare(b.departureAt));

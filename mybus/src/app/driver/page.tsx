@@ -48,8 +48,10 @@ function TripStatusBadge({ trip, past }: { trip: TripSummary; past: boolean }) {
 
 export default async function DriverDashboardPage() {
   const user = await requireUser("driver");
-  const trips = driverTrips(user.id);
-  const vehicles = driverVehicles(user.id);
+  const [trips, vehicles] = await Promise.all([
+    driverTrips(user.id),
+    driverVehicles(user.id),
+  ]);
 
   const upcoming = trips.filter(
     (t) => t.status === "scheduled" && !isPast(t.departureAt)

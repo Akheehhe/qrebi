@@ -11,7 +11,7 @@ export default async function LiveBoardingPage({
 }) {
   const { id } = await params;
   const user = await requireUser("driver");
-  const initial = getLiveState(id, user.id);
+  const initial = await getLiveState(id, user.id);
   if (!initial) notFound();
 
   return (

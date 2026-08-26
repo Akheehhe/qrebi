@@ -28,7 +28,7 @@ export async function bookTripAction(
     redirect(`/login?next=${encodeURIComponent(`/trips/${tripId}`)}`);
   }
 
-  const trip = getTrip(tripId);
+  const trip = await getTrip(tripId);
   if (!trip || trip.status !== "scheduled") {
     return { error: "რეისი ვერ მოიძებნა ან გაუქმებულია" };
   }
@@ -43,7 +43,7 @@ export async function bookTripAction(
   if (trip.driverId === user.id) {
     return { error: "საკუთარ რეისზე ადგილის დაჯავშნა შეუძლებელია" };
   }
-  if (userHasBooking(tripId, user.id)) {
+  if (await userHasBooking(tripId, user.id)) {
     return { error: "ამ რეისზე ჯავშანი უკვე გაქვს" };
   }
 
@@ -63,7 +63,7 @@ export async function bookTripAction(
   const paymentMethod =
     formData.get("paymentMethod") === "cash" ? "cash" : "online";
 
-  const bookingId = insertBooking({
+  const bookingId = await insertBooking({
     tripId,
     passengerId: user.id,
     seats,
@@ -88,10 +88,10 @@ export async function bookTripAction(
 export async function cancelBookingAction(formData: FormData): Promise<void> {
   const user = await requireUser();
   const bookingId = String(formData.get("bookingId") ?? "");
-  const booking = getBookingForUser(bookingId, user.id);
-  const { ok } = cancelBooking(bookingId, user.id);
+  const booking = await getBookingForUser(bookingId, user.id);
+  const { ok } = await cancelBooking(bookingId, user.id);
   if (ok && booking) {
-    const trip = getTrip(booking.tripId);
+    const trip = await getTrip(booking.tripId);
     if (trip) {
       await notifyDriverCancellation(
         trip,
