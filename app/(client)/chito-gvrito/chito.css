@@ -155,9 +155,11 @@ a.cg-link:hover .cg-chev{transform:translateX(3px);color:var(--cg-ink)}
 .cg-lang{position:absolute;z-index:2;top:clamp(14px,3vw,22px);right:clamp(14px,3vw,22px);
   display:flex;align-items:center;gap:2px;min-height:44px;padding:4px;
   background:#fff;border:1.5px solid var(--cg-line);border-radius:999px}
-.cg-lang button{padding:6px 10px 7px;border:none;border-radius:999px;background:none;
-  cursor:pointer;font-family:inherit;font-size:12px;font-weight:800;
+.cg-lang button{position:relative;padding:6px 10px 7px;border:none;border-radius:999px;
+  background:none;cursor:pointer;font-family:inherit;font-size:12px;font-weight:800;
   color:var(--cg-muted);transition:background .2s,color .2s}
+/* the pills stay small; each finger target stretches to the pill's 44px */
+.cg-lang button::after{content:"";position:absolute;inset:-8px -1px;border-radius:inherit}
 .cg-lang button:hover{color:var(--cg-ink)}
 .cg-lang button.on{background:var(--cg-ink);color:#fff}
 
@@ -179,4 +181,7 @@ a.cg-link:hover .cg-chev{transform:translateX(3px);color:var(--cg-ink)}
   .cg-txt small{font-size:12.5px}
   .cg-ico{width:42px;height:42px}
   .cg-wifi-lab{width:4.8em}
+  /* Копировать is the longest word on the card — keep the rows on one line */
+  .cg-wifi-row{gap:8px;padding:11px 10px}
+  .cg-wifi-row button{padding:7px 10px 8px;font-size:12px}
 }

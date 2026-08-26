@@ -20,7 +20,15 @@ export default function WifiCard({ ssid, password }: { ssid: string; password: s
 
   useEffect(() => {
     const ua = navigator.userAgent
-    if (/iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
+    const isIos =
+      /iPhone|iPad|iPod/.test(ua) ||
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+    // only real Safari hands a downloaded profile to the installer — Chrome,
+    // Firefox and in-app browsers on iOS dead-end, so they get the copy rows
+    const iosSafari =
+      isIos &&
+      !/CriOS|FxiOS|EdgiOS|OPT\/|GSA|DuckDuckGo|Instagram|FBAN|FBAV|Line\/|Snapchat|musical_ly|TikTok/i.test(ua)
+    if (iosSafari) {
       setPlatform('ios')
     } else if (/Android/i.test(ua)) {
       setPlatform('android')
@@ -32,6 +40,7 @@ export default function WifiCard({ ssid, password }: { ssid: string; password: s
     if (timer.current) clearTimeout(timer.current)
     try {
       await navigator.clipboard.writeText(text)
+      setFailed(false)
       setCopied(which)
       timer.current = setTimeout(() => setCopied(null), 1800)
       return true
@@ -47,12 +56,12 @@ export default function WifiCard({ ssid, password }: { ssid: string; password: s
      top of it — the guest picks the network and pastes. The intent URL is
      a no-op outside Chrome-likes; the copied password still stands. */
   async function connectAndroid() {
-    await copy('pass', password)
-    setConnectHint(true)
+    const ok = await copy('pass', password)
+    setConnectHint(ok)
     try {
       window.location.href = 'intent:#Intent;action=android.settings.WIFI_SETTINGS;end'
     } catch {
-      /* unsupported browser — the hint + copied password carry it */
+      /* some browsers refuse the intent — the hint + copied password carry it */
     }
   }
 
@@ -84,9 +93,9 @@ export default function WifiCard({ ssid, password }: { ssid: string; password: s
               </a>
               <p className="cg-wifi-hint">
                 <T3
-                  ka="ჩამოიტვირთება Wi-Fi პროფილი — დააჭირე „დაშვება“-ს, შემდეგ Settings → Profile Downloaded → Install, და ტელეფონი თავად დაუკავშირდება."
+                  ka="ჩამოიტვირთება Wi-Fi პროფილი — დააჭირე „Allow“-ს, შემდეგ Settings → Profile Downloaded → Install, და ტელეფონი თავად დაუკავშირდება."
                   en="A Wi-Fi profile will download — tap Allow, then Settings → Profile Downloaded → Install, and your phone joins on its own."
-                  ru="Загрузится Wi-Fi профиль — нажмите «Разрешить», затем Настройки → Профиль загружен → Установить, и телефон подключится сам."
+                  ru="Загрузится профиль Wi-Fi — нажмите «Разрешить», затем Настройки → Профиль загружен → Установить, и телефон подключится сам."
                 />
               </p>
             </>
@@ -100,9 +109,9 @@ export default function WifiCard({ ssid, password }: { ssid: string; password: s
               {connectHint && (
                 <p className="cg-wifi-hint">
                   <T3
-                    ka="პაროლი დაკოპირდა — გახსნილ ფანჯარაში აირჩიე ქსელი და ჩასვი."
-                    en="Password copied — pick the network in the panel that opens and paste."
-                    ru="Пароль скопирован — выберите сеть в открывшемся окне и вставьте."
+                    ka="პაროლი დაკოპირდა — აირჩიე ქსელი Wi-Fi პარამეტრებში და ჩასვი."
+                    en="Password copied — pick the network in Wi-Fi settings and paste."
+                    ru="Пароль скопирован — выберите сеть в настройках Wi-Fi и вставьте его."
                   />
                 </p>
               )}
@@ -114,7 +123,7 @@ export default function WifiCard({ ssid, password }: { ssid: string; password: s
             <code>{ssid}</code>
             <button type="button" onClick={() => copy('ssid', ssid)}>
               {copied === 'ssid'
-                ? <T3 ka="დაკოპირდა ✓" en="Copied ✓" ru="Скопировано ✓" />
+                ? <T3 ka="მზადაა ✓" en="Copied ✓" ru="Готово ✓" />
                 : <T3 ka="კოპირება" en="Copy" ru="Копировать" />}
             </button>
           </div>
@@ -123,7 +132,7 @@ export default function WifiCard({ ssid, password }: { ssid: string; password: s
             <code>{password}</code>
             <button type="button" onClick={() => copy('pass', password)}>
               {copied === 'pass'
-                ? <T3 ka="დაკოპირდა ✓" en="Copied ✓" ru="Скопировано ✓" />
+                ? <T3 ka="მზადაა ✓" en="Copied ✓" ru="Готово ✓" />
                 : <T3 ka="კოპირება" en="Copy" ru="Копировать" />}
             </button>
           </div>
