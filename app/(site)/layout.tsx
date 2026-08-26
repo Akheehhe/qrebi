@@ -1,26 +1,11 @@
 import type { Metadata, Viewport } from 'next'
-import { Montserrat, Noto_Sans_Georgian } from 'next/font/google'
-import './globals.css'
+import '../globals.css'
+import { display, georgian } from '@/app/fonts'
 import Header from '@/components/Header'
 import PromoBar from '@/components/PromoBar'
 import Footer from '@/components/Footer'
 import StickyBar from '@/components/StickyBar'
 import SiteRuntime from '@/components/SiteRuntime'
-
-// Self-hosted by next/font — no request leaves the user's browser for Google.
-const display = Montserrat({
-  subsets: ['latin'],
-  weight: ['600', '700', '800', '900'],
-  variable: '--font-display',
-  display: 'swap',
-})
-
-const georgian = Noto_Sans_Georgian({
-  subsets: ['georgian'],
-  weight: ['400', '500', '600', '700', '800', '900'],
-  variable: '--font-georgian',
-  display: 'swap',
-})
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://qrebi.ge'),
