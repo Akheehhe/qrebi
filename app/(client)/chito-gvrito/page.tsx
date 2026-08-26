@@ -13,8 +13,10 @@ const LINKS = {
     'https://www.google.com/maps/search/?api=1&query=Chito%20Gvrito%2C%20Sioni%20Street%208%2C%20Tbilisi%2C%20Georgia',
   maps:
     'https://www.google.com/maps/search/?api=1&query=Chito%20Gvrito%2C%20Sioni%20Street%208%2C%20Tbilisi%2C%20Georgia',
-  // TODO: რესტორნის ნამდვილი ქსელი და პაროლი
-  wifi: { ssid: 'Chito Gvrito', password: 'gvrito2026' },
+  // TODO: რესტორნის ნამდვილი ქსელი და პაროლი — სანამ ცარიელია, Wi-Fi ბარათი
+  // საერთოდ არ ჩანს, რომ სტუმარმა ყალბი პაროლი არ სცადოს. ჩასართავად:
+  // wifi: { ssid: 'ქსელის სახელი', password: 'პაროლი' },
+  wifi: null as { ssid: string; password: string } | null,
 }
 
 export default function Page() {
@@ -26,9 +28,9 @@ export default function Page() {
         <div className="cg-badge">
           <BirdOnNest />
         </div>
-        <h1 className="cg-name">ჩიტო გვრიტო</h1>
-        <p className="cg-latin">Chito Gvrito</p>
-        <p className="cg-tags">
+        <h1 className="cg-name" lang="ka">ჩიტო გვრიტო</h1>
+        <p className="cg-latin" lang="en">Chito Gvrito</p>
+        <p className="cg-tags" lang="en">
           <span className="cg-tag-teal">Restaurant</span>
           <span className="cg-tag-mag"><i aria-hidden="true">•</i>Georgian Kitchen</span>
           <span className="cg-tag-org"><i aria-hidden="true">•</i>Wine&nbsp;&amp;&nbsp;Food</span>
@@ -39,7 +41,7 @@ export default function Page() {
         </a>
       </header>
 
-      <nav className="cg-links" aria-label="Chito Gvrito">
+      <nav className="cg-links">
         <a className="cg-link" href={LINKS.menu} target="_blank" rel="noopener">
           <span className="cg-ico cg-ico-teal"><MenuIcon /></span>
           <span className="cg-txt">
@@ -53,12 +55,13 @@ export default function Page() {
           <span className="cg-ico cg-ico-mag"><StarIcon /></span>
           <span className="cg-txt">
             <b><T ge="შეგვაფასე Google-ზე" en="Review us on Google" /></b>
-            <small><T ge="★★★★★ — სულ 30 წამია" en="★★★★★ — takes 30 seconds" /></small>
+            {/* პირდაპირი writereview ბმულის ჩასმისას დააბრუნე "★★★★★ — სულ 30 წამია" */}
+            <small><T ge="გაგვიზიარე შენი შთაბეჭდილება" en="Share your experience" /></small>
           </span>
           <Chev />
         </a>
 
-        <WifiCard ssid={LINKS.wifi.ssid} password={LINKS.wifi.password} />
+        {LINKS.wifi && <WifiCard ssid={LINKS.wifi.ssid} password={LINKS.wifi.password} />}
       </nav>
 
       <footer className="cg-foot">
@@ -74,7 +77,7 @@ export default function Page() {
 
 function BirdOnNest() {
   return (
-    <svg className="cg-bird" viewBox="0 0 120 120" role="img" aria-label="ჩიტო გვრიტო">
+    <svg className="cg-bird" viewBox="0 0 120 120" aria-hidden="true">
       <circle
         cx="60" cy="60" r="57" fill="#fff" stroke="#C9C9C9" strokeWidth="2.6"
         strokeLinecap="round" strokeDasharray="0.1 11"

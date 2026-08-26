@@ -20,8 +20,7 @@ export default function LangSwitch() {
       type="button"
       className="cg-lang"
       onClick={toggle}
-      aria-label="ქართული / English"
-      aria-pressed={en}
+      aria-label={en ? 'გადართე ქართულზე' : 'Switch to English'}
     >
       <span className={en ? '' : 'on'}>ქარ</span>
       <span className={en ? 'on' : ''}>ENG</span>

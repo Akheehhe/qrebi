@@ -11,14 +11,17 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://qrebi.ge'),
   title: 'ჩიტო გვრიტო · Chito Gvrito — სიონის 8, თბილისი',
   description:
-    'ქართული სამზარეულო, ღვინო და კერძები ძველ თბილისში. მენიუ, Google შეფასება და Wi-Fi — ერთ გვერდზე. Georgian kitchen, wine & food at 8 Sioni St, Old Tbilisi.',
+    'ქართული სამზარეულო, ღვინო და კერძები ძველ თბილისში. მენიუ, შეფასება Google-ზე და Wi-Fi — ერთ გვერდზე. Georgian cuisine, wine & food at 8 Sioni St, Old Tbilisi.',
   openGraph: {
     type: 'website',
     url: 'https://qrebi.ge/chito-gvrito',
+    siteName: 'QRebi',
     title: 'ჩიტო გვრიტო · Chito Gvrito',
     description:
-      'მენიუ, Google შეფასება და Wi-Fi — ერთ გვერდზე. Menu, Google review & Wi-Fi in one tap.',
+      'მენიუ, შეფასება Google-ზე და Wi-Fi — ერთ გვერდზე. Menu, Google review & Wi-Fi in one tap.',
     locale: 'ka_GE',
+    alternateLocale: 'en_US',
+    images: [{ url: '/chito-gvrito-og.png', width: 1200, height: 630 }],
   },
   icons: {
     // the brand bird, so the tab matches the card on the table

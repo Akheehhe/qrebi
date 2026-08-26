@@ -4,8 +4,8 @@
 export function T({ ge, en }: { ge: React.ReactNode; en: React.ReactNode }) {
   return (
     <>
-      <span className="ge">{ge}</span>
-      <span className="en">{en}</span>
+      <span className="ge" lang="ka">{ge}</span>
+      <span className="en" lang="en">{en}</span>
     </>
   )
 }

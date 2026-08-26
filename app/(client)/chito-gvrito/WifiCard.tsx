@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { T } from '@/components/shared'
 
 /* The third link on the card. A phone can't join a network from a plain
@@ -9,14 +9,21 @@ import { T } from '@/components/shared'
 export default function WifiCard({ ssid, password }: { ssid: string; password: string }) {
   const [open, setOpen] = useState(false)
   const [copied, setCopied] = useState<'ssid' | 'pass' | null>(null)
+  const [failed, setFailed] = useState(false)
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => () => { if (timer.current) clearTimeout(timer.current) }, [])
 
   async function copy(which: 'ssid' | 'pass', text: string) {
+    if (timer.current) clearTimeout(timer.current)
     try {
       await navigator.clipboard.writeText(text)
       setCopied(which)
-      setTimeout(() => setCopied(null), 1800)
+      timer.current = setTimeout(() => setCopied(null), 1800)
     } catch {
-      /* clipboard blocked — the value is selectable text, long-press still works */
+      /* clipboard blocked — the values stay selectable, the hint says so */
+      setFailed(true)
+      setCopied(null)
     }
   }
 
@@ -57,10 +64,23 @@ export default function WifiCard({ ssid, password }: { ssid: string; password: s
             </button>
           </div>
           <p className="cg-wifi-hint">
-            <T
-              ge="დააკოპირე პაროლი, გახსენი პარამეტრებში Wi-Fi და აირჩიე ქსელი."
-              en="Copy the password, open Wi-Fi in Settings and pick the network."
-            />
+            {failed ? (
+              <T
+                ge="ვერ დაკოპირდა — ხანგრძლივად დააჭირე პაროლს და მონიშნე."
+                en="Couldn't copy — long-press the password to select it."
+              />
+            ) : (
+              <T
+                ge="დააკოპირე პაროლი, გახსენი პარამეტრებში Wi-Fi და აირჩიე ქსელი."
+                en="Copy the password, open Wi-Fi in Settings and pick the network."
+              />
+            )}
+          </p>
+          {/* what just happened, for ears instead of eyes */}
+          <p className="sr-only" role="status">
+            {copied === 'ssid' && <T ge="ქსელის სახელი დაკოპირდა" en="Network name copied" />}
+            {copied === 'pass' && <T ge="პაროლი დაკოპირდა" en="Password copied" />}
+            {failed && <T ge="კოპირება ვერ მოხერხდა" en="Copy failed" />}
           </p>
         </div>
       )}

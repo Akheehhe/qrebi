@@ -18,6 +18,8 @@
   --cg-muted:#6E675C;
 
   background:var(--cg-cream);color:var(--cg-ink);
+  /* globals.css pads phone bodies 78px to clear the qrebi sticky bar — not here */
+  padding-bottom:0;
   /* the logo's confetti, faint, as the tablecloth */
   background-image:
     radial-gradient(circle at 12% 18%,rgba(140,198,63,.16) 0 5px,transparent 6px),
@@ -57,9 +59,10 @@ footer.cg-foot{background:none;padding-block:0}
 /* the dot travels with the word after it, so a wrapped line never ends on one */
 .cg-tags span{display:inline-flex;align-items:center;gap:9px;white-space:nowrap}
 .cg-tags i{font-style:normal;color:#C9C2B4;font-size:.9em}
-.cg-tag-teal{color:var(--cg-teal)}
+/* the logo colours, pulled darker for 12px type — AA on the cream ground */
+.cg-tag-teal{color:#0E7680}
 .cg-tag-mag{color:var(--cg-mag)}
-.cg-tag-org{color:var(--cg-org)}
+.cg-tag-org{color:#A85800}
 
 .cg-addr{display:inline-flex;align-items:center;gap:7px;margin-top:clamp(14px,3vw,18px);
   padding:9px 16px 10px;background:#fff;border:1.5px solid var(--cg-line);border-radius:999px;
@@ -99,6 +102,8 @@ a.cg-link:hover .cg-chev{transform:translateX(3px);color:var(--cg-ink)}
 .cg-wifi{flex-direction:column;gap:0;padding:0;overflow:hidden}
 .cg-wifi-head{display:flex;align-items:center;gap:15px;width:100%;padding:16px 18px;
   background:none;border:none;cursor:pointer;font-family:inherit;color:inherit}
+/* the card's overflow:hidden clips an outset ring, so this one sits inside */
+.cg-wifi-head:focus-visible{outline-offset:-6px;border-radius:14px}
 .cg-wifi.open{transform:none}
 .cg-wifi.open .cg-chev{transform:rotate(180deg);color:var(--cg-ink)}
 
@@ -109,20 +114,23 @@ a.cg-link:hover .cg-chev{transform:translateX(3px);color:var(--cg-ink)}
   letter-spacing:.04em;text-transform:uppercase;color:var(--cg-muted)}
 .cg-wifi-row code{flex:1;min-width:0;overflow-wrap:anywhere;
   font-family:inherit;font-size:15.5px;font-weight:700}
-.cg-wifi-row button{flex:none;padding:7px 13px 8px;border:none;border-radius:999px;
-  background:var(--cg-org);color:#fff;font-family:inherit;font-size:12.5px;font-weight:800;
-  cursor:pointer;transition:background .2s,transform .15s}
-.cg-wifi-row button:hover{background:#D9740E}
+.cg-wifi-row button{position:relative;flex:none;padding:7px 13px 8px;border:none;
+  border-radius:999px;background:var(--cg-org);color:var(--cg-ink);font-family:inherit;
+  font-size:12.5px;font-weight:800;cursor:pointer;transition:background .2s,transform .15s}
+/* the visual pill stays small; the finger gets the full 44px */
+.cg-wifi-row button::after{content:"";position:absolute;inset:-7px;border-radius:inherit}
+.cg-wifi-row button:hover{background:#FF9B36}
 .cg-wifi-row button:active{transform:scale(.95)}
 .cg-wifi-hint{font-size:13px;line-height:1.5;font-weight:500;color:var(--cg-muted)}
 
 /* ── footer + language pill ───────────────────────────────────────────── */
-.cg-foot{margin-top:auto;padding-top:6px;font-size:12.5px;font-weight:600;color:#A79F90}
+.cg-foot{margin-top:auto;padding-top:6px;font-size:12.5px;font-weight:600;color:var(--cg-muted)}
 .cg-foot a{transition:color .2s}
 .cg-foot a:hover{color:var(--cg-ink)}
 
 .cg-lang{position:absolute;z-index:2;top:clamp(14px,3vw,22px);right:clamp(14px,3vw,22px);
-  display:flex;gap:2px;padding:4px;background:#fff;border:1.5px solid var(--cg-line);
+  display:flex;align-items:center;gap:2px;min-height:44px;padding:4px;
+  background:#fff;border:1.5px solid var(--cg-line);
   border-radius:999px;cursor:pointer;font-family:inherit}
 .cg-lang span{padding:5px 11px 6px;border-radius:999px;
   font-size:12px;font-weight:800;color:var(--cg-muted);transition:background .2s,color .2s}
