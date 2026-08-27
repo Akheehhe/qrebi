@@ -6,10 +6,10 @@ import { T3 } from './t3'
 import LangSwitch from './LangSwitch'
 import WifiCard from './WifiCard'
 
-/* The real logo drops in as public/chito-gvrito-logo.png — the moment the
-   file lands in the repo the badge switches to it; until then the page
-   stands on the redrawn brand bird. */
-const LOGO = '/chito-gvrito-logo.png'
+/* The real logo, pulled from the restaurant's Facebook profile at full
+   quality. If the file is ever removed the page falls back to the redrawn
+   brand bird instead of a broken image. */
+const LOGO = '/chito-gvrito-logo.webp'
 
 export default function Page() {
   const hasLogo = existsSync(join(process.cwd(), 'public', LOGO))
