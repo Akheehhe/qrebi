@@ -3,8 +3,8 @@
    live in exactly one place. */
 
 export const LINKS = {
-  // TODO: მენიუს საბოლოო ბმული ცალკე მოგვეწოდება — მანამდე Wolt-ის გვერდი დგას
-  menu: 'https://wolt.com/en/geo/tbilisi/restaurant/chito-gvrito',
+  // the restaurant's own menu page, built from their Wolt feed
+  menu: '/chito-gvrito/menu',
   // the restaurant's own Google Business review link
   review:
     'https://search.google.com/local/writereview?placeid=ChIJHaT7HgANREAR7AeA4wujrMM',

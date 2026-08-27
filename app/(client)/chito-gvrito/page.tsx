@@ -1,6 +1,7 @@
 import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 import Image from 'next/image'
+import Link from 'next/link'
 import { LINKS } from './config'
 import { T3 } from './t3'
 import LangSwitch from './LangSwitch'
@@ -42,14 +43,14 @@ export default function Page() {
       </header>
 
       <nav className="cg-links">
-        <a className="cg-link" href={LINKS.menu} target="_blank" rel="noopener">
+        <Link className="cg-link" href={LINKS.menu}>
           <span className="cg-ico cg-ico-teal"><MenuIcon /></span>
           <span className="cg-txt">
             <b><T3 ka="მენიუ" en="Menu" ru="Меню" /></b>
             <small><T3 ka="კერძები, ღვინო და ფასები" en="Dishes, wine & prices" ru="Блюда, вино и цены" /></small>
           </span>
           <Chev />
-        </a>
+        </Link>
 
         <a className="cg-link" href={LINKS.review} target="_blank" rel="noopener">
           <span className="cg-ico cg-ico-mag"><StarIcon /></span>

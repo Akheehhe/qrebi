@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const LANGS = [
   { code: 'ka', label: 'ქარ', name: 'ქართული' },
@@ -15,6 +15,13 @@ type Lang = (typeof LANGS)[number]['code']
    chito.css show exactly one language. */
 export default function LangSwitch() {
   const [lang, setLang] = useState<Lang>('ka')
+
+  // the choice lives on <body> and survives page-to-page navigation —
+  // a freshly mounted pill has to pick it up rather than reset it
+  useEffect(() => {
+    const cl = document.body.classList
+    setLang(cl.contains('cg-en') ? 'en' : cl.contains('cg-ru') ? 'ru' : 'ka')
+  }, [])
 
   function pick(next: Lang) {
     if (next === lang) return
