@@ -39,7 +39,6 @@ export function Logo({ className = 'logo' }: { className?: string }) {
         height={493}
         decoding="async"
       />
-      <span className="tld">.ge</span>
     </>
   )
 }
