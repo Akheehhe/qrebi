@@ -48,6 +48,7 @@ export default function HeroBackground() {
             srcSet={`/img/banner-${p.slug}-sq-800.webp 800w, /img/banner-${p.slug}-sq-1400.webp 1400w`}
             sizes="100vw"
             alt=""
+            loading="lazy"
             fetchPriority={i === 0 ? 'high' : 'low'}
             decoding="async"
           />

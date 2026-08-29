@@ -448,8 +448,8 @@ html.js [data-stagger].seen>*{animation:rise .65s var(--ease-quint) both;
 @media (max-width:900px){
   .hero{min-height:0}
   .hero{min-height:0}
-  .hero-grid{order:1;justify-content:flex-start;
-    padding:clamp(30px,5vw,46px) var(--gut) clamp(30px,5vw,44px)}
+  .hero-grid{order:1;justify-content:center;
+    padding:clamp(46px,9vw,70px) var(--gut) clamp(40px,7vw,58px)}
   .hero-copy{max-width:none}
   .hero-facts{order:4;background:none}
 
@@ -551,10 +551,12 @@ html.js [data-stagger].seen>*{animation:rise .65s var(--ease-quint) both;
    occupies the lower band and this fills the rest, and on any width it keeps
    the crop's edges from reading as a cut. */
 .hero-tint{position:absolute;inset:0;z-index:-2;pointer-events:none;
-  transition:background-color .9s var(--ease-quart)}
-.hero-tint-google{background:#462C7D}
-.hero-tint-tripadvisor{background:#1F754F}
-.hero-tint-booking{background:#1A4378}
+  background:var(--purple);transition:background-color .9s var(--ease-quart)}
+@media (min-width:760px){
+  .hero-tint-google{background:#462C7D}
+  .hero-tint-tripadvisor{background:#1F754F}
+  .hero-tint-booking{background:#1A4378}
+}
 .hero-bg{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
 .hero-bg picture{position:absolute;inset:0;display:block;opacity:0;
   transition:opacity .9s var(--ease-quart)}
@@ -572,10 +574,10 @@ html.js [data-stagger].seen>*{animation:rise .65s var(--ease-quint) both;
    muddles both. The artwork takes the lower band instead and the type sits on
    the field colour above it, with the two blended rather than butted. */
 @media (max-width:759px){
-  /* The square crop is composed subject-centre, so type laid over it muddles
-     both. On phones the artwork leaves the background entirely and becomes a
-     block under the copy; the tint carries its colour up behind the type. */
-  .hero-bg{position:relative;order:2;inset:auto;aspect-ratio:1/1;width:100%;z-index:0}
+  /* No banner on phones: it cost a screen of height before anyone reached the
+     price, and the arrows and dots have nothing left to steer once it is gone.
+     The headline still names the platform. */
+  .hero-bg{display:none}
   .hero-scrim{display:none}
 }
 
@@ -697,7 +699,8 @@ html.js [data-stagger].seen>*{animation:rise .65s var(--ease-quint) both;
 .hero-dot.on{width:26px;background:var(--gold)}
 
 @media (max-width:759px){
-  .hero-nav{order:3;margin-top:clamp(14px,3vw,20px);margin-bottom:clamp(18px,3vw,26px)}
+  /* nothing to steer once the banner is gone */
+  .hero-nav{display:none}
 }
 @media (prefers-reduced-motion:reduce){
   .hero-arw:hover{transform:none}
