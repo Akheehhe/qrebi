@@ -96,8 +96,10 @@ export default function Page() {
 
             <p className="lede">
               <T
-                ge="დახლზე დებ, კლიენტი ეხება და პირდაპირ შენს გვერდზე ხვდება. აპლიკაცია არ სჭირდება, ბმულს ნებისმიერ დროს ცვლი."
-                en="Put it on the counter, the customer taps, and they land straight on your page. No app to install, and you can change the link any time."
+                ge={<>დახლზე დებ, კლიენტი ეხება და პირდაპირ შენს გვერდზე ხვდება.{' '}
+                  <span className="wide-only">აპლიკაცია არ სჭირდება, ბმულს ნებისმიერ დროს ცვლი.</span></>}
+                en={<>Put it on the counter, the customer taps, and they land straight on your page.{' '}
+                  <span className="wide-only">No app to install, and you can change the link any time.</span></>}
               />
             </p>
 

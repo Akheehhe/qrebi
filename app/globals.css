@@ -449,7 +449,9 @@ html.js [data-stagger].seen>*{animation:rise .65s var(--ease-quint) both;
   .hero{min-height:0}
   .hero{min-height:0}
   .hero-grid{order:1;justify-content:center;
-    padding:clamp(46px,9vw,70px) var(--gut) clamp(40px,7vw,58px)}
+    padding:clamp(54px,12vw,84px) var(--gut) clamp(52px,11vw,76px)}
+  .hero .lede{margin-top:clamp(18px,4.5vw,26px)}
+  .hero-cta{margin-top:clamp(28px,7vw,40px);gap:10px}
   .hero-copy{max-width:none}
   .hero-facts{order:4;background:none}
 
@@ -579,6 +581,14 @@ html.js [data-stagger].seen>*{animation:rise .65s var(--ease-quint) both;
      The headline still names the platform. */
   .hero-bg{display:none}
   .hero-scrim{display:none}
+
+  /* Cut the hero down to one idea. Everything hidden here is said again within
+     a screen or two: the second half of the lede appears in step 02 and in
+     what's included, the kicker in the note under the gallery, and the facts
+     strip is repeated verbatim by the gold ticker directly beneath it. */
+  .wide-only{display:none}
+  .hero .kicker{display:none}
+  .hero-facts{display:none}
 }
 
 @media (prefers-reduced-motion:reduce){
