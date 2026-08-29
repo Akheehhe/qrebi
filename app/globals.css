@@ -137,10 +137,13 @@ header{position:sticky;top:0;z-index:var(--z-head);background:transparent;
 header.solid{background:var(--ink);box-shadow:0 1px 0 rgba(255,255,255,.16)}
 .nav{display:flex;align-items:center;justify-content:space-between;gap:18px;height:var(--head);
   max-width:1160px;margin-inline:auto;padding:0 var(--gut)}
-.logo{display:flex;align-items:center;gap:9px;color:#fff;
-  font-family:var(--font-display),sans-serif;font-weight:900;font-size:22px;line-height:1.24}
-.logo svg{width:28px;height:28px;flex:none}
-.logo .tld{opacity:.5;font-weight:700}
+/* the wordmark carries the name, so the only type left beside it is the TLD */
+/* the image has no baseline of its own, so the TLD is aligned to the bottom of
+   the letterforms instead of floating up like a trademark mark */
+.logo{display:flex;align-items:flex-end;gap:3px;color:#fff;
+  font-family:var(--font-display),sans-serif;font-weight:800;font-size:15px;line-height:1}
+.logo img{height:26px;width:auto;flex:none;display:block}
+.logo .tld{opacity:.55;padding-bottom:2px}
 .navlinks{display:flex;align-items:center;gap:22px;font-size:15px;font-weight:700;color:#EDE4FC}
 
 .navlink{position:relative;padding:5px 0;transition:color .2s}
@@ -508,8 +511,8 @@ html.js [data-stagger].seen>*{animation:rise .65s var(--ease-quint) both;
 @media (max-width:420px){
   .nav{gap:10px;padding-inline:16px}
   .navlinks .btn{padding:8px 15px}
-  .logo{font-size:18px;gap:6px}
-  .logo svg{width:24px;height:24px}
+  .logo{font-size:13px;gap:2px}
+  .logo img{height:21px}
   .navlinks{gap:11px}
   .navphone{font-size:14px}
   #langToggle{font-size:12.5px;gap:6px}
@@ -523,8 +526,8 @@ html.js [data-stagger].seen>*{animation:rise .65s var(--ease-quint) both;
 /* 320px-class phones: the header is the one row with no slack left in it. */
 @media (max-width:365px){
   .nav{gap:8px;padding-inline:13px}
-  .logo{font-size:16px;gap:5px}
-  .logo svg{width:22px;height:22px}
+  .logo{font-size:12px;gap:2px}
+  .logo img{height:19px}
   .navlinks{gap:9px}
   .navphone{font-size:13px;gap:5px}
   .navphone svg{width:13px;height:13px}

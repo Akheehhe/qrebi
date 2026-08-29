@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     locale: 'ka_GE',
   },
   icons: {
-    icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233F1C92'/%3E%3Crect x='14' y='14' width='36' height='36' rx='6' fill='none' stroke='%23fff' stroke-width='9'/%3E%3Crect x='27' y='27' width='10' height='10' fill='%23fff'/%3E%3Cpath d='M38 64 L64 38 L64 64 Z' fill='%233F1C92'/%3E%3Cpath d='M44 58 L58 44 L58 58 Z' fill='%23fff'/%3E%3C/svg%3E",
+    icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233F1C92'/%3E%3Cpath fill='%23fff' fill-rule='evenodd' d='M12 12H52V52H12ZM20.4 20.4H43.2V38.4L52 47.2V52H47.2L38.4 43.2H20.4ZM25.2 25.2H38.4V38.4H25.2Z'/%3E%3C/svg%3E",
   },
 }
 

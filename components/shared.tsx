@@ -25,17 +25,21 @@ export function WhatsAppIcon(props: { className?: string }) {
   )
 }
 
+/** The brandbook wordmark itself, not an approximation of it.
+ *  Lifted from brandbook QRebi.pdf p2 (the white-on-Ink-Violet lockup) and
+ *  given a real alpha channel, so the same file sits on the Cosmic Blue header
+ *  and on the Ink Violet one without a plate showing behind it. */
 export function Logo({ className = 'logo' }: { className?: string }) {
   return (
     <>
-      <svg viewBox="0 0 64 64" aria-hidden="true">
-        <rect x="10" y="10" width="40" height="40" rx="7" fill="none" stroke="#fff" strokeWidth="9" />
-        <rect x="25" y="25" width="10" height="10" fill="#fff" />
-        <path d="M40 64 L64 40 L64 64 Z" fill="#fff" opacity=".9" />
-      </svg>
-      <span>
-        QRebi<span className="tld">.ge</span>
-      </span>
+      <img
+        src="/img/logo-qrebi.webp"
+        alt="QRebi"
+        width={1672}
+        height={493}
+        decoding="async"
+      />
+      <span className="tld">.ge</span>
     </>
   )
 }
