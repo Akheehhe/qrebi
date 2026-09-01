@@ -3,8 +3,8 @@
    live in exactly one place. */
 
 export const LINKS = {
-  // the restaurant's own menu page, built from their Wolt feed
-  menu: '/chito-gvrito/menu',
+  // the restaurant's own menu site (a copy also lives at /chito-gvrito/menu)
+  menu: 'https://chito-gvrito-menu.vercel.app/',
   // the restaurant's own Google Business review link
   review:
     'https://search.google.com/local/writereview?placeid=ChIJHaT7HgANREAR7AeA4wujrMM',
