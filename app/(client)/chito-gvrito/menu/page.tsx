@@ -6,7 +6,8 @@ import menuData from './menu-data.json'
 
 /* The full menu — 12 categories, 240 dishes — transcribed from the
    restaurant's own printed menu (the two PDFs behind chito-gvrito-menu
-   .vercel.app, which also hosts the category photos hotlinked below).
+   .vercel.app; the category photos in public/chito-gvrito/img/ come from
+   there too, recut to the banner strip).
    menu-data.json is the only thing to touch when a dish or price changes.
    Russian: hand-written for categories and notes; dishes fall back to
    English unless a verified translation exists in the data. */
@@ -53,9 +54,9 @@ type MenuData = {
 
 const { restaurant: R, categories: MENU } = menuData as MenuData
 
-/* Category photos live on the restaurant's menu site; if one ever goes
-   away the banner degrades to the plain ink panel underneath. */
-const PHOTO_BASE = 'https://chito-gvrito-menu.vercel.app/img/cat'
+/* Category photos are served from this repo; if one ever goes missing
+   the banner degrades to the plain ink panel underneath. */
+const PHOTO_BASE = '/chito-gvrito/img'
 
 /* Sub-group labels arrive as one "ქართული / English" string; Russian for
    them lives here so the data file stays a faithful transcription. */
