@@ -1,1 +1,1955 @@
-[{"ka": "სუპები", "en": "SOUPS", "ru": "супы", "items": [{"ka": "სოკოს კრემ სუპი", "en": "Mushroom Cream-Soup", "ru": "Грибной крем-суп", "dka": "", "den": "", "dru": "", "p": 1785}, {"ka": "ისპანახის კრემ სუპი", "en": "Spinach Cream-soup", "ru": "Крем-суп из шпината", "dka": "", "den": "", "dru": "", "p": 1680}, {"ka": "უკრაინული ბორში", "en": "Ukrainian Borsh", "ru": "Украинский борщ", "dka": "კომბოსტო, საქონლის ხორცი, ქინძი და ოხრახუში", "den": "Cabbage, beef, coriander and parsley", "dru": "Капуста, говядина, кориандр и петрушка", "p": 1680}, {"ka": "ჩიხირთმა", "en": "Chikhirtma", "ru": "Чихиртма", "dka": "ქათმის ხორცი, ქათმის ბულიონი, ხორბლის ფქვილი, კვერცხი,კარაქი", "den": "Chicken, chicken broth, wheat flour, eggs, butter", "dru": "Куриное мясо, куриный бульон, пшеничная мука, яйца, сливочное масло.", "p": 1575}, {"ka": "სუპხარჩო", "en": "Supkharcho", "ru": "Суп харчо", "dka": "საქონლის ხორცი, ბრინჯი, ტომატ პასტა, ქინძი, ოხრახუში, ხახვი", "den": "Beef, rice, tomato, coriander, parsley, onion", "dru": "Говядина, рис, томатная паста, кориандр, петрушка, лук", "p": 1995}, {"ka": "ხაში", "en": "Khashi", "ru": "Хаш", "dka": "", "den": "", "dru": "", "p": 1785}, {"ka": "ბოსტნეულის სუპი", "en": "vegetable soup", "ru": "овощной суп", "dka": "ბროკოლ,ბულგარული,ყაბაყი,სტაფილო,ხახვი,სოკო", "den": "Broccoli, bulgarian, zucchini, carrots, onions, mushrooms", "dru": "Брокколи, болгарский, цуккини, морковь, лук, грибы", "p": 1575}]}, {"ka": "დაფები", "en": "BOARDS", "ru": "доски", "items": [{"ka": "ფხალის ასორტი", "en": "Trio Assort Of Pkhali", "ru": "Ассорти пхали", "dka": "შემწვარი წითელი ბულგარული და ბადრიჯანი, ისპანახის ფხალი, სუნელები, ნიგვზის შიგთავსი და ბროწეულის მარცვლები", "den": "Three kinds of traditional vegetable appetaizers-bell pepper, eggplant, spinach, Herbs, seasoned with spices and walnuts topped with pomegranate", "dru": "Жареный красный болгарский перец и баклажаны, листья шпината, специи, ореховая начинка и зерна граната", "p": 2940}, {"ka": "ღორის ნეკნები", "en": "Pork ribs", "ru": "Свиные ребрышки", "dka": "ღორის ნეკნი(2კგ) ბარბექიუს სოუსში 3/4 პერსონაზე/ასევე ქათმის ფრთები (6 ცალი)მექსიკური კარტოფილი,მწნილის მიქსი,მექსიკური სოუსი,აზიურ სოუსი.", "den": "Pork ribs (2 kg) in barbecue sauce for 3/4 persons/as well as chicken wings (6 pieces), Mexican fries, pickle mix, Mexican sauce, Asian sauce.", "dru": "Свиные ребрышки (2 кг) в соусе барбекю на 3/4 персоны/а также куриные крылышки (6 шт.), картофель фри по-мексикански, микс маринованных огурцов, мексиканский соус, азиатский соус.", "p": 9975}, {"ka": "რაჭული ლორის დაფა", "en": "Rachuli ham board", "ru": "Доска для ветчины Рачули", "dka": "ლორი,ყველის ჩხირები,მჟავე", "den": "Ham, cheese sticks, sour cream", "dru": "Ветчина, сырные палочки, сметана", "p": 4095}]}, {"ka": "სალათები", "en": "SALADS", "ru": "Салаты", "items": [{"ka": "სტეიკ სალათი", "en": "Steak Salad", "ru": "Стейк-салат", "dka": "საქონლის სუკი, ბულგარული, საკათის ფურცელი, კიტრი, პომიდორი ჩერი და სოუსი", "den": "Beef fillet, bell pepper, lettuce, cucumber, potato, sauce", "dru": "Сук из говядины, булгари, лист сакати, огурец, помидоры черри и соус", "p": 2835}, {"ka": "სოკოს სალათი ნიგვზით", "en": "Mushroom Salad with Almonds", "ru": "Грибной салат с грецкими орехами", "dka": "ხის სოკო და ნიგოზი", "den": "wood mushroom, almond", "dru": "Древесные грибы и грецкие орехи", "p": 1995}, {"ka": "ცეზარი ქათმით", "en": "Ceasar with Chicken", "ru": "Цезарь с курицей", "dka": "ქათმის ხორცი, სალათის ფოთოლი, ცეზარდრესინგი და პარმეზანი", "den": "Chicken lettuce, caesar dressing, parmesan", "dru": "Курица, салат, соус «Цезарь», пармезан", "p": 2415}, {"ka": "კიტრი პომიდვრის სალათი ნიგვზით", "en": "Cucumber tomato salad with nuts", "ru": "Салат из помидоров огурцов с грецкими орехами", "dka": "", "den": "", "dru": "", "p": 1785}, {"ka": "რაჭული სალათი ლორით", "en": "Rachuli salad with ham", "ru": "Салат Рачули с ветчиной", "dka": "ლორი,სალათის ფოთოლი,პესტოს სოუსი", "den": "Ham, lettuce, pesto sauce", "dru": "Ветчина, салат, соус песто", "p": 1785}, {"ka": "ბერძნული სალათი", "en": "Greek Salad", "ru": "Греческий салат", "dka": "კიტრი,პომიდორი,სალათის ფურცელი,ზეთისხილი,ფეტა.", "den": "Cucumber, tomato, lettuce, olives, feta.", "dru": "Огурец, помидор, салат, оливки, фета.", "p": 2205}, {"ka": "კიტრი პომიდვრის სალათა", "en": "Cucumber Tomato Salad", "ru": "Салат из помидоров огурцов", "dka": "", "den": "", "dru": "", "p": 1470}, {"ka": "ცეზარი კრევეტებით", "en": "Caesar with shrimp", "ru": "Цезарь с креветками", "dka": "", "den": "", "dru": "", "p": 2835}, {"ka": "ცეზარი ორაგულით", "en": "Caesar with salmon", "ru": "Цезарь с лососем", "dka": "", "den": "", "dru": "", "p": 3045}]}, {"ka": "საუზმე", "en": "BREAKFAST", "ru": "Завтрак", "items": [{"ka": "ბენედიქტი", "en": "Benedict", "ru": "Бенедикт", "dka": "კვერცხი, ფრანგული სოუსი, ბეკონი", "den": "Egg, French sauce, Bacon", "dru": "Яйцо, французский соус, бекон", "p": 1995}, {"ka": "ომლეტი", "en": "Omlette", "ru": "Омлет", "dka": "კვერცხი, ბეკონი და ყველი", "den": "Egg, Bacon, Cheese", "dru": "Яйцо, бекон и сыр", "p": 1890}, {"ka": "კონტინენტალი", "en": "Continental", "ru": "Континентальный", "dka": "კვერცხი, სოსისი ბეკონით, ყველით, პომიდორი, კიტრი,კარაქტი, თაფლი", "den": "Egg,sausage with bacon, cheece, tomato, cucummber, butter, honey", "dru": "Яйцо, колбаса с беконом, сыр, помидор, огурец, персонаж, мед", "p": 2730}]}, {"ka": "ქართული ცხელი კერძები", "en": "GEORGIAN HOT DISHES", "ru": "Грузинские горячие блюда", "items": [{"ka": "ლობიო ქოთანში, მჭადით და მწნილით", "en": "Beans(Lobio) in a Pot, with (Corn Bread) and Pickles", "ru": "Фасоль в кастрюле с солеными огурцами и солеными огурцами", "dka": "ლობიო, მჭადი და წიწაკის მწნილი", "den": "Beans, mchadi, pickled pepper", "dru": "Фасоль, нут и маринованные огурцы", "p": 1785}, {"ka": "ხბოს ჩაშუშული", "en": "Chashushuli with Veal", "ru": "Телятина тушеная", "dka": "ხბოს ხორცი, პომიდორი, ქინძი, ოხრახუში, ხახვი", "den": "Veal, tomato, coriander and parsley, onion", "dru": "Телятина, помидоры, кориандр, петрушка, лук", "p": 2730}, {"ka": "იმერული კუპატი კეცზე", "en": "Kupati on the Clay Pot", "ru": "Купати на кеци", "dka": "", "den": "", "dru": "", "p": 2205}, {"ka": "ოჯახური ღორის", "en": "Ojakhuri Pork", "ru": "семейная свинья", "dka": "კარტოფილი, ბულგარული, ნიორი, ღორის ხორცი, ხახვი", "den": "Potato, Bell pepper, garlic, pork, onion", "dru": "Картофель, болгарский, чеснок, свинина, лук", "p": 2310}, {"ka": "ტოლმა ვაზის ფოთოლში", "en": "Tolma in Grape Leaves", "ru": "Как виноградный лист", "dka": "ვაზის ფოთოლში შეხვეული ღორისა და საქონლის ფარში მაწვნის და ნივრის სოუსით", "den": "Grape leaves stuffed with ground beef and pork, with yogurt and garlic sauce", "dru": "Котлета из свинины и говядины, завернутая в виноградные листья, с овощно-чесночным соусом", "p": 1785}, {"ka": "შქმერული", "en": "Shkmeruli", "ru": "Шкмерули", "dka": "კეცზე შემწვარი ქათამი ნივრის სოუსში", "den": "Oven roasted chicken, cooked in traditional garlic sauce served in clay plate", "dru": "Жареная курица в чесночном соусе", "p": 2835}, {"ka": "სოკო კეცზე", "en": "Mushroom on the Clay Place", "ru": "гриб на Кетси", "dka": "კეცზე შემწვარი სოკო სულგუნით", "den": "button mushroom stuffed with cheese on the clay plate", "dru": "Жареные грибы с сулгуном", "p": 1995}, {"ka": "ჩაქაფული ბატკნის", "en": "Chakapuli", "ru": "Чакапули из баранины", "dka": "ბატკნის ჩაქაფული, თეთრ ღვინოში მოხარშული ბატკნის , ტარხუნით, პიტნით, დაფნის ფოთლით", "den": "Chakapuli with Lamb or Veal Chunks ( lamb or veal chunks cooked in white wine, terragon, mint, bay leaf)", "dru": "Тушеная баранина, баранина, приготовленная в белом вине, с эстрагоном, мятой, лавровым листом", "p": 3150}, {"ka": "მეგრული ხარჩო ნიგვიზით და ელარჯის ბურთულებით", "en": "Maghrian broth with nigiviz and Elarji balls", "ru": "Магрийский бульон с нигивизом и шариками Эларджи", "dka": "ღერღილი,სულგუნი,ხბოს ხორცი,ნიგოზი.", "den": "Gherghil, sulgun, veal, walnut.", "dru": "Гергиль, сулгун, телятина, грецкий орех.", "p": 2730}, {"ka": "აფხაზურა თაშმიჯაბით", "en": "Abkhazura with Tashmijab", "ru": "Абхазура с Ташмиджабом", "dka": "აფხაზურა,კარტოფილის პიურე,სულგუნი.", "den": "Abkhazura, potato puree, Sulguni.", "dru": "Абхазура, картофельное пюре, Сулугуни.", "p": 2835}, {"ka": "ტაბაკა", "en": "Tabaka", "ru": "Табака", "dka": "შემწვარი ქათამი ტყემლით", "den": "Fried chicken with tkemli", "dru": "Жареная курица с ткемли", "p": 2940}]}, {"ka": "პასტა", "en": "PASTA", "ru": "Паста", "items": [{"ka": "პასტა ბოლონეზე", "en": "Pasta Bolognese", "ru": "Паста болоньезе", "dka": "საქონლის ფარში, პომიდორი, სტაფილო, ხახვი, შავი ღვინო, სპაგეტი", "den": "Beef, tomato, carrot, onion, black wine, spaghetti", "dru": "Котлета из говядины, помидоры, морковь, лук, красное вино, спагетти", "p": 2415}, {"ka": "პასტა კარბონარა", "en": "Pasta Carbonara", "ru": "Паста карбонара", "dka": "კვერცხის გული, პროშუტო", "den": "Egg yolk, prosciutto, tagliatelle", "dru": "Яичный желток, прошутто", "p": 2625}, {"ka": "ტალიატელი ბოსტნეულით", "en": "Penne with Vegetables", "ru": "Тальятелле с овощами", "dka": "პენე, პომიდვრის სოუსი, პარმეზანი", "den": "Penne, tomato sauce, parmesan", "dru": "Пенне, томатный соус, пармезан", "p": 2205}, {"ka": "პასტა ბაზილიკის პესტოთი", "en": "Pasta", "ru": "Паста с песто из базилика", "dka": "", "den": "", "dru": "", "p": 1995}, {"ka": "ტალიატელი ზღვის პროდუქტებით", "en": "Tagliatelle with seafood", "ru": "Тальятелле с морепродуктами", "dka": "", "den": "", "dru": "", "p": 3045}]}, {"ka": "ცომეული", "en": "BAKERY", "ru": "Выпечка", "items": [{"ka": "ლობიანი", "en": "Lobiani", "ru": "бобы", "dka": "", "den": "", "dru": "", "p": 1575}, {"ka": "იმერული ხაჭაპური", "en": "Imeruli Khachapuri", "ru": "Хачапури по-имеретински", "dka": "", "den": "", "dru": "", "p": 1995}, {"ka": "საფირმო ხაჭაპური", "en": "Special Kachapuri", "ru": "Фирменные хачапури", "dka": "იმერული ყველი, სულგუნი და კვერცხი", "den": "Imeretian cheese, sulguni cheese, smoked sulguni, egg", "dru": "Сыр имер, сулгун и яйцо", "p": 2625}, {"ka": "აჭარული ხაჭაპური", "en": "Acharuli Kachapuri", "ru": "Хачапури по-аджарски", "dka": "იმერული ყველი, სულგუნი, კვერცხის გული, კარაქი", "den": "Imeretian cheese, sulguni cheese, egg yolk, butter", "dru": "Сыр Имер, сулгун, яичный желток, сливочное масло", "p": 1995}, {"ka": "პიცა პეპერონი", "en": "Pepperoni", "ru": "Пицца пепперони", "dka": "მოცარელა, პეპერონი, პომიდვრის სოუსი, ჰალაპენიო", "den": "Mozzarella, pepperoni, tomato sauce, jalapeno", "dru": "Моцарелла, пепперони, томатный соус, халапеньо", "p": 2625}, {"ka": "ბოსტნეულის პიცა", "en": "Vegetable Pizza", "ru": "Овощная пицца", "dka": "მოცარელა, პომიდვრის სოუსი, სოკო, ბულგარული, ზეთის ხილი, ჩერი პომიდორი", "den": "Mozzarella, tomato sauce, mushroom, bell pepper, olive fruit, cherry tomato", "dru": "Моцарелла, томатный соус, грибы, болгарский перец, оливки, помидоры черри", "p": 2415}, {"ka": "პიცა მარგარიტა", "en": "Margherita", "ru": "Пицца Маргарита", "dka": "პომიდვრის სოუსი, მოცარელა", "den": "Tomato sauce, mozzarella", "dru": "Томатный соус, моцарелла", "p": 2205}, {"ka": "პიცა ოთხი ყველის", "en": "Four Cheese Pizza", "ru": "Пицца с четырьмя сырами", "dka": "მოცარელა, ჩედარი, როკფორი, გაუდა, ნაღები", "den": "Mozzarella, cheddar, roquefort, gouda, cream", "dru": "Моцарелла, чеддер, рокфор, гауда, сливки", "p": 2835}]}, {"ka": "სტეიკები", "en": "STEAKS", "ru": "стейки", "items": [{"ka": "საქონლის სტეიკი დაგრილული ბოსტნეულის გარნირით", "en": "Beaf Steak with Grilled Vegetable", "ru": "Стейк из говядины с гарниром из овощей гриль", "dka": "საქონლის ხორცი, ბოსტნეული, თეთრი ღვინის სოუსი", "den": "Beef, vegetables, white wine sauce", "dru": "Говядина, овощи, соус из белого вина", "p": 5040}, {"ka": "ქათმის სტეიკი ქარტოფილის ბალიშით და პარმეზანის სოუსით", "en": "Chicken Steak with Potato and Parmesan Souce", "ru": "Куриный стейк с картофельными дольками и соусом пармезан", "dka": "ქათმის ხორცი, ყველის სოუსი, კარტოფილი", "den": "Chicken, cheese sauce, potatoes", "dru": "Куриное мясо, сырный соус, картофель", "p": 3150}, {"ka": "ორაგულის სტეიკი გამომცხვარი ბოსტნეულით", "en": "Salmon Steak with Baked Vegetables", "ru": "Стейк лосося с запеченными овощами", "dka": "ნორვეგიული ორაგული, ბოსტნეული, თეთრი ღვინო, ლიმონი და ფოკაჩას პური", "den": "Norwegian salmon, vegetables, white wine, lemon, foraccia bread", "dru": "Норвежский лосось, овощи, белое вино, лимон и хлеб фокачча.", "p": 5355}, {"ka": "ღორის ხორცის სტეიკი კარტოფილის გარნირით", "en": "Pork Steak", "ru": "Стейк из свинины с картофельным гарниром", "dka": "300გრ. ღორის ხორცი, სოუსით და კარტოფილი ფრით", "den": "300g Pork fillet, sauce and french fries", "dru": "300 гр. Свинина, соус и картофель фри", "p": 3255}, {"ka": "სტეიკების მიქსგრილი 2/3 პერსონაზე", "en": "Mixed grill of steaks for 2/3 persons", "ru": "Микс-гриль из стейков на 2/3 персоны", "dka": "ძროხის,ღორის და ქათმის სტეიკი გარნირით", "den": "Beef, pork and chicken steak with garnish", "dru": "Стейк из говядины, свинины и курицы с гарниром", "p": 8925}, {"ka": "ქათმის შნიცელი", "en": "Chicken schnitzel", "ru": "Куриный шницель", "dka": "", "den": "", "dru": "", "p": 2940}, {"ka": "ღორის შნიცელი", "en": "Pork schnitzel", "ru": "Шницель из свинины", "dka": "", "den": "", "dru": "", "p": 3150}]}, {"ka": "კერძები გრილზე", "en": "GRILLED DISHES", "ru": "Блюда на гриле", "items": [{"ka": "ქათმის მწვადი", "en": "Chicken BBQ", "ru": "Куриный шашлык", "dka": "", "den": "", "dru": "", "p": 1995}, {"ka": "ღორის მწვადი", "en": "Pork BBQ", "ru": "шашлык из свинины", "dka": "", "den": "", "dru": "", "p": 2205}, {"ka": "ხბოს მწვადი", "en": "Veal BBQ", "ru": "Шашлык из телятины", "dka": "", "den": "", "dru": "", "p": 2835}, {"ka": "ქაბაბი შერეული", "en": "Kebab mixed", "ru": "Кебаб смешанный", "dka": "", "den": "", "dru": "", "p": 2310}, {"ka": "ბატკნის მწვადი", "en": "Lamb barbecue", "ru": "Шашлык из баранины", "dka": "", "den": "", "dru": "", "p": 3045}, {"ka": "მწვადის დაფა", "en": "Barbecue board", "ru": "Доска для барбекю", "dka": "ღორი,ქათამი,ხბო,ბატკანი,კარტოფილი ფრი,ბოსტნეულის ასორტი", "den": "Pork, chicken, veal, lamb, french fries, assorted vegetables", "dru": "Свинина, курица, телятина, баранина, картофель фри, овощное ассорти", "p": 10395}, {"ka": "ქაბაბი ქათმის", "en": "Kebab with chicken", "ru": "Куриный шашлык", "dka": "", "den": "", "dru": "", "p": 1995}, {"ka": "ქაბაბი ბატკნის", "en": "Kebab of lamb", "ru": "Кебаб из баранины", "dka": "", "den": "", "dru": "", "p": 2520}]}, {"ka": "ბურგერი და აპეტაიზერი", "en": "BURGERS AND APPETIZERS", "ru": "Бургер и закуска", "items": [{"ka": "ბურგერი და ფრი", "en": "Burger and French Fries", "ru": "Бургер и картофель фри", "dka": "", "den": "", "dru": "", "p": 2625}, {"ka": "ყველის ჩხირები", "en": "Cheese Sticks", "ru": "Сырные палочки", "dka": "", "den": "", "dru": "", "p": 2625}, {"ka": "ქათმის ფრთები", "en": "Chicken Wings", "ru": "куриные крылышки", "dka": "შემწვარი ქათმის ფრთები ბარბექიუს სოუსში, ლურჯი ყველის სოუსით, კვერცხი", "den": "Fried chicken wings in barbeque sauce with blue-cheese sauce, egg", "dru": "Жареные куриные крылышки в соусе барбекю, соусе из голубого сыра, яйце", "p": 2730}, {"ka": "მექსიკური კარტოფილი", "en": "Mexican potatoes", "ru": "Мексиканский картофель", "dka": "", "den": "", "dru": "", "p": 1365}, {"ka": "კარტოფილი ფრი", "en": "French fries", "ru": "французская картошка фри", "dka": "", "den": "", "dru": "", "p": 1050}]}, {"ka": "სოუსები", "en": "SAUCES", "ru": "соусы", "items": [{"ka": "ტყემალი 0.05g", "en": "Tkemali 0.05g", "ru": "Ткемал 0,05г", "dka": "", "den": "", "dru": "", "p": 315}, {"ka": "საწებელი 0.05g", "en": "Satsebeli 0.05g", "ru": "Соус 0,05г", "dka": "", "den": "", "dru": "", "p": 315}, {"ka": "მეგრული აჯიკა 0.05g", "en": "Megruli Adjika 0.05g", "ru": "Магрилианская аджика 0,05г", "dka": "", "den": "", "dru": "", "p": 315}, {"ka": "კეტჩუპი 0.05g", "en": "Ketchup 0.05g", "ru": "Кетчуп 0,05г", "dka": "", "den": "", "dru": "", "p": 315}, {"ka": "მაიონეზი 0.05g", "en": "Mayonnaise 0.05g", "ru": "Майонез 0,05г", "dka": "", "den": "", "dru": "", "p": 315}, {"ka": "მექსიკური სოუსი 0.05g", "en": "Mexican Sauce 0.05g", "ru": "Мексиканский соус 0,05г", "dka": "", "den": "", "dru": "", "p": 525}]}, {"ka": "უალკოჰოლო სასმელები", "en": "NON-ALCOHOLIC DRINKS", "ru": "безалкогольные напитки", "items": [{"ka": "წყალი მთის 0.750", "en": "Mountain water 0.75", "ru": "Вода горы 0,750", "dka": "", "den": "", "dru": "", "p": 420}, {"ka": "კოკა-კოლა 0.33 შუშის ბოთლი", "en": "Coca-Cola 0.33", "ru": "Стеклянная бутылка Кока-Кола 0,33.", "dka": "", "den": "", "dru": "", "p": 420}, {"ka": "ფანტა 0.33 შუშის", "en": "Fanta 0.33", "ru": "Фанта 0,33 стекло", "dka": "", "den": "", "dru": "", "p": 420}, {"ka": "სპრაიტი 0.33 ქილის", "en": "Sprite 0.33", "ru": "Спрайт 0,33 банки", "dka": "", "den": "", "dru": "", "p": 420}, {"ka": "ბორჯომი 0.5", "en": "Borjomi 0.5", "ru": "Боржоми 0,5", "dka": "", "den": "", "dru": "", "p": 420}, {"ka": "რედ ბული 0.25", "en": "Red Bull 0.25", "ru": "Ред Булл 0,25", "dka": "", "den": "", "dru": "", "p": 1050}]}, {"ka": "ღვინო", "en": "WINE", "ru": "вино", "items": [{"ka": "ვაზისუბნის მამულის საფერავი ქვევრი (წითელი მშრალი) 0.75l", "en": "Vazisubani Estate Wine/Saperavi Qvevri (red dry) 0.75l", "ru": "Цветной кувшин Vazisubani Manor (красный сухой) 0,75л", "dka": "", "den": "", "dru": "", "p": 9975}, {"ka": "ვაზისუბნის მამულის რქაწითელი ქვევრი (თეთრი მშრალი) 0.75l", "en": "Vazisubani Estate Wine/Rkatsiteli Qvevri (white dry) 0.75l", "ru": "Кувшин Ркацители имения Вазисубани (белое сухое) 0,75л", "dka": "", "den": "", "dru": "", "p": 7875}]}, {"ka": "ლუდი", "en": "BEER", "ru": "пиво", "items": [{"ka": "შავი ლომი იპა/ აპა/შავი 0.5", "en": "Black Lion APA/IPA/ Black 0.5l", "ru": "Блэк Лион Ипа/Апа/Блэк 0.5", "dka": "", "den": "", "dru": "", "p": 1260}, {"ka": "კაიაკი 0.5", "en": "Kaiaki 0.5l", "ru": "Каяк 0,5", "dka": "", "den": "", "dru": "", "p": 1050}, {"ka": "ჰეინეკენი 0.33", "en": "Heineken 0.33l", "ru": "Хайнекен 0,33", "dka": "", "den": "", "dru": "", "p": 1050}, {"ka": "მილერი 0.33", "en": "Miller 0.33l", "ru": "Миллер 0,33", "dka": "", "den": "", "dru": "", "p": 1050}, {"ka": "გინესი 0.44", "en": "Guinness 0.44l", "ru": "Гиннесс 0,44", "dka": "", "den": "", "dru": "", "p": 1680}]}, {"ka": "ჭაჭა", "en": "CHACHA", "ru": "Чача", "items": [{"ka": "ჭაჭა სახლის 0.5l", "en": "Homemade Chacha 0.5l", "ru": "Чача домашняя 0,5л", "dka": "", "den": "", "dru": "", "p": 4725}, {"ka": "ჭაჭა ხილის 0.5l", "en": "Fruit Chacha 0.5l", "ru": "Чача фруктовая 0,5л", "dka": "", "den": "", "dru": "", "p": 5250}]}, {"ka": "აპეტაიზერები", "en": "Appetizers", "ru": "Закуски", "items": [{"ka": "ქათამი ბაჟეში", "en": "Chicken in the bajra", "ru": "Курица в мешке", "dka": "ქათამი,ნიგოზი.", "den": "Chicken, walnuts.", "dru": "Курица, грецкие орехи.", "p": 1995}, {"ka": "ორაგული ბაჟეში", "en": "Salmon in Baje", "ru": "Лосось в бублике", "dka": "ნორვეგიული ორაგული,ნიგოზი", "den": "Norwegian salmon, walnuts", "dru": "Норвежский лосось, грецкие орехи", "p": 2625}, {"ka": "აჯაფსანდალი", "en": "Ajapsandal", "ru": "Аджапсандал", "dka": "ხახვი,ნიორი,პომიდორი,სუნელები", "den": "Onion, garlic, tomato, spices", "dru": "Лук, чеснок, помидоры, специи", "p": 1575}]}, {"ka": "თევზი", "en": "Fish", "ru": "рыбы", "items": [{"ka": "კალმახი ბოსტნეულის რაგუთი", "en": "Trout with vegetable ragout", "ru": "Форель с овощным рагу", "dka": "", "den": "", "dru": "", "p": 2100}, {"ka": "დორადო შავი ბრინჯის გარნირით", "en": "Dorado with black rice garnish", "ru": "Дорадо с гарниром из черного риса", "dka": "", "den": "", "dru": "", "p": 4725}]}, {"ka": "დესერტი", "en": "Dessert", "ru": "Десерт", "items": [{"ka": "კრეპი ბანანით და შოკოლადით", "en": "Crepe with bananas and chocolate", "ru": "Креп с бананом и шоколадом", "dka": "", "den": "", "dru": "", "p": 1785}, {"ka": "ნაპოლეონი", "en": "Napoleon cake", "ru": "Наполеон", "dka": "", "den": "", "dru": "", "p": 1300}, {"ka": "ტირამისუ", "en": "Tiramisu", "ru": "Тирамису", "dka": "", "den": "", "dru": "", "p": 1365}, {"ka": "ჩიზქეიქი", "en": "Cheesecake", "ru": "чизкейк", "dka": "", "den": "", "dru": "", "p": 1470}, {"ka": "ბრაუნი", "en": "Brownie", "ru": "Брауни", "dka": "", "den": "", "dru": "", "p": 1050}, {"ka": "ვაშლის შტრუდელი", "en": "Apple strudel", "ru": "яблочный штрудель", "dka": "", "den": "", "dru": "", "p": 1155}]}]
+{
+ "restaurant": {
+  "name_ka": "ჩიტო გვრიტო",
+  "name_en": "Chito Gvrito",
+  "tagline_ka": "ქართული ღვინის რესტორანი",
+  "tagline_en": "Georgian Wine Restaurant",
+  "address_ka": "თბილისი, სიონის ქ. 8",
+  "address_en": "Tbilisi, Sioni St. 8",
+  "phone": "557574114",
+  "phone_display": "557 574 114",
+  "facebook": "ჩიტო გვრიტო • Chito Gvrito",
+  "vat_note_ka": "ფასები მოიცავს დღგ-ს",
+  "vat_note_en": "Price includes VAT",
+  "allergy_ka": "ძვირფასო მომხმარებელო! თუ გაქვთ ალერგიის გამომწვევ და მომატებული მგრძნობელობის მქონე პროდუქტზე რეაქცია, გთხოვთ აცნობოთ მომსახურე პერსონალს.",
+  "allergy_en": "Dear customer! Please communicate to our staff member if you are allergic or sensitive to any food products.",
+  "tagline_ru": "Грузинский винный ресторан",
+  "address_ru": "Тбилиси, ул. Сиони 8",
+  "vat_note_ru": "Цены включают НДС",
+  "allergy_ru": "Дорогой гость! Если у вас есть аллергия или повышенная чувствительность к каким-либо продуктам, пожалуйста, сообщите об этом персоналу."
+ },
+ "categories": [
+  {
+   "id": "breakfast",
+   "ka": "საუზმე",
+   "en": "Breakfast",
+   "group": "food",
+   "items": [
+    {
+     "ka": "კონტინენტალი",
+     "en": "Continental",
+     "dka": "კვერცხი, საქონლის სოსისი, ყველი, პომიდორი, კიტრი, კარაქი, თაფლი",
+     "den": "Egg, beef sausage, cheese, tomato, cucumber, butter, honey",
+     "price": "28.00",
+     "ru": "Континентальный"
+    },
+    {
+     "ka": "ბენედიქტი",
+     "en": "Benedict",
+     "dka": "კვერცხი, ფრანგული სოუსი, ბეკონი",
+     "den": "Egg, French sauce, bacon",
+     "price": "19.00",
+     "ru": "Бенедикт",
+     "dru": "Яйцо, французский соус, бекон"
+    },
+    {
+     "ka": "ომლეტი",
+     "en": "Omelette",
+     "dka": "კვერცხი, ბეკონი და ყველი",
+     "den": "Egg, bacon and cheese",
+     "price": "19.00",
+     "ru": "Омлет",
+     "dru": "Яйцо, бекон и сыр"
+    },
+    {
+     "ka": "შემწვარი სულგუნი კეცზე",
+     "en": "Fried Sulguni (Cheese)",
+     "dka": "",
+     "den": "",
+     "price": "26.00"
+    },
+    {
+     "ka": "ქართული საუზმე",
+     "en": "Georgian Breakfast",
+     "dka": "პომიდორი, ხახვი, ნიორი, ყველი, კვერცხი, მწვანილი",
+     "den": "Tomato, onion, garlic, cheese, egg, herbs",
+     "price": "21.00"
+    }
+   ],
+   "ru": "Завтрак"
+  },
+  {
+   "id": "start",
+   "ka": "დასაწყისი",
+   "en": "To Start",
+   "group": "food",
+   "items": [
+    {
+     "ka": "საფირმო ყველის დაფა",
+     "en": "Cheese Platter",
+     "dka": "იმერული ყველი, სულგუნი, შებოლილი სულგუნი, გაუდა, პარმეზანი, თაფლი",
+     "den": "Imeretian cheese, sulguni cheese, smoked sulguni, gauda, parmesan, honey",
+     "price": "37.00",
+     "group": "დაფები / Platters"
+    },
+    {
+     "ka": "ქართული ყველის დაფა",
+     "en": "Georgian Cheese Platter",
+     "dka": "იმერული ყველი, სულგუნი, შებოლილი სულგუნი",
+     "den": "Imeretian cheese, sulguni cheese, smoked sulguni",
+     "price": "27.00",
+     "group": "დაფები / Platters"
+    },
+    {
+     "ka": "რაჭული ლორი მოხარშული კარტოფილით",
+     "en": "Traditional Racha Ham With Boiled Potatoes",
+     "dka": "",
+     "den": "",
+     "price": "29.00",
+     "group": "დაფები / Platters"
+    },
+    {
+     "ka": "ფხალის ასორტი",
+     "en": "Trio Assort Of Pkhali",
+     "dka": "ისპანახის ფხალი, სუნელები, ნიგვზის შიგთავსი, ბროწეულის მარცვლები",
+     "den": "Three kinds of traditional vegetable appetizers: bell pepper, eggplant, spinach, herbs, seasoned with spices and walnuts, topped with pomegranate",
+     "price": "30.00",
+     "group": "დაფები / Platters",
+     "ru": "Ассорти пхали"
+    },
+    {
+     "ka": "კიტრის და პომიდვრის სალათი კახური ზეთით ან ნიგვზით",
+     "en": "Georgian Salad With Kakhetian Oil Or With Walnut",
+     "dka": "კიტრი, პომიდორი, ოხრახუში, ნიახური ხახვი, კახური ზეთით ან ნიგვზით",
+     "den": "Cucumber, tomato, parsley, red onion, kakhetian oil or with walnut",
+     "price": "16.00 / 18.00",
+     "group": "სალათები / Salads"
+    },
+    {
+     "ka": "ბერძნული სალათი",
+     "en": "Greek Salad",
+     "dka": "კიტრი, პომიდორი, სალათის ფურცელი, ზეთისხილი, ფეტა",
+     "den": "Cucumber, tomato, lettuce, olive, feta",
+     "price": "24.00",
+     "group": "სალათები / Salads",
+     "ru": "Греческий салат"
+    },
+    {
+     "ka": "ცეზარი ქათმით / კრევეტით / ორაგულით",
+     "en": "Caesar With Chicken / Shrimps / Salmon",
+     "dka": "ქათმის ხორცი / კრევეტი / ორაგული, სალათის ფოთოლი, ცეზარ დრესინგი, პარმეზანი",
+     "den": "Chicken / shrimp / salmon, lettuce, caesar dressing, parmesan",
+     "price": "28.00 / 31.00 / 33.00",
+     "group": "სალათები / Salads"
+    },
+    {
+     "ka": "გოგრის ტკბილი სალათი",
+     "en": "Sweet Pumpkin Salad",
+     "dka": "გოგრა, თაფლი, ნიგოზი, სალათის ფოთოლი, გარგარის ჩირი, მწვანე ვაშლი",
+     "den": "Pumpkin, honey, walnuts, lettuce, dried apricot, green apple",
+     "price": "24.00",
+     "group": "სალათები / Salads"
+    },
+    {
+     "ka": "მწნილის ასორტი",
+     "en": "Assorted Pickles",
+     "dka": "კიტრი, წიწაკა, წითელი და თეთრი კომბოსტო",
+     "den": "Cucumber, pepper, red and white cabbage",
+     "price": "15.00",
+     "group": "სალათები / Salads"
+    },
+    {
+     "ka": "ხინკალი",
+     "en": "Khinkali",
+     "dka": "კალაქური / სოკო / ყველი",
+     "den": "Classical / mushroom / cheese",
+     "price": "2.50",
+     "group": "ხინკალი და აპეტაიზერი / Khinkali & Appetizers",
+     "gnote_ka": "მინიმუმ 5 ცალი ხინკალი ერთი სახეობის",
+     "gnote_en": "Minimum 5 khinkali of the same variety"
+    },
+    {
+     "ka": "ხინკალი საქონლის / ხინკალი ბატკნის",
+     "en": "Khinkali Beef / Lamb",
+     "dka": "",
+     "den": "",
+     "price": "3.00",
+     "group": "ხინკალი და აპეტაიზერი / Khinkali & Appetizers",
+     "gnote_ka": "მინიმუმ 5 ცალი ხინკალი ერთი სახეობის",
+     "gnote_en": "Minimum 5 khinkali of the same variety"
+    },
+    {
+     "ka": "შემწვარი ხინკალი (6 ცალი)",
+     "en": "Fried Khinkali (6 Ones)",
+     "dka": "კალაქური / სოკო",
+     "den": "Classical / mushroom",
+     "price": "20.00",
+     "group": "ხინკალი და აპეტაიზერი / Khinkali & Appetizers",
+     "gnote_ka": "მინიმუმ 5 ცალი ხინკალი ერთი სახეობის",
+     "gnote_en": "Minimum 5 khinkali of the same variety"
+    },
+    {
+     "ka": "სოკო კეცზე",
+     "en": "Mushroom In The Clay Pot",
+     "dka": "ქამა სოკო, სულგუნი",
+     "den": "Mushroom, sulguni cheese",
+     "price": "22.00",
+     "group": "ხინკალი და აპეტაიზერი / Khinkali & Appetizers",
+     "gnote_ka": "მინიმუმ 5 ცალი ხინკალი ერთი სახეობის",
+     "gnote_en": "Minimum 5 khinkali of the same variety",
+     "ru": "гриб на Кетси"
+    },
+    {
+     "ka": "ქათამი ბაჟეში",
+     "en": "Chicken With Walnut Sauce",
+     "dka": "შემწვარი ქათმის ხორცი, ნიგოზი",
+     "den": "Fried chicken meat, walnuts",
+     "price": "20.00",
+     "group": "ხინკალი და აპეტაიზერი / Khinkali & Appetizers",
+     "gnote_ka": "მინიმუმ 5 ცალი ხინკალი ერთი სახეობის",
+     "gnote_en": "Minimum 5 khinkali of the same variety",
+     "ru": "Курица в мешке"
+    },
+    {
+     "ka": "საფირმო ხაში „სარკე\"",
+     "en": "Khashi",
+     "dka": "საქონლის ფაშვი, რძოქი, ნიორი, გახეხილი შოთის პური",
+     "den": "Beef tripe soup, roasted bread",
+     "price": "20.00",
+     "group": "წვნიანი / Soups"
+    },
+    {
+     "ka": "ჩიხირთმა",
+     "en": "Chikhirtma",
+     "dka": "ქათმის ხორცი, ქათმის ბულიონი, ხორბლის ფქვილი, კვერცხი, კარაქი, ძმარი",
+     "den": "Chicken, chicken broth, wheat flour, eggs, butter, vinegar",
+     "price": "19.00",
+     "group": "წვნიანი / Soups",
+     "ru": "Чихиртма"
+    },
+    {
+     "ka": "სუპხარჩო",
+     "en": "Kharcho Soup",
+     "dka": "საქონლის ხორცი, ბრინჯი, პომიდორი, ქინძი, ოხრახუში, ხახვი",
+     "den": "Beef, rice, tomato, coriander, parsley, onion",
+     "price": "23.00",
+     "group": "წვნიანი / Soups",
+     "ru": "Суп харчо"
+    },
+    {
+     "ka": "პელმენი ქოთანში",
+     "en": "Dumplings In A Pot",
+     "dka": "ცომი, არაჟანი, შერეული ფარში",
+     "den": "Little dumplings with meat in sour cream",
+     "price": "21.00",
+     "group": "წვნიანი / Soups"
+    },
+    {
+     "ka": "უკრაინული ბორში",
+     "en": "Ukrainian Borsch",
+     "dka": "კომბოსტო, საქონლის ხორცი, ქინძი, ოხრახუში, ძმარი",
+     "den": "Cabbage, beef, coriander, parsley, vinegar",
+     "price": "19.00",
+     "group": "წვნიანი / Soups",
+     "ru": "Украинский борщ"
+    },
+    {
+     "ka": "სოკოს კრემსუპი",
+     "en": "Mushroom Cream-Soup",
+     "dka": "სოკო, ნაღები",
+     "den": "Mushroom, cream",
+     "price": "18.00",
+     "group": "წვნიანი / Soups"
+    },
+    {
+     "ka": "ბოსტნეულის სუპი",
+     "en": "Vegetable Soup",
+     "dka": "ბროკოლი, ბულგარული, კაბაჩი, სტაფილო, ხახვი, სოკო",
+     "den": "Broccoli, bell pepper, zucchini, carrot, onion, mushroom",
+     "price": "18.00",
+     "group": "წვნიანი / Soups",
+     "ru": "овощной суп"
+    },
+    {
+     "ka": "ისპანახის კრემსუპი",
+     "en": "Spinach Cream-Soup",
+     "dka": "ისპანახი, ნაღები",
+     "den": "Spinach, cream",
+     "price": "19.00",
+     "group": "წვნიანი / Soups"
+    }
+   ],
+   "ru": "Закуски"
+  },
+  {
+   "id": "georgian",
+   "ka": "ქართული კერძები",
+   "en": "Georgian Kitchen",
+   "group": "food",
+   "items": [
+    {
+     "ka": "ლობიო ქოთანში",
+     "en": "Beans (Lobio) In A Pot",
+     "dka": "მჭადი, მწნილის მიქსი",
+     "den": "Corn bread, pickled mix",
+     "price": "22.00",
+     "group": "ცხელი კერძები / Hot Dishes"
+    },
+    {
+     "ka": "ლობიო ქოთანში ლორით",
+     "en": "Beans With Ham In The Pot",
+     "dka": "მჭადი, მწნილის მიქსი, რაჭული ლორი",
+     "den": "Corn bread, pickled mix, Rachuli Ham",
+     "price": "24.00",
+     "group": "ცხელი კერძები / Hot Dishes"
+    },
+    {
+     "ka": "ხბოს ჩაშუშული",
+     "en": "Chashushuli With Veal",
+     "dka": "ხბოს ხორცი, პომიდორი, ქინძი, ოხრახუში, ხახვი",
+     "den": "Veal, tomato, coriander and parsley, onion",
+     "price": "31.00",
+     "group": "ცხელი კერძები / Hot Dishes",
+     "ru": "Телятина тушеная",
+     "dru": "Телятина, помидоры, кориандр, петрушка, лук"
+    },
+    {
+     "ka": "იმერული კუპატი კეცზე",
+     "en": "Imeretian Kupati On The Clay Pot",
+     "dka": "ღორის ხორცი",
+     "den": "Pork sausage",
+     "price": "24.00",
+     "group": "ცხელი კერძები / Hot Dishes",
+     "ru": "Купати на кеци"
+    },
+    {
+     "ka": "მეგრული ხარჩო ნიგვზით და ელარჯის ბურთულებით",
+     "en": "Megrelian Kharcho With Walnuts And Elarji Balls",
+     "dka": "ღერღილი, სულგუნი, ხბოს ხორცი, ნიგოზი",
+     "den": "Corn, sulguni, veal, walnut",
+     "price": "30.00",
+     "group": "ცხელი კერძები / Hot Dishes"
+    },
+    {
+     "ka": "ოჯახური ღორის / ბატკანი / ხბო",
+     "en": "Ojakhuri Pork / Lamb / Veal",
+     "dka": "კარტოფილი, ბულგარული, ნიორი, ღორის ხორცი, ხახვი",
+     "den": "Potato, bell pepper, garlic, pork, onion",
+     "price": "25.00 / 30.00 / 28.00",
+     "group": "ცხელი კერძები / Hot Dishes"
+    },
+    {
+     "ka": "აჯაფსანდალი",
+     "en": "Adjapsandali",
+     "dka": "შემწვარი ბადრიჯანი, ბულგარული წიწაკა, ხახვი, ნიორი, პომიდორი, სუნელები",
+     "den": "Grill eggplant, bell pepper, garlic, Georgian herbs, onion, tomato",
+     "price": "18.00",
+     "group": "ცხელი კერძები / Hot Dishes",
+     "ru": "Аджапсандал"
+    },
+    {
+     "ka": "ტოლმა ვაზის ფოთოლში (5 ცალი)",
+     "en": "Tolma In Grape Leaves (5 Ones)",
+     "dka": "ვაზის ფოთოლში შეხვეული ღორისა და საქონლის ფარშით, მაწვნის და ნიგვზის სოუსით",
+     "den": "Grape leaves stuffed with ground beef and pork, with yogurt and garlic sauce",
+     "price": "20.00",
+     "group": "ცხელი კერძები / Hot Dishes"
+    },
+    {
+     "ka": "აფხაზურა თაშმიჯაბის გარნირით",
+     "en": "Abkhazura With Tashmijab Garnish",
+     "dka": "აფხაზურა, კარტოფილის პიურე, სულგუნი",
+     "den": "Beef sausage, potato puree, Sulguni",
+     "price": "29.00",
+     "group": "ცხელი კერძები / Hot Dishes"
+    },
+    {
+     "ka": "შქმერული",
+     "en": "Shkmeruli",
+     "dka": "კეცზე შემწვარი ქათამი ნიგვზის სოუსში",
+     "den": "Oven roasted chicken, cooked in traditional garlic sauce served in clay plate",
+     "price": "29.00",
+     "group": "ცხელი კერძები / Hot Dishes",
+     "ru": "Шкмерули"
+    },
+    {
+     "ka": "ბატკნის ჩაქაფული",
+     "en": "Chaqapuli With Lamb",
+     "dka": "თეთრ ღვინოში მოხარშული ბატკანი, ტარხუნით, პიტნით, დაფნის ფოთლით",
+     "den": "Lamb chunks cooked in white wine, tarragon, mint, bay leaf",
+     "price": "34.00",
+     "group": "ცხელი კერძები / Hot Dishes"
+    },
+    {
+     "ka": "შემწვარი მთლიანი ქათამი (ტაბაკა)",
+     "en": "Whole Roasted Chicken",
+     "dka": "შემწვარი ქათამი ტყემლით",
+     "den": "Fried chicken with tkemali sauce",
+     "price": "29.00",
+     "group": "ცხელი კერძები / Hot Dishes"
+    },
+    {
+     "ka": "ღორის ნეკნი (2 კგ) ბარბექიუს სოუსში (3/4 პერსონაზე)",
+     "en": "Pork Ribs (2 Kg) With Barbecue Sauce (3/4 Per Person)",
+     "dka": "ქათმის ფრთები (6 ცალი) ბარბექიუს სოუსით, მექსიკური კარტოფილი, მწნილის მიქსი, მექსიკური სოუსი, ბარბექიუს სოუსი, აზიური სოუსი",
+     "den": "Chicken wings (6 pieces) with barbecue, Mexican fries, pickle mix, Mexican sauce, barbecue sauce, Asian sauce",
+     "price": "109.00",
+     "group": "საფირმო კერძი / Royal Dish"
+    },
+    {
+     "ka": "გრილზე შემწვარი ბატკნის ნეკნები (2-3 პერსონაზე)",
+     "en": "Grilled Lamb Ribs (2-3 People)",
+     "dka": "ბატკნის ნეკნები დაგრილული ბოსტნეულით, ბრინჯით, თაშმიჯაბთან და საპეც სოუსთან ერთად",
+     "den": "Lamb ribs, grilled vegetables, rice, mashed potatoes with special sauce",
+     "price": "119.00",
+     "group": "საფირმო კერძი / Royal Dish"
+    },
+    {
+     "ka": "მეცხვარის სადილი (4-5 პერსონაზე)",
+     "en": "Shepherd's Dinner (4-5 People)",
+     "dka": "შემწვარი ბატკნის ბარკალი 2კგ საფირმო სოუსში, გრილზე შემწვარი საქონლის სუკი, შემწვარი ბატკნის ხინკალი 5 ცალი, ცოცხალი ბოსტნეული, 3 სახეობის სოუსი",
+     "den": "Baked lamb shank 2 kg in special sauce, grilled beef tenderloin, fried lamb khinkali 5 ones, fresh vegetables, 3 sauces",
+     "price": "229.00",
+     "group": "საფირმო კერძი / Royal Dish"
+    }
+   ],
+   "ru": "Грузинские блюда"
+  },
+  {
+   "id": "grill",
+   "ka": "გრილი და სტეიკი",
+   "en": "Grill & Steak",
+   "group": "food",
+   "items": [
+    {
+     "ka": "მწვადის დაფა",
+     "en": "Mtsvadi Board",
+     "dka": "შამფურზე შემწვარი ოთხი სახეობის მწვადი: ღორი, ქათამი, ხბო, ბატკანი, კარტოფილი ფრი, ბოსტნეულის ასორტი",
+     "den": "Grilled pork, chicken, veal, lamb, french fries, vegetable assorty",
+     "price": "109.00",
+     "group": "მწვადი და გრილი / Skewers & Grill",
+     "ru": "Доска для барбекю"
+    },
+    {
+     "ka": "ქათმის მწვადი",
+     "en": "Chicken BBQ",
+     "dka": "შამფურზე შემწვარი ქათმის ხორცი",
+     "den": "Charcoal grilled chicken meat",
+     "price": "21.00",
+     "group": "მწვადი და გრილი / Skewers & Grill",
+     "ru": "Куриный шашлык"
+    },
+    {
+     "ka": "ღორის მწვადი",
+     "en": "Pork BBQ",
+     "dka": "შამფურზე შემწვარი ღორის მწვადი",
+     "den": "Charcoal grilled pork meat",
+     "price": "24.00",
+     "group": "მწვადი და გრილი / Skewers & Grill",
+     "ru": "шашлык из свинины"
+    },
+    {
+     "ka": "ხბოს მწვადი",
+     "en": "Veal BBQ",
+     "dka": "შამფურზე შემწვარი ხბოს ხორცი",
+     "den": "Charcoal grilled veal meat",
+     "price": "29.00",
+     "group": "მწვადი და გრილი / Skewers & Grill",
+     "ru": "Шашлык из телятины"
+    },
+    {
+     "ka": "ბატკნის მწვადი",
+     "en": "Lamb BBQ",
+     "dka": "შამფურზე შემწვარი ბატკნის ხორცი",
+     "den": "Charcoal grilled lamb",
+     "price": "33.00",
+     "group": "მწვადი და გრილი / Skewers & Grill",
+     "ru": "Шашлык из баранины"
+    },
+    {
+     "ka": "ორაგულის მწვადი",
+     "en": "Salmon BBQ",
+     "dka": "შამფურზე შემწვარი ორაგული",
+     "den": "Charcoal grilled salmon",
+     "price": "45.00",
+     "group": "მწვადი და გრილი / Skewers & Grill"
+    },
+    {
+     "ka": "ქაბაბი ქათმის / ქაბაბი შერეული / ბატკნის",
+     "en": "Kebab Chicken / Kebab Mixed / Lamb",
+     "dka": "",
+     "den": "",
+     "price": "23.00 / 24.00 / 27.00",
+     "group": "მწვადი და გრილი / Skewers & Grill"
+    },
+    {
+     "ka": "ქათმის ფრთები (12 ცალი)",
+     "en": "Chicken Wings (12 Ones)",
+     "dka": "შემწვარი ქათმის ფრთები ბარბექიუს სოუსში, ლურჯი ყველის სოუსით, კვერცხი",
+     "den": "Fried chicken wings in barbeque sauce with blue-cheese sauce, egg",
+     "price": "29.00",
+     "group": "მწვადი და გრილი / Skewers & Grill"
+    },
+    {
+     "ka": "ბურგერი და ფრი",
+     "en": "Burger And French Fries",
+     "dka": "საქონლის ხორცი, კიტრის მწნილი, პომიდორი, ყველი გაუდა, განსაკუთრებული სოუსი",
+     "den": "Beef, pickled cucumber, tomato, gouda cheese, special sauce",
+     "price": "29.00",
+     "group": "მწვადი და გრილი / Skewers & Grill",
+     "ru": "Бургер и картофель фри"
+    },
+    {
+     "ka": "ყველის ჩხირები პიტნის სოუსით",
+     "en": "Cheese Sticks With Mint Sauce",
+     "dka": "სულგუნი, პიტნის სოუსი",
+     "den": "Sulguni, mint sauce",
+     "price": "29.00",
+     "group": "მწვადი და გრილი / Skewers & Grill"
+    },
+    {
+     "ka": "საქონლის სტეიკი დაგრილული ბოსტნეულით და სოკოს სოუსით",
+     "en": "Beef Steak With Grilled Vegetables And Mushroom Sauce",
+     "dka": "",
+     "den": "",
+     "price": "55.00",
+     "group": "სტეიკები / Steaks"
+    },
+    {
+     "ka": "ღორის ხორცის სტეიკი",
+     "en": "Pork Steak",
+     "dka": "300 გრ. ღორის ხორცი, სოუსით და კარტოფილი ფრით",
+     "den": "300 gr of pork fillet, sauce and french fries",
+     "price": "34.00",
+     "group": "სტეიკები / Steaks"
+    },
+    {
+     "ka": "შნიცელი ქათმის, კარტოფილით",
+     "en": "Schnitzel Chicken, With Potatoes",
+     "dka": "",
+     "den": "",
+     "price": "32.00",
+     "group": "სტეიკები / Steaks"
+    },
+    {
+     "ka": "ქათმის სტეიკი კარტოფილი ფრის გარნირით და ყველის სოუსით",
+     "en": "Chicken Steak With French Fries Garnish And Cheese Sauce",
+     "dka": "",
+     "den": "",
+     "price": "32.00",
+     "group": "სტეიკები / Steaks"
+    },
+    {
+     "ka": "სტეიკების მიქსგრილი დაფა 2/3 პერსონაზე",
+     "en": "Steak Mix Grill Board For 2/3 Person",
+     "dka": "ძროხის, ღორის, ქათმის სტეიკი გარნირით",
+     "den": "Beef, pork, chicken steak with garnish",
+     "price": "109.00",
+     "group": "სტეიკები / Steaks"
+    }
+   ],
+   "ru": "Гриль и стейки"
+  },
+  {
+   "id": "sea",
+   "ka": "თევზი და სუში",
+   "en": "Fish & Sushi",
+   "group": "food",
+   "items": [
+    {
+     "ka": "კალმახი ბოსტნეულის რაგუთი",
+     "en": "Trout With Vegetable Ragout",
+     "dka": "",
+     "den": "",
+     "price": "28.00",
+     "group": "თევზეული / Fish",
+     "ru": "Форель с овощным рагу"
+    },
+    {
+     "ka": "დორადო შავი ბრინჯის გარნირით",
+     "en": "Dorado With Black Rice Garnish",
+     "dka": "",
+     "den": "",
+     "price": "45.00",
+     "group": "თევზეული / Fish",
+     "ru": "Дорадо с гарниром из черного риса"
+    },
+    {
+     "ka": "შემწვარი სამეფო კრევეტი (9 ცალი)",
+     "en": "Roasted Royal Shrimps (9 Ones)",
+     "dka": "",
+     "den": "",
+     "price": "29.00",
+     "group": "თევზეული / Fish"
+    },
+    {
+     "ka": "ორაგული ბაჟეში",
+     "en": "Salmon In Walnut Sauce",
+     "dka": "ნორვეგიული ორაგული, ნიგოზი",
+     "den": "Norwegian salmon, walnuts",
+     "price": "30.00",
+     "group": "თევზეული / Fish",
+     "ru": "Лосось в бублике"
+    },
+    {
+     "ka": "ორაგულის სტეიკი შავ-თეთრი ბრინჯით",
+     "en": "Salmon Steak With Black And White Rice",
+     "dka": "ნორვეგიული ორაგული, შავ-თეთრი ბრინჯი, ლიმონი, ნაშარაბი",
+     "den": "Norwegian salmon, black and white rice, pomegranate sauce",
+     "price": "59.00",
+     "group": "თევზეული / Fish"
+    },
+    {
+     "ka": "ტუნას როლი",
+     "en": "Tuna Roll",
+     "dka": "ნორის ფურცელი, კრემჩიზი ფილადელფია, კონსერვირებული ტუნა, სეზამის მარცვალი, ბრინჯი",
+     "den": "Rice, nori sheet, Philadelphia cream cheese, canned tuna, sesame seeds",
+     "price": "25.00",
+     "group": "სუში / Sushi"
+    },
+    {
+     "ka": "ფილადელფია როლი",
+     "en": "Philadelphia Roll",
+     "dka": "ორაგული, ბრინჯი, ნორის ფურცელი, კრემჩიზი ფილადელფია, ავოკადო, კიტრი",
+     "den": "Salmon, rice, nori sheet, Philadelphia cream cheese, avocado, cucumber",
+     "price": "32.00",
+     "group": "სუში / Sushi"
+    },
+    {
+     "ka": "კრევეტი როლი",
+     "en": "Shrimp Roll",
+     "dka": "ბრინჯი, ნორის ფურცელი, კრემჩიზი ფილადელფია, ტემპურა კრევეტი, სეზამის მარცვალი",
+     "den": "Rice, nori sheet, Philadelphia cream cheese, tempura shrimp, sesame seeds",
+     "price": "26.00",
+     "group": "სუში / Sushi"
+    },
+    {
+     "ka": "კალიფორნია როლი",
+     "en": "California Roll",
+     "dka": "ორაგული, ბრინჯი, ნორის ფურცელი, კრემჩიზი ფილადელფია, კიტრი, ტობიკო",
+     "den": "Salmon, rice, nori sheet, Philadelphia cream cheese, cucumber, tobiko",
+     "price": "30.00",
+     "group": "სუში / Sushi"
+    },
+    {
+     "ka": "ცხელი ორაგულის როლი",
+     "en": "Hot Salmon Roll",
+     "dka": "ორაგული, კრემჩიზი ფილადელფია, ბრინჯი, ნორის ფურცელი, კიტრი, ტემპურა",
+     "den": "Salmon, Philadelphia cream cheese, rice, nori sheet, cucumber, tempura",
+     "price": "30.00",
+     "group": "სუში / Sushi"
+    },
+    {
+     "ka": "კიტრის მაკი",
+     "en": "Cucumber Maki",
+     "dka": "ბრინჯი, ნორის ფურცელი, კიტრი, კრემჩიზი ფილადელფია",
+     "den": "Rice, nori sheet, cucumber, Philadelphia cream cheese",
+     "price": "14.00",
+     "group": "სუში / Sushi"
+    },
+    {
+     "ka": "სუში სეტი 2-3 კაცზე",
+     "en": "Sushi Set 2-3 People",
+     "dka": "როლი ფილადელფია, ტუნას როლი, კრევეტის როლი, კიტრის მაკი",
+     "den": "Philadelphia roll, tuna roll, shrimp roll, cucumber maki",
+     "price": "120.00",
+     "was": "127.00",
+     "group": "სუში / Sushi"
+    },
+    {
+     "ka": "სუში სეტი 3-4 კაცზე",
+     "en": "Sushi Set 3-4 People",
+     "dka": "როლი ფილადელფია, როლი კალიფორნია, ტუნას როლი, ტემპურა კრევეტის როლი, კიტრის მაკი",
+     "den": "Philadelphia roll, California roll, tuna roll, tempura shrimp roll, cucumber maki",
+     "price": "90.00",
+     "was": "97.00",
+     "group": "სუში / Sushi"
+    },
+    {
+     "ka": "სუში სეტი 4-6 კაცზე",
+     "en": "Sushi Set 4-6 People",
+     "dka": "როლი ფილადელფია, როლი კალიფორნია, ტუნას როლი, ტემპურა კრევეტის როლი, ცხელი ორაგულის როლი, კიტრის მაკი",
+     "den": "Philadelphia roll, California roll, tuna roll, tempura shrimp roll, hot salmon roll, cucumber maki",
+     "price": "150.00",
+     "was": "157.00",
+     "group": "სუში / Sushi"
+    }
+   ],
+   "ru": "Рыба и суши"
+  },
+  {
+   "id": "bakery",
+   "ka": "ცომეული და პასტა",
+   "en": "Bakery & Pasta",
+   "group": "food",
+   "items": [
+    {
+     "ka": "საფირმო ხაჭაპური",
+     "en": "Special Khachapuri",
+     "dka": "იმერული ყველი, სულგუნი",
+     "den": "Imeretian cheese, Sulguni cheese",
+     "price": "27.00",
+     "group": "ხაჭაპური და ცომეული / Khachapuri & Bread",
+     "ru": "Фирменные хачапури"
+    },
+    {
+     "ka": "იმერული ხაჭაპური",
+     "en": "Imeretian Khachapuri",
+     "dka": "იმერული ყველი",
+     "den": "Imeretian cheese",
+     "price": "21.00",
+     "group": "ხაჭაპური და ცომეული / Khachapuri & Bread",
+     "ru": "Хачапури по-имеретински"
+    },
+    {
+     "ka": "აჭარული ხაჭაპური",
+     "en": "Adjaruli Khachapuri",
+     "dka": "იმერული ყველი, სულგუნი, კვერცხის გული, კარაქი",
+     "den": "Imeretian cheese, Sulguni cheese, egg yolk, butter",
+     "price": "19.00",
+     "group": "ხაჭაპური და ცომეული / Khachapuri & Bread",
+     "ru": "Хачапури по-аджарски",
+     "dru": "Сыр Имер, сулгун, яичный желток, сливочное масло"
+    },
+    {
+     "ka": "მეგრული ხაჭაპური",
+     "en": "Megrelian Khachapuri",
+     "dka": "იმერული ყველი, სულგუნი",
+     "den": "Imeretian cheese, Sulguni cheese",
+     "price": "25.00",
+     "group": "ხაჭაპური და ცომეული / Khachapuri & Bread"
+    },
+    {
+     "ka": "აჭარული ლობიანი ლორით / ლორის გარეშე",
+     "en": "Adjaruli Lobiani With Ham / Without Ham",
+     "dka": "ლობიო, ლორი",
+     "den": "Beans, ham",
+     "price": "23.00 / 21.00",
+     "group": "ხაჭაპური და ცომეული / Khachapuri & Bread"
+    },
+    {
+     "ka": "ლობიანი",
+     "en": "Lobiani",
+     "dka": "ლობიო",
+     "den": "Beans",
+     "price": "19.00",
+     "group": "ხაჭაპური და ცომეული / Khachapuri & Bread",
+     "ru": "бобы"
+    },
+    {
+     "ka": "პიცა პეპერონი",
+     "en": "Pepperoni",
+     "dka": "მოცარელა, პეპერონი, პომიდვრის სოუსი",
+     "den": "Mozzarella, pepperoni, tomato sauce",
+     "price": "27.00",
+     "group": "პიცა / Pizza",
+     "ru": "Пицца пепперони"
+    },
+    {
+     "ka": "ბოსტნეულის პიცა",
+     "en": "Vegetable Pizza",
+     "dka": "მოცარელა, პომიდვრის სოუსი, სოკო, ბულგარული, ზეთისხილი, ჩერი პომიდორი",
+     "den": "Mozzarella, tomato sauce, mushroom, bell pepper, olive, cherry tomato",
+     "price": "26.00",
+     "group": "პიცა / Pizza",
+     "ru": "Овощная пицца"
+    },
+    {
+     "ka": "პიცა მარგარიტა",
+     "en": "Margarita",
+     "dka": "პომიდვრის სოუსი, მოცარელა",
+     "den": "Tomato sauce, mozzarella",
+     "price": "23.00",
+     "group": "პიცა / Pizza",
+     "ru": "Пицца Маргарита",
+     "dru": "Томатный соус, моцарелла"
+    },
+    {
+     "ka": "პიცა ოთხი ყველის",
+     "en": "Four Cheese Pizza",
+     "dka": "მოცარელა, ჩედარი, როკფორი, გაუდა, ნაღები",
+     "den": "Mozzarella, cheddar, Roquefort, Gouda, cream",
+     "price": "30.00",
+     "group": "პიცა / Pizza",
+     "ru": "Пицца с четырьмя сырами",
+     "dru": "Моцарелла, чеддер, рокфор, гауда, сливки"
+    },
+    {
+     "ka": "პასტა ბაზილიკის პესტოთი",
+     "en": "Pasta With Basil Pesto",
+     "dka": "ბაზილიკის პესტო, ნაღები, პარმეზანი, სპაგეტი",
+     "den": "Basil pesto, cream, parmesan, spaghetti",
+     "price": "22.00",
+     "group": "პასტა / Pasta",
+     "ru": "Паста с песто из базилика"
+    },
+    {
+     "ka": "პასტა ბოლონეზე",
+     "en": "Pasta Bolognese",
+     "dka": "საქონლის ფარში, პომიდორი, სტაფილო, ხახვი, შავი ღვინო, სპაგეტი",
+     "den": "Beef, tomato, carrot, onion, black wine, spaghetti",
+     "price": "25.00",
+     "group": "პასტა / Pasta",
+     "ru": "Паста болоньезе",
+     "dru": "Котлета из говядины, помидоры, морковь, лук, красное вино, спагетти"
+    },
+    {
+     "ka": "პასტა კარბონარა",
+     "en": "Pasta Carbonara",
+     "dka": "ბეკონი, სპაგეტი, ნაღები, პარმეზანი, კვერცხის გული",
+     "den": "Bacon, spaghetti, cream, parmesan, egg yolk",
+     "price": "26.00",
+     "group": "პასტა / Pasta",
+     "ru": "Паста карбонара"
+    },
+    {
+     "ka": "ტალიატელი ბოსტნეულით",
+     "en": "Tagliatelle With Vegetables",
+     "dka": "ტალიატელი, პომიდვრის სოუსი, პარმეზანი, ბულგარული, ქამა სოკო",
+     "den": "Tagliatelle, tomato sauce, parmesan, bulgarian pepper, mushroom",
+     "price": "23.00",
+     "group": "პასტა / Pasta",
+     "ru": "Тальятелле с овощами"
+    },
+    {
+     "ka": "ტალიატელი ზღვის პროდუქტებით",
+     "en": "Tagliatelle With Sea Food",
+     "dka": "პატარა კრევეტი, კალმარი, რვაფეხა, მიდია, ნაღების სოუსი, ტალიატელი, პარმეზანი, კვერცხის გული",
+     "den": "Mini shrimps, squid, octopus, mussel, cream, tagliatelle, parmesan, egg yolk",
+     "price": "32.00",
+     "group": "პასტა / Pasta",
+     "ru": "Тальятелле с морепродуктами"
+    }
+   ],
+   "ru": "Выпечка и паста"
+  },
+  {
+   "id": "sides",
+   "ka": "გარნირი და სოუსი",
+   "en": "Sides & Sauces",
+   "group": "food",
+   "items": [
+    {
+     "ka": "მჭადი (2 ცალი)",
+     "en": "Corn Bread (2 Ones)",
+     "price": "6.00",
+     "group": "გარნირი / Sides"
+    },
+    {
+     "ka": "შოთის პური",
+     "en": "Shoti Bread",
+     "price": "5.00",
+     "group": "გარნირი / Sides"
+    },
+    {
+     "ka": "ფრი კეტჩუპით",
+     "en": "French Fries With Ketchup",
+     "price": "12.00",
+     "group": "გარნირი / Sides"
+    },
+    {
+     "ka": "მექსიკური კარტოფილი საპეც სოუსით",
+     "en": "Mexican Potatoes With Special Sauce",
+     "price": "15.00",
+     "group": "გარნირი / Sides"
+    },
+    {
+     "ka": "ბრინჯი თეთრი",
+     "en": "White Rice",
+     "price": "12.00",
+     "group": "გარნირი / Sides"
+    },
+    {
+     "ka": "ბრინჯი შავი",
+     "en": "Black Rice",
+     "price": "14.00",
+     "group": "გარნირი / Sides"
+    },
+    {
+     "ka": "ბრინჯი ბოსტნეულით",
+     "en": "Rice With Vegetables",
+     "price": "17.00",
+     "group": "გარნირი / Sides"
+    },
+    {
+     "ka": "ბოსტნეული გრილზე",
+     "en": "Grilled Vegetables",
+     "price": "19.00",
+     "group": "გარნირი / Sides"
+    },
+    {
+     "ka": "თაშმიჯაბი",
+     "en": "Tashmijab",
+     "dka": "კარტოფილი ყველით სვანურად",
+     "den": "Potatoes with cheese Svanetian style",
+     "price": "14.00",
+     "group": "გარნირი / Sides"
+    },
+    {
+     "ka": "ტყემალი",
+     "en": "Tkemali",
+     "price": "3.50",
+     "group": "სოუსი / Sauces"
+    },
+    {
+     "ka": "საწებელი",
+     "en": "Satsebeli",
+     "price": "3.50",
+     "group": "სოუსი / Sauces"
+    },
+    {
+     "ka": "მეგრული აჯიკა",
+     "en": "Megrelian Adjika",
+     "price": "3.50",
+     "group": "სოუსი / Sauces"
+    },
+    {
+     "ka": "კეტჩუპი",
+     "en": "Ketchup",
+     "price": "3.50",
+     "group": "სოუსი / Sauces"
+    },
+    {
+     "ka": "მაიონეზი",
+     "en": "Mayonnaise",
+     "price": "3.50",
+     "group": "სოუსი / Sauces"
+    },
+    {
+     "ka": "მექსიკური სოუსი",
+     "en": "Mexican Sauce",
+     "price": "4.00",
+     "group": "სოუსი / Sauces"
+    },
+    {
+     "ka": "ძაძიკის სოუსი",
+     "en": "Tzatziki Sauce",
+     "price": "5.00",
+     "group": "სოუსი / Sauces"
+    },
+    {
+     "ka": "ბარბექიუს სოუსი",
+     "en": "BBQ Sauce",
+     "price": "5.00",
+     "group": "სოუსი / Sauces"
+    }
+   ],
+   "ru": "Гарниры и соусы"
+  },
+  {
+   "id": "sweet",
+   "ka": "დესერტი და ყავა",
+   "en": "Dessert & Coffee",
+   "group": "food",
+   "items": [
+    {
+     "ka": "კრეპი ბანანით და შოკოლადის კრემით / მურაბით",
+     "en": "Crepe With Banana And Chocolate Cream / With Jam",
+     "price": "19.00",
+     "group": "დესერტი / Desserts"
+    },
+    {
+     "ka": "ბრაუნი ნაყინით",
+     "en": "Brownie With Ice Cream",
+     "price": "14.00",
+     "group": "დესერტი / Desserts"
+    },
+    {
+     "ka": "ნაპოლეონი",
+     "en": "Napoleon",
+     "price": "14.00",
+     "group": "დესერტი / Desserts",
+     "ru": "Наполеон"
+    },
+    {
+     "ka": "ტირამისუ",
+     "en": "Tiramisu",
+     "price": "14.00",
+     "group": "დესერტი / Desserts",
+     "ru": "Тирамису"
+    },
+    {
+     "ka": "ჩიზქეიქი",
+     "en": "Cheesecake",
+     "price": "14.00",
+     "group": "დესერტი / Desserts",
+     "ru": "чизкейк"
+    },
+    {
+     "ka": "ვაშლის შტრუდელი ნაყინით",
+     "en": "Apple Strudel With Ice Cream",
+     "price": "15.00",
+     "group": "დესერტი / Desserts"
+    },
+    {
+     "ka": "ნაყინი",
+     "en": "Ice Cream",
+     "dka": "ვანილი, შოკოლადი",
+     "den": "Vanilla, chocolate",
+     "price": "14.00",
+     "group": "დესერტი / Desserts"
+    },
+    {
+     "ka": "ხილის დაფა",
+     "en": "Fruit Plate",
+     "price": "25.00",
+     "group": "დესერტი / Desserts"
+    },
+    {
+     "ka": "ესპრესო",
+     "en": "Espresso",
+     "price": "7.00",
+     "group": "ყავა / Coffee"
+    },
+    {
+     "ka": "ორმაგი ესპრესო",
+     "en": "Double Espresso",
+     "price": "10.00",
+     "group": "ყავა / Coffee"
+    },
+    {
+     "ka": "ამერიკანო",
+     "en": "Americano",
+     "price": "8.00",
+     "group": "ყავა / Coffee"
+    },
+    {
+     "ka": "კაპუჩინო",
+     "en": "Cappuccino",
+     "price": "10.00",
+     "group": "ყავა / Coffee"
+    },
+    {
+     "ka": "ლატე",
+     "en": "Latte",
+     "price": "12.00",
+     "group": "ყავა / Coffee"
+    },
+    {
+     "ka": "ფლეტ ვაითი",
+     "en": "Flat White",
+     "price": "14.00",
+     "group": "ყავა / Coffee"
+    },
+    {
+     "ka": "აღმოსავლური ყავა",
+     "en": "Oriental Coffee",
+     "price": "7.00",
+     "group": "ყავა / Coffee"
+    },
+    {
+     "ka": "ცივი ყავა",
+     "en": "Iced Coffee",
+     "price": "12.00",
+     "group": "ყავა / Coffee"
+    },
+    {
+     "ka": "ცივი ყავა ნაყინით",
+     "en": "Iced Coffee With Ice Cream",
+     "price": "15.00",
+     "group": "ყავა / Coffee"
+    },
+    {
+     "ka": "ირლანდიური ყავა",
+     "en": "Irish Coffee",
+     "price": "20.00",
+     "group": "ყავა / Coffee"
+    },
+    {
+     "ka": "ცხელი შოკოლადი",
+     "en": "Hot Chocolate",
+     "price": "14.00",
+     "group": "ჩაი და ცხელი სასმელი / Tea & Hot Drinks"
+    },
+    {
+     "ka": "შავი ჩაი",
+     "en": "Black Tea",
+     "dka": "ჭიქა / ჩაიდანი",
+     "den": "Cup / pot",
+     "price": "7.00 / 15.00",
+     "group": "ჩაი და ცხელი სასმელი / Tea & Hot Drinks"
+    },
+    {
+     "ka": "მწვანე ჩაი",
+     "en": "Green Tea",
+     "dka": "ჭიქა / ჩაიდანი",
+     "den": "Cup / pot",
+     "price": "7.00 / 15.00",
+     "group": "ჩაი და ცხელი სასმელი / Tea & Hot Drinks"
+    },
+    {
+     "ka": "კენკრის ჩაი ალუბლით",
+     "en": "Berries And Cherry Mix Tea",
+     "dka": "ჭიქა / ჩაიდანი",
+     "den": "Cup / pot",
+     "price": "7.00 / 15.00",
+     "group": "ჩაი და ცხელი სასმელი / Tea & Hot Drinks"
+    },
+    {
+     "ka": "პიტნის ჩაი",
+     "en": "Mint Tea",
+     "price": "10.00",
+     "group": "ჩაი და ცხელი სასმელი / Tea & Hot Drinks"
+    },
+    {
+     "ka": "ცივი ჩაი სეზონური ხილით",
+     "en": "Iced Tea With Seasonal Fruits",
+     "price": "12.00",
+     "group": "ჩაი და ცხელი სასმელი / Tea & Hot Drinks"
+    },
+    {
+     "ka": "გლინტვეინი",
+     "en": "Glintwine",
+     "price": "14.00",
+     "group": "ჩაი და ცხელი სასმელი / Tea & Hot Drinks"
+    }
+   ],
+   "ru": "Десерты и кофе"
+  },
+  {
+   "id": "wine",
+   "ka": "ქართული ღვინო",
+   "en": "Georgian Wine",
+   "group": "drinks",
+   "note_ka": "ფასი: ჭიქა / ბოთლი",
+   "note_en": "Price: glass / bottle",
+   "items": [
+    {
+     "ka": "საფერავი ქვევრის",
+     "en": "Saperavi Qvevri",
+     "dka": "წითელი მშრალი / Red Dry",
+     "den": "წითელი მშრალი / Red Dry",
+     "price": "19.00 / 95.00",
+     "group": "ვაზისუბნის მამული / Vazisubani Estate"
+    },
+    {
+     "ka": "3 ქვევრი",
+     "en": "3 Qvevri",
+     "dka": "ქარვის ფერი მშრალი / Amber Dry",
+     "den": "ქარვის ფერი მშრალი / Amber Dry",
+     "price": "18.00 / 90.00",
+     "group": "ვაზისუბნის მამული / Vazisubani Estate"
+    },
+    {
+     "ka": "ქისი",
+     "en": "Kisi",
+     "dka": "თეთრი მშრალი / Dry White",
+     "den": "თეთრი მშრალი / Dry White",
+     "price": "17.00 / 80.00",
+     "group": "ვაზისუბნის მამული / Vazisubani Estate"
+    },
+    {
+     "ka": "ხვანჭკარა",
+     "en": "Khvanchkara",
+     "dka": "წითელი ნახევრად ტკბილი / Red Semi Sweet",
+     "den": "წითელი ნახევრად ტკბილი / Red Semi Sweet",
+     "price": "25.00 / 120.00",
+     "group": "როიალ ხვანჭკარა / Royal Khvanchkara"
+    },
+    {
+     "ka": "ცოლიკაური",
+     "en": "Tsolikauri",
+     "dka": "თეთრი მშრალი / White Dry",
+     "den": "თეთრი მშრალი / White Dry",
+     "price": "17.00 / 80.00",
+     "group": "როიალ ხვანჭკარა / Royal Khvanchkara"
+    },
+    {
+     "ka": "ტვიში",
+     "en": "Tvishi",
+     "dka": "თეთრი ნახევრად ტკბილი / White Semi Sweet",
+     "den": "თეთრი ნახევრად ტკბილი / White Semi Sweet",
+     "price": "19.00 / 90.00",
+     "group": "როიალ ხვანჭკარა / Royal Khvanchkara"
+    },
+    {
+     "ka": "ელიანო",
+     "en": "Eliano",
+     "dka": "ვარდისფერი ნახევრად მშრალი / Semi Dry Rose",
+     "den": "ვარდისფერი ნახევრად მშრალი / Semi Dry Rose",
+     "price": "15.00 / 70.00",
+     "group": "როიალ ხვანჭკარა / Royal Khvanchkara"
+    },
+    {
+     "ka": "საფერავი",
+     "en": "Saperavi",
+     "dka": "წითელი მშრალი / Red Dry",
+     "den": "წითელი მშრალი / Red Dry",
+     "price": "11.00 / 50.00",
+     "group": "ჯორჯიან სან / Georgian Sun"
+    },
+    {
+     "ka": "ქინძმარაული",
+     "en": "Kindzmarauli",
+     "dka": "წითელი ნახევრად ტკბილი / Red Semi Sweet",
+     "den": "წითელი ნახევრად ტკბილი / Red Semi Sweet",
+     "price": "11.00 / 50.00",
+     "group": "ჯორჯიან სან / Georgian Sun"
+    },
+    {
+     "ka": "რქაწითელი-მწვანე",
+     "en": "Rkatsiteli-Mtsvani",
+     "dka": "ქარვის ფერი მშრალი / Amber Dry",
+     "den": "ქარვის ფერი მშრალი / Amber Dry",
+     "price": "11.00 / 50.00",
+     "group": "ჯორჯიან სან / Georgian Sun"
+    },
+    {
+     "ka": "ჩიტისთვალა",
+     "en": "Chitistvala",
+     "dka": "ქარვის ფერი მშრალი / Amber Dry",
+     "den": "ქარვის ფერი მშრალი / Amber Dry",
+     "price": "32.00 / 150.00",
+     "group": "ვარძიის ტერასები / Vardzia Terassa"
+    },
+    {
+     "ka": "მეღვინის რჩეული",
+     "en": "Winemaker's Selection",
+     "dka": "თეთრი მშრალი / White Dry",
+     "den": "თეთრი მშრალი / White Dry",
+     "price": "15.00 / 70.00",
+     "group": "ქინძმარაულის მარანი / Kindzmarauli Marani"
+    },
+    {
+     "ka": "ქისი",
+     "en": "Kisi",
+     "dka": "თეთრი მშრალი / White Dry",
+     "den": "თეთრი მშრალი / White Dry",
+     "price": "16.00 / 75.00",
+     "group": "ქინძმარაულის მარანი / Kindzmarauli Marani"
+    },
+    {
+     "ka": "ქისი",
+     "en": "Kisi",
+     "dka": "თეთრი ნახევრად მშრალი / White Semi Dry",
+     "den": "თეთრი ნახევრად მშრალი / White Semi Dry",
+     "price": "16.00 / 75.00",
+     "group": "ქინძმარაულის მარანი / Kindzmarauli Marani"
+    },
+    {
+     "ka": "ყვარელი",
+     "en": "Kvareli",
+     "dka": "წითელი მშრალი / Red Dry",
+     "den": "წითელი მშრალი / Red Dry",
+     "price": "15.00 / 70.00",
+     "group": "ქინძმარაულის მარანი / Kindzmarauli Marani"
+    },
+    {
+     "ka": "ქინძმარაული",
+     "en": "Kindzmarauli",
+     "dka": "წითელი ნახევრად ტკბილი / Red Semi Sweet",
+     "den": "წითელი ნახევრად ტკბილი / Red Semi Sweet",
+     "price": "18.00 / 85.00",
+     "group": "ქინძმარაულის მარანი / Kindzmarauli Marani"
+    },
+    {
+     "ka": "საფერავი",
+     "en": "Saperavi",
+     "dka": "წითელი მშრალი / Red Dry",
+     "den": "წითელი მშრალი / Red Dry",
+     "price": "18.00 / 85.00",
+     "group": "ვინივერია / Winiveria"
+    },
+    {
+     "ka": "მუკუზანი",
+     "en": "Mukuzani",
+     "dka": "წითელი მშრალი / Red Dry",
+     "den": "წითელი მშრალი / Red Dry",
+     "price": "19.00 / 90.00",
+     "group": "ვინივერია / Winiveria"
+    },
+    {
+     "ka": "ქინძმარაული",
+     "en": "Kindzmarauli",
+     "dka": "წითელი ნახევრად ტკბილი / Red Semi Sweet",
+     "den": "წითელი ნახევრად ტკბილი / Red Semi Sweet",
+     "price": "18.00 / 85.00",
+     "group": "ვინივერია / Winiveria"
+    },
+    {
+     "ka": "ხვანჭკარა",
+     "en": "Khvanchkara",
+     "dka": "წითელი ნახევრად ტკბილი / Red Semi Sweet",
+     "den": "წითელი ნახევრად ტკბილი / Red Semi Sweet",
+     "price": "25.00 / 120.00",
+     "group": "ვინივერია / Winiveria"
+    },
+    {
+     "ka": "ცოლიკაური",
+     "en": "Tsolikauri",
+     "dka": "თეთრი მშრალი / White Dry",
+     "den": "თეთრი მშრალი / White Dry",
+     "price": "17.00 / 80.00",
+     "group": "ვინივერია / Winiveria"
+    },
+    {
+     "ka": "ქისი",
+     "en": "Kisi",
+     "dka": "თეთრი მშრალი / White Dry",
+     "den": "თეთრი მშრალი / White Dry",
+     "price": "18.00 / 85.00",
+     "group": "ვინივერია / Winiveria"
+    },
+    {
+     "ka": "წინანდალი",
+     "en": "Tsinandali",
+     "dka": "თეთრი მშრალი / Dry White",
+     "den": "თეთრი მშრალი / Dry White",
+     "price": "13.00 / 60.00",
+     "group": "შუმის მეღვინეობა / Shumi"
+    },
+    {
+     "ka": "ქინძმარაული",
+     "en": "Kindzmarauli",
+     "dka": "წითელი ნახევრად ტკბილი / Red Semi Sweet",
+     "den": "წითელი ნახევრად ტკბილი / Red Semi Sweet",
+     "price": "15.00 / 70.00",
+     "group": "შუმის მეღვინეობა / Shumi"
+    },
+    {
+     "ka": "ყვარელი",
+     "en": "Kvareli",
+     "dka": "წითელი მშრალი / Dry Red",
+     "den": "წითელი მშრალი / Dry Red",
+     "price": "18.00 / 85.00",
+     "group": "შუმის მეღვინეობა / Shumi"
+    },
+    {
+     "ka": "თავკვერი",
+     "en": "Tavkveri",
+     "dka": "წითელი მშრალი / Dry Red",
+     "den": "წითელი მშრალი / Dry Red",
+     "price": "21.00 / 100.00",
+     "group": "გურაშვილის საოჯახო მარანი / Gurashvili's Family Vineyards"
+    },
+    {
+     "ka": "ქისი მწვანე",
+     "en": "Kisi Mtsvane",
+     "dka": "ქარვისფერი მშრალი / Amber Dry",
+     "den": "ქარვისფერი მშრალი / Amber Dry",
+     "price": "20.00 / 95.00",
+     "group": "გურაშვილის საოჯახო მარანი / Gurashvili's Family Vineyards"
+    },
+    {
+     "ka": "მწვივანი",
+     "en": "Mtsvivani",
+     "dka": "თეთრი მშრალი / Dry White",
+     "den": "თეთრი მშრალი / Dry White",
+     "price": "20.00 / 95.00",
+     "group": "გურაშვილის საოჯახო მარანი / Gurashvili's Family Vineyards"
+    },
+    {
+     "ka": "ქისი რეზერვი",
+     "en": "Kisi Reserve",
+     "dka": "ქარვისფერი მშრალი / Amber Dry",
+     "den": "ქარვისფერი მშრალი / Amber Dry",
+     "price": "16.00 / 75.00",
+     "group": "გიოს მარანი / Gio's Marani"
+    },
+    {
+     "ka": "საფერავი",
+     "en": "Saperavi",
+     "dka": "წითელი მშრალი / Red Dry",
+     "den": "წითელი მშრალი / Red Dry",
+     "price": "12.00 / 55.00",
+     "group": "ფრენდს ვაინი / Friends' Wine"
+    },
+    {
+     "ka": "ფიროსმანი",
+     "en": "Firosmani",
+     "dka": "წითელი ნახევრად მშრალი / Red Semi Dry",
+     "den": "წითელი ნახევრად მშრალი / Red Semi Dry",
+     "price": "12.00 / 55.00",
+     "group": "ფრენდს ვაინი / Friends' Wine"
+    },
+    {
+     "ka": "ტვიში",
+     "en": "Tvishi",
+     "dka": "თეთრი ნახევრად ტკბილი / White Semi Sweet",
+     "den": "თეთრი ნახევრად ტკბილი / White Semi Sweet",
+     "price": "14.00 / 65.00",
+     "group": "ფრენდს ვაინი / Friends' Wine"
+    },
+    {
+     "ka": "ქინძმარაული",
+     "en": "Kindzmarauli",
+     "dka": "წითელი ნახევრად ტკბილი / Red Semi Sweet",
+     "den": "წითელი ნახევრად ტკბილი / Red Semi Sweet",
+     "price": "12.00 / 55.00",
+     "group": "ფრენდს ვაინი / Friends' Wine"
+    },
+    {
+     "ka": "წინანდალი",
+     "en": "Tsinandali",
+     "dka": "თეთრი მშრალი / White Dry",
+     "den": "თეთრი მშრალი / White Dry",
+     "price": "11.00 / 50.00",
+     "group": "ფრენდს ვაინი / Friends' Wine"
+    },
+    {
+     "ka": "საფერავი",
+     "en": "Saperavi",
+     "dka": "წითელი მშრალი / Red Dry",
+     "den": "წითელი მშრალი / Red Dry",
+     "price": "8.00 / 35.00",
+     "group": "ჩამოსასხმელი ღვინო / Draft Wine"
+    },
+    {
+     "ka": "ქინძმარაული",
+     "en": "Kindzmarauli",
+     "dka": "წითელი ნახევრად ტკბილი / Red Semi Sweet",
+     "den": "წითელი ნახევრად ტკბილი / Red Semi Sweet",
+     "price": "9.00 / 40.00",
+     "group": "ჩამოსასხმელი ღვინო / Draft Wine"
+    },
+    {
+     "ka": "წინანდალი",
+     "en": "Tsinandali",
+     "dka": "თეთრი მშრალი / White Dry",
+     "den": "თეთრი მშრალი / White Dry",
+     "price": "8.00 / 35.00",
+     "group": "ჩამოსასხმელი ღვინო / Draft Wine"
+    },
+    {
+     "ka": "შუშხუნა ღვინო",
+     "en": "Sparkling Wine",
+     "dka": "თეთრი მშრალი / White Dry",
+     "den": "თეთრი მშრალი / White Dry",
+     "price": "15.00 / 80.00",
+     "group": "ცქრიალა ღვინო / Sparkling Wine"
+    }
+   ],
+   "blurb_ka": "38 დასახელება · ჭიქით და ბოთლით",
+   "blurb_en": "38 wines by the glass and the bottle",
+   "ru": "Грузинское вино",
+   "note_ru": "Цена: бокал / бутылка",
+   "blurb_ru": "38 вин по бокалам и бутылкам"
+  },
+  {
+   "id": "bar",
+   "ka": "ბარი",
+   "en": "Bar",
+   "group": "drinks",
+   "items": [
+    {
+     "ka": "ჯინ ტონიკი",
+     "en": "Gin & Tonic",
+     "price": "25.00",
+     "group": "კოქტეილები / Cocktails",
+     "gnote_ka": "ყველა კოქტეილი 25 ლარი",
+     "gnote_en": "All cocktails 25 GEL"
+    },
+    {
+     "ka": "აპეროლ სპრიცი",
+     "en": "Aperol Spritz",
+     "price": "25.00",
+     "group": "კოქტეილები / Cocktails",
+     "gnote_ka": "ყველა კოქტეილი 25 ლარი",
+     "gnote_en": "All cocktails 25 GEL"
+    },
+    {
+     "ka": "მოხიტო",
+     "en": "Mojito",
+     "price": "25.00",
+     "group": "კოქტეილები / Cocktails",
+     "gnote_ka": "ყველა კოქტეილი 25 ლარი",
+     "gnote_en": "All cocktails 25 GEL"
+    },
+    {
+     "ka": "კოსმოპოლიტენი",
+     "en": "Cosmopolitan",
+     "price": "25.00",
+     "group": "კოქტეილები / Cocktails",
+     "gnote_ka": "ყველა კოქტეილი 25 ლარი",
+     "gnote_en": "All cocktails 25 GEL"
+    },
+    {
+     "ka": "მარგარიტა",
+     "en": "Margarita",
+     "price": "25.00",
+     "group": "კოქტეილები / Cocktails",
+     "gnote_ka": "ყველა კოქტეილი 25 ლარი",
+     "gnote_en": "All cocktails 25 GEL"
+    },
+    {
+     "ka": "დაიკირი",
+     "en": "Daiquiri",
+     "price": "25.00",
+     "group": "კოქტეილები / Cocktails",
+     "gnote_ka": "ყველა კოქტეილი 25 ლარი",
+     "gnote_en": "All cocktails 25 GEL"
+    },
+    {
+     "ka": "მარტინი ესპრესო",
+     "en": "Martini Espresso",
+     "price": "25.00",
+     "group": "კოქტეილები / Cocktails",
+     "gnote_ka": "ყველა კოქტეილი 25 ლარი",
+     "gnote_en": "All cocktails 25 GEL"
+    },
+    {
+     "ka": "სისხლიანი მერი",
+     "en": "Bloody Mary",
+     "price": "25.00",
+     "group": "კოქტეილები / Cocktails",
+     "gnote_ka": "ყველა კოქტეილი 25 ლარი",
+     "gnote_en": "All cocktails 25 GEL"
+    },
+    {
+     "ka": "ოლდ ფეშენი",
+     "en": "Old Fashion",
+     "price": "25.00",
+     "group": "კოქტეილები / Cocktails",
+     "gnote_ka": "ყველა კოქტეილი 25 ლარი",
+     "gnote_en": "All cocktails 25 GEL"
+    },
+    {
+     "ka": "ვისკი საუერი",
+     "en": "Whiskey Sour",
+     "price": "25.00",
+     "group": "კოქტეილები / Cocktails",
+     "gnote_ka": "ყველა კოქტეილი 25 ლარი",
+     "gnote_en": "All cocktails 25 GEL"
+    },
+    {
+     "ka": "ნეგრონი",
+     "en": "Negroni",
+     "price": "25.00",
+     "group": "კოქტეილები / Cocktails",
+     "gnote_ka": "ყველა კოქტეილი 25 ლარი",
+     "gnote_en": "All cocktails 25 GEL"
+    },
+    {
+     "ka": "ლონგ აილენდი",
+     "en": "Long Island",
+     "price": "25.00",
+     "group": "კოქტეილები / Cocktails",
+     "gnote_ka": "ყველა კოქტეილი 25 ლარი",
+     "gnote_en": "All cocktails 25 GEL"
+    },
+    {
+     "ka": "ლონგ აილენდი ენერჯი",
+     "en": "Long Island Energy",
+     "price": "25.00",
+     "group": "კოქტეილები / Cocktails",
+     "gnote_ka": "ყველა კოქტეილი 25 ლარი",
+     "gnote_en": "All cocktails 25 GEL"
+    },
+    {
+     "ka": "პინა კოლადა",
+     "en": "Pina Colada",
+     "price": "25.00",
+     "group": "კოქტეილები / Cocktails",
+     "gnote_ka": "ყველა კოქტეილი 25 ლარი",
+     "gnote_en": "All cocktails 25 GEL"
+    },
+    {
+     "ka": "მაი ტაი",
+     "en": "Mai Tai",
+     "price": "25.00",
+     "group": "კოქტეილები / Cocktails",
+     "gnote_ka": "ყველა კოქტეილი 25 ლარი",
+     "gnote_en": "All cocktails 25 GEL"
+    },
+    {
+     "ka": "ტეკილა სანრაიზი",
+     "en": "Tequila Sunrise",
+     "price": "25.00",
+     "group": "კოქტეილები / Cocktails",
+     "gnote_ka": "ყველა კოქტეილი 25 ლარი",
+     "gnote_en": "All cocktails 25 GEL"
+    },
+    {
+     "ka": "B-52",
+     "en": "B-52",
+     "price": "25.00",
+     "group": "კოქტეილები / Cocktails",
+     "gnote_ka": "ყველა კოქტეილი 25 ლარი",
+     "gnote_en": "All cocktails 25 GEL"
+    },
+    {
+     "ka": "ლურჯი ლაგუნა",
+     "en": "Blue Lagoon",
+     "price": "25.00",
+     "group": "კოქტეილები / Cocktails",
+     "gnote_ka": "ყველა კოქტეილი 25 ლარი",
+     "gnote_en": "All cocktails 25 GEL"
+    },
+    {
+     "ka": "სექსი პლიაჟზე",
+     "en": "Sex On The Beach",
+     "price": "25.00",
+     "group": "კოქტეილები / Cocktails",
+     "gnote_ka": "ყველა კოქტეილი 25 ლარი",
+     "gnote_en": "All cocktails 25 GEL"
+    },
+    {
+     "ka": "ვოდკა რედბული",
+     "en": "Vodka Redbull",
+     "price": "25.00",
+     "group": "კოქტეილები / Cocktails",
+     "gnote_ka": "ყველა კოქტეილი 25 ლარი",
+     "gnote_en": "All cocktails 25 GEL"
+    },
+    {
+     "ka": "კუბა ლიბრე",
+     "en": "Kuba Libre",
+     "price": "25.00",
+     "group": "კოქტეილები / Cocktails",
+     "gnote_ka": "ყველა კოქტეილი 25 ლარი",
+     "gnote_en": "All cocktails 25 GEL"
+    },
+    {
+     "ka": "შავი ლომი",
+     "en": "Black Lion",
+     "dka": "შავი / იპა / აპა",
+     "den": "Black / IPA / APA",
+     "price": "12.00",
+     "group": "ლუდი / Beer"
+    },
+    {
+     "ka": "კაიაკი",
+     "en": "Kaiaki",
+     "price": "10.00",
+     "group": "ლუდი / Beer"
+    },
+    {
+     "ka": "ჰეინეკენი",
+     "en": "Heineken",
+     "price": "10.00",
+     "group": "ლუდი / Beer"
+    },
+    {
+     "ka": "კორონა",
+     "en": "Corona",
+     "price": "14.00",
+     "group": "ლუდი / Beer"
+    },
+    {
+     "ka": "ესტრელა",
+     "en": "Estrella (Damm Barcelona)",
+     "price": "10.00",
+     "group": "ლუდი / Beer"
+    },
+    {
+     "ka": "ბავარია",
+     "en": "Bavaria",
+     "price": "10.00",
+     "group": "ლუდი / Beer"
+    },
+    {
+     "ka": "სტაროპრამენი",
+     "en": "Staropramen",
+     "price": "10.00",
+     "group": "ლუდი / Beer"
+    },
+    {
+     "ka": "შავი ლომი ჰელესი 0.400ლ",
+     "en": "Black Lion Lager 0.400 ml",
+     "group": "ჩამოსასხმელი / Draft",
+     "price": "10.00"
+    },
+    {
+     "ka": "ტააti (გაუფილტრავი) 0.500ლ",
+     "en": "Taati (Unfiltered) 0.500 ml",
+     "group": "ჩამოსასხმელი / Draft",
+     "price": "12.00"
+    },
+    {
+     "ka": "ლუდის ხემსი",
+     "en": "Beer Snack",
+     "dka": "მიწის თხილი, ფისტა, ქართული თხილი",
+     "den": "Ground nuts, pistachios, Georgian nuts",
+     "price": "28.00",
+     "group": "ლუდის ხემსი / Beer Snacks"
+    },
+    {
+     "ka": "ლუდის დაფა",
+     "en": "Beer Board",
+     "dka": "ქართული ჩიფსი, ბეკონში გადახვეული მინი სოსისი, ნივრიანი პურები",
+     "den": "Georgian chips, mini sausage wrapped in bacon, garlic bread",
+     "price": "25.00",
+     "group": "ლუდის ხემსი / Beer Snacks"
+    },
+    {
+     "ka": "ჩილიმი წყალზე",
+     "en": "Hookah On The Water",
+     "price": "65.00",
+     "group": "ჩილიმი / Hookah"
+    },
+    {
+     "ka": "ჩილიმი რძეზე",
+     "en": "Hookah On Milk",
+     "price": "80.00",
+     "group": "ჩილიმი / Hookah"
+    },
+    {
+     "ka": "ჩილიმი წვენზე",
+     "en": "Hookah On The Juice",
+     "price": "85.00",
+     "group": "ჩილიმი / Hookah"
+    },
+    {
+     "ka": "ჩილიმი ღვინოზე",
+     "en": "Hookah On Wine",
+     "price": "90.00",
+     "group": "ჩილიმი / Hookah"
+    },
+    {
+     "ka": "ჩილიმი ვისკიზე",
+     "en": "Hookah On Whiskey",
+     "price": "95.00",
+     "group": "ჩილიმი / Hookah"
+    },
+    {
+     "ka": "ჩილიმი ხილზე",
+     "en": "Fruit Hookah",
+     "dka": "ფორთოხალი, ვაშლი, გრეიფრუტი",
+     "den": "Orange, apple, grapefruit",
+     "price": "100.00",
+     "group": "ჩილიმი / Hookah"
+    }
+   ],
+   "ru": "Бар"
+  },
+  {
+   "id": "spirits",
+   "ka": "ძლიერი ალკოჰოლი",
+   "en": "Spirits",
+   "group": "drinks",
+   "items": [
+    {
+     "ka": "ოლმეკა თეთრი",
+     "en": "Olmeca White",
+     "group": "ტეკილა / Tequila",
+     "price": "13.00 / 130.00"
+    },
+    {
+     "ka": "ოლმეკა გოლდი",
+     "en": "Olmeca Gold",
+     "group": "ტეკილა / Tequila",
+     "price": "15.00 / 150.00"
+    },
+    {
+     "ka": "ბეილისი",
+     "en": "Baileys",
+     "group": "ლიქიორი / Liquor",
+     "price": "15.00 / 200.00"
+    },
+    {
+     "ka": "იეგერმაისტერი",
+     "en": "Jägermeister",
+     "group": "ლიქიორი / Liquor",
+     "price": "11.00 / 150.00"
+    },
+    {
+     "ka": "ჩივას რეგალი 18",
+     "en": "Chivas Regal 18 Y.O",
+     "group": "ვისკი / Whiskey",
+     "price": "45.00 / 850.00"
+    },
+    {
+     "ka": "ჩივას რეგალი 12",
+     "en": "Chivas Regal 12 Y.O",
+     "group": "ვისკი / Whiskey",
+     "price": "23.00 / 380.00"
+    },
+    {
+     "ka": "ჯონი ვოკერი შავი ლეიბლი",
+     "en": "Johnnie Walker Black Label",
+     "group": "ვისკი / Whiskey",
+     "price": "23.00 / 380.00"
+    },
+    {
+     "ka": "ჯონი ვოკერი რედ ლეიბლი",
+     "en": "Johnnie Walker Red Label",
+     "group": "ვისკი / Whiskey",
+     "price": "15.00 / 210.00"
+    },
+    {
+     "ka": "გლენმორანჟი",
+     "en": "Glenmorangie",
+     "group": "ვისკი / Whiskey",
+     "price": "25.00 / 400.00"
+    },
+    {
+     "ka": "ჯემისონი",
+     "en": "Jameson",
+     "group": "ვისკი / Whiskey",
+     "price": "16.00 / 240.00"
+    },
+    {
+     "ka": "ჯი & ბი",
+     "en": "J&B",
+     "group": "ვისკი / Whiskey",
+     "price": "14.00 / 190.00"
+    },
+    {
+     "ka": "ჯეკ დენიელსი",
+     "en": "Jack Daniels",
+     "group": "ვისკი / Whiskey",
+     "price": "20.00 / 300.00"
+    },
+    {
+     "ka": "მარტინი ბიანკო",
+     "en": "Martini Blanco",
+     "group": "ვერმუტი / Vermouth",
+     "price": "10.00 / 120.00"
+    },
+    {
+     "ka": "მარტინი ექსტრა დრაი",
+     "en": "Martini Extra Dry",
+     "group": "ვერმუტი / Vermouth",
+     "price": "10.00 / 120.00"
+    },
+    {
+     "ka": "მარტინი როსსო",
+     "en": "Martini Rosso",
+     "group": "ვერმუტი / Vermouth",
+     "price": "10.00 / 120.00"
+    },
+    {
+     "ka": "სარაჯიშვილი ვ.ს.",
+     "en": "Sarajishvili V.S",
+     "group": "ბრენდი / Brandy",
+     "price": "11.00 / 100.00"
+    },
+    {
+     "ka": "სარაჯიშვილი ვ.ს.ო.პ.",
+     "en": "Sarajishvili V.S.O.P",
+     "group": "ბრენდი / Brandy",
+     "price": "15.00 / 180.00"
+    },
+    {
+     "ka": "სარაჯიშვილი X.O",
+     "en": "Sarajishvili X.O",
+     "group": "ბრენდი / Brandy",
+     "price": "27.00 / 300.00"
+    },
+    {
+     "ka": "სახლის ჭაჭა",
+     "en": "Chacha",
+     "price": "5.00 / 45.00",
+     "group": "ჭაჭა / Chacha",
+     "gnote_ka": "ბოთლი 0.5 ლ",
+     "gnote_en": "0.5 L bottle"
+    },
+    {
+     "ka": "ხილის ჭაჭა",
+     "en": "Fruit Chacha",
+     "price": "7.00 / 50.00",
+     "group": "ჭაჭა / Chacha",
+     "gnote_ka": "ბოთლი 0.5 ლ",
+     "gnote_en": "0.5 L bottle"
+    },
+    {
+     "ka": "ჭაჭის სეტი (6 შოტი)",
+     "en": "Chacha Set (6 Shots)",
+     "price": "24.00",
+     "group": "ჭაჭა / Chacha",
+     "gnote_ka": "ბოთლი 0.5 ლ",
+     "gnote_en": "0.5 L bottle"
+    },
+    {
+     "ka": "ნემიროვი",
+     "en": "Nemiroff",
+     "price": "6.00 / 55.00",
+     "group": "არაყი / Vodka",
+     "gnote_ka": "ბოთლი 0.5 ლ",
+     "gnote_en": "0.5 L bottle"
+    },
+    {
+     "ka": "სტოლიჩნაია",
+     "en": "Stolichnaya",
+     "price": "8.00 / 65.00",
+     "group": "არაყი / Vodka",
+     "gnote_ka": "ბოთლი 0.5 ლ",
+     "gnote_en": "0.5 L bottle"
+    },
+    {
+     "ka": "ფინლანდია",
+     "en": "Finlandia",
+     "price": "9.00 / 70.00",
+     "group": "არაყი / Vodka",
+     "gnote_ka": "ბოთლი 0.5 ლ",
+     "gnote_en": "0.5 L bottle"
+    },
+    {
+     "ka": "აბსოლუტი ბლუ",
+     "en": "Absolut Blue",
+     "price": "9.00 / 70.00",
+     "group": "არაყი / Vodka",
+     "gnote_ka": "ბოთლი 0.5 ლ",
+     "gnote_en": "0.5 L bottle"
+    },
+    {
+     "ka": "გრეი გუსი",
+     "en": "Grey Goose",
+     "price": "14.00 / 200.00",
+     "group": "არაყი / Vodka",
+     "gnote_ka": "ბოთლი 0.5 ლ",
+     "gnote_en": "0.5 L bottle"
+    }
+   ],
+   "note_ka": "ფასი: 50 მლ / ბოთლი",
+   "note_en": "Price: 50 ml / bottle",
+   "ru": "Крепкий алкоголь",
+   "note_ru": "Цена: 50 мл / бутылка"
+  },
+  {
+   "id": "soft",
+   "ka": "უალკოჰოლო",
+   "en": "Soft Drinks",
+   "group": "drinks",
+   "items": [
+    {
+     "ka": "წყალი",
+     "en": "Water",
+     "price": "4.00"
+    },
+    {
+     "ka": "ბორჯომი",
+     "en": "Borjomi",
+     "price": "4.00"
+    },
+    {
+     "ka": "ტონიკი",
+     "en": "Tonic",
+     "price": "6.00"
+    },
+    {
+     "ka": "კოკა-კოლა / ფანტა / სპრაიტი",
+     "en": "Coca-Cola / Fanta / Sprite",
+     "price": "4.00"
+    },
+    {
+     "ka": "წვენი ასორტიმენტში",
+     "en": "Juice In Assortment",
+     "price": "5.00"
+    },
+    {
+     "ka": "სახლის კომპოტი 1ლ",
+     "en": "Homemade Compote 1 L",
+     "price": "14.00"
+    },
+    {
+     "ka": "რედ ბული",
+     "en": "Red Bull",
+     "price": "10.00"
+    },
+    {
+     "ka": "სახლის ლიმონათი",
+     "en": "Homemade Lemonade",
+     "dka": "ციტრუსი / კენკრა / ჯინჯერი, 0.5ლ / 1ლ",
+     "den": "Citrus / berry / ginger, 0.5 L / 1 L",
+     "price": "15.00 / 28.00"
+    },
+    {
+     "ka": "შეიქები",
+     "en": "Shakes",
+     "dka": "ბანანი / კენკრა / ვანილი / შოკოლადი",
+     "den": "Banana / berry / vanilla / chocolate",
+     "price": "14.00"
+    },
+    {
+     "ka": "ფრეში",
+     "en": "Fresh",
+     "dka": "ფორთოხალი / გრეიფრუტი",
+     "den": "Orange / grapefruit",
+     "price": "15.00"
+    }
+   ],
+   "ru": "Безалкогольные напитки"
+  }
+ ]
+}
