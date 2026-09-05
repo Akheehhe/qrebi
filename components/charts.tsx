@@ -16,7 +16,11 @@ function niceTicks(min: number, max: number, count = 3) {
   const span = Math.max(max - min, 1)
   const raw = span / count
   const mag = Math.pow(10, Math.floor(Math.log10(raw)))
-  const step = [1, 2, 2.5, 5, 10].map((m) => m * mag).find((s) => s >= raw) ?? raw
+  // Small integer ranges (workout counts) get whole-number ticks.
+  const step =
+    span <= 6 && Number.isInteger(min) && Number.isInteger(max)
+      ? Math.max(1, Math.ceil(span / count))
+      : ([1, 2, 2.5, 5, 10].map((m) => m * mag).find((s) => s >= raw) ?? raw)
   const start = Math.floor(min / step) * step
   const ticks: number[] = []
   for (let v = start; v <= max + 1e-9; v += step) ticks.push(+v.toFixed(6))
