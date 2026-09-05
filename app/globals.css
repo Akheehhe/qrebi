@@ -1,718 +1,1643 @@
 /* ═══════════════════════════════════════════════════════════════════════
-   QRebi — design system.
+   Podium — design system.
 
-   The brief is a printed object: a card that sits on a counter in a Georgian
-   café. So the page is built like the poster that ships with it, not like a
-   SaaS site — 90° corners everywhere, one drenched brand colour, gold used as
-   a struck label rather than a tint, and shadows that are hard offsets with no
-   blur. Identity (Cosmic Blue / Ink Violet / Soft Lilac + Montserrat) comes
-   from the brandbook and is not up for negotiation; everything here is that
-   identity pushed harder.
+   Apple-style dark UI with a competitive edge: graphite black ground,
+   frosted charcoal glass cards with continuous corners, one warm brushed-gold
+   accent for anything that is a win (rank, prize, streak), electric mint for
+   effort (calories burned, workouts), ice blue for intake and the opponent.
+   Depth comes from layered translucency and soft shadows; sections are
+   separated by spacing, never by divider lines.
    ═══════════════════════════════════════════════════════════════════════ */
 
-:root{
-  /* brandbook */
-  --purple:#3F1C92;        /* Cosmic Blue  */
-  --ink:#0A071C;           /* Ink Violet   */
-  --lilac:#F7F0FF;         /* Soft Lilac   */
-  --paper:#fff;
-  /* site extensions, all derived from the three above */
-  --purple-deep:#2A115E;
-  --purple-lift:#4E26AD;
-  --gold:#F5B301;
-  --gold-lift:#FFC629;
-  --text:#3E3757;          /* body on light   — 9.7:1 on paper */
-  --muted:#615478;         /* support on light — 6.4:1 on paper */
-  --on-dark:#DCCFF6;       /* body on purple/ink — 8:1+ */
-  --on-dark-dim:#B9A6E4;   /* support on purple/ink — 5.6:1+ */
-  --line:#E4D8F7;
+:root {
+  --bg: #0b0b0f;
+  --bg-2: #12121a;
+  --surface: rgba(255, 255, 255, 0.055);
+  --surface-2: rgba(255, 255, 255, 0.095);
+  --surface-3: rgba(255, 255, 255, 0.14);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-2: rgba(255, 255, 255, 0.14);
 
-  /* rhythm — one scale, used everywhere so sections can't drift apart */
-  --gut:clamp(20px,4vw,32px);
-  --sec:clamp(64px,9vw,124px);   /* section padding, top and bottom */
-  --shadow-hard:14px 14px 0 var(--ink);
-  --shadow-hard-sm:8px 8px 0 var(--ink);
+  --text: #f5f5f7;
+  --text-2: #a5a5b0;
+  --text-3: #6f6f7b;
+  --on-gold: #1a1204;
 
-  --z-bar:60; --z-fab:50; --z-head:70;
-  --head:66px;   /* locked on .nav, so the 100svh hero is exact */
+  --gold: #e0b15a;
+  --gold-2: #b8863b;
+  --gold-3: #f3cf7a;
+  --gold-grad: linear-gradient(135deg, #f6d98a 0%, #dcaa48 48%, #b8863b 100%);
+  --gold-dim: rgba(224, 177, 90, 0.16);
+  --gold-line: rgba(224, 177, 90, 0.35);
 
-  --ease-quart:cubic-bezier(.25,1,.5,1);
-  --ease-quint:cubic-bezier(.22,1,.36,1);
-  --ease-expo:cubic-bezier(.16,1,.3,1);
+  --mint: #3ddc97;
+  --mint-dim: rgba(61, 220, 151, 0.16);
+  --ice: #7cc4ff;
+  --ice-dim: rgba(124, 196, 255, 0.16);
+  --coral: #ff6b6b;
+  --silver: #cfd3db;
+  --bronze: #c48a5a;
+
+  --r-xl: 32px;
+  --r-lg: 26px;
+  --r-md: 20px;
+  --r-sm: 16px;
+  --r-pill: 999px;
+
+  --pad: 20px;
+  --tab-h: 66px;
+  --sat: env(safe-area-inset-top, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+
+  --font: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', Inter, 'Segoe UI', Roboto,
+    Helvetica, Arial, sans-serif;
+
+  --shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  --shadow-sm: 0 6px 18px rgba(0, 0, 0, 0.35);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;
-  font-family:var(--font-georgian),var(--font-display),system-ui,sans-serif;
-  font-size:17px;line-height:1.55;overflow-x:hidden}
-img{max-width:100%;height:auto;display:block}
-a{color:inherit;text-decoration:none}
-ul,ol{list-style:none}
-section{scroll-margin-top:calc(var(--head) + 10px)}
-.wrap{max-width:1160px;margin-inline:auto;padding-inline:var(--gut)}
-
-/* the ring has to survive every ground it can land on: gold buttons and the
-   gold ticker get an ink ring, everything else the gold one. */
-:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
-.btn:focus-visible,.ticker :focus-visible,mark :focus-visible,
-.rate.best :focus-visible{outline-color:var(--ink)}
-.btn-ink:focus-visible,.btn-ghost:focus-visible{outline-color:var(--gold)}
-
-/* language visibility */
-.en{display:none}
-body.lang-en .ge{display:none}
-body.lang-en .en{display:inline}
-
-/* ── type ──────────────────────────────────────────────────────────────
-   One family, four weights, a 1.3 ratio. The contrast is in weight and
-   size, never in a second typeface — the brandbook only has one.        */
-h1{font-size:clamp(34px,5.6vw,62px);line-height:1.14;font-weight:900;
-   letter-spacing:-.034em;text-wrap:balance}
-h2{font-size:clamp(29px,4.2vw,52px);line-height:1.2;font-weight:900;
-   letter-spacing:-.03em;text-wrap:balance}
-h3{font-size:clamp(18px,1.5vw,21px);font-weight:800;letter-spacing:-.012em;line-height:1.3}
-p{text-wrap:pretty}
-
-/* THE signature: a struck gold label, printed straight over the words.
-   `clone` keeps the block intact when the phrase wraps to a second line. */
-/* Painted as a band rather than an inline background: an inline background
-   fills the font's reported box (1.36em here), which put a third of an em of
-   empty gold above every marked word. The band is sized to the ink instead,
-   so it sits on the letters and consecutive marked lines stay tight. */
-mark{color:var(--ink);padding-block:0;padding-inline:.18em;
-  background:linear-gradient(var(--gold),var(--gold)) no-repeat;
-  background-size:100% 1.12em;background-position:0 .24em;
-  -webkit-box-decoration-break:clone;box-decoration-break:clone}
-
-/* the rotating platform name in the headline. The slot keeps the line's own
-   metrics (height:1lh, aligned to the top of the line box) so swapping words
-   never nudges the baseline; only its width moves. */
-.cycle{position:relative;display:inline-block;vertical-align:top;height:1lh;
-  transition:width .42s var(--ease-quint)}
-.cycle-sizer{visibility:hidden}
-.cycle-word{position:absolute;inset:0 auto auto 0;white-space:nowrap;
-  animation:cycle-in .55s var(--ease-expo) both}
-@keyframes cycle-in{
-  from{opacity:0;transform:translateY(.24em) rotate(-1.2deg)}
-  to{opacity:1;transform:none}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.lede{font-size:clamp(16.5px,1.35vw,19.5px);line-height:1.55;font-weight:500;max-width:46ch}
-.sec-lede{margin-top:18px;max-width:52ch;font-size:clamp(16px,1.3vw,18.5px);
-  line-height:1.55;font-weight:500;color:var(--text)}
-
-/* the one kicker on the page — a mark, not a tracked-caps eyebrow */
-.kicker{display:inline-flex;align-items:center;gap:10px;margin-bottom:clamp(16px,2.2vw,24px);
-  padding:10px 15px 12px 12px;background:var(--ink);
-  font-size:13.5px;font-weight:800;color:#fff;letter-spacing:.005em;line-height:1.1}
-.kicker svg{width:13px;height:13px;color:var(--gold);flex:none}
-
-/* ── buttons ─────────────────────────────────────────────────────────── */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;
-  padding:17px 26px 19px;font-family:inherit;font-weight:900;font-size:16px;line-height:1.1;
-  border:none;cursor:pointer;background:var(--gold);color:var(--ink);
-  transition:transform .2s var(--ease-quint),background .2s,box-shadow .2s var(--ease-quint)}
-.btn svg{width:18px;height:18px;flex:none;transition:transform .25s var(--ease-quint)}
-.btn:hover{background:var(--gold-lift);transform:translateY(-3px)}
-.btn:hover svg:last-child{transform:translateX(4px)}
-.btn:active{transform:translateY(0) scale(.98);transition-duration:.1s}
-.btn-ghost{background:transparent;color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.42)}
-.btn-ghost:hover{background:rgba(255,255,255,.14);color:#fff;box-shadow:inset 0 0 0 2px #fff}
-.btn-ghost svg:first-child{fill:#25D366;stroke:none}
-.btn-gold{background:var(--gold);color:var(--ink)}
-.btn-ink{background:var(--purple);color:#fff}
-.btn-ink:hover{background:var(--purple-lift)}
-.btn-ink:disabled{background:var(--muted);cursor:progress;transform:none}
-.btn-ghost:hover svg:last-child{transform:none}
-
-/* ── header ───────────────────────────────────────────────────────────
-   Sits in flow over the hero, so at rest it is the hero's own purple;
-   once the hero is behind it, it goes to Ink Violet.                    */
-/* Transparent while the hero is behind it — the hero is pulled up under the
-   header for exactly this — because the banner's colour changes underneath.
-   Goes solid Ink Violet once the hero is gone, and on any page without one. */
-header{position:sticky;top:0;z-index:var(--z-head);background:transparent;
-  transition:background .3s var(--ease-quart)}
-header.solid{background:var(--ink);box-shadow:0 1px 0 rgba(255,255,255,.16)}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:18px;height:var(--head);
-  max-width:1160px;margin-inline:auto;padding:0 var(--gut)}
-/* the wordmark carries the name, so the only type left beside it is the TLD */
-/* the wordmark is the whole logo now, so the link is just the image */
-.logo{display:flex;align-items:center;color:#fff}
-.logo img{height:26px;width:auto;flex:none;display:block}
-.navlinks{display:flex;align-items:center;gap:22px;font-size:15px;font-weight:700;color:#EDE4FC}
-
-.navlink{position:relative;padding:5px 0;transition:color .2s}
-.navlink::after{content:"";position:absolute;inset:auto 0 -2px;height:2px;background:var(--gold);
-  transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease-quart)}
-.navlink:hover{color:#fff}
-.navlink:hover::after,.navlink.active::after{transform:scaleX(1)}
-.navlink.active{color:#fff}
-
-.navphone{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-display),sans-serif;
-  font-weight:900;color:#fff;white-space:nowrap;transition:color .2s}
-.navphone svg{width:15px;height:15px;fill:var(--gold);flex:none}
-.navphone:hover{color:var(--gold)}
-.navrule{width:1px;height:20px;background:rgba(255,255,255,.24)}
-.navlinks .btn{padding:9px 19px;font-size:14.5px}
-
-#langToggle{display:flex;align-items:center;gap:8px;padding:0;background:none;border:none;
-  cursor:pointer;font-family:inherit;font-size:13.5px;font-weight:800;line-height:1.1}
-.seg{transition:color .2s}
-body:not(.lang-en) .seg-ge,body.lang-en .seg-en{color:#fff}
-body:not(.lang-en) .seg-en,body.lang-en .seg-ge{color:var(--on-dark-dim)}
-#langToggle:hover .seg{color:#fff}
-
-/* ── hero ─────────────────────────────────────────────────────────────
-   Drenched. Type on the left, the product drawn at full size on the
-   right, tapped, with the review it produces landing on top of it.     */
-.hero{position:relative;display:flex;flex-direction:column;justify-content:center;
-  min-height:calc(100svh - var(--head));
-  margin-top:calc(var(--head) * -1);padding-top:var(--head);
-  background:var(--purple);color:#fff;overflow:hidden;isolation:isolate}
-.price-sec::before{content:"";position:absolute;inset:0;z-index:-1;
-  pointer-events:none;opacity:.045;
-  background-repeat:repeat;background-size:420px 420px;
-  background-image:
-    radial-gradient(circle at 68px 60px,#fff 0 35px,transparent 36px),
-    radial-gradient(circle at 250px 38px,#fff 0 16px,transparent 17px),
-    radial-gradient(circle at 360px 146px,#fff 0 44px,transparent 45px),
-    radial-gradient(circle at 146px 196px,#fff 0 22px,transparent 23px),
-    radial-gradient(circle at 46px 304px,#fff 0 29px,transparent 30px),
-    radial-gradient(circle at 244px 334px,#fff 0 50px,transparent 51px),
-    radial-gradient(circle at 368px 372px,#fff 0 21px,transparent 22px)}
-/* The right column runs to the viewport edge rather than stopping at the
-   container, so the card reads as an object laid on the page instead of an
-   asset parked in a box. The left column keeps the container's own margin. */
-.hero-grid{order:1;flex:1;display:flex;flex-direction:column;justify-content:center;
-  padding:clamp(48px,6vw,80px) var(--gut);
-  max-width:1160px;margin-inline:auto;width:100%}
-.hero-copy{min-width:0;max-width:none}
-.hero h1{max-width:9.8em}
-.hero .lede,.hero-facts{color:rgba(255,255,255,.92)}
-.hero .lede{margin-top:clamp(20px,2.4vw,30px);max-width:44ch}
-.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:clamp(28px,3.4vw,38px)}
-
-.hero-facts{order:3;position:relative;display:flex;flex-wrap:wrap;
-  padding-inline:max(var(--gut),calc((100vw - 1160px) / 2));
-  background:rgba(10,7,28,.55);border-top:1px solid rgba(255,255,255,.24);
-  font-size:15px;font-weight:600}
-.hero-facts li{display:flex;align-items:center;gap:11px;
-  padding:clamp(15px,1.8vw,20px) clamp(20px,2.6vw,34px) clamp(15px,1.8vw,20px) 0}
-.hero-facts li+li{padding-left:clamp(20px,2.6vw,34px);
-  border-left:1px solid rgba(255,255,255,.2)}
-.hero-facts svg{width:17px;height:17px;color:var(--gold);flex:none}
-.hero-facts b{font-weight:900;color:#fff}
-
-/* hero entrance — the single orchestrated moment on the page */
-.hero-copy>*,.hero-facts{animation:rise .85s var(--ease-expo) both}
-.hero-facts{animation-name:fade}
-.hero-copy>*:nth-child(1){animation-delay:.02s}
-.hero-copy>*:nth-child(2){animation-delay:.09s}
-.hero-copy>*:nth-child(3){animation-delay:.17s}
-.hero-copy>*:nth-child(4){animation-delay:.25s}
-.hero-facts{animation-delay:.36s}
-@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
-@keyframes fade{from{opacity:0}to{opacity:1}}
-
-/* ── ticker ───────────────────────────────────────────────────────────
-   The offer at speed, in the second brand colour. Gold on ink is the
-   loudest pairing the brand owns, so it gets one strip and no more.    */
-.ticker{background:var(--gold);color:var(--ink);overflow:hidden;
-  border-block:3px solid var(--ink)}
-.ticker-track{display:flex;width:max-content;animation:roll 34s linear infinite}
-.ticker ul{display:flex;align-items:center}
-.ticker li{display:flex;align-items:center;gap:13px;padding:15px 0;font-size:15px;
-  font-weight:900;letter-spacing:-.005em;white-space:nowrap}
-.ticker li svg{width:11px;height:11px;margin-inline:26px;flex:none;opacity:.55}
-@keyframes roll{to{transform:translateX(-50%)}}
-.ticker:hover .ticker-track{animation-play-state:paused}
-
-/* ── steps ────────────────────────────────────────────────────────────
-   Three solid blocks butted together into one bar, running Soft Lilac →
-   Cosmic Blue → gold. The colour progression carries the sequence, so the
-   numbers are a label rather than the whole idea, and nothing here needs
-   an illustration to explain it.                                        */
-.steps-sec{padding-block:var(--sec)}
-.steps{margin-top:clamp(34px,4.4vw,52px);display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
-.step{display:flex;flex-direction:column;align-items:flex-start;
-  min-height:clamp(300px,30vw,400px);
-  padding:clamp(26px,3.2vw,42px) clamp(22px,2.6vw,36px) clamp(30px,3.6vw,46px)}
-/* the bar runs edge to edge, but its text still lines up with the container */
-.step:first-child{padding-left:max(var(--gut),calc((100vw - 1160px) / 2))}
-.step:last-child{padding-right:max(var(--gut),calc((100vw - 1160px) / 2))}
-.step-ico{display:grid;place-items:center;width:44px;height:44px}
-.step-ico svg{width:100%;height:100%}
-.step-n{margin-top:clamp(30px,3.6vw,52px);font-family:var(--font-display),sans-serif;
-  font-size:clamp(46px,5.2vw,74px);font-weight:900;line-height:1;letter-spacing:-.045em}
-.step h3{margin:clamp(14px,1.6vw,20px) 0 9px}
-.step p{font-size:16px;line-height:1.55;max-width:34ch}
-
-.step-a{background:var(--lilac);color:var(--ink)}
-.step-a .step-ico,.step-a .step-n{color:var(--purple)}
-.step-a p{color:var(--text)}
-
-.step-b{background:var(--purple);color:#fff}
-.step-b .step-ico,.step-b .step-n{color:var(--gold)}
-.step-b p{color:var(--on-dark)}
-
-.step-c{background:var(--gold);color:var(--ink)}
-.step-c .step-ico,.step-c .step-n{color:var(--ink)}
-.step-c p{color:#3B2E05}
-
-/* ── proof ────────────────────────────────────────────────────────────
-   The dark band that breaks up two white sections, and where the brand's
-   core line finally gets to be the biggest thing on screen.            */
-.proof{display:grid;grid-template-columns:minmax(0,44%) minmax(0,56%);
-  background:var(--ink);color:#fff;align-items:stretch}
-.proof-shot{position:relative;min-height:clamp(420px,52vw,660px);overflow:hidden;background:var(--purple-deep)}
-.proof-shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  object-position:50% 68%;filter:saturate(.95) contrast(1.04)}
-.proof-copy{padding:var(--sec) var(--gut) var(--sec) clamp(28px,4.5vw,64px);
-  max-width:44rem}
-.proof-copy>.btn{margin-top:clamp(28px,3.4vw,38px)}
-
-.included{margin-top:clamp(30px,4vw,44px);display:flex;flex-direction:column}
-.included li{display:flex;gap:clamp(14px,1.8vw,20px);padding:clamp(18px,2.4vw,24px) 0;
-  border-top:1px solid rgba(255,255,255,.18)}
-.included li:last-child{border-bottom:1px solid rgba(255,255,255,.18)}
-.inc-icon{flex:none;display:grid;place-items:center;width:46px;height:46px;
-  color:var(--gold);box-shadow:inset 0 0 0 2px rgba(245,179,1,.45)}
-.inc-icon svg{width:23px;height:23px}
-.included h3{color:#fff}
-.included p{margin-top:7px;font-size:15.5px;line-height:1.55;color:var(--on-dark-dim);max-width:44ch}
-
-/* ── places ───────────────────────────────────────────────────────────
-   A carousel that advances card by card on its own; the visitor can take
-   over at any moment — swipe, wheel, or the two hard-edged arrows.     */
-.places{padding-block:var(--sec);--card:clamp(244px,30vw,392px);--gap:10px}
-.gallery-shell{position:relative;margin-top:clamp(34px,4vw,48px)}
-.gallery{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
-  scrollbar-width:none;
-  padding-inline:max(var(--gut),calc((100vw - 1160px) / 2))}
-.gallery::-webkit-scrollbar{display:none}
-.gallery-track{display:flex;gap:var(--gap);width:max-content}
-.gallery figure{position:relative;flex:0 0 var(--card);overflow:hidden;
-  scroll-snap-align:start;background:var(--ink);isolation:isolate}
-.gal-btn{position:absolute;top:calc(50% - 27px);z-index:2;width:54px;height:54px;
-  display:grid;place-items:center;border:none;cursor:pointer;
-  background:var(--ink);color:var(--gold);box-shadow:var(--shadow-hard-sm);
-  transition:background .2s,transform .2s var(--ease-quint)}
-.gal-btn:hover{background:var(--purple);transform:translateY(-2px)}
-.gal-btn svg{width:20px;height:20px}
-.gal-prev{left:14px}
-.gal-prev svg{transform:rotate(180deg)}
-.gal-next{right:14px}
-.gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;
-  transition:transform .8s var(--ease-quart)}
-.gallery figure:hover img{transform:scale(1.05)}
-.gallery figcaption{position:absolute;inset:auto 0 0;display:flex;align-items:center;gap:11px;
-  padding:14px 18px 17px;background:var(--ink);color:#fff;
-  font-size:15.5px;font-weight:800;letter-spacing:-.005em}
-.gallery figcaption svg{width:19px;height:19px;color:var(--gold);flex:none}
-.note{max-width:58ch;margin-top:clamp(32px,4vw,48px);font-size:clamp(16px,1.4vw,18.5px);
-  line-height:1.5;font-weight:700;color:var(--purple)}
-
-/* ── pricing ──────────────────────────────────────────────────────────
-   A price list, set like one: quantity, leader dots, figure. The tier we
-   want you on is a solid gold bar rather than a badged card.           */
-.price-sec{position:relative;background:var(--purple);color:#fff;padding-block:var(--sec);
-  overflow:hidden;isolation:isolate}
-.price-head .sec-lede{color:var(--on-dark)}
-.rates{margin-top:clamp(34px,4.4vw,52px);border-top:1px solid rgba(255,255,255,.24)}
-.rate{display:flex;align-items:baseline;gap:clamp(12px,2vw,20px);padding:clamp(17px,2vw,23px) 0;
-  border-bottom:1px solid rgba(255,255,255,.24)}
-.rate .qty{font-size:clamp(17.5px,1.9vw,23px);font-weight:800}
-.rate .dots{flex:1;min-width:24px;height:1px;transform:translateY(-6px);
-  background:repeating-linear-gradient(90deg,rgba(255,255,255,.42) 0 4px,transparent 4px 11px)}
-.rate .amt{display:inline-flex;align-items:baseline;
-  font-family:var(--font-display),sans-serif;font-size:clamp(32px,4.4vw,54px);font-weight:900;
-  line-height:1.18;letter-spacing:-.035em;white-space:nowrap}
-.rate .amt i{font-style:normal;font-size:.52em;margin-left:.06em}
-.rate .amt em{font-style:normal;font-family:var(--font-georgian),sans-serif;
-  font-size:13.5px;font-weight:700;color:var(--on-dark-dim);margin-left:10px}
-
-.rate.best{background:var(--gold);color:var(--ink);border-bottom-color:transparent;
-  margin-inline:calc(var(--gut) * -.6);padding-inline:calc(var(--gut) * .6);
-  padding-block:clamp(22px,2.8vw,32px)}
-.rate.best .qty{font-size:clamp(19px,2.2vw,27px);font-weight:900}
-.rate.best .amt{font-size:clamp(38px,5.4vw,66px)}
-.rate.best .amt em{color:rgba(10,7,28,.62)}
-.rate.best .dots{background:repeating-linear-gradient(90deg,rgba(10,7,28,.34) 0 4px,transparent 4px 11px)}
-.rate-tag{align-self:center;padding:7px 11px 9px;background:var(--ink);color:var(--gold);
-  font-size:12px;font-weight:900;line-height:1.1;white-space:nowrap}
-/* Two badges, deliberately unequal: 36+ already owns a full gold bar, so the
-   popular tier gets a gold chip on the purple — louder than the rows around
-   it, quieter than the bar below it. */
-.rate-tag-pop{background:var(--gold);color:var(--ink)}
-
-.price-foot{margin-top:clamp(30px,3.6vw,42px);display:flex;align-items:center;
-  gap:clamp(18px,2.4vw,30px);flex-wrap:wrap}
-.price-note{display:flex;align-items:center;gap:10px;max-width:46ch;
-  font-size:15px;font-weight:700;color:var(--on-dark)}
-.price-note svg{width:16px;height:16px;color:var(--gold);flex:none}
-
-/* ── order ────────────────────────────────────────────────────────────── */
-.order-sec{padding-block:var(--sec);background:var(--lilac)}
-.order-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  gap:clamp(36px,5vw,72px);align-items:start}
-.order-info p{margin-top:18px;font-size:17.5px;line-height:1.55;color:var(--text);max-width:40ch}
-.contacts{margin-top:clamp(28px,3.4vw,38px);display:flex;flex-direction:column}
-.contacts a{display:flex;align-items:baseline;justify-content:space-between;gap:16px;
-  padding:17px 0;border-top:1px solid var(--line);font-weight:800;font-size:17px;
-  transition:color .18s}
-.contacts a:last-child{border-bottom:1px solid var(--line)}
-.contacts a:hover{color:var(--purple)}
-.contacts .lab{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;
-  font-weight:700;color:var(--muted)}
-.contacts .lab svg{width:13px;height:13px;transition:transform .25s var(--ease-quint)}
-.contacts a:hover .lab svg{transform:translateX(4px)}
-.contacts .wa{color:#12703A}
-
-form{background:var(--paper);padding:clamp(26px,3.4vw,38px) clamp(22px,3vw,34px);
-  display:flex;flex-direction:column;gap:16px;box-shadow:var(--shadow-hard)}
-label{display:flex;flex-direction:column;gap:7px;font-size:13.5px;font-weight:800;color:var(--text)}
-input[type=text],input[type=tel]{padding:15px 16px;border:2px solid var(--line);
-  font-size:16px;font-family:inherit;color:var(--ink);outline:none;
-  transition:border-color .15s,box-shadow .15s}
-input::placeholder{color:var(--muted);opacity:1}
-input:focus{border-color:var(--purple);outline:none;box-shadow:0 0 0 3px rgba(63,28,146,.16)}
-form .btn{margin-top:4px}
-.reg-note{padding:13px 15px;font-size:13.5px;line-height:1.5;font-weight:700}
-.form-foot{display:flex;align-items:center;justify-content:center;gap:8px;
-  font-size:13px;color:var(--muted);font-weight:600;text-align:center}
-.form-foot svg{width:13px;height:13px;color:var(--purple);flex:none}
-.success{background:var(--paper);padding:clamp(44px,6vw,64px) 32px;display:flex;
-  flex-direction:column;align-items:center;gap:14px;text-align:center;box-shadow:var(--shadow-hard)}
-.success .tick{display:grid;place-items:center;width:64px;height:64px;
-  background:var(--purple);color:#fff}
-.success .tick svg{width:30px;height:30px}
-
-/* ── footer ───────────────────────────────────────────────────────────── */
-footer{background:var(--ink);color:var(--on-dark-dim);padding-block:clamp(34px,4vw,52px);
-  font-size:14.5px}
-.foot{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.foot-contacts{display:flex;gap:22px;flex-wrap:wrap;font-weight:700}
-.foot-contacts a{color:#EDE4FC;transition:color .18s}
-.foot-contacts a:hover{color:var(--gold)}
-
-/* ── sticky mobile bar + whatsapp ─────────────────────────────────────── */
-.cta-bar{display:none;position:fixed;inset:auto 0 0;z-index:var(--z-bar);gap:8px;
-  padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:var(--ink);
-  transform:translateY(115%);transition:transform .35s var(--ease-quint)}
-.cta-bar.show{transform:none}
-.cta-bar .btn{flex:1;padding:14px 12px;font-size:15.5px}
-.cta-bar .wa-sq{flex:none;display:grid;place-items:center;width:54px;background:#25D366}
-.cta-bar .wa-sq svg{width:26px;height:26px;fill:#fff}
-.wa-fab{position:fixed;right:22px;bottom:22px;z-index:var(--z-fab);width:58px;height:58px;
-  background:#25D366;display:grid;place-items:center;box-shadow:var(--shadow-hard-sm);
-  transition:transform .22s var(--ease-quint)}
-.wa-fab:hover{transform:translateY(-3px)}
-.wa-fab svg{width:29px;height:29px;fill:#fff}
-
-/* ── scroll reveals ───────────────────────────────────────────────────
-   Content is visible by default; JS only opts elements into the reveal,
-   so a headless render or a background tab can never ship a blank page. */
-html.js [data-rise]{opacity:0;transform:translateY(18px)}
-html.js [data-rise].seen{opacity:1;transform:none;
-  transition:opacity .7s var(--ease-expo),transform .7s var(--ease-expo)}
-html.js [data-stagger]>*{opacity:0;transform:translateY(16px)}
-html.js [data-stagger].seen>*{animation:rise .65s var(--ease-quint) both;
-  animation-delay:calc(var(--i,0) * 75ms)}
-
-@media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  html.js [data-rise],html.js [data-stagger]>*{opacity:1;transform:none;animation:none}
-  .hero-copy>*,.hero-facts,.cycle-word{animation:none}
-  .cycle{transition:none}
-  .ticker-track{animation:none}
-  /* the carousel is already a plain scroller; JS skips the autoplay */
-  .gallery figure:hover img{transform:none}
-  .btn:hover,.wa-fab:hover{transform:none}
-  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+html {
+  background: var(--bg);
+  color-scheme: dark;
+  -webkit-text-size-adjust: 100%;
 }
 
-/* ═══ responsive ═══════════════════════════════════════════════════════
-   Four stops, ascending, each with one job:
-     1080  the hero's two columns stop fitting side by side comfortably
-      900  every two-column band becomes one column
-      680  phone layout: sticky order bar takes over the primary CTA
-      420  smallest phones — tighten the chrome, never the tap targets
-   ═════════════════════════════════════════════════════════════════════ */
-@media (max-width:1080px){
-  .proof{grid-template-columns:minmax(0,40%) minmax(0,60%)}
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.35;
+  letter-spacing: -0.005em;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+  overscroll-behavior-y: none;
 }
 
-@media (max-width:900px){
-  .hero{min-height:0}
-  .hero{min-height:0}
-  .hero-grid{order:1;justify-content:center;
-    padding:clamp(54px,12vw,84px) var(--gut) clamp(52px,11vw,76px)}
-  .hero .lede{margin-top:clamp(18px,4.5vw,26px)}
-  .hero-cta{margin-top:clamp(28px,7vw,40px);gap:10px}
-  .hero-copy{max-width:none}
-  .hero-facts{order:4;background:none}
-
-  /* one column: the three tones now stack into a single vertical bar */
-  .steps{grid-template-columns:1fr}
-  .step{min-height:0;padding:clamp(24px,4vw,34px) var(--gut) clamp(28px,4.4vw,38px)}
-  .step:first-child,.step:last-child{padding-inline:var(--gut)}
-  .step-n{margin-top:clamp(16px,2.6vw,24px)}
-  .step p{max-width:46ch}
-
-  .proof{grid-template-columns:1fr}
-  .proof-shot{min-height:clamp(300px,62vw,460px)}
-  .proof-copy{padding:var(--sec) var(--gut);max-width:none}
-
-  .order-grid{grid-template-columns:1fr}
-  /* the form is the point of the section — put it above the phone numbers */
-  .order-form-col{order:-1}
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-/* the nav runs out of room before the phone breakpoint does */
-@media (max-width:768px){
-  .navlink,.navrule{display:none}
-  .navlinks{gap:16px}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
 }
 
-@media (max-width:680px){
-  .cta-bar{display:flex}
-  .wa-fab{display:none}
-  .gal-btn{display:none}   /* on phones the swipe is the control */
-  body{padding-bottom:78px}
-  /* the phone number is the point on mobile — the section links are not */
-  .navhide{display:none}
-  .navlinks{gap:14px}
-  .navphone{font-size:15.5px}
-
-  .hero-cta{flex-direction:column;align-items:stretch}
-  .hero-cta .btn{width:100%}
-  /* a divided row cannot hold three Georgian facts at phone width */
-  .hero-facts{flex-direction:column}
-  .hero-facts li{padding:13px 0}
-  .hero-facts li+li{padding-left:0;border-left:none;
-    border-top:1px solid rgba(255,255,255,.16)}
-
-
-  .rate{flex-wrap:wrap;gap:8px 14px}
-  .rate .dots{display:none}
-  .rate .qty{flex:1 0 auto}
-  .rate .amt{margin-left:auto}
-  .rate-tag{order:3;flex:0 0 auto}
-  .rate.best{margin-inline:calc(var(--gut) * -1);padding-inline:var(--gut)}
-
-  .contacts a{flex-direction:column;align-items:flex-start;gap:5px}
-  .foot{flex-direction:column;align-items:flex-start;gap:18px}
+button {
+  background: none;
+  border: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
-@media (max-width:420px){
-  .nav{gap:10px;padding-inline:16px}
-  .navlinks .btn{padding:8px 15px}
-  .logo img{height:21px}
-  .navlinks{gap:11px}
-  .navphone{font-size:14px}
-  #langToggle{font-size:12.5px;gap:6px}
-  .ticker li{font-size:14px}
-  .ticker li svg{margin-inline:18px}
+img,
+svg,
+canvas,
+video {
+  display: block;
+  max-width: 100%;
 }
 
-/* form error state — the only red on the page, so it needs no other signal */
-.reg-note{background:#FDECEC;color:#9F1F19}
-
-/* 320px-class phones: the header is the one row with no slack left in it. */
-@media (max-width:365px){
-  .nav{gap:8px;padding-inline:13px}
-  .logo img{height:19px}
-  .navlinks{gap:9px}
-  .navphone{font-size:13px;gap:5px}
-  .navphone svg{width:13px;height:13px}
-  #langToggle{font-size:12px;gap:5px}
-  .cta-bar .btn{min-width:0;font-size:14.5px;padding-inline:8px}
+ul,
+ol {
+  list-style: none;
 }
 
-/* On the narrowest phones an animated slot width still rewraps mid-flight and
-   settles back, so snap the width there instead. */
-@media (max-width:400px){
-  .cycle{transition:none}
+::selection {
+  background: rgba(224, 177, 90, 0.35);
 }
 
+/* ── Shell ─────────────────────────────────────────────────────────────── */
 
-
-/* ── hero background ──────────────────────────────────────────────────
-   The three brand banners, stacked and crossfading with the headline.
-   Each is art-directed: the wide crop on desktop, the square one on
-   phones, so the card and the phone never shrink to nothing.
-
-   object-position differs per breakpoint because the artwork is composed
-   subject-right on the wide crop and subject-bottom on the square one;
-   the copy sits opposite the subject in both cases.                     */
-/* Each banner sits on its own field colour, sampled from the artwork, so the
-   hero can carry that colour beyond the image: on phones the artwork only
-   occupies the lower band and this fills the rest, and on any width it keeps
-   the crop's edges from reading as a cut. */
-.hero-tint{position:absolute;inset:0;z-index:-2;pointer-events:none;
-  background:var(--purple);transition:background-color .9s var(--ease-quart)}
-@media (min-width:760px){
-  .hero-tint-google{background:#462C7D}
-  .hero-tint-tripadvisor{background:#1F754F}
-  .hero-tint-booking{background:#1A4378}
-}
-.hero-bg{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
-.hero-bg picture{position:absolute;inset:0;display:block;opacity:0;
-  transition:opacity .9s var(--ease-quart)}
-.hero-bg picture.on{opacity:1}
-.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:50% 100%}
-@media (min-width:760px){
-  /* the banner is wider than the frame, so cover crops the sides: showing the
-     left of the image is what carries the card to the right, clear of the copy */
-  .hero-bg img{object-position:40% 50%}
-  /* wide enough for the longest platform name to sit beside "მეტი", still
-     well short of the card */
-  .hero-copy{max-width:min(100%,44rem)}
-}
-/* Phones: the square crop is composed subject-centre, so laying type over it
-   muddles both. The artwork takes the lower band instead and the type sits on
-   the field colour above it, with the two blended rather than butted. */
-@media (max-width:759px){
-  /* No banner on phones: it cost a screen of height before anyone reached the
-     price, and the arrows and dots have nothing left to steer once it is gone.
-     The headline still names the platform. */
-  .hero-bg{display:none}
-  .hero-scrim{display:none}
-
-  /* Cut the hero down to one idea. Everything hidden here is said again within
-     a screen or two: the second half of the lede appears in step 02 and in
-     what's included, the kicker in the note under the gallery, and the facts
-     strip is repeated verbatim by the gold ticker directly beneath it. */
-  .wide-only{display:none}
-  .hero .kicker{display:none}
-  .hero-facts{display:none}
+.app {
+  position: relative;
+  max-width: 480px;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: calc(var(--sat) + 14px) var(--pad) calc(var(--tab-h) + var(--sab) + 28px);
 }
 
-@media (prefers-reduced-motion:reduce){
-  .hero-bg picture,.hero-bg{transition:none}
+.app--bare {
+  padding-bottom: calc(var(--sab) + 28px);
 }
 
-/* Legibility over artwork that is busy on one side and open on the other.
-   Ink rather than a brand tint, because the field beneath it is purple,
-   green or blue depending on which banner is up. */
-.hero-scrim{position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(10,7,28,.62) 0%,rgba(10,7,28,.52) 40%,
-    rgba(10,7,28,.3) 68%,rgba(10,7,28,.12) 100%)}
-@media (min-width:760px){
-  .hero-scrim{background:linear-gradient(96deg,rgba(10,7,28,.9) 0%,rgba(10,7,28,.74) 34%,
-    rgba(10,7,28,.34) 62%,rgba(10,7,28,.06) 88%,transparent 100%)}
+@media (min-width: 560px) {
+  .app {
+    border-inline: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.012), transparent 30%);
+  }
 }
 
-/* ── campaign ─────────────────────────────────────────────────────────
-   One deadline, stated the same way everywhere: a percentage, what it
-   applies to, and how long is left. The clock is the only moving part,
-   and it stops for good when the date passes.                          */
-.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
-  clip-path:inset(50%);white-space:nowrap;border:0}
-
-.promo-bar{background:var(--gold);color:var(--ink);border-bottom:3px solid var(--ink)}
-.promo-bar a{display:flex;align-items:center;justify-content:center;gap:clamp(9px,1.4vw,16px);
-  flex-wrap:wrap;max-width:1160px;margin-inline:auto;padding:9px var(--gut) 11px;
-  font-size:clamp(13px,1.15vw,15px);font-weight:800;line-height:1.25;text-align:center}
-.promo-pct{font-family:var(--font-display),sans-serif;font-size:1.5em;font-weight:900;
-  letter-spacing:-.03em;line-height:1}
-.promo-copy{opacity:.85}
-
-.cdown{display:flex;align-items:stretch;gap:6px}
-.cdown-cell{display:flex;flex-direction:column;align-items:center;gap:2px;
-  min-width:2.6em;padding:5px 6px 6px;background:var(--ink);color:var(--gold)}
-.cdown-cell b{font-family:var(--font-display),sans-serif;font-size:1.05em;font-weight:900;
-  line-height:1;font-variant-numeric:tabular-nums}
-.cdown-cell i{font-style:normal;font-size:.62em;font-weight:700;opacity:.7;line-height:1}
-.cdown-inline .cdown-cell{padding:4px 5px 5px;min-width:2.4em}
-.price-sec .cdown-cell{background:var(--ink);color:var(--gold)}
-
-/* the deadline, restated where the prices actually are */
-.price-promo{display:flex;align-items:center;justify-content:space-between;gap:clamp(16px,2.4vw,32px);
-  flex-wrap:wrap;margin-top:clamp(26px,3.2vw,38px);padding:clamp(16px,2vw,22px) clamp(18px,2.2vw,26px);
-  background:var(--gold);color:var(--ink)}
-.price-promo-l{display:flex;align-items:center;gap:clamp(12px,1.6vw,18px)}
-.price-pct{font-family:var(--font-display),sans-serif;font-size:clamp(34px,4.4vw,54px);
-  font-weight:900;letter-spacing:-.04em;line-height:1}
-.price-promo-l>span{display:flex;flex-direction:column;gap:3px;font-size:clamp(15px,1.4vw,18px);
-  font-weight:900;line-height:1.2}
-.price-promo-l i{font-style:normal;font-size:.78em;font-weight:700;color:rgba(10,7,28,.66)}
-.price-promo-r{display:flex;flex-direction:column;gap:7px;align-items:flex-start}
-.price-promo-lab{font-size:12.5px;font-weight:900;color:rgba(10,7,28,.7);line-height:1}
-
-/* the regular price, struck, beside the one being charged */
-.rate .amt s{font-family:var(--font-georgian),sans-serif;font-size:.36em;font-weight:700;
-  color:var(--on-dark-dim);text-decoration-thickness:2px;margin-right:.4em;white-space:nowrap}
-.rate.best .amt s{color:rgba(10,7,28,.55)}
-
-/* ── the email offer ──────────────────────────────────────────────── */
-.price-offer{margin-top:clamp(26px,3.2vw,38px)}
-.offer-form,.offer-done{background:rgba(10,7,28,.42);
-  box-shadow:inset 0 0 0 2px rgba(255,255,255,.16);
-  padding:clamp(20px,2.6vw,30px) clamp(18px,2.4vw,28px)}
-.offer-head{display:flex;align-items:baseline;justify-content:space-between;
-  gap:clamp(12px,2vw,26px);flex-wrap:wrap}
-.offer-title{font-size:clamp(17px,1.7vw,21px);font-weight:900;line-height:1.35;max-width:26ch}
-.offer-perks{display:flex;gap:clamp(12px,1.8vw,22px);flex-wrap:wrap;
-  font-size:14px;font-weight:700;color:var(--on-dark)}
-.offer-perks li{display:flex;align-items:center;gap:7px}
-.offer-perks svg{width:15px;height:15px;color:var(--gold);flex:none}
-.offer-row{display:flex;gap:10px;margin-top:clamp(16px,2vw,22px);flex-wrap:wrap}
-.offer-row input{flex:1 1 15rem;min-width:0;padding:15px 16px;border:2px solid rgba(255,255,255,.28);
-  background:rgba(255,255,255,.06);font-size:16px;font-family:inherit;color:#fff;outline:none;
-  transition:border-color .15s,background .15s}
-.offer-row input::placeholder{color:rgba(255,255,255,.55)}
-.offer-row input:focus{border-color:var(--gold);background:rgba(255,255,255,.1)}
-.offer-row .btn{flex:0 0 auto}
-.offer-err{margin-top:12px;font-size:14px;font-weight:700;color:#FFD4D0}
-
-.offer-done{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
-.offer-tick{display:grid;place-items:center;width:52px;height:52px;background:var(--gold);color:var(--ink)}
-.offer-tick svg{width:24px;height:24px}
-.offer-lead{font-size:15px;font-weight:800;color:var(--on-dark)}
-.offer-code{font-family:var(--font-display),sans-serif;font-size:clamp(28px,3.4vw,40px);
-  font-weight:900;letter-spacing:.04em;line-height:1;color:var(--gold);
-  font-variant-numeric:tabular-nums}
-.offer-note{font-size:15px;line-height:1.5;font-weight:600;color:var(--on-dark);max-width:44ch}
-
-@media (max-width:680px){
-  .promo-bar a{gap:8px;padding-inline:14px;font-size:12.5px}
-  .promo-copy{flex:1 1 100%;order:3;opacity:.8}
-  .price-promo{flex-direction:column;align-items:flex-start}
-  .offer-row .btn{width:100%}
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+  min-height: 44px;
 }
 
-/* ── hero banner controls ─────────────────────────────────────────────
-   In flow rather than floated over the artwork, so nothing is covered and
-   the buttons cannot land on the copy at any width. Same hard-edged
-   language as the gallery arrows. The dots are a position readout as much
-   as a control — arrows alone never say how many there are.            */
-.hero-nav{order:2;position:relative;z-index:1;display:flex;align-items:center;
-  gap:clamp(12px,1.8vw,20px);align-self:center;
-  margin-bottom:clamp(16px,2.2vw,26px)}
-.hero-arw{display:grid;place-items:center;width:46px;height:46px;padding:0;
-  border:none;cursor:pointer;background:var(--ink);color:var(--gold);
-  box-shadow:var(--shadow-hard-sm);
-  transition:background .2s,transform .2s var(--ease-quint)}
-.hero-arw:hover{background:var(--purple);transform:translateY(-2px)}
-.hero-arw:active{transform:translateY(0) scale(.96)}
-.hero-arw svg{width:18px;height:18px}
-.hero-prev svg{transform:rotate(180deg)}
-.hero-dots{display:flex;align-items:center;gap:7px}
-.hero-dot{width:10px;height:10px;padding:0;border:none;cursor:pointer;
-  background:rgba(255,255,255,.45);
-  transition:background .25s,width .3s var(--ease-quint)}
-.hero-dot:hover{background:rgba(255,255,255,.75)}
-.hero-dot.on{width:26px;background:var(--gold)}
-
-@media (max-width:759px){
-  /* nothing to steer once the banner is gone */
-  .hero-nav{display:none}
+.back {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
 }
-@media (prefers-reduced-motion:reduce){
-  .hero-arw:hover{transform:none}
-  .hero-dot{transition:background .25s}
+
+/* ── Type ─────────────────────────────────────────────────────────────── */
+
+.h1 {
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
+
+.h2 {
+  font-size: 22px;
+  font-weight: 750;
+  letter-spacing: -0.022em;
+  line-height: 1.15;
+}
+
+.h3 {
+  font-size: 17px;
+  font-weight: 650;
+  letter-spacing: -0.012em;
+}
+
+.display {
+  font-size: 44px;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1;
+}
+
+.hero-num {
+  font-size: 58px;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 0.95;
+}
+
+.kicker {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.muted {
+  color: var(--text-2);
+}
+
+.dim {
+  color: var(--text-3);
+}
+
+.small {
+  font-size: 13.5px;
+}
+
+.tiny {
+  font-size: 12px;
+}
+
+.strong {
+  font-weight: 700;
+}
+
+.gold {
+  color: var(--gold-3);
+}
+
+.mint {
+  color: var(--mint);
+}
+
+.ice {
+  color: var(--ice);
+}
+
+.coral {
+  color: var(--coral);
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.center {
+  text-align: center;
+}
+
+.grow {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── Layout helpers ───────────────────────────────────────────────────── */
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.stack-sm {
+  gap: 8px;
+}
+
+.stack-lg {
+  gap: 24px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.row-sm {
+  gap: 8px;
+}
+
+.between {
+  justify-content: space-between;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.section-head a {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gold-3);
+}
+
+/* ── Cards ────────────────────────────────────────────────────────────── */
+
+.card {
+  position: relative;
+  overflow: hidden;
+  padding: 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+}
+
+.card--tight {
+  padding: 14px 16px;
+  border-radius: var(--r-md);
+}
+
+.card--gold {
+  background: var(--gold-grad);
+  border-color: transparent;
+  color: var(--on-gold);
+  box-shadow: 0 14px 36px rgba(217, 164, 65, 0.28);
+}
+
+.card--gold .kicker,
+.card--gold .muted,
+.card--gold .dim {
+  color: rgba(26, 18, 4, 0.7);
+}
+
+.card--outline-gold {
+  border-color: var(--gold-line);
+  box-shadow: 0 0 0 1px rgba(224, 177, 90, 0.12), var(--shadow);
+}
+
+.card--glow::before,
+.glow-gold::before,
+.glow-mint::before,
+.glow-ice::before {
+  content: '';
+  position: absolute;
+  inset: -45% -30% auto;
+  height: 75%;
+  pointer-events: none;
+  background: radial-gradient(55% 60% at 50% 0%, var(--glow, rgba(224, 177, 90, 0.26)), transparent 72%);
+}
+
+.glow-gold {
+  --glow: rgba(224, 177, 90, 0.26);
+}
+
+.glow-mint {
+  --glow: rgba(61, 220, 151, 0.22);
+}
+
+.glow-ice {
+  --glow: rgba(124, 196, 255, 0.22);
+}
+
+.card > * {
+  position: relative;
+}
+
+/* ── Buttons ──────────────────────────────────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 52px;
+  padding: 0 22px;
+  border: 1px solid transparent;
+  border-radius: 17px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  transition:
+    transform 0.15s var(--ease),
+    opacity 0.15s,
+    background 0.2s;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn[disabled],
+.btn[aria-disabled='true'] {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.btn-gold {
+  background: var(--gold-grad);
+  color: var(--on-gold);
+  box-shadow: 0 8px 24px rgba(217, 164, 65, 0.28);
+}
+
+.btn-glass {
+  background: var(--surface-2);
+  border-color: var(--border-2);
+  color: var(--text);
+}
+
+.btn-mint {
+  background: var(--mint);
+  color: #062a1b;
+  box-shadow: 0 8px 24px rgba(61, 220, 151, 0.25);
+}
+
+.btn-coral {
+  background: rgba(255, 107, 107, 0.16);
+  border-color: rgba(255, 107, 107, 0.35);
+  color: var(--coral);
+}
+
+.btn-ghost {
+  color: var(--text-2);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn-sm {
+  height: 38px;
+  padding: 0 14px;
+  font-size: 14px;
+  border-radius: 12px;
+}
+
+.btn-lg {
+  height: 58px;
+  font-size: 17px;
+  border-radius: 19px;
+}
+
+.btn-pill {
+  border-radius: var(--r-pill);
+}
+
+.btn-icon {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.btn svg {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+}
+
+/* ── Pills & chips ────────────────────────────────────────────────────── */
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 11px;
+  border-radius: var(--r-pill);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.pill svg {
+  width: 14px;
+  height: 14px;
+}
+
+.pill-gold {
+  background: var(--gold-dim);
+  color: var(--gold-3);
+  border-color: var(--gold-line);
+}
+
+.pill-mint {
+  background: var(--mint-dim);
+  color: var(--mint);
+  border-color: rgba(61, 220, 151, 0.3);
+}
+
+.pill-ice {
+  background: var(--ice-dim);
+  color: var(--ice);
+  border-color: rgba(124, 196, 255, 0.3);
+}
+
+.pill-coral {
+  background: rgba(255, 107, 107, 0.14);
+  color: var(--coral);
+  border-color: rgba(255, 107, 107, 0.3);
+}
+
+.pill-solid-gold {
+  background: var(--gold-grad);
+  color: var(--on-gold);
+  border-color: transparent;
+}
+
+.chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin-inline: calc(-1 * var(--pad));
+  padding-inline: var(--pad);
+  padding-bottom: 2px;
+}
+
+.chips::-webkit-scrollbar {
+  display: none;
+}
+
+.chip {
+  flex: 0 0 auto;
+  height: 38px;
+  padding: 0 15px;
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-2);
+  transition: background 0.2s, color 0.2s;
+}
+
+.chip.is-on {
+  background: var(--gold-dim);
+  color: var(--gold-3);
+  border-color: var(--gold-line);
+}
+
+/* segmented control */
+.seg {
+  display: flex;
+  padding: 4px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-pill);
+}
+
+.seg > * {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  border-radius: var(--r-pill);
+  font-size: 14px;
+  font-weight: 650;
+  color: var(--text-2);
+  transition: background 0.2s, color 0.2s;
+}
+
+.seg > .is-on {
+  background: var(--surface-3);
+  color: var(--text);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+}
+
+.seg--gold > .is-on {
+  color: var(--gold-3);
+}
+
+/* ── Lists & rows ─────────────────────────────────────────────────────── */
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  color: inherit;
+  transition: background 0.2s, transform 0.15s var(--ease);
+}
+
+a.item:active,
+button.item:active {
+  transform: scale(0.985);
+  background: var(--surface-2);
+}
+
+.item--gold {
+  border-color: var(--gold-line);
+  background: linear-gradient(135deg, rgba(224, 177, 90, 0.14), rgba(224, 177, 90, 0.05));
+}
+
+.item--plain {
+  background: transparent;
+  border: 0;
+  padding: 10px 0;
+}
+
+.ico {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.ico svg {
+  width: 20px;
+  height: 20px;
+}
+
+.ico-gold {
+  background: var(--gold-dim);
+  color: var(--gold-3);
+}
+
+.ico-mint {
+  background: var(--mint-dim);
+  color: var(--mint);
+}
+
+.ico-ice {
+  background: var(--ice-dim);
+  color: var(--ice);
+}
+
+.ico-coral {
+  background: rgba(255, 107, 107, 0.14);
+  color: var(--coral);
+}
+
+.ico-lg {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+}
+
+.ico-lg svg {
+  width: 26px;
+  height: 26px;
+}
+
+.chev {
+  color: var(--text-3);
+  flex: 0 0 auto;
+}
+
+/* ── Forms ────────────────────────────────────────────────────────────── */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field > label,
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.input {
+  width: 100%;
+  height: 52px;
+  padding: 0 16px;
+  border-radius: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border-2);
+  color: var(--text);
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input:focus {
+  border-color: rgba(224, 177, 90, 0.6);
+  box-shadow: 0 0 0 4px rgba(224, 177, 90, 0.12);
+}
+
+.input::placeholder {
+  color: var(--text-3);
+}
+
+.input:disabled {
+  opacity: 0.6;
+}
+
+textarea.input {
+  height: auto;
+  min-height: 96px;
+  padding: 14px 16px;
+  resize: vertical;
+}
+
+select.input {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23a5a5b0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 42px;
+}
+
+.input-wrap {
+  position: relative;
+}
+
+.input-wrap svg {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: var(--text-3);
+}
+
+.input-wrap .input {
+  padding-left: 46px;
+}
+
+.hint {
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+.error {
+  font-size: 14px;
+  color: var(--coral);
+}
+
+.ok {
+  font-size: 14px;
+  color: var(--mint);
+}
+
+/* option cards (radio-like) */
+.opt {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px;
+  border-radius: var(--r-md);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-2);
+  text-align: left;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+
+.opt.is-on {
+  background: var(--gold-dim);
+  border-color: var(--gold-line);
+  color: var(--text);
+}
+
+.opt strong {
+  font-size: 14.5px;
+  color: var(--text);
+}
+
+.opt svg {
+  width: 22px;
+  height: 22px;
+  color: var(--gold-3);
+}
+
+/* ── Tab bar ──────────────────────────────────────────────────────────── */
+
+.tabbar {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--sab) + 10px);
+  transform: translateX(-50%);
+  width: min(calc(100% - 24px), 456px);
+  height: var(--tab-h);
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: stretch;
+  padding: 6px;
+  background: rgba(20, 20, 27, 0.78);
+  border: 1px solid var(--border-2);
+  border-radius: 28px;
+  backdrop-filter: blur(26px) saturate(160%);
+  -webkit-backdrop-filter: blur(26px) saturate(160%);
+  box-shadow: 0 14px 44px rgba(0, 0, 0, 0.55);
+  z-index: 50;
+}
+
+.tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  border-radius: 22px;
+  color: var(--text-3);
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+  transition: color 0.2s, background 0.2s;
+}
+
+.tab svg {
+  width: 24px;
+  height: 24px;
+}
+
+.tab.is-on {
+  color: var(--gold-3);
+  background: rgba(224, 177, 90, 0.1);
+}
+
+/* ── Avatars ──────────────────────────────────────────────────────────── */
+
+.avatar {
+  position: relative;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  overflow: hidden;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #fff;
+  background: linear-gradient(135deg, #3b3f5e, #1f2233);
+  text-transform: uppercase;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar--gold {
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 4.5px var(--gold);
+}
+
+.avatar--ice {
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 4.5px var(--ice);
+}
+
+.avatar--mint {
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 4.5px var(--mint);
+}
+
+.avatar-row {
+  display: flex;
+}
+
+.avatar-row .avatar {
+  box-shadow: 0 0 0 2px var(--bg);
+}
+
+.avatar-row .avatar + .avatar {
+  margin-left: -10px;
+}
+
+/* ── Bars, rings, dots ────────────────────────────────────────────────── */
+
+.bar {
+  height: 8px;
+  border-radius: 6px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+
+.bar > i {
+  display: block;
+  height: 100%;
+  border-radius: 6px;
+  background: var(--gold);
+  transition: width 0.6s var(--ease);
+}
+
+.bar--mint > i {
+  background: var(--mint);
+}
+
+.bar--ice > i {
+  background: var(--ice);
+}
+
+.bar--thin {
+  height: 5px;
+}
+
+.split {
+  display: flex;
+  height: 12px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--surface-2);
+  gap: 2px;
+}
+
+.split > i {
+  display: block;
+  height: 100%;
+}
+
+.dots {
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  border: 1px solid var(--border-2);
+}
+
+.dot.is-on {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+
+.dot.is-mint {
+  background: var(--mint);
+  border-color: var(--mint);
+}
+
+.rings {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.rings svg {
+  transform: rotate(-90deg);
+}
+
+.rings circle {
+  fill: none;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.9s var(--ease);
+}
+
+.rings-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 2px;
+}
+
+/* ── Stat tiles ───────────────────────────────────────────────────────── */
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+}
+
+.stat .value {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+.stat .label {
+  font-size: 12.5px;
+  color: var(--text-2);
+  font-weight: 600;
+}
+
+/* ── Steppers / session controls ──────────────────────────────────────── */
+
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.stepper button {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--surface-2);
+  border: 1px solid var(--border-2);
+  color: var(--text);
+  transition: transform 0.12s var(--ease), background 0.2s;
+}
+
+.stepper button:active {
+  transform: scale(0.92);
+  background: var(--surface-3);
+}
+
+.stepper button svg {
+  width: 22px;
+  height: 22px;
+}
+
+.stepper .val {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 96px;
+}
+
+.stepper .val b {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.stepper .val span {
+  font-size: 12px;
+  color: var(--text-3);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.timer {
+  font-size: 68px;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+/* ── Sheets & overlays ────────────────────────────────────────────────── */
+
+.scrim {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 55;
+  animation: fade 0.25s var(--ease) both;
+}
+
+.sheet {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: min(100%, 480px);
+  max-height: 88dvh;
+  overflow-y: auto;
+  padding: 14px var(--pad) calc(var(--sab) + 24px);
+  background: rgba(19, 19, 26, 0.94);
+  border-top: 1px solid var(--border-2);
+  border-radius: 30px 30px 0 0;
+  backdrop-filter: blur(28px) saturate(150%);
+  -webkit-backdrop-filter: blur(28px) saturate(150%);
+  z-index: 60;
+  animation: up 0.35s var(--ease) both;
+}
+
+.sheet-grip {
+  width: 40px;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--surface-3);
+  margin: 0 auto 14px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--tab-h) + var(--sab) + 26px);
+  transform: translateX(-50%);
+  padding: 12px 18px;
+  border-radius: var(--r-pill);
+  background: rgba(30, 30, 38, 0.92);
+  border: 1px solid var(--border-2);
+  box-shadow: var(--shadow);
+  font-weight: 650;
+  font-size: 14px;
+  z-index: 70;
+  animation: up 0.3s var(--ease) both;
+  white-space: nowrap;
+}
+
+/* ── Charts (see components/charts.tsx) ───────────────────────────────── */
+
+.chart {
+  width: 100%;
+  overflow: visible;
+}
+
+.chart .grid {
+  stroke: rgba(255, 255, 255, 0.07);
+  stroke-width: 1;
+}
+
+.chart .axis-label {
+  fill: var(--text-3);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.chart .value-label {
+  fill: var(--text);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.legend {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-size: 12.5px;
+  color: var(--text-2);
+  font-weight: 600;
+}
+
+.legend i {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  margin-right: 6px;
+  vertical-align: -1px;
+}
+
+/* ── Podium ───────────────────────────────────────────────────────────── */
+
+.podium {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr 1fr;
+  align-items: end;
+  gap: 10px;
+  padding: 10px 6px 0;
+}
+
+.podium-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.podium-step {
+  width: 100%;
+  border-radius: 16px 16px 6px 6px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 10px;
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--on-gold);
+}
+
+.podium-step--1 {
+  height: 96px;
+  background: var(--gold-grad);
+  box-shadow: 0 10px 30px rgba(217, 164, 65, 0.3);
+}
+
+.podium-step--2 {
+  height: 72px;
+  background: linear-gradient(180deg, #e6e9ef, #aeb3bd);
+  color: #1c1f26;
+}
+
+.podium-step--3 {
+  height: 58px;
+  background: linear-gradient(180deg, #d9a377, #a8703f);
+  color: #2a1a0a;
+}
+
+.podium-name {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.podium-pts {
+  font-size: 12.5px;
+  color: var(--text-2);
+  font-weight: 600;
+}
+
+.rank-num {
+  width: 28px;
+  text-align: center;
+  font-weight: 800;
+  color: var(--text-2);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Utilities ────────────────────────────────────────────────────────── */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.hr {
+  flex: 1;
+  height: 1px;
+  background: var(--border-2);
+}
+
+.fade-in {
+  animation: fade 0.5s var(--ease) both;
+}
+
+.rise {
+  animation: up 0.5s var(--ease) both;
+}
+
+.delay-1 {
+  animation-delay: 0.06s;
+}
+
+.delay-2 {
+  animation-delay: 0.12s;
+}
+
+.delay-3 {
+  animation-delay: 0.18s;
+}
+
+.pulse {
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+.spin {
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes sweep {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--surface) 25%, var(--surface-2) 50%, var(--surface) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+  border-radius: var(--r-md);
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ── Additions: legends, scanner, quantity controls ───────────────────── */
+
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: 1px;
+}
+
+.scan-frame {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: radial-gradient(80% 80% at 50% 40%, #1b1b24, #0b0b0f);
+  border: 1px solid var(--border);
+  display: grid;
+  place-items: center;
+}
+
+.scan-frame img,
+.scan-frame video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.scan-corner {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  border: 3px solid var(--mint);
+  pointer-events: none;
+}
+
+.scan-corner.tl { top: 16px; left: 16px; border-right: 0; border-bottom: 0; border-radius: 12px 0 0 0; }
+.scan-corner.tr { top: 16px; right: 16px; border-left: 0; border-bottom: 0; border-radius: 0 12px 0 0; }
+.scan-corner.bl { bottom: 16px; left: 16px; border-right: 0; border-top: 0; border-radius: 0 0 0 12px; }
+.scan-corner.br { bottom: 16px; right: 16px; border-left: 0; border-top: 0; border-radius: 0 0 12px 0; }
+
+.scan-sweep {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 0%, rgba(61, 220, 151, 0.25) 50%, transparent 100%);
+  animation: sweep 2.2s linear infinite;
+}
+
+.shutter {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #fff;
+  border: 5px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  display: grid;
+  place-items: center;
+  color: #111;
+}
+
+.qty {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-pill);
+  padding: 2px;
+}
+
+.qty button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--text);
+}
+
+.qty button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.qty b {
+  min-width: 34px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 0 10px;
+  border-radius: 16px;
+  color: var(--text-2);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: background 0.2s;
+}
+
+.day b {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+  letter-spacing: 0;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.day.is-on b {
+  background: var(--gold-grad);
+  color: var(--on-gold);
+  border-color: transparent;
+}
+
+.day i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--mint);
+  opacity: 0;
+}
+
+.day.has-log i {
+  opacity: 1;
+}
+
+.meal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.food-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+}
+
+.food-row + .food-row {
+  margin-top: 2px;
+}
+
+.x {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--text-3);
+  background: transparent;
+}
+
+.x svg {
+  width: 16px;
+  height: 16px;
+}
+
+.x:hover,
+.x:active {
+  color: var(--coral);
+  background: rgba(255, 107, 107, 0.12);
+}
+
+/* ── Additions: badges, pinned rank, messages ─────────────────────────── */
+
+.badges {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px 10px;
+}
+
+.badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 650;
+  color: var(--text-2);
+}
+
+.badge-disc {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-3);
+  font-size: 26px;
+}
+
+.badge.is-earned .badge-disc {
+  background: var(--gold-grad);
+  color: var(--on-gold);
+  border-color: transparent;
+  box-shadow: 0 8px 22px rgba(217, 164, 65, 0.3);
+}
+
+.badge.is-earned {
+  color: var(--text);
+}
+
+.badge.is-silver .badge-disc {
+  background: linear-gradient(180deg, #e6e9ef, #aeb3bd);
+  color: #1c1f26;
+  border-color: transparent;
+}
+
+.pinned {
+  position: sticky;
+  bottom: calc(var(--tab-h) + var(--sab) + 18px);
+  z-index: 5;
+}
+
+.bubble {
+  max-width: 82%;
+  padding: 10px 14px;
+  border-radius: 18px;
+  background: var(--surface-2);
+  font-size: 14.5px;
+  line-height: 1.35;
+}
+
+.bubble.me {
+  align-self: flex-end;
+  background: var(--gold-dim);
+  border: 1px solid var(--gold-line);
+}
+
+.bubble .who {
+  display: block;
+  font-size: 11px;
+  color: var(--text-3);
+  margin-bottom: 2px;
+  font-weight: 700;
+}
+
+.prize-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.prize {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  min-height: 190px;
+}
+
+.prize-art {
+  height: 84px;
+  border-radius: var(--r-md);
+  display: grid;
+  place-items: center;
+  font-size: 40px;
+  background: radial-gradient(70% 70% at 50% 30%, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
+  border: 1px solid var(--border);
+}
+
+.prize.is-locked {
+  opacity: 0.75;
 }
